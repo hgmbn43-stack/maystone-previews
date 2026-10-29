@@ -25,7 +25,10 @@ function onOpen() {
   SpreadsheetApp.getUi().createMenu('Maystone')
     .addItem('1. Set GitHub key', 'setGitHubKey')
     .addItem('2. Switch on automation', 'switchOn')
+    .addItem('3. Set Apify key', 'setApifyKey')
+    .addItem('4. Switch on lead farmer', 'switchOnFarmer')
     .addSeparator()
+    .addItem('Farm leads now', 'farmNow')
     .addItem('Run now', 'processAll')
     .addToUi();
 }
@@ -48,7 +51,7 @@ function switchOn() {
     return;
   }
   if (!PropertiesService.getUserProperties().getProperty('GH_TOKEN')) { ui.alert('Do step 1 (GitHub key) first.'); return; }
-  ScriptApp.getProjectTriggers().forEach(function (t) { ScriptApp.deleteTrigger(t); });
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() !== 'farmDaily') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('onEditRun').forSpreadsheet(SpreadsheetApp.getActive()).onEdit().create();
   ScriptApp.newTrigger('processAll').timeBased().everyMinutes(5).create();
   processAll();
@@ -73,6 +76,7 @@ function processAll() {
       var sh = SpreadsheetApp.getActive().getSheetByName(name);
       if (sh && sh.getLastRow() >= 2) processRows_(sh, 2, sh.getLastRow());
     });
+    try { farmPoll_(); } catch (e) { console.error('farmPoll_: ' + e); }
   });
 }
 
