@@ -30,7 +30,7 @@ function checkKey_(id, k) {
   var hit = findLead_(id);
   if (!hit || !k) return null;
   var key = String(hit.sheet.getRange(hit.row, COL.key).getValue()).trim();
-  return key && key === k ? hit : null;
+  return key && key.length >= 12 && key === k ? hit : null;
 }
 
 function detailsForm_(id, k) {

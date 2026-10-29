@@ -23,6 +23,11 @@ function ensureClientHeaders_() {
     if (!sh) return;
     if (sh.getMaxColumns() < CX.key) sh.insertColumnsAfter(sh.getMaxColumns(), CX.key - sh.getMaxColumns());
     var h = sh.getRange(1, CX.details, 1, 4);
+    var body = sh.getRange(2, CX.details, sh.getMaxRows() - 1, 4);
+    if (body.getDataValidations().some(function (row) { return row.some(function (v) { return v; }); })) {
+      body.clearDataValidations();                       // these columns arrived as tick boxes: make them plain text
+      body.setValues(body.getValues().map(function (row) { return row.map(function (v) { return v === false || v === true ? '' : v; }); }));
+    }
     if (h.getValues()[0].join('') !== CX_HEADERS.join('')) {
       h.setValues([CX_HEADERS]).setFontWeight('bold');
       sh.getRange(1, CX.details, 1, 4).setBackground(sh.getRange(1, 1).getBackground());
@@ -36,7 +41,7 @@ function sendDetailsLink_(sh, r, to) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) throw new Error('no valid customer email');
   var id = String(sh.getRange(r, 1).getValue()).trim();
   var key = String(sh.getRange(r, CX.key).getValue()).trim();
-  if (!key) { key = Utilities.getUuid().replace(/-/g, '').slice(0, 16); sh.getRange(r, CX.key).setValue(key); }
+  if (!key || key === 'FALSE' || key === 'TRUE') { key = Utilities.getUuid().replace(/-/g, '').slice(0, 16); sh.getRange(r, CX.key).setValue(key); }
   var link = FORM_URL + '?form=' + encodeURIComponent(id) + '&k=' + key;
   var biz = sh.getRange(r, 2).getValue();
   var body = 'Hi,\n\nThanks for your payment – we\'re getting your new website for ' + biz + ' ready.\n\n' +
@@ -83,6 +88,7 @@ function clientPoll_() {
 }
 
 function cleanDomain_(d) {
+  if (d === false || d === true) return '';
   return String(d || '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/\/.*$/, '');
 }
 
