@@ -90,6 +90,8 @@ function stripePoll_() {
     var liveNote = '';
     try { goLive_(id); liveNote = 'Their site is being switched to live (preview banner removed) – about 2 minutes.'; }
     catch (err) { liveNote = 'Could not switch the site to live automatically: ' + err.message; }
+    try { ensureClientHeaders_(); sendDetailsLink_(sh, r, s.customer_details && s.customer_details.email); liveNote += '\nThey\'ve been emailed the form to send their photos and details.'; }
+    catch (err) { liveNote += '\nCould not email them the details form: ' + err.message + ' (use Maystone > Send details form).'; }
     notify_(sh.getName(), 'PAID: ' + biz + ' just paid ' + amount,
       biz + ' paid ' + amount + ' for ' + pkg + '.\n\n' + liveNote +
       '\n\nNext: get their photos, logo and any wording changes, and book the day-2 check-in call.');

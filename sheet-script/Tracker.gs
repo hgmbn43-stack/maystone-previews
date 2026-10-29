@@ -14,6 +14,8 @@ var CALLS_ID = '1QWrKee1Li45r1Zw2YcIV4XMSUyC-oFueAx4wWglWoEQ';
 // ---------- views ----------
 
 function doGet(e) {
+  var page = routeGet_(e);   // details form (TrackerForms.gs)
+  if (page) return page;
   var id = e && e.parameter && String(e.parameter.v || '').replace(/[^A-Za-z0-9_-]/g, '');
   if (id) {
     var lock = LockService.getScriptLock();

@@ -28,6 +28,7 @@ function onOpen() {
     .addItem('3. Set Apify key', 'setApifyKey')
     .addItem('4. Switch on lead farmer', 'switchOnFarmer')
     .addItem('5. Set Stripe key', 'setStripeKey')
+    .addItem('Send details form (selected row)', 'sendDetailsFormMenu')
     .addSeparator()
     .addItem('Farm leads now', 'farmNow')
     .addItem('Run now', 'processAll')
@@ -79,6 +80,7 @@ function processAll() {
     });
     try { farmPoll_(); } catch (e) { console.error('farmPoll_: ' + e); }
     try { stripePoll_(); } catch (e) { console.error('stripePoll_: ' + e); }
+    try { clientPoll_(); } catch (e) { console.error('clientPoll_: ' + e); }
   });
 }
 

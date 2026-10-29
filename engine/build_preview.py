@@ -91,15 +91,23 @@ def library_images(group):
     return sorted(p for p in folder.iterdir() if p.suffix.lower() in IMAGE_EXT)
 
 
-def build_one(env, row, out_root, preview=True):
-    name = tidy_name(row.get("Business"))
+def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, domain=""):
+    """details: what the customer sent through the details form (business, phone, creds, company).
+    lead_dir: folder with the customer's own photos: hero.*, side.*, logo.*, 1.*, 2.* ..."""
+    details = details or {}
+    slug_name = tidy_name(row.get("Business"))  # the link never changes, even if they rename
+    name = tidy_name(details.get("business") or row.get("Business"))
     if not name or name.lower() in ("none", "null"):
         return None, "no business name"
-    phone = (row.get("Phone") or "").strip()
+    phone = (details.get("phone") or row.get("Phone") or "").strip()
     if not phone:
         return None, "no phone"
     group = group_for(row.get("Trade"), name)
     t = dict(TRADES[group], steps=STEPS)
+    cred_values = details.get("creds") or {}          # by label, or
+    cred_list = details.get("creds_list") or []        # by position: [registration, insurance/guarantee]
+    t["creds"] = [dict(c, value=str(cred_values.get(c["label"]) or (cred_list[i] if i < len(cred_list) else "") or "").strip())
+                  for i, c in enumerate(t["creds"])]
     town = (row.get("Town") or "").strip() or "your area"
 
     try:
@@ -114,14 +122,16 @@ def build_one(env, row, out_root, preview=True):
         reviews = 0
 
     lead_id = (row.get("Lead ID") or "lead").strip()
-    out_dir = out_root / f"{lead_id}-{slugify(name)}"
+    out_dir = out_root / f"{lead_id}-{slugify(slug_name)}"
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "assets").mkdir(exist_ok=True)
     shutil.copyfile(HERE / "assets" / "archivo.woff2", out_dir / "assets" / "archivo.woff2")
 
     # Photo library: images/<group>/ holds hero.*, side.*, before.*, after.* and
     # gallery photos named 1.*, 2.* ... Any slot without a file shows a placeholder.
-    files = library_images(group)
+    own_files = sorted(p for p in lead_dir.iterdir() if p.suffix.lower() in IMAGE_EXT) if lead_dir and lead_dir.is_dir() else []
+    own = any(p.stem.lower() != "logo" for p in own_files)
+    files = own_files if own else library_images(group)
     by_stem = {p.stem.lower(): p for p in files}
     img_dir = out_dir / "img"
 
@@ -134,9 +144,20 @@ def build_one(env, row, out_root, preview=True):
     img = {slot: place(by_stem[slot], slot) for slot in ("hero", "side", "before", "after") if slot in by_stem}
     numbered = sorted((p for p in files if p.stem.isdigit()), key=lambda p: int(p.stem))
     gallery = []
-    for i, caption in enumerate(t["gallery"]):
-        src = place(numbered[i], f"g{i + 1}") if i < len(numbered) else ""
-        gallery.append({"caption": caption, "src": src})
+    if own:
+        # customer's own photos: first ones double as hero/side if they didn't pick them
+        if "hero" not in img and numbered:
+            img["hero"] = place(numbered[0], "hero")
+        if "side" not in img and len(numbered) > 1:
+            img["side"] = place(numbered[1], "side")
+        captions = details.get("captions") or {}
+        for i, p in enumerate(numbered[:9]):
+            gallery.append({"caption": str(captions.get(p.stem, "")), "src": place(p, f"g{i + 1}")})
+    else:
+        for i, caption in enumerate(t["gallery"]):
+            src = place(numbered[i], f"g{i + 1}") if i < len(numbered) else ""
+            gallery.append({"caption": caption, "src": src})
+    logo = next((p for p in own_files if p.stem.lower() == "logo"), None)
 
     biz = {
         "name": name, "initials": initials(name), "town": town, "town_longest": max(len(w) for w in re.split(r"[-\s]", town)), "phone": phone, "tel": tel_link(phone),
@@ -145,6 +166,7 @@ def build_one(env, row, out_root, preview=True):
         "rating_pct": round(rating / 5 * 100) if rating is not None else 0,
         "maps": (row.get("Google Maps") or "").strip() or "https://www.google.com/maps",
         "is_ltd": bool(re.search(r"\b(ltd|limited)\b", name, re.I)),
+        "logo": place(logo, "logo") if logo else "",
     }
     areas = [town] + [a for a in NEARBY.get(town, []) if a != town]
     schema = {
@@ -155,7 +177,7 @@ def build_one(env, row, out_root, preview=True):
     html = env.get_template("call_me.html").render(
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
-        track=CONFIG.get("track", ""),
+        track=CONFIG.get("track", ""), own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
         schema_json=json.dumps(schema).replace("</", "<\\/"),
     )
     (out_dir / "index.html").write_text(html, encoding="utf-8")

@@ -6,6 +6,7 @@
 <title>{{ biz.name }} | {{ t.label }} in {{ biz.town }}</title>
 <meta name="description" content="{{ biz.name }}: {{ t.label|lower }} in {{ biz.town }} and nearby. Call {{ biz.phone }} for a quote.">
 {% if preview %}<meta name="robots" content="noindex">{% endif %}
+{% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
 <link rel="preload" href="assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">{{ schema_json|safe }}</script>
 <style>
@@ -96,6 +97,7 @@ section { padding-block: clamp(3.5rem, 9vw, 6rem); }
   transform: skewX(-8deg);
 }
 .monogram span { transform: skewX(8deg); }
+.brandmark .logo { flex: none; height: 2.6rem; width: auto; max-width: 9rem; object-fit: contain; border-radius: 4px; background: #fff; padding: 2px; }
 .brandmark strong { font-family: var(--display); font-weight: 800; font-stretch: 80%; font-size: 1.15rem; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nav { display: none; gap: 1.5rem; font-weight: 600; font-size: .95rem; }
 .nav a { text-decoration: none; opacity: .9; }
@@ -353,7 +355,7 @@ footer .wrap { display: grid; gap: 1.5rem; }
 
 <div class="topbar">
   <div class="wrap">
-    <a class="brandmark" href="#top" aria-label="{{ biz.name }} home"><span class="monogram"><span>{{ biz.initials }}</span></span><strong>{{ biz.name }}</strong></a>
+    <a class="brandmark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img class="logo" src="{{ biz.logo }}" alt="">{% else %}<span class="monogram"><span>{{ biz.initials }}</span></span>{% endif %}<strong>{{ biz.name }}</strong></a>
     <nav class="nav" aria-label="Main">
       <a href="#services">Services</a>
       <a href="#work">Our work</a>
@@ -367,7 +369,7 @@ footer .wrap { display: grid; gap: 1.5rem; }
 
 <header class="hero-wrap" id="top">
   <div class="hero{% if img.hero %} has-photo{% endif %}">
-    {% if img.hero %}<div class="hero-photo"><img src="{{ img.hero }}" alt=""></div><span class="ph-tag photo-tag">Example photo</span>{% endif %}
+    {% if img.hero %}<div class="hero-photo"><img src="{{ img.hero }}" alt=""></div>{% if not own %}<span class="ph-tag photo-tag">Example photo</span>{% endif %}{% endif %}
     <div class="wrap">
       <div class="hero-copy">
         <p class="hero-kicker">{{ t.kicker }} in {{ biz.town }}</p>
@@ -408,7 +410,8 @@ footer .wrap { display: grid; gap: 1.5rem; }
       {% endif %}
       <div class="trust-item"><b>{{ biz.town }}</b><span>Local and nearby</span></div>
       {% for c in t.creds[:1] %}
-      <div class="trust-item ph"><span class="ph-tag">Placeholder</span><b>{{ c.short }}</b><span>{{ c.label }}</span></div>
+      {% if c.value %}<div class="trust-item"><b>{{ c.short }}</b><span>{{ c.value }}</span></div>
+      {% elif preview %}<div class="trust-item ph"><span class="ph-tag">Placeholder</span><b>{{ c.short }}</b><span>{{ c.label }}</span></div>{% endif %}
       {% endfor %}
     </div>
   </div>
@@ -422,9 +425,11 @@ footer .wrap { display: grid; gap: 1.5rem; }
         <h2>{{ t.services_title }}</h2>
         <p>{{ t.services_intro }}</p>
       </div>
+      {% if img.side or preview %}
       <div class="side-photo">
-        {% if img.side %}<img src="{{ img.side }}" alt="" loading="lazy"><span class="ph-tag">Example photo</span>{% else %}<span class="ph-tag">Your photo here</span>{% endif %}
+        {% if img.side %}<img src="{{ img.side }}" alt="" loading="lazy">{% if not own %}<span class="ph-tag">Example photo</span>{% endif %}{% else %}<span class="ph-tag">Your photo here</span>{% endif %}
       </div>
+      {% endif %}
     </div>
     <div class="services-grid">
       {% for s in t.services %}
@@ -445,7 +450,7 @@ footer .wrap { display: grid; gap: 1.5rem; }
     <div class="ba" id="ba">
       <img src="{{ img.before }}" alt="Before" loading="lazy">
       <img class="after" src="{{ img.after }}" alt="After" loading="lazy">
-      <span class="ph-tag">Example photos</span>
+      {% if not own %}<span class="ph-tag">Example photos</span>{% endif %}
       <span class="lbl l">Before</span><span class="lbl r">After</span>
       <div class="handle"></div>
       <input id="ba-range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
@@ -454,6 +459,8 @@ footer .wrap { display: grid; gap: 1.5rem; }
 </section>
 {% endif %}
 
+{% set shown = gallery if preview else (gallery|selectattr("src")|list) %}
+{% if shown %}
 <section id="work"{% if not (img.before and img.after) %} class="alt"{% endif %}>
   <div class="wrap">
     <div class="section-head">
@@ -462,17 +469,18 @@ footer .wrap { display: grid; gap: 1.5rem; }
       <p>{{ t.gallery_intro }}</p>
     </div>
     <div class="gallery">
-      {% for g in gallery %}
+      {% for g in shown %}
       <figure class="tile">
         {% if g.src %}<img src="{{ g.src }}" alt="{{ g.caption }}" loading="lazy">{% endif %}
-        <span class="ph-tag">{{ 'Example photo' if g.src else 'Your photo here' }}</span>
-        <figcaption>{{ g.caption }}</figcaption>
+        {% if not (own and g.src) %}<span class="ph-tag">{{ 'Example photo' if g.src else 'Your photo here' }}</span>{% endif %}
+        {% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}
       </figure>
       {% endfor %}
     </div>
-    <p class="gallery-note">These spaces get your own job photos before the site goes live.</p>
+    {% if preview %}<p class="gallery-note">These spaces get your own job photos before the site goes live.</p>{% endif %}
   </div>
 </section>
+{% endif %}
 
 <section class="steps-band" id="how">
   <div class="wrap">
@@ -485,6 +493,7 @@ footer .wrap { display: grid; gap: 1.5rem; }
   </div>
 </section>
 
+{% if preview or biz.reviews %}
 <section id="reviews">
   <div class="wrap reviews-layout">
     <div class="score">
@@ -499,6 +508,7 @@ footer .wrap { display: grid; gap: 1.5rem; }
       <p style="color:var(--ink-soft)">Reviews from your Google listing show here as customers leave them.</p>
       {% endif %}
     </div>
+    {% if preview %}
     <div>
       <div class="review-cards">
         {% for i in range(3) %}
@@ -512,8 +522,10 @@ footer .wrap { display: grid; gap: 1.5rem; }
       </div>
       <p class="reviews-note">On the live site these cards show your latest Google reviews, word for word, pulled straight from your listing.</p>
     </div>
+    {% endif %}
   </div>
 </section>
+{% endif %}
 
 <section class="alt" id="areas">
   <div class="wrap areas-panel">
@@ -573,7 +585,8 @@ footer .wrap { display: grid; gap: 1.5rem; }
       <p>{{ t.quote_intro }}</p>
       <a class="phone-mid" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
       {% for c in t.creds %}
-      <div class="ph-box" style="color:var(--ink)"><span class="ph-tag">Placeholder</span><strong>{{ c.label }}</strong><span>{{ c.hint }}</span></div>
+      {% if c.value %}<div class="ph-box" style="color:var(--ink);border-style:solid"><strong>{{ c.label }}</strong><span>{{ c.value }}</span></div>
+      {% elif preview %}<div class="ph-box" style="color:var(--ink)"><span class="ph-tag">Placeholder</span><strong>{{ c.label }}</strong><span>{{ c.hint }}</span></div>{% endif %}
       {% endfor %}
     </div>
     <form id="quote-form" novalidate>
@@ -592,7 +605,8 @@ footer .wrap { display: grid; gap: 1.5rem; }
         </div>
       </div>
       <div class="field"><label for="q-details">What do you need? <span class="hint">(optional)</span></label><textarea id="q-details" name="details"></textarea></div>
-      <div class="field"><label for="q-photos">Photos of the job <span class="hint">(optional, helps us quote faster)</span></label><input id="q-photos" name="photos" type="file" accept="image/*" multiple></div>
+      <div class="field"><label for="q-email">Email <span class="hint">(optional)</span></label><input id="q-email" name="email" type="email" autocomplete="email"></div>
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave blank<input id="q-web" name="website" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn btn-brand" type="submit">Send my enquiry</button>
       <div id="q-status" class="form-status" role="status" hidden></div>
     </form>
@@ -602,13 +616,15 @@ footer .wrap { display: grid; gap: 1.5rem; }
 <footer>
   <div class="wrap">
     <div class="foot-top">
-      <span class="brandmark"><span class="monogram"><span>{{ biz.initials }}</span></span><strong>{{ biz.name }}</strong></span>
+      <span class="brandmark">{% if biz.logo %}<img class="logo" src="{{ biz.logo }}" alt="">{% else %}<span class="monogram"><span>{{ biz.initials }}</span></span>{% endif %}<strong>{{ biz.name }}</strong></span>
       <a class="phone-foot" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
     </div>
     <p>{{ t.label }} in {{ biz.town }} and the surrounding area.</p>
     <div class="foot-legal">
-      {% if biz.is_ltd %}<p><span class="ph-tag">Placeholder</span> Company number, country of registration and registered office go here.</p>{% endif %}
-      <p><span class="ph-tag">Placeholder</span> Privacy notice: how enquiries from this site are stored and used.</p>
+      {% if legal.company %}<p>{{ legal.company }}</p>
+      {% elif biz.is_ltd and preview %}<p><span class="ph-tag">Placeholder</span> Company number, country of registration and registered office go here.</p>{% endif %}
+      {% if preview %}<p><span class="ph-tag">Placeholder</span> Privacy notice: how enquiries from this site are stored and used.</p>
+      {% else %}<p>Enquiries sent through this site are only used to reply to you about your job.</p>{% endif %}
       <p>&copy; {{ year }} {{ biz.name }}</p>
     </div>
     <p class="foot-credit">Website by Maystone</p>
@@ -642,12 +658,18 @@ footer .wrap { display: grid; gap: 1.5rem; }
       document.getElementById(missing[0]).focus();
       return;
     }
-    {% if preview %}
+    {% if preview or not track %}
     status.innerHTML = '<strong>This is a preview.</strong> On your live site, this enquiry goes straight to your phone and email.';
-    {% else %}
-    status.innerHTML = '<strong>Thanks, your enquiry is sent.</strong> We will be in touch soon.';
-    {% endif %}
     status.hidden = false;
+    {% else %}
+    if (document.getElementById('q-web').value) return;
+    var body = new URLSearchParams({ action: 'enquiry', id: {{ lead_id|tojson }} });
+    ['name', 'phone', 'postcode', 'job', 'details', 'email'].forEach(function (k) { body.append(k, (form.elements[k] && form.elements[k].value) || ''); });
+    fetch({{ track|tojson }}, { method: 'POST', mode: 'no-cors', credentials: 'omit', body: body });
+    status.innerHTML = '<strong>Thanks, your enquiry is sent.</strong> We will be in touch soon.';
+    status.hidden = false;
+    form.reset();
+    {% endif %}
   });
 })();
 </script>

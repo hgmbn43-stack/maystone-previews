@@ -29,11 +29,13 @@ def main():
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
             live = bool(data.get("live"))
-            row = {k: str(v) for k, v in data.items() if k != "live"}
+            details = data.get("details") if isinstance(data.get("details"), dict) else {}
+            row = {k: str(v) for k, v in data.items() if k not in ("live", "details", "domain")}
         except (ValueError, OSError) as e:
             print(f"skip {f.name}: {e}")
             continue
-        result, reason = build_one(env, row, out_root, preview=not live)
+        result, reason = build_one(env, row, out_root, preview=not live, details=details,
+                                   lead_dir=ROOT / "leads" / f.stem, domain=str(data.get("domain") or "").strip().lower())
         if result:
             built += 1
             print("built", result["Path"])

@@ -23,6 +23,10 @@ jobs:
           python-version: "3.12"
       - run: pip install jinja2
       - run: python engine/build_all.py
+      - name: Publish customers' own-domain sites
+        run: python engine/publish_clients.py
+        env:
+          CLIENT_TOKEN: ${{ secrets.CLIENT_SITES_TOKEN }}
       - run: rm -rf .git .github
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
