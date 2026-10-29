@@ -651,6 +651,6 @@ footer .wrap { display: grid; gap: 1.5rem; }
   });
 })();
 </script>
-{% if preview and track %}<img src="{{ track }}?v={{ lead_id }}" width="1" height="1" alt="" style="position:absolute;left:-9999px" referrerpolicy="no-referrer">{% endif %}
+{% if preview and track %}<script>try{fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true});}catch(e){}</script>{% endif %}
 </body>
 </html>
