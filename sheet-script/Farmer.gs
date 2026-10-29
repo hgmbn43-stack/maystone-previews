@@ -14,6 +14,8 @@ var MASTER_ID = '1mbmuBmjrXDgVm7GlkptSGpBHloYSkMB1h81Xfwy6zik';
 var ACTOR = 'compass~crawler-google-places';
 var MAX_RUN_USD = 0.5;
 var MIN_CREDIT_USD = 5;
+var DAILY_TARGET = 200;   // new leads per weekday across both reps (~100 each)
+var MAX_TOWNS_PER_DAY = 5;
 var SEARCHES = ['plasterer', 'carpenter', 'builder', 'painter and decorator', 'plumber', 'roofer',
   'electrician', 'landscaper', 'handyman', 'tiler', 'gardener', 'fencing contractor'];
 var QUEUE = ['Bognor Regis', 'Chichester', 'Horsham', 'Crawley', 'Burgess Hill', 'Haywards Heath',
@@ -45,12 +47,12 @@ function switchOnFarmer() {
   if (!PropertiesService.getUserProperties().getProperty('APIFY_TOKEN')) { ui.alert('Do step 3 (Apify key) first.'); return; }
   ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() === 'farmDaily') ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('farmDaily').timeBased().everyDays(1).atHour(6).inTimezone('Europe/London').create();
-  ui.alert('Lead farmer is on. Every weekday around 6am it adds one new town of leads to the Harvey and Fin tabs.\nNext town: ' + (nextTown_() || 'queue finished'));
+  ui.alert('Lead farmer is on. Every weekday from about 6am it scrapes towns until there are ' + DAILY_TARGET + ' new leads (max ' + MAX_TOWNS_PER_DAY + ' towns), split between the Harvey and Fin tabs.\nNext town: ' + (nextTown_() || 'queue finished'));
 }
 
 /** Menu: start a scrape now (any day). */
 function farmNow() {
-  var msg = startFarm_(true);
+  var msg = startFarm_(false);
   SpreadsheetApp.getUi().alert(msg);
 }
 
@@ -58,12 +60,13 @@ function farmNow() {
 function farmDaily() {
   var day = Number(Utilities.formatDate(new Date(), 'Europe/London', 'u')); // 1 = Mon ... 7 = Sun
   if (day > 5) return;
-  startFarm_(false);
+  startFarm_(true);
 }
 
 // ---------- start + poll ----------
 
-function startFarm_(manual) {
+/** chain = keep going town after town until DAILY_TARGET (used by the daily trigger). */
+function startFarm_(chain) {
   var props = PropertiesService.getScriptProperties();
   if (props.getProperty('FARM_RUN')) return 'A scrape is already running. Leads appear within about 15 minutes.';
   if (!PropertiesService.getUserProperties().getProperty('APIFY_TOKEN')) return 'No Apify key set.';
@@ -83,7 +86,7 @@ function startFarm_(manual) {
   };
   var run = apify_('POST', 'acts/' + ACTOR + '/runs?maxTotalChargeUsd=' + MAX_RUN_USD, input);
   if (run.code !== 201) return 'Could not start Apify: ' + run.code + ' ' + JSON.stringify(run.json).slice(0, 200);
-  props.setProperty('FARM_RUN', JSON.stringify({ id: run.json.data.id, town: town, started: Date.now() }));
+  props.setProperty('FARM_RUN', JSON.stringify({ id: run.json.data.id, town: town, started: Date.now(), chain: !!chain }));
   return 'Started scraping ' + town + '. New leads appear in the Harvey and Fin tabs within about 15 minutes.';
 }
 
@@ -104,7 +107,15 @@ function farmPoll_() {
   var cost = Number(run.json.data.usageTotalUsd || 0);
   if (status !== 'SUCCEEDED') { logCoverage_([job.town, '12 trades', 0, 0, '', round2_(cost), 'Apify run ' + status]); return; }
   var items = apify_('GET', 'datasets/' + run.json.data.defaultDatasetId + '/items?clean=true&limit=1000');
-  addLeads_(job.town, items.json || [], cost);
+  var added = addLeads_(job.town, items.json || [], cost);
+
+  // Daily tally, then carry on to the next town if we're short of the target
+  var today = Utilities.formatDate(new Date(), 'Europe/London', 'yyyy-MM-dd');
+  var stats = JSON.parse(props.getProperty('FARM_DAY') || '{}');
+  if (stats.date !== today) stats = { date: today, leads: 0, towns: 0 };
+  stats.leads += added; stats.towns += 1;
+  props.setProperty('FARM_DAY', JSON.stringify(stats));
+  if (job.chain && stats.leads < DAILY_TARGET && stats.towns < MAX_TOWNS_PER_DAY) startFarm_(true);
 }
 
 // ---------- build + write ----------
@@ -174,7 +185,9 @@ function addLeads_(town, items, cost) {
   var counts = { A: 0, B: 0, C: 0 };
   rows.forEach(function (r) { counts[r.priority]++; });
   logCoverage_([town, '12 trades', items.length, values.length, ids, round2_(cost), 'Sheet script (Apify no-website filter)']);
+  var addedCount = values.length;
   try { SpreadsheetApp.getActive().toast('+' + values.length + ' leads from ' + town + ' (A ' + counts.A + ', B ' + counts.B + ')', 'Lead farmer', 10); } catch (e) {}
+  return addedCount;
 }
 
 function readExisting_(master, leadsTab) {
