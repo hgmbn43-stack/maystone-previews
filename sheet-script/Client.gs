@@ -157,3 +157,6 @@ function setDomain_(sh, r, id, domain) {
     'Delete any other A or AAAA records for @ first. It can take up to an hour to work, and the padlock (HTTPS) ' +
     'switches on by itself shortly after. When https://' + domain + ' shows their site, change the Live site cell to "Live: https://' + domain + '".');
 }
+
+/** Run once from the editor to grant Drive permission (reads customers' uploads). */
+function authoriseDrive() { var r = DriveApp.getFoldersByName(UPLOAD_ROOT); return r.hasNext() ? 'ok' : 'no uploads folder yet'; }
