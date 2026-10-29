@@ -200,4 +200,4 @@ var FORM_HTML_ = '<!doctype html><html lang="en-GB"><head><meta charset="utf-8">
   '</script></body></html>';
 
 /** Run once from the editor to grant Drive + Gmail permission for the web app. */
-function authorise() { DriveApp.getRootFolder(); GmailApp.getAliases(); return 'ok'; }
+function authorise() { leadFolder_('_permission-check'); GmailApp.getAliases(); return 'ok'; }
