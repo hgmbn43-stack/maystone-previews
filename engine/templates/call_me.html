@@ -275,6 +275,19 @@ section { padding-block: clamp(3.5rem, 9vw, 6rem); }
 .faq details[open] summary::after { content: "\2212"; }
 .faq details p { padding-bottom: 1.2rem; color: var(--ink-soft); max-width: 44rem; }
 
+/* Go live (preview only): package choice + pay buttons */
+.golive { background: var(--tint); }
+.plans { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); max-width: 52rem; }
+.plan { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.5rem; display: grid; gap: .6rem; align-content: start; position: relative; }
+.plan.best { border: 2px solid var(--brand); }
+.plan .tag { position: absolute; top: -.75rem; left: 1.25rem; background: var(--brand); color: var(--on-brand); font-size: .75rem; font-weight: 700; padding: .2rem .6rem; border-radius: 999px; }
+.plan .price { font-family: var(--display); font-weight: 850; font-stretch: 70%; font-size: 2.6rem; line-height: 1; }
+.plan .price small { font-family: var(--body); font-size: 1rem; font-weight: 600; color: var(--ink-soft); }
+.plan p { color: var(--ink-soft); }
+.plan .btn { margin-top: .4rem; }
+.golive-note { margin-top: 1rem; color: var(--ink-soft); font-size: .92rem; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .plan.best { border-color: var(--stripe); } }
+
 /* Quote band */
 .quote-band { background: var(--brand); color: var(--on-brand); position: relative; }
 .quote-band::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 10px; background: var(--stripe); clip-path: polygon(0 0, 100% 0, 100% 30%, 0 100%); }
@@ -527,6 +540,32 @@ footer .wrap { display: grid; gap: 1.5rem; }
   </div>
 </section>
 
+{% if preview and pay.once %}
+<section class="golive" id="go-live">
+  <div class="wrap">
+    <div class="section-head"><div class="rule"></div><h2>Like it? Make it yours</h2><p>Pick a package and we'll set your site up with your own photos, details and wording, then put it live.</p></div>
+    <div class="plans">
+      <div class="plan">
+        <h3>Pay once</h3>
+        <span class="price">£500</span>
+        <p>One payment. Your website, finished with your own photos and details.</p>
+        <a class="btn btn-brand" href="{{ pay.once }}?client_reference_id={{ lead_id }}" rel="noopener">Choose pay once</a>
+      </div>
+      {% if pay.monthly %}
+      <div class="plan best">
+        <span class="tag">Most popular</span>
+        <h3>Website + care plan</h3>
+        <span class="price">£599 <small>then £49/month</small></span>
+        <p>Your website set up, then hosting and changes looked after every month.</p>
+        <a class="btn btn-brand" href="{{ pay.monthly }}?client_reference_id={{ lead_id }}" rel="noopener">Choose care plan</a>
+      </div>
+      {% endif %}
+    </div>
+    <p class="golive-note">Secure card payment by Stripe. Questions first? Reply to our email or ring your Maystone contact.</p>
+  </div>
+</section>
+{% endif %}
+
 <section class="quote-band" id="quote">
   <div class="wrap quote-grid">
     <div class="quote-side">
@@ -612,5 +651,6 @@ footer .wrap { display: grid; gap: 1.5rem; }
   });
 })();
 </script>
+{% if preview and track %}<img src="{{ track }}?v={{ lead_id }}" width="1" height="1" alt="" style="position:absolute;left:-9999px" referrerpolicy="no-referrer">{% endif %}
 </body>
 </html>

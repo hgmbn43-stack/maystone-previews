@@ -27,11 +27,13 @@ def main():
     built = 0
     for f in sorted((ROOT / "leads").glob("*.json")):
         try:
-            row = {k: str(v) for k, v in json.loads(f.read_text(encoding="utf-8")).items()}
+            data = json.loads(f.read_text(encoding="utf-8"))
+            live = bool(data.get("live"))
+            row = {k: str(v) for k, v in data.items() if k != "live"}
         except (ValueError, OSError) as e:
             print(f"skip {f.name}: {e}")
             continue
-        result, reason = build_one(env, row, out_root, preview=True)
+        result, reason = build_one(env, row, out_root, preview=not live)
         if result:
             built += 1
             print("built", result["Path"])

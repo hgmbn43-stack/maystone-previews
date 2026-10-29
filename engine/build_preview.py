@@ -29,6 +29,10 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from trades import NEARBY, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
+try:
+    CONFIG = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
+except (OSError, ValueError):
+    CONFIG = {}
 IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 SCHEMA_TYPE = {
     "plumbing": "Plumber", "electrical": "Electrician", "roofing": "RoofingContractor",
@@ -150,6 +154,8 @@ def build_one(env, row, out_root, preview=True):
     }
     html = env.get_template("call_me.html").render(
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
+        lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
+        track=CONFIG.get("track", ""),
         schema_json=json.dumps(schema).replace("</", "<\\/"),
     )
     (out_dir / "index.html").write_text(html, encoding="utf-8")

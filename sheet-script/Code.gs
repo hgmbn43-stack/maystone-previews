@@ -27,6 +27,7 @@ function onOpen() {
     .addItem('2. Switch on automation', 'switchOn')
     .addItem('3. Set Apify key', 'setApifyKey')
     .addItem('4. Switch on lead farmer', 'switchOnFarmer')
+    .addItem('5. Set Stripe key', 'setStripeKey')
     .addSeparator()
     .addItem('Farm leads now', 'farmNow')
     .addItem('Run now', 'processAll')
@@ -77,6 +78,7 @@ function processAll() {
       if (sh && sh.getLastRow() >= 2) processRows_(sh, 2, sh.getLastRow());
     });
     try { farmPoll_(); } catch (e) { console.error('farmPoll_: ' + e); }
+    try { stripePoll_(); } catch (e) { console.error('stripePoll_: ' + e); }
   });
 }
 
@@ -159,6 +161,7 @@ function sendPreview_(to, business, link, rep) {
     'Thanks for speaking with us. Here\'s the preview of your new website for ' + business + ':\n' +
     link + '\n\n' +
     'It works on phones and computers. Photos, badges and a few bits of wording are placeholders – we swap in your own before it goes live.\n\n' +
+    'When you\'re happy, you can pick a package and pay securely at the bottom of the page, and we\'ll get it live.\n\n' +
     'Have a look and reply to this email or give us a ring with any changes.\n\n' +
     'Thanks,\n' + rep + '\nMaystone';
   GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, { from: SENDER, name: SENDER_NAME });
