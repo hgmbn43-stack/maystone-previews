@@ -77,7 +77,7 @@ function stripePoll_() {
     var who = (s.customer_details && (s.customer_details.name || s.customer_details.email)) || '';
     var hit = id ? findLead_(id) : null;
     if (!hit) {
-      notify_(null, 'PAID (no lead matched): Stripe payment attached (' + amount + ')',
+      notify_(null, 'PAID (no lead matched): ' + amount,
         'A payment of ' + amount + ' from ' + who + ' came in without a lead ID. Match it up by hand in the sheet.');
       return;
     }
