@@ -42,7 +42,7 @@ function sendDetailsLink_(sh, r, to) {
   var id = String(sh.getRange(r, 1).getValue()).trim();
   var key = String(sh.getRange(r, CX.key).getValue()).trim();
   if (!key || key === 'FALSE' || key === 'TRUE') { key = Utilities.getUuid().replace(/-/g, '').slice(0, 16); sh.getRange(r, CX.key).setValue(key); }
-  var link = FORM_URL + '?form=' + encodeURIComponent(id) + '&k=' + key;
+  var link = SITE + 'details/?id=' + encodeURIComponent(id) + '&k=' + key;
   var biz = sh.getRange(r, 2).getValue();
   var body = 'Hi,\n\nThanks for your payment – we\'re getting your new website for ' + biz + ' ready.\n\n' +
     'Please send us your photos and a few details here (it takes about 5 minutes):\n' + link + '\n\n' +

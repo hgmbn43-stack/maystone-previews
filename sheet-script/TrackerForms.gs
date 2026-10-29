@@ -13,15 +13,33 @@ var UPLOAD_ROOT = 'Maystone client uploads';
 
 function routeGet_(e) {
   var p = (e && e.parameter) || {};
+  if (p.info) return json_(leadInfo_(String(p.info), String(p.k || '')));
   if (p.form) return detailsForm_(String(p.form), String(p.k || ''));
   return null;
 }
 
 function doPost(e) {
   var p = (e && e.parameter) || {};
-  if (p.action === 'enquiry') { try { enquiry_(p); } catch (err) { console.error(err); } }
+  if (p.action === 'enquiry') { try { enquiry_(p); } catch (err) { console.error(err); } return ContentService.createTextOutput('ok'); }
+  var body = null;
+  try { body = JSON.parse((e && e.postData && e.postData.contents) || 'null'); } catch (err) {}
+  if (body && body.action === 'details') {
+    try { submitDetails(String(body.id || ''), String(body.k || ''), body.data || {}, body.photos || []); return json_({ ok: true }); }
+    catch (err) { return json_({ ok: false, error: err.message }); }
+  }
   return ContentService.createTextOutput('ok');
 }
+
+/** Prefill for the static details form (maystone-previews/details/). */
+function leadInfo_(id, k) {
+  var hit = checkKey_(id, k);
+  if (!hit) return { ok: false };
+  var sh = hit.sheet, r = hit.row;
+  return { ok: true, biz: String(sh.getRange(r, C.biz).getValue()), phone: String(sh.getRange(r, 5).getValue()),
+           email: String(sh.getRange(r, COL.email).getValue()) };
+}
+
+function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
 
 // ---------- details form ----------
 
