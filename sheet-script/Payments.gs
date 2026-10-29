@@ -41,7 +41,7 @@ function recordView_(id) {
   if (!String(sh.getRange(r, C2.hot).getValue()).trim()) {
     sh.getRange(r, C2.hot).setValue('Yes – ' + Utilities.formatDate(new Date(), 'Europe/London', 'dd/MM HH:mm'));
     var biz = sh.getRange(r, C.biz).getValue(), phone = sh.getRange(r, 5).getValue();
-    notify_(sh.getName(), '🔥 ' + biz + ' is looking at their preview now',
+    notify_(sh.getName(), 'HOT LEAD: ' + biz + ' is looking at their preview now',
       biz + ' just opened their website preview.\n\nCall them now while it\'s on their screen: ' + phone + '\n\nLead ' + id + ' on the ' + sh.getName() + ' tab.');
   }
 }
@@ -77,7 +77,7 @@ function stripePoll_() {
     var who = (s.customer_details && (s.customer_details.name || s.customer_details.email)) || '';
     var hit = id ? findLead_(id) : null;
     if (!hit) {
-      notify_(null, '💷 Stripe payment with no lead attached (' + amount + ')',
+      notify_(null, 'PAID (no lead matched): Stripe payment attached (' + amount + ')',
         'A payment of ' + amount + ' from ' + who + ' came in without a lead ID. Match it up by hand in the sheet.');
       return;
     }
@@ -90,7 +90,7 @@ function stripePoll_() {
     var liveNote = '';
     try { goLive_(id); liveNote = 'Their site is being switched to live (preview banner removed) – about 2 minutes.'; }
     catch (err) { liveNote = 'Could not switch the site to live automatically: ' + err.message; }
-    notify_(sh.getName(), '💷 ' + biz + ' just paid ' + amount,
+    notify_(sh.getName(), 'PAID: ' + biz + ' just paid ' + amount,
       biz + ' paid ' + amount + ' for ' + pkg + '.\n\n' + liveNote +
       '\n\nNext: get their photos, logo and any wording changes, and book the day-2 check-in call.');
   });

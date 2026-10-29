@@ -35,7 +35,7 @@ function recordView_(id) {
   if (!String(sh.getRange(r, C2.hot).getValue()).trim()) {
     sh.getRange(r, C2.hot).setValue('Yes – ' + Utilities.formatDate(new Date(), 'Europe/London', 'dd/MM HH:mm'));
     var biz = sh.getRange(r, C.biz).getValue(), phone = sh.getRange(r, 5).getValue();
-    notify_(sh.getName(), '🔥 ' + biz + ' is looking at their preview now',
+    notify_(sh.getName(), 'HOT LEAD: ' + biz + ' is looking at their preview now',
       biz + ' just opened their website preview.\n\nCall them now while it\'s on their screen: ' + phone + '\n\nLead ' + id + ' on the ' + sh.getName() + ' tab.');
   }
 }
