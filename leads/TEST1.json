@@ -7,5 +7,15 @@
  "Google rating": "",
  "Google reviews": "",
  "Google Maps": "",
- "live": true
+ "live": true,
+ "details": {
+  "business": "Maystone Test Plumbing",
+  "phone": "07700 900123",
+  "email": "hgmbn43@gmail.com",
+  "creds_list": [
+   "Gas Safe reg. 123456",
+   "£2m public liability insurance"
+  ],
+  "company": ""
+ }
 }
