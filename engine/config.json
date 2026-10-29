@@ -1,1 +1,5 @@
-{"pay_once": "", "pay_monthly": "", "track": "https://script.google.com/macros/s/AKfycbyHy9OQT8lM1U_xwEg2rpJqCG1PZApcAKPNbtpDUzI1Gw-Btro7IwNEr-GZwHxXf3Er/exec"}
+{
+ "pay_once": "https://buy.stripe.com/28EdR98DSe56ckJaQGeQM01",
+ "pay_monthly": "https://buy.stripe.com/7sYdR94nC1ik3OdcYOeQM02",
+ "track": "https://script.google.com/macros/s/AKfycbyHy9OQT8lM1U_xwEg2rpJqCG1PZApcAKPNbtpDUzI1Gw-Btro7IwNEr-GZwHxXf3Er/exec"
+}
