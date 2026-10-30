@@ -408,3 +408,60 @@ EXTRAS = {
 for _g, _x in EXTRAS.items():
     TRADES[_g].update({k: v for k, v in _x.items() if k != "short"})
     TRADES[_g]["creds"] = [dict(c, short=_x["short"]) if i == 0 else c for i, c in enumerate(TRADES[_g]["creds"])]
+
+
+# Guide price bands for the "rough price" tool, in the same order as each trade's services.
+# (low, high) in pounds, or (low, high, "unit") when the price is per item/hour/room.
+# None = no guide price for that service. These are typical UK ranges used as EXAMPLES in
+# previews; the client sets their own before the site goes live.
+PRICES = {
+    "plumbing": [(90, 250), (2000, 4000), (80, 120), (80, 250), (200, 450, "per radiator"), (90, 300)],
+    "electrical": [(80, 200), (450, 800), (150, 300), (3500, 8000), (90, 300), (800, 1200)],
+    "building": [(30000, 70000), (15000, 50000), (35000, 60000), (500, 3000), (2500, 6000), (200, 1500)],
+    "plastering": [(400, 800, "per room"), (800, 1500, "per room"), (3000, 7000), (500, 1200), (150, 500), (100, 400)],
+    "carpentry": [(1200, 3500), (120, 250, "per door"), (1000, 4000), (300, 1200), (1500, 5000), (400, 2500)],
+    "decorating": [(300, 700, "per room"), (1500, 4000), (250, 600, "per room"), (150, 500), (800, 1800), (100, 400)],
+    "roofing": [(150, 600), (6000, 15000), (1500, 4500), (400, 1500), (1500, 4000), (100, 250)],
+    "kitchens_bathrooms": [(2500, 6000), (4000, 9000), (400, 1500), (400, 1500), (700, 2000), None],
+    "gardens": [(3000, 8000), (1000, 3000), (600, 2500), (25, 40, "an hour"), (300, 1500), (200, 800)],
+    "handyman": [(40, 120, "per item"), (50, 150), (50, 150), (150, 400), (80, 250), (30, 45, "an hour")],
+    "local": [None, None, None],
+}
+
+# Postcode districts for the "Do you cover me?" checker (Sussex towns in NEARBY).
+POSTCODES = {
+    "Worthing": ["BN11", "BN12", "BN13", "BN14"], "Goring-by-Sea": ["BN12"], "Durrington": ["BN13"],
+    "Findon": ["BN14"], "Ferring": ["BN12"], "Lancing": ["BN15"], "Sompting": ["BN15"],
+    "Shoreham-by-Sea": ["BN43"], "Southwick": ["BN42"], "Portslade": ["BN41"], "Steyning": ["BN44"],
+    "Brighton": ["BN1", "BN2"], "Hove": ["BN3"], "Rottingdean": ["BN2"], "Saltdean": ["BN2"],
+    "Woodingdean": ["BN2"], "Peacehaven": ["BN10"], "Newhaven": ["BN9"], "Seaford": ["BN25"],
+    "Lewes": ["BN7", "BN8"], "Ringmer": ["BN8"], "Kingston": ["BN7"],
+    "Littlehampton": ["BN17"], "Rustington": ["BN16"], "Angmering": ["BN16"], "East Preston": ["BN16"],
+    "Arundel": ["BN18"], "Bognor Regis": ["PO21", "PO22"], "Felpham": ["PO22"], "Middleton-on-Sea": ["PO22"],
+    "Aldwick": ["PO21"], "Chichester": ["PO19"], "Selsey": ["PO20"], "Bosham": ["PO18"], "Emsworth": ["PO10"],
+    "Midhurst": ["GU29"], "Horsham": ["RH12", "RH13"], "Southwater": ["RH13"], "Broadbridge Heath": ["RH12"],
+    "Billingshurst": ["RH14"], "Henfield": ["BN5"], "Crawley": ["RH10", "RH11"], "Three Bridges": ["RH10"],
+    "Pound Hill": ["RH10"], "Horley": ["RH6"], "East Grinstead": ["RH19"], "Burgess Hill": ["RH15"],
+    "Hassocks": ["BN6"], "Hurstpierpoint": ["BN6"], "Wivelsfield": ["RH17"], "Haywards Heath": ["RH16"],
+    "Lindfield": ["RH16"], "Cuckfield": ["RH17"], "Eastbourne": ["BN20", "BN21", "BN22", "BN23"],
+    "Hampden Park": ["BN22"], "Polegate": ["BN26"], "Pevensey": ["BN24"], "Willingdon": ["BN20"], "Hailsham": ["BN27"],
+}
+
+
+# Light-and-airy palettes (v4). brand = main colour for text accents and buttons,
+# stripe = accent for lines, underlines and highlights, soft = very light section tint.
+PALETTES = {
+    "plumbing": {"brand": "#12406b", "stripe": "#3ea6d4", "soft": "#eef6fb"},
+    "electrical": {"brand": "#1c2433", "stripe": "#f0b21c", "soft": "#fbf6e8"},
+    "building": {"brand": "#6a3622", "stripe": "#d8964a", "soft": "#fbf3ec"},
+    "plastering": {"brand": "#37464f", "stripe": "#c6a47a", "soft": "#f6f2ec"},
+    "carpentry": {"brand": "#4d3322", "stripe": "#c88748", "soft": "#f9f2ea"},
+    "decorating": {"brand": "#1d4d59", "stripe": "#e6a443", "soft": "#eef6f5"},
+    "roofing": {"brand": "#2b3540", "stripe": "#c75d3c", "soft": "#f6f1ee"},
+    "kitchens_bathrooms": {"brand": "#1d5660", "stripe": "#6cc3b0", "soft": "#edf7f5"},
+    "gardens": {"brand": "#2a5733", "stripe": "#8fbf4f", "soft": "#f0f6ea"},
+    "handyman": {"brand": "#253341", "stripe": "#ee8436", "soft": "#fcf2ea"},
+    "local": {"brand": "#22384b", "stripe": "#62a5d4", "soft": "#eef4f9"},
+}
+for _g, _p in PALETTES.items():
+    TRADES[_g].update(_p)

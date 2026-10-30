@@ -26,7 +26,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from trades import NEARBY, STEPS, TRADES, group_for
+from trades import NEARBY, POSTCODES, PRICES, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
 try:
@@ -131,7 +131,8 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     # gallery photos named 1.*, 2.* ... Any slot without a file shows a placeholder.
     own_files = sorted(p for p in lead_dir.iterdir() if p.suffix.lower() in IMAGE_EXT) if lead_dir and lead_dir.is_dir() else []
     own = any(p.stem.lower() != "logo" for p in own_files)
-    files = own_files if own else library_images(group)
+    # Library (example) photos only on previews; a live site shows the customer's own photos or none.
+    files = own_files if own else (library_images(group) if preview else [])
     by_stem = {p.stem.lower(): p for p in files}
     img_dir = out_dir / "img"
 
@@ -169,6 +170,22 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         "logo": place(logo, "logo") if logo else "",
     }
     areas = [town] + [a for a in NEARBY.get(town, []) if a != town]
+    # Rating rules: show it from 4.0 up; only animate (count up) a strong rating.
+    biz["show_rating"] = bool(reviews) and rating is not None and rating >= 4.0
+    biz["animate_rating"] = biz["show_rating"] and rating >= 4.5
+    biz["pc_example"] = (POSTCODES.get(town) or [town])[0]
+
+    # Services with guide prices for the "rough price" tool. Guide prices are example
+    # ranges, so they only appear on previews, never on a customer's live site.
+    services = []
+    for (title, blurb), band in zip(t["services"], PRICES.get(group, [])):
+        item = {"title": title, "blurb": blurb, "low": None, "high": None, "unit": ""}
+        if band and preview:
+            item.update(low=band[0], high=band[1], unit=band[2] if len(band) > 2 else "")
+        services.append(item)
+    t["services_full"] = services
+    price_json = [x for x in services if x["low"] is not None]
+    coverage = [{"name": a, "pc": POSTCODES.get(a, [])} for a in areas]
     schema = {
         "@context": "https://schema.org", "@type": SCHEMA_TYPE.get(group, "HomeAndConstructionBusiness"),
         "name": name, "telephone": biz["tel"], "areaServed": areas,
@@ -179,6 +196,8 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
         schema_json=json.dumps(schema).replace("</", "<\\/"),
+        price_json=json.dumps(price_json).replace("</", "<\\/"),
+        coverage_json=json.dumps(coverage).replace("</", "<\\/"),
     )
     (out_dir / "index.html").write_text(html, encoding="utf-8")
     return {"Lead ID": lead_id, "Business": name, "Group": group, "Path": str(out_dir / "index.html")}, None
