@@ -466,25 +466,92 @@ PALETTES = {
 for _g, _p in PALETTES.items():
     TRADES[_g].update(_p)
 
-# Scroll films (signature hero). A short renovation film per trade group that plays frame by frame
-# as the visitor scrolls. Frames: films/<group>/d/0001.webp ... (wide, 1280px) and
-# films/<group>/m/0001.webp ... (tall, 540x960). Made with Higgsfield from a before and an after
-# still shot from the same camera position. Groups without a film use the CALL ME layout.
-# accent = colour picked from the film (buttons, rails); accent_ink = darker version for small text
-# on the light ground; ground = page background that matches the film's walls.
-FILMS = {
-    "plumbing": {
-        "frames": 64,
-        "accent": "#b0853a", "accent_ink": "#7a5a22", "accent_dark": "#d9ad62", "ground": "#f1ece4",
-        "alt": "A tired 1990s bathroom being stripped back to bare walls and rebuilt into a modern bathroom",
-        "hook": "Seen better days?",
-        "hook_sub": "Scroll to watch this one get sorted.",
-        "beats": [
-            {"eyebrow": "Step 1 · Strip out", "line": "Back to bare walls. Pipework done properly.", "from": .2, "to": .42},
-            {"eyebrow": "Step 2 · Fit", "line": "Tiled, plumbed in, tested.", "from": .5, "to": .74},
-        ],
-        "end_from": .84,
-        # The film ends on a real 5-star review; ones mentioning these words are picked first.
-        "quote_words": ["bathroom", "en-suite", "ensuite", "shower room", "renovat", "refit"],
+# Scroll films (signature hero). Each trade has a library of short renovation films that play frame by
+# frame as the visitor scrolls. Each lead gets a film nobody else in their area has (build_preview.assign_films).
+# Frames: films/<group>/<film id>/m/0001.webp ... (tall, 540x960) and optionally d/ (wide, 1280px).
+# Films without a wide set show the tall film in a framed panel on computers.
+# Made with Higgsfield: an "after" still, a matching "before" still (same camera), then MiniMax H3
+# with start and end frames, 4 s, 2K, 9:16 (about 10 credits a film). pins.json fixes a lead to a film.
+#
+# SCENES: captions and review keywords per kind of job. prefer = words in a business's name or trade
+# that make this kind of film the first choice for them.
+SCENES = {
+    "bathroom": {
+        "hook": "Seen better days?", "hook_sub": "Scroll to watch this one get sorted.",
+        "beats": [("Step 1 · Strip out", "Back to bare walls. Pipework done properly."),
+                  ("Step 2 · Fit", "Tiled, plumbed in, tested.")],
+        "quote_words": ["bathroom", "en-suite", "ensuite", "shower room", "renovat", "refit", "tiling"],
+        "prefer": ["bathroom"],
     },
+    "wetroom": {
+        "hook": "Time for a proper shower?", "hook_sub": "Scroll to watch this one get built.",
+        "beats": [("Step 1 · Strip out", "Old suite out. Floor levelled and tanked."),
+                  ("Step 2 · Fit", "Walk-in shower tiled, plumbed and tested.")],
+        "quote_words": ["wet room", "wetroom", "walk-in", "shower", "bathroom", "tiling"],
+        "prefer": ["bathroom", "wet room", "shower"],
+    },
+    "shower": {
+        "hook": "Shower seen better days?", "hook_sub": "Scroll to watch it get replaced.",
+        "beats": [("Step 1 · Out", "Old cubicle out. Leaks found and fixed."),
+                  ("Step 2 · In", "New shower tiled, sealed and tested.")],
+        "quote_words": ["shower", "bathroom", "leak", "tiling"],
+        "prefer": ["bathroom", "shower"],
+    },
+    "boiler": {
+        "hook": "Boiler on its last legs?", "hook_sub": "Scroll to watch it get swapped.",
+        "beats": [("Step 1 · Out", "Old boiler and pipework removed safely."),
+                  ("Step 2 · In", "New combi fitted, flushed and tested.")],
+        "quote_words": ["boiler", "combi", "heating", "gas"],
+        "prefer": ["heating", "boiler", "gas"],
+    },
+    "heating": {
+        "hook": "Cold rooms?", "hook_sub": "Scroll to warm this one up.",
+        "beats": [("Step 1 · Off", "Old radiators off. System drained."),
+                  ("Step 2 · On", "New radiators fitted, flushed and balanced.")],
+        "quote_words": ["radiator", "heating", "warm", "power flush", "powerflush"],
+        "prefer": ["heating"],
+    },
+    "hotwater": {
+        "hook": "Running out of hot water?", "hook_sub": "Scroll to watch it get sorted.",
+        "beats": [("Step 1 · Out", "Old tank and cylinder out."),
+                  ("Step 2 · In", "New cylinder fitted and tested.")],
+        "quote_words": ["hot water", "cylinder", "tank", "immersion", "boiler"],
+        "prefer": ["heating"],
+    },
+    "sink": {
+        "hook": "Drip, drip, drip?", "hook_sub": "Scroll to watch it get fixed.",
+        "beats": [("Step 1 · Find it", "Leak traced. Old pipework out."),
+                  ("Step 2 · Fix it", "New sink, tap and pipework fitted.")],
+        "quote_words": ["leak", "sink", "tap", "kitchen", "pipe", "blocked"],
+        "prefer": ["leak", "drain"],
+    },
+}
+# When each caption shows, as a share of the scroll through the film.
+FILM_TIMING = {"hook_to": .14, "beats": [(.2, .42), (.5, .74)], "end_from": .84}
+
+# accent = colour picked from the film (buttons, rails); accent_ink = darker version for small text on the
+# light ground; accent_dark = lighter version for dark mode; ground = page background matching the film.
+FILMS = {
+    "plumbing": [
+        {"id": "bathroom-01", "scene": "bathroom", "accent": "#b0853a", "accent_ink": "#7a5a22", "accent_dark": "#d9ad62", "ground": "#f1ece4",
+         "alt": "A tired 1990s bathroom being stripped back to bare walls and rebuilt into a modern bathroom"},
+        {"id": "bathroom-02", "scene": "bathroom", "accent": "#5f7f95", "accent_ink": "#3f5b6e", "accent_dark": "#9fbdd1", "ground": "#eef0f1",
+         "alt": "A dated family bathroom being stripped out and refitted with a new bath, shower and grey tiles"},
+        {"id": "wetroom-03", "scene": "wetroom", "accent": "#b08a3e", "accent_ink": "#76591f", "accent_dark": "#d8b15f", "ground": "#eef1ec",
+         "alt": "A small old bathroom being turned into a green-tiled walk-in wet room"},
+        {"id": "cottage-04", "scene": "bathroom", "accent": "#7d9a7e", "accent_ink": "#4d6a4f", "accent_dark": "#a9c6aa", "ground": "#f1efe8",
+         "alt": "An old cottage bathroom being rebuilt with a roll-top bath and sage green panelling"},
+        {"id": "ensuite-05", "scene": "bathroom", "accent": "#a06a3c", "accent_ink": "#7a4f2a", "accent_dark": "#d49a66", "ground": "#efeeec",
+         "alt": "A tired loft en-suite being refitted with a black-framed walk-in shower"},
+        {"id": "boiler-06", "scene": "boiler", "accent": "#b8693a", "accent_ink": "#8a4a24", "accent_dark": "#e09868", "ground": "#f2eeea",
+         "alt": "An old floor-standing boiler and tangled pipes being replaced with a neat new combi boiler"},
+        {"id": "radiators-07", "scene": "heating", "accent": "#c2783f", "accent_ink": "#8d5226", "accent_dark": "#e4a06a", "ground": "#f3eee8",
+         "alt": "A cold, damp living room getting new column radiators and warming up"},
+        {"id": "cylinder-08", "scene": "hotwater", "accent": "#b8693a", "accent_ink": "#8a4a24", "accent_dark": "#e09868", "ground": "#f1efec",
+         "alt": "An old leaking hot water tank being replaced with a new cylinder in a tidy airing cupboard"},
+        {"id": "sink-09", "scene": "sink", "accent": "#a98a45", "accent_ink": "#715a22", "accent_dark": "#d6b466", "ground": "#eff1ec",
+         "alt": "A leaking old kitchen sink being replaced with a new Belfast sink, tap and pipework"},
+        {"id": "shower-10", "scene": "shower", "accent": "#c97d6d", "accent_ink": "#93503f", "accent_dark": "#eaa596", "ground": "#f6efec",
+         "alt": "A mouldy old shower cubicle being replaced with a new walk-in shower"},
+    ],
 }

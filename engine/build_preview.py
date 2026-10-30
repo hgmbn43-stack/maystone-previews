@@ -17,6 +17,7 @@ Photos: put example images in images/<group>/ (e.g. images/plumbing/1.jpg).
 They show tagged "Example photo"; with none, tiles show "Your photo here".
 """
 import csv
+import hashlib
 import json
 import os
 import re
@@ -27,7 +28,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from trades import FILMS, NEARBY, POSTCODES, PRICES, STEPS, TRADES, group_for
+from trades import FILM_TIMING, FILMS, NEARBY, POSTCODES, PRICES, SCENES, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
 try:
@@ -92,7 +93,78 @@ def library_images(group):
     return sorted(p for p in folder.iterdir() if p.suffix.lower() in IMAGE_EXT)
 
 
-def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, domain=""):
+def film_library(group):
+    """Films for a trade group that have their frames in place, in library order."""
+    out = []
+    for f in FILMS.get(group, []):
+        folder = HERE / "films" / group / f["id"]
+        tall = sorted((folder / "m").glob("*.webp")) if (folder / "m").is_dir() else []
+        if tall:
+            out.append(dict(f, folder=folder, frames=len(tall), wide=(folder / "d" / "0001.webp").exists()))
+    return out
+
+
+def area_of(town):
+    """A town plus its neighbours: two leads in the same area never share a film."""
+    town = (town or "").strip()
+    near = set(NEARBY.get(town, [])) | {t for t, n in NEARBY.items() if town in n}
+    return ({town} | near) if town else set()
+
+
+def lead_order(lead_id):
+    m = re.match(r"([A-Za-z]*)(\d*)", lead_id or "")
+    return (m.group(1), int(m.group(2) or 0), lead_id or "")
+
+
+def assign_films(rows):
+    """Pick a library film for every lead. Leads are taken in ID order, so a lead keeps its film when
+    later leads arrive. A film already used in the lead's area is only reused when the library runs out.
+    Films whose kind of job matches the business name come first (e.g. "heating" -> boiler films).
+    films/pins.json can fix a lead to a film: {"L002": "bathroom-01"}."""
+    try:
+        pins = json.loads((HERE / "films" / "pins.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pins = {}
+    used, out = {}, {}
+    for row in sorted(rows, key=lambda r: lead_order(r.get("Lead ID"))):
+        lead_id = (row.get("Lead ID") or "").strip()
+        name = tidy_name(row.get("Business"))
+        group = group_for(row.get("Trade"), name)
+        library = film_library(group)
+        if not lead_id or not library:
+            continue
+        town = (row.get("Town") or "").strip()
+        taken = set()
+        for t in area_of(town):
+            taken |= used.get(t, set())
+        words = f"{name} {row.get('Trade') or ''}".lower()
+        ids = [f["id"] for f in library]
+        if pins.get(lead_id) in ids:
+            choice = pins[lead_id]
+        else:
+            def rank(f):
+                scene = SCENES.get(f.get("scene"), {})
+                liked = any(w in words for w in scene.get("prefer", []))
+                return (f["id"] in taken, not liked, hashlib.sha1(f"{lead_id}/{f['id']}".encode()).hexdigest())
+            choice = sorted(library, key=rank)[0]["id"]
+        out[lead_id] = choice
+        used.setdefault(town, set()).add(choice)
+    return out
+
+
+def film_context(film, base, label):
+    """Everything the template needs about one film: frames, colours, captions and timing."""
+    scene = SCENES.get(film.get("scene"), SCENES["bathroom"])
+    beats = [{"eyebrow": e, "line": l, "from": a, "to": z}
+             for (e, l), (a, z) in zip(film.get("beats") or scene["beats"], FILM_TIMING["beats"])]
+    ctx = {k: v for k, v in film.items() if k not in ("folder",)}
+    ctx.update(base=base, label=label, beats=beats, end_from=FILM_TIMING["end_from"], hook_to=FILM_TIMING["hook_to"],
+               hook=film.get("hook") or scene["hook"], hook_sub=film.get("hook_sub") or scene["hook_sub"],
+               quote_words=film.get("quote_words") or scene["quote_words"])
+    return ctx
+
+
+def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, domain="", film_id=None):
     """details: what the customer sent through the details form (business, phone, creds, company).
     lead_dir: folder with the customer's own photos: hero.*, side.*, logo.*, 1.*, 2.* ..."""
     details = details or {}
@@ -195,17 +267,30 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     # Google place ID from the Maps link: previews load the listing's own photos and reviews live.
     m = re.search(r"place_id[:=]([A-Za-z0-9_-]{10,})", row.get("Google Maps") or "")
     place_id = m.group(1) if m else ""
-    # Scroll film (signature hero) for trade groups that have one. Previews share one copy of the frames
-    # (engine/films/<group>/); a live site gets its own copy so it can move to the customer's domain.
+    # Scroll film (signature hero). A customer's own film (made from their real before and after photos,
+    # in leads/<ID>/film/) comes first; otherwise the library film picked by assign_films. Previews share the
+    # library frames in engine/films/; a live site gets its own copy so it can move to the customer's domain.
     film = None
-    film_src = HERE / "films" / group
-    if group in FILMS and (film_src / "m" / "0001.webp").exists() and (film_src / "d" / "0001.webp").exists():
+    own_film = lead_dir / "film" if lead_dir else None
+    library = film_library(group)
+    if own_film and (own_film / "m" / "0001.webp").exists():
+        shutil.copytree(own_film, out_dir / "film", dirs_exist_ok=True)
+        try:
+            meta = json.loads((own_film / "film.json").read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            meta = {}
+        base_film = dict(library[0] if library else {}, **meta)
+        base_film.update(frames=len(list((own_film / "m").glob("*.webp"))), wide=(own_film / "d" / "0001.webp").exists())
+        base_film.setdefault("alt", "One of our real jobs, from before to finished")
+        film = film_context(base_film, "film/", "Made from our real job photos")
+    elif library:
+        chosen = next((f for f in library if f["id"] == film_id), library[0])
         if preview:
-            base = os.path.relpath(film_src, out_dir).replace(os.sep, "/") + "/"
+            base = os.path.relpath(chosen["folder"], out_dir).replace(os.sep, "/") + "/"
         else:
-            shutil.copytree(film_src, out_dir / "film", dirs_exist_ok=True)
+            shutil.copytree(chosen["folder"], out_dir / "film", dirs_exist_ok=True)
             base = "film/"
-        film = dict(FILMS[group], base=base)
+        film = film_context(chosen, base, "Example film" if preview else "Illustration")
     pcs = sorted(POSTCODES.get(town) or [], key=lambda c: (re.sub(r"\d", "", c), int(re.sub(r"\D", "", c) or 0)))
     same_area = len({re.sub(r"\d", "", c) for c in pcs}) == 1
     pc_label = f"{pcs[0]}–{pcs[-1]}" if len(pcs) > 1 and same_area else (pcs[0] if pcs else "")
@@ -247,8 +332,9 @@ def main():
                       trim_blocks=True, lstrip_blocks=True)
     out_root.mkdir(parents=True, exist_ok=True)
     built, skipped = [], []
+    films = assign_films(rows)
     for row in rows:
-        result, reason = build_one(env, row, out_root, preview)
+        result, reason = build_one(env, row, out_root, preview, film_id=films.get((row.get("Lead ID") or "").strip()))
         if result:
             built.append(result)
         else:

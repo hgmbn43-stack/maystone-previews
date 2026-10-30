@@ -8,8 +8,8 @@
 {% if preview %}<meta name="robots" content="noindex">{% endif %}
 {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
 <link rel="preload" href="assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="{{ film.base }}m/0001.webp" media="(max-aspect-ratio: 1/1)">
-<link rel="preload" as="image" href="{{ film.base }}d/0001.webp" media="(min-aspect-ratio: 1/1)">
+<link rel="preload" as="image" href="{{ film.base }}m/0001.webp"{% if film.wide %} media="(max-aspect-ratio: 1/1)"{% endif %}>
+{% if film.wide %}<link rel="preload" as="image" href="{{ film.base }}d/0001.webp" media="(min-aspect-ratio: 1/1)">{% endif %}
 <script type="application/ld+json">{{ schema_json|safe }}</script>
 <style>
 @font-face {
@@ -112,9 +112,11 @@ section { padding-block: clamp(4rem, 9vw, 7rem); }
 
 /* The film */
 .stage { position: relative; height: 420vh; height: 420svh; background: var(--night); }
-.pin { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--night) url("{{ film.base }}d/0001.webp") center / cover no-repeat; }
-@media (max-aspect-ratio: 1/1) { .pin { background-image: url("{{ film.base }}m/0001.webp"); } }
-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.pin { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--night); }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--night) url("{{ film.base }}m/0001.webp") center / cover no-repeat; }
+{% if film.wide %}
+@media (min-aspect-ratio: 1/1) { canvas { background-image: url("{{ film.base }}d/0001.webp"); } }
+{% endif %}
 .shade { position: absolute; inset: 0; pointer-events: none;
   background: linear-gradient(90deg, rgba(10,14,18,.5) 0%, rgba(10,14,18,0) 58%),
     linear-gradient(180deg, rgba(10,14,18,.6) 0%, rgba(10,14,18,0) 24%, rgba(10,14,18,0) 52%, rgba(10,14,18,.82) 100%); }
@@ -149,6 +151,17 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .rail b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 2px; }
 .rail i { position: absolute; top: 50%; left: 0; width: .8rem; height: .8rem; margin: -.4rem 0 0 -.4rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
 .pct { min-width: 3.4rem; text-align: right; font-variant-numeric: tabular-nums; }
+{% if not film.wide %}
+/* A film made for phones: on wider screens it sits in a framed panel on the right, with the captions on the left. */
+@media (min-aspect-ratio: 1/1) {
+  .stage { --panel-h: calc(100vh - var(--head) - 9vh); --panel-w: calc(var(--panel-h) * 9 / 16); --panel-r: max(5vw, calc((100vw - 1180px) / 2 + 20px)); }
+  .pin { background: radial-gradient(ellipse 60% 70% at 72% 55%, color-mix(in srgb, var(--accent) 22%, var(--night)) 0%, var(--night) 70%); }
+  canvas { inset: auto; top: calc(var(--head) + 4vh); right: var(--panel-r); width: var(--panel-w); height: var(--panel-h); border-radius: 22px; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+  .shade { display: none; }
+  .film-tag { top: calc(var(--head) + 4vh + 14px); right: calc(var(--panel-r) + 14px); }
+  .beat .in, .hud .in { padding-right: calc(var(--panel-w) + 5vw); }
+}
+{% endif %}
 @media (max-width: 720px) {
   .ribbon .long { display: none; } .ribbon .short { display: inline; }
   .b-step { top: auto; bottom: calc(var(--tb) + 13vh); bottom: calc(var(--tb) + 13svh); }
@@ -371,9 +384,9 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     <div class="pin" id="pin">
       <canvas id="film" role="img" aria-label="{{ film.alt }}"></canvas>
       <div class="shade"></div>
-      <span class="ph-tag film-tag">{{ 'Example film' if preview else 'Illustration' }}</span>
+      <span class="ph-tag film-tag">{{ film.label }}</span>
 
-      <div class="beat b-hook" data-from="0" data-to="{{ (film.beats[0]['from'] - 0.06)|round(2) }}"><div class="in">
+      <div class="beat b-hook" data-from="0" data-to="{{ film.hook_to }}"><div class="in">
         <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>
         <p class="hook">{{ film.hook }}</p>
         <p class="hook-sub">{{ film.hook_sub }}</p>
@@ -590,7 +603,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     {% elif biz.is_ltd and preview %}<p><span class="ph-tag">Placeholder</span>Company number, country of registration and registered office go here.</p>{% endif %}
     {% if preview %}<p><span class="ph-tag">Placeholder</span>Privacy notice: how enquiries from this site are stored and used.</p>
     {% else %}<p>Enquiries sent through this site are only used to reply to you about your job.</p>{% endif %}
-    <p>&copy; {{ year }} {{ biz.name }}. Website by Maystone.{% if not preview %} The film at the top is an illustration.{% endif %}</p>
+    <p>&copy; {{ year }} {{ biz.name }}. Website by Maystone.{% if not preview and film.label == 'Illustration' %} The film at the top is an illustration.{% endif %}</p>
   </div>
 </footer>
 
@@ -606,8 +619,8 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <script>
 /* The film: frames drawn to a canvas as the visitor scrolls, with a cross-fade between neighbouring frames. */
 (function () {
-  var BASE = {{ film.base|tojson }}, N = {{ film.frames|int }};
-  var tall = window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches;
+  var BASE = {{ film.base|tojson }}, N = {{ film.frames|int }}, WIDE = {{ 'true' if film.wide else 'false' }};
+  var tall = !WIDE || (window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches);
   var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var stage = document.getElementById("stage"), pin = document.getElementById("pin"), cv = document.getElementById("film");
   var top = document.getElementById("topbar"), fill = document.getElementById("fill"), knob = document.getElementById("knob"), pct = document.getElementById("pct");
@@ -621,7 +634,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     // Some in-app browsers stretch the page to its full height; never let the film be taller than the screen.
     var sh = (window.screen && screen.height) || innerHeight;
     if (innerHeight > sh * 1.25) { pin.style.height = sh + "px"; stage.style.height = Math.round(sh * 4.2) + "px"; }
-    var w = pin.clientWidth, h = pin.clientHeight;
+    var w = cv.clientWidth, h = cv.clientHeight;
     if (Math.abs(w - cw) < 2 && Math.abs(h - ch) < 140 && cw) return;   // ignore the address bar sliding in and out
     cw = w; ch = h;
     var r = Math.min(window.devicePixelRatio || 1, 2), k = Math.min(r, Math.sqrt(2600000 / Math.max(1, w * h)));
