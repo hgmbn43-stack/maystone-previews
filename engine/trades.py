@@ -470,8 +470,9 @@ for _g, _p in PALETTES.items():
 # frame as the visitor scrolls. Each lead gets a film nobody else in their area has (build_preview.assign_films).
 # Frames: films/<group>/<film id>/m/0001.webp ... (tall, 540x960) and optionally d/ (wide, 1280px).
 # Films without a wide set show the tall film in a framed panel on computers.
-# Made with Higgsfield: an "after" still, a matching "before" still (same camera), then MiniMax H3
-# with start and end frames, 4 s, 2K, 9:16 (about 10 credits a film). pins.json fixes a lead to a film.
+# Made with Higgsfield: an "after" still, a matching "before" still (same camera), then Seedance 2.0 Mini
+# with start and end frames, 4 s, 720p, 9:16, no audio (about 7 credits a film in all; MiniMax H3 failed
+# most runs on 2026-10-30, Flux 3 Video works but costs 30+). pins.json fixes a lead to a film.
 #
 # SCENES: captions and review keywords per kind of job. prefer = words in a business's name or trade
 # that make this kind of film the first choice for them.
@@ -535,13 +536,13 @@ FILMS = {
     "plumbing": [
         {"id": "bathroom-01", "scene": "bathroom", "accent": "#b0853a", "accent_ink": "#7a5a22", "accent_dark": "#d9ad62", "ground": "#f1ece4",
          "alt": "A tired 1990s bathroom being stripped back to bare walls and rebuilt into a modern bathroom"},
-        {"id": "bathroom-02", "scene": "bathroom", "accent": "#5f7f95", "accent_ink": "#3f5b6e", "accent_dark": "#9fbdd1", "ground": "#eef0f1",
+        {"id": "bathroom-02", "scene": "bathroom", "accent": "#7495ab", "accent_ink": "#3f5b6e", "accent_dark": "#9fbdd1", "ground": "#eef0f1",
          "alt": "A dated family bathroom being stripped out and refitted with a new bath, shower and grey tiles"},
         {"id": "wetroom-03", "scene": "wetroom", "accent": "#b08a3e", "accent_ink": "#76591f", "accent_dark": "#d8b15f", "ground": "#eef1ec",
          "alt": "A small old bathroom being turned into a green-tiled walk-in wet room"},
         {"id": "cottage-04", "scene": "bathroom", "accent": "#7d9a7e", "accent_ink": "#4d6a4f", "accent_dark": "#a9c6aa", "ground": "#f1efe8",
          "alt": "An old cottage bathroom being rebuilt with a roll-top bath and sage green panelling"},
-        {"id": "ensuite-05", "scene": "bathroom", "accent": "#a06a3c", "accent_ink": "#7a4f2a", "accent_dark": "#d49a66", "ground": "#efeeec",
+        {"id": "ensuite-05", "scene": "bathroom", "accent": "#b67f4f", "accent_ink": "#7a4f2a", "accent_dark": "#d49a66", "ground": "#efeeec",
          "alt": "A tired loft en-suite being refitted with a black-framed walk-in shower"},
         {"id": "boiler-06", "scene": "boiler", "accent": "#b8693a", "accent_ink": "#8a4a24", "accent_dark": "#e09868", "ground": "#f2eeea",
          "alt": "An old floor-standing boiler and tangled pipes being replaced with a neat new combi boiler"},
