@@ -842,10 +842,15 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     });
     // The film ends on one real customer's words: the shortest 5-star review with something to say.
     var q = document.getElementById("end-quote"), five = list.filter(function (r) { return r.rating >= 5 && r.text && r.text.text && r.text.text.trim().length >= 40; });
+    var WORDS = {{ (film.quote_words or [])|tojson }};
+    var fits = function (r) { var t = r.text.text.toLowerCase(), n = 0; WORDS.forEach(function (w) { n += t.split(w).length - 1; }); return -n; };
     if (q && five.length) {
-      var best = five.slice().sort(function (x, y) { return x.text.text.length - y.text.text.length; })[0];
+      // Prefer the review that talks most about the kind of job in the film, then the shortest.
+      var best = five.slice().sort(function (x, y) { return (fits(x) - fits(y)) || (x.text.text.length - y.text.text.length); })[0];
       q.querySelector("blockquote").textContent = "\u201c" + best.text.text.trim() + "\u201d";
-      q.querySelector("figcaption").textContent = ((best.authorAttribution || {}).displayName || "A customer") + " \u00b7 Google review";
+      var cap = q.querySelector("figcaption"), who = (best.authorAttribution || {}).displayName || "A customer";
+      if (best.authorAttribution && best.authorAttribution.uri) { var l = el("a", "", who); l.href = best.authorAttribution.uri; l.target = "_blank"; l.rel = "noopener"; l.style.color = "inherit"; cap.append(l, " \u00b7 Google review"); }
+      else cap.textContent = who + " \u00b7 Google review";
       q.hidden = false;
     }
     var note = document.querySelector("#reviews .reviews-note");

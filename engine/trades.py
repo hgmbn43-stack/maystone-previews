@@ -484,5 +484,7 @@ FILMS = {
             {"eyebrow": "Step 2 · Fit", "line": "Tiled, plumbed in, tested.", "from": .5, "to": .74},
         ],
         "end_from": .84,
+        # The film ends on a real 5-star review; ones mentioning these words are picked first.
+        "quote_words": ["bathroom", "en-suite", "ensuite", "shower room", "renovat", "refit"],
     },
 }
