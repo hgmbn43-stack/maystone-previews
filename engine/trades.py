@@ -465,3 +465,24 @@ PALETTES = {
 }
 for _g, _p in PALETTES.items():
     TRADES[_g].update(_p)
+
+# Scroll films (signature hero). A short renovation film per trade group that plays frame by frame
+# as the visitor scrolls. Frames: films/<group>/d/0001.webp ... (wide, 1280px) and
+# films/<group>/m/0001.webp ... (tall, 540x960). Made with Higgsfield from a before and an after
+# still shot from the same camera position. Groups without a film use the CALL ME layout.
+# accent = colour picked from the film (buttons, rails); accent_ink = darker version for small text
+# on the light ground; ground = page background that matches the film's walls.
+FILMS = {
+    "plumbing": {
+        "frames": 64,
+        "accent": "#b0853a", "accent_ink": "#7a5a22", "accent_dark": "#d9ad62", "ground": "#f1ece4",
+        "alt": "A tired 1990s bathroom being stripped back to bare walls and rebuilt into a modern bathroom",
+        "hook": "Seen better days?",
+        "hook_sub": "Scroll to watch this one get sorted.",
+        "beats": [
+            {"eyebrow": "Step 1 · Strip out", "line": "Back to bare walls. Pipework done properly.", "from": .2, "to": .42},
+            {"eyebrow": "Step 2 · Fit", "line": "Tiled, plumbed in, tested.", "from": .5, "to": .74},
+        ],
+        "end_from": .84,
+    },
+}

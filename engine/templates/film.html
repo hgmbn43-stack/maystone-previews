@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ biz.name }} | {{ t.label }} in {{ biz.town }}</title>
+<meta name="description" content="{{ biz.name }}: {{ t.label|lower }} in {{ biz.town }} and nearby. Call {{ biz.phone }} for a quote.">
+{% if preview %}<meta name="robots" content="noindex">{% endif %}
+{% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
+<link rel="preload" href="assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="{{ film.base }}m/0001.webp" media="(max-aspect-ratio: 1/1)">
+<link rel="preload" as="image" href="{{ film.base }}d/0001.webp" media="(min-aspect-ratio: 1/1)">
+<script type="application/ld+json">{{ schema_json|safe }}</script>
+<style>
+@font-face {
+  font-family: "Archivo"; font-style: normal; font-display: swap;
+  font-weight: 100 900; font-stretch: 62% 125%;
+  src: url("assets/archivo.woff2") format("woff2-variations"), url("assets/archivo.woff2") format("woff2");
+}
+/* Layout: a pinned full-screen film that rebuilds the job as you scroll (400vh of scroll), then one calm page in the
+   film's own colours: stone ground, the trade's brand colour for numbers, one accent picked from the film for buttons and rails. */
+:root {
+  --ground: {{ film.ground }};
+  --paper: #fbf8f3;
+  --card: #ffffff;
+  --ink: #16202a;
+  --ink-soft: #5b646d;
+  --line: #ddd5c9;
+  --brand: {{ t.brand }};
+  --brand-text: {{ t.brand }};
+  --accent: {{ film.accent }};
+  --accent-ink: {{ film.accent_ink }};
+  --on-accent: #16110a;
+  --btn: {{ t.brand }};
+  --btn-ink: #ffffff;
+  --night: #0e151c;
+  --on-night: #f3efe8;
+  --night-soft: #b7b0a6;
+  --star: #e3a008;
+  --ok: #1d7a4c;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 16px;
+  --head: 4.4rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15191d; --paper: #1b2025; --card: #20262c; --ink: #ece6dc; --ink-soft: #a9a196; --line: #30363c;
+    --brand-text: color-mix(in srgb, {{ t.stripe }} 80%, #ffffff); --accent-ink: {{ film.accent_dark }};
+    --btn: var(--accent); --btn-ink: var(--on-accent); --ok: #5fcf96;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15191d; --paper: #1b2025; --card: #20262c; --ink: #ece6dc; --ink-soft: #a9a196; --line: #30363c;
+  --brand-text: color-mix(in srgb, {{ t.stripe }} 80%, #ffffff); --accent-ink: {{ film.accent_dark }};
+  --btn: var(--accent); --btn-ink: var(--on-accent); --ok: #5fcf96;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-family: var(--display); text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.kicker { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); display: flex; align-items: center; gap: .7rem; }
+.kicker::before { content: ""; width: 2.2rem; height: 2px; background: var(--accent); border-radius: 2px; transform-origin: left; flex: none; }
+h2 { font-weight: 900; font-stretch: 68%; font-size: clamp(2.3rem, 6vw, 4.3rem); line-height: .92; letter-spacing: -.01em; margin-top: .75rem; max-width: 17ch; }
+section { padding-block: clamp(4rem, 9vw, 7rem); }
+.ph-tag { display: inline-block; justify-self: start; font: 600 .66rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .38rem .6rem; border-radius: 999px; background: rgba(14, 21, 28, .78); color: #fff; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .7rem 1.25rem; border-radius: 999px;
+  border: 1.5px solid transparent; font: 700 1rem/1.1 var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: transform .12s ease, filter .15s ease, background .2s ease, border-color .2s ease; }
+.btn svg { width: 1.1em; height: 1.1em; flex: none; }
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn:hover { filter: brightness(1.06); }
+.btn-accent { background: var(--accent); color: var(--on-accent); }
+.btn-brand { background: var(--btn); color: var(--btn-ink); }
+.btn-line { background: transparent; color: var(--ink); border-color: color-mix(in srgb, var(--ink) 28%, transparent); }
+.btn-line:hover { border-color: var(--ink); }
+.btn-ghost { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.65); }
+.btn-wa { background: #25d366; color: #0b3d1f; }
+
+/* Top bar: floats over the film, turns solid once the film has played */
+.top { position: fixed; top: 0; left: 0; right: 0; z-index: 50; color: #fff; padding-top: env(safe-area-inset-top, 0px); transition: background .35s ease, color .35s ease, box-shadow .35s ease; }
+.top.solid { background: color-mix(in srgb, var(--ground) 92%, transparent); color: var(--ink); box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+.ribbon { font-size: .8rem; line-height: 1.35; padding: .45rem max(20px, env(safe-area-inset-right, 0px)) .45rem max(20px, env(safe-area-inset-left, 0px)); background: rgba(14, 21, 28, .55); color: #fff; overflow: hidden; max-height: 4rem; transition: max-height .35s ease, padding .35s ease; }
+.ribbon .short { display: none; }
+.top.scrolled .ribbon { max-height: 0; padding-block: 0; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem max(20px, env(safe-area-inset-right, 0px)) .75rem max(20px, env(safe-area-inset-left, 0px)); max-width: 1220px; margin-inline: auto; }
+.mark { display: flex; align-items: center; gap: .6rem; text-decoration: none; min-width: 0; }
+.mark .mono { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: 50%; border: 1.5px solid currentColor; font: 800 .8rem/1 var(--display); font-stretch: 80%; flex: none; }
+.mark img { height: 2.3rem; width: auto; max-width: 7rem; object-fit: contain; flex: none; }
+.mark strong { font: 750 1rem/1.1 var(--display); font-stretch: 85%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.links { display: none; gap: 1.6rem; font-weight: 600; font-size: .95rem; }
+.links a { text-decoration: none; opacity: .85; }
+.links a:hover { opacity: 1; }
+@media (min-width: 900px) { .links { display: flex; } }
+.top .btn { min-height: 44px; padding: .55rem 1.05rem; font-size: .95rem; }
+.prog { height: 2px; background: transparent; }
+.prog b { display: block; height: 100%; width: 0; background: var(--accent); opacity: 0; transition: opacity .3s ease; }
+.top.solid .prog b { opacity: 1; }
+
+/* The film */
+.stage { position: relative; height: 420vh; height: 420svh; background: var(--night); }
+.pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--night) url("{{ film.base }}d/0001.webp") center / cover no-repeat; }
+@media (max-aspect-ratio: 1/1) { .pin { background-image: url("{{ film.base }}m/0001.webp"); } }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.shade { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(10,14,18,.5) 0%, rgba(10,14,18,0) 58%),
+    linear-gradient(180deg, rgba(10,14,18,.6) 0%, rgba(10,14,18,0) 24%, rgba(10,14,18,0) 52%, rgba(10,14,18,.82) 100%); }
+.film-tag { position: absolute; top: calc(var(--head) + .6rem); right: max(20px, env(safe-area-inset-right, 0px)); }
+.beat { position: absolute; left: 0; right: 0; color: #fff; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); opacity: 0; transform: translateY(18px); pointer-events: none; }
+.beat.on { pointer-events: auto; }
+.beat .in { max-width: 1180px; margin-inline: auto; }
+.b-hook { bottom: 16vh; opacity: 1; transform: none; }
+.b-step { top: 20vh; }
+.b-end { bottom: 13vh; }
+.who { display: grid; gap: .15rem; font-family: var(--display); text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+.who b { font-weight: 750; font-size: 1.05rem; font-stretch: 88%; }
+.who span { font: 600 .72rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.hook { font: 900 clamp(3.2rem, 11.5vw, 9.6rem)/.86 var(--display); font-stretch: 66%; letter-spacing: -.01em; margin-top: .9rem; max-width: 9ch; text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+.hook-sub { margin-top: 1rem; font-size: 1.1rem; max-width: 30ch; opacity: .92; }
+.cue { display: inline-flex; gap: .55rem; align-items: center; margin-top: 1.3rem; font: 600 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.cue i { width: 1px; height: 2.4rem; background: linear-gradient(#fff, transparent); transform-origin: top; animation: drip 1.8s ease-in-out infinite; }
+@keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.eyebrow { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .9; }
+.step-line { font: 850 clamp(2.2rem, 6.4vw, 5.2rem)/.92 var(--display); font-stretch: 70%; margin-top: .5rem; max-width: 12ch; text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+.end-name { font: 900 clamp(2.6rem, 8.6vw, 7.2rem)/.88 var(--display); font-stretch: 64%; margin-top: .5rem; max-width: 14ch; text-shadow: 0 2px 30px rgba(0,0,0,.4); }
+.end-rating { margin-top: .9rem; font-weight: 650; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.end-rating .stars { color: var(--star); letter-spacing: .08em; }
+.end-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.2rem; }
+.phone { font: 850 clamp(1.8rem, 4.4vw, 2.7rem)/1 var(--display); font-stretch: 78%; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: .2rem; white-space: nowrap; }
+.hud { position: absolute; left: 0; right: 0; bottom: max(1.1rem, env(safe-area-inset-bottom, 0px)); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; pointer-events: none; }
+.hud .in { max-width: 1180px; margin-inline: auto; display: grid; grid-template-columns: auto 1fr auto; gap: .9rem; align-items: center; font: 600 .7rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.rail { position: relative; height: 2px; background: rgba(255,255,255,.28); border-radius: 2px; }
+.rail b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 2px; }
+.rail i { position: absolute; top: 50%; left: 0; width: .8rem; height: .8rem; margin: -.4rem 0 0 -.4rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+.pct { min-width: 3.4rem; text-align: right; font-variant-numeric: tabular-nums; }
+@media (max-width: 720px) {
+  .ribbon .long { display: none; } .ribbon .short { display: inline; }
+  .b-step { top: auto; bottom: 13vh; }
+  .shade { background: linear-gradient(180deg, rgba(10,14,18,.55) 0%, rgba(10,14,18,0) 20%, rgba(10,14,18,0) 40%, rgba(10,14,18,.86) 100%); }
+}
+
+/* At a glance */
+.intro-grid { display: grid; gap: 1.6rem 3rem; }
+@media (min-width: 900px) { .intro-grid { grid-template-columns: 1.15fr 1fr; align-items: end; } }
+.lede { color: var(--ink-soft); font-size: 1.15rem; max-width: 44ch; }
+.proof { display: flex; flex-wrap: wrap; gap: 2rem 3.4rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.proof > div { display: grid; gap: .3rem; align-content: start; }
+.proof strong { font: 900 3.3rem/1 var(--display); font-stretch: 68%; color: var(--brand-text); font-variant-numeric: tabular-nums; }
+.proof span { color: var(--ink-soft); font-size: .95rem; }
+.proof .ph { border: 1.5px dashed var(--line); border-radius: 12px; padding: .8rem 1rem; gap: .45rem; }
+.proof .ph b { font: 800 1.4rem/1 var(--display); font-stretch: 80%; }
+.stars-bar { position: relative; display: inline-block; color: color-mix(in srgb, var(--star) 25%, var(--line)); letter-spacing: .08em; line-height: 1; }
+.stars-bar span { position: absolute; inset: 0 auto 0 0; overflow: hidden; white-space: nowrap; color: var(--star); }
+
+/* Services: one list, each job with its guide price and a one-tap quote */
+.band { background: var(--paper); }
+.jobs { list-style: none; margin: 2.6rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.jobs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6rem 2rem; padding-block: 1.45rem; border-bottom: 1px solid var(--line); align-items: center; }
+.jobs h3 { font-weight: 850; font-stretch: 74%; font-size: clamp(1.55rem, 3.4vw, 2.3rem); line-height: 1; display: flex; align-items: baseline; gap: .6rem; transition: color .25s ease, transform .35s ease; }
+.jobs h3::after { content: "\2192"; font-size: .7em; color: var(--accent); opacity: 0; transform: translateX(-.4rem); transition: opacity .25s ease, transform .35s ease; }
+.jobs li:hover h3, .jobs li:focus-within h3 { color: var(--brand-text); }
+.jobs li:hover h3::after, .jobs li:focus-within h3::after { opacity: 1; transform: none; }
+.jobs p { color: var(--ink-soft); margin-top: .45rem; max-width: 52ch; }
+.job-side { display: flex; align-items: center; gap: 1.2rem; justify-content: flex-end; }
+.price { font: 600 .95rem/1.25 var(--mono); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.price small { display: block; color: var(--ink-soft); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
+.job-acts { display: flex; gap: .5rem; }
+.icon-btn { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; flex: none; text-decoration: none; }
+.icon-btn svg { width: 1.3rem; height: 1.3rem; }
+.icon-btn.wa { background: #25d366; color: #0b3d1f; }
+.prices-note { margin-top: 1.4rem; }
+@media (max-width: 720px) {
+  .jobs li { grid-template-columns: 1fr; }
+  .job-side { justify-content: space-between; }
+  .price { text-align: left; }
+}
+
+/* Reviews */
+.reviews-grid { display: grid; gap: 2.4rem 3.5rem; }
+@media (min-width: 960px) { .reviews-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); align-items: start; } }
+.score-num { display: block; font: 900 clamp(4.5rem, 12vw, 7.5rem)/.85 var(--display); font-stretch: 66%; color: var(--brand-text); margin-top: 1.2rem; font-variant-numeric: tabular-nums; }
+.score .stars-bar { font-size: 1.5rem; margin-top: .6rem; }
+.score p { margin-top: .5rem; color: var(--ink-soft); }
+.score a { display: inline-block; margin-top: .9rem; font-weight: 700; color: var(--brand-text); }
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; display: grid; gap: .75rem; align-content: start; }
+.review-card .stars { color: var(--star); letter-spacing: .08em; }
+.review-card p { font-size: .98rem; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+.skel { height: .7rem; border-radius: 4px; background: color-mix(in srgb, var(--line) 60%, transparent); }
+.skel.s { width: 60%; }
+.review-who { display: flex; align-items: center; gap: .6rem; margin-top: .3rem; min-width: 0; }
+.review-who i, .review-who img { width: 2.1rem; height: 2.1rem; border-radius: 50%; background: color-mix(in srgb, var(--brand) 12%, var(--paper)); display: block; flex: none; object-fit: cover; }
+.review-who a { font-weight: 700; text-decoration: none; }
+.review-who small { display: block; color: var(--ink-soft); font-size: .8rem; }
+.review-who .skel { width: 6rem; }
+.reviews-note, .g-source { margin-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
+
+/* Recent work (the business's own photos only) */
+.gallery { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); margin-top: 2.4rem; }
+.tile { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; max-width: 100%; background: var(--paper); }
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+.tile figcaption, .g-credit { position: absolute; left: .7rem; bottom: .7rem; max-width: calc(100% - 1.4rem); padding: .3rem .7rem; border-radius: 999px; background: rgba(14, 21, 28, .72); color: #fff; font-size: .78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g-credit a { color: inherit; }
+
+/* Areas */
+.areas-grid { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .areas-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.town-box { position: relative; display: grid; align-items: center; min-height: clamp(9rem, 40vw, 19rem); overflow: hidden; container-type: inline-size; }
+.town-word { position: relative; z-index: 1; font: 900 clamp(3rem, calc(150cqi / var(--chars)), 8rem)/.86 var(--display); font-stretch: 62%; color: var(--brand-text); letter-spacing: -.02em; overflow-wrap: break-word; }
+.ring { position: absolute; inset: 50% auto auto 38%; width: min(95%, 25rem); aspect-ratio: 1; transform: translate(-50%, -50%); color: var(--accent); opacity: .6; pointer-events: none; }
+.ring circle { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 4 7; }
+.areas { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1.4rem 0 0; }
+.areas li { padding: .45rem .95rem; background: var(--card); border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: .95rem; }
+.cover { display: grid; gap: .6rem; margin-top: 1.6rem; }
+.cover label { font-weight: 700; }
+.cover-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+.cover-row input { flex: 1 1 12rem; min-width: 0; }
+.cover-result { display: flex; align-items: center; gap: .6rem; font-weight: 650; min-height: 1.6em; }
+.cover-result svg { width: 1.6rem; height: 1.6rem; flex: none; }
+.cover-result .ok { color: var(--ok); }
+.cover-result .maybe { color: var(--ink-soft); font-weight: 500; }
+
+/* FAQ */
+.faq { display: grid; gap: .6rem; max-width: 52rem; margin-top: 2.2rem; }
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding-inline: 1.3rem; }
+.faq summary { cursor: pointer; padding: 1.15rem 2.6rem 1.15rem 0; font-weight: 700; font-size: 1.05rem; list-style: none; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0; top: .85rem; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); color: var(--accent-ink); font-size: 1.2rem; }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { padding-bottom: 1.25rem; color: var(--ink-soft); max-width: 46rem; }
+
+/* Quote band: back to the film's night colour */
+.quote-band { background: var(--night); color: var(--on-night); }
+.quote-band .kicker { color: var(--accent); }
+.quote-band h2 { color: var(--on-night); }
+.quote-band .ph-tag { background: rgba(255,255,255,.14); }
+.quote-grid { display: grid; gap: 2.5rem 4rem; }
+@media (min-width: 960px) { .quote-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: start; } }
+.quote-side { display: grid; gap: 1.2rem; align-content: start; }
+.quote-side > p { color: var(--night-soft); max-width: 42ch; }
+.quote-side .end-row { margin-top: .3rem; }
+.creds { display: grid; gap: .6rem; margin-top: .6rem; }
+.cred { border: 1.5px dashed rgba(255,255,255,.25); border-radius: 12px; padding: .85rem 1rem; display: grid; gap: .3rem; }
+.cred.real { border-style: solid; border-color: rgba(255,255,255,.18); }
+.cred span { color: var(--night-soft); font-size: .92rem; }
+.qform { background: var(--card); color: var(--ink); border-radius: 22px; padding: clamp(1.3rem, 3vw, 2rem); display: grid; gap: 1rem; position: relative; }
+.qd-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.qd-head h3 { font-weight: 850; font-stretch: 78%; font-size: 1.7rem; }
+.qd-close { background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 50%; width: 2.6rem; height: 2.6rem; font-size: 1.4rem; cursor: pointer; flex: none; }
+.field { display: grid; gap: .35rem; }
+.field-row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+label { font-weight: 650; font-size: .93rem; }
+.hint { font-weight: 400; color: var(--ink-soft); }
+input, select, textarea { font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1.5px solid var(--line); border-radius: 12px; padding: .75rem .9rem; width: 100%; min-height: 50px; }
+input:focus, select:focus, textarea:focus { border-color: var(--brand-text); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+textarea { min-height: 7rem; resize: vertical; }
+.qform .btn-brand { justify-self: start; }
+.form-status { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; border-radius: 12px; border: 1.5px solid var(--ok); }
+.form-status strong { color: var(--ok); }
+.form-status svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--ok); }
+.draw path { stroke-dasharray: 30; stroke-dashoffset: 0; }
+dialog.qd { border: 0; padding: 0; width: min(36rem, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border-radius: 22px; background: transparent; color: var(--ink); }
+dialog.qd::backdrop { background: rgba(10, 14, 18, .62); }
+dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-height: calc(100dvh - 24px); }
+
+/* Go live (previews only) */
+.golive { background: var(--paper); }
+.plans { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); max-width: 52rem; margin-top: 2.4rem; }
+.plan { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 1.6rem; display: grid; gap: .6rem; align-content: start; position: relative; }
+.plan.best { border: 2px solid var(--accent); }
+.plan .tag { position: absolute; top: -.8rem; left: 1.4rem; background: var(--accent); color: var(--on-accent); font-size: .75rem; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; }
+.plan h3 { font-weight: 800; font-stretch: 85%; font-size: 1.3rem; }
+.plan .amount { font: 900 2.9rem/1 var(--display); font-stretch: 66%; color: var(--brand-text); }
+.plan .amount small { font: 600 1rem/1 var(--body); color: var(--ink-soft); }
+.plan p { color: var(--ink-soft); }
+.plan .btn { margin-top: .4rem; justify-self: start; }
+.golive-note { margin-top: 1.25rem; color: var(--ink-soft); font-size: .92rem; max-width: 52rem; }
+.golive-note a { color: var(--brand-text); font-weight: 700; }
+
+footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
+.foot { display: grid; gap: .8rem; }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 2rem; align-items: center; color: var(--ink); }
+.foot-top strong { font: 800 1.2rem/1.1 var(--display); font-stretch: 82%; }
+.foot-top a { font-weight: 700; text-decoration: none; }
+.foot .ph-tag { margin-right: .4rem; }
+
+/* Quick contact on phones, once the film is out of the way */
+.action-bar { display: none; }
+@media (max-width: 760px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .action-bar { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .6rem; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    padding: .65rem max(12px, env(safe-area-inset-right, 0px)) calc(.65rem + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    background: color-mix(in srgb, var(--ground) 94%, transparent); border-top: 1px solid var(--line); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    transition: transform .35s ease; }
+  .action-bar .btn { min-height: 52px; }
+  body.in-film .action-bar { transform: translateY(110%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .kicker::before { transform: scaleX(.05); transition: transform .9s cubic-bezier(.6,0,.2,1); }
+  .js .kicker.in::before { transform: none; }
+  .ring circle { stroke-dashoffset: 400; transition: stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1); }
+  .ring.in circle { stroke-dashoffset: 0; }
+  .ring circle:nth-child(2) { transition-delay: .15s; } .ring circle:nth-child(3) { transition-delay: .3s; }
+  .draw path { stroke-dashoffset: 30; animation: draw .5s .05s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .btn:hover svg, .btn:active svg { animation: buzz .5s ease; }
+  @keyframes buzz { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 40% { transform: rotate(12deg); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(5deg); } }
+}
+@media (prefers-reduced-motion: reduce) { .cue i { animation: none; } .jobs h3, .jobs h3::after { transition: none; } }
+</style>
+</head>
+<body class="in-film">
+<script>document.documentElement.className += " js";</script>
+{% set phone_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>{% endset %}
+{% set wa_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>{% endset %}
+{% set wa_text = ("Hi " ~ biz.name ~ ", I found your website and I'd like a quote. Here's a photo of the job:")|urlencode %}
+{% set tick_svg %}<svg class="draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>{% endset %}
+{% macro quote_form(p, title, with_close=false) %}
+    <form class="qform" id="{{ p }}-form" novalidate>
+      <div class="qd-head"><h3 id="{{ p }}-title">{{ title }}</h3>{% if with_close %}<button class="qd-close" type="button" data-close aria-label="Close">&times;</button>{% endif %}</div>
+      <div class="field-row">
+        <div class="field"><label for="{{ p }}-name">Your name</label><input id="{{ p }}-name" name="name" autocomplete="name" required></div>
+        <div class="field"><label for="{{ p }}-phone">Phone</label><input id="{{ p }}-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="{{ p }}-postcode">Postcode</label><input id="{{ p }}-postcode" name="postcode" autocomplete="postal-code" required></div>
+        <div class="field"><label for="{{ p }}-job">Type of job</label>
+          <select id="{{ p }}-job" name="job">
+            {% for sv in t.services %}<option>{{ sv[0] }}</option>{% endfor %}
+            <option>Something else</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label for="{{ p }}-details">What do you need? <span class="hint">(optional)</span></label><textarea id="{{ p }}-details" name="details"></textarea></div>
+      <div class="field"><label for="{{ p }}-email">Email <span class="hint">(optional)</span></label><input id="{{ p }}-email" name="email" type="email" autocomplete="email"></div>
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave blank<input id="{{ p }}-web" name="website" tabindex="-1" autocomplete="off"></label></div>
+      {% if biz.whatsapp %}<p class="hint">Got photos? <a href="{{ biz.whatsapp }}?text={{ wa_text }}">Send them on WhatsApp</a> and we can price it faster.</p>{% endif %}
+      <button class="btn btn-brand" type="submit">Send my enquiry</button>
+      <div class="form-status" role="status" hidden></div>
+    </form>
+{% endmacro %}
+<header class="top" id="topbar">
+  {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. The film, prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
+  <div class="bar">
+    <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
+    <nav class="links" aria-label="Main"><a href="#services">Services</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">Areas</a><a href="#quote">Get a quote</a></nav>
+    <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
+  </div>
+  <div class="prog" aria-hidden="true"><b id="prog"></b></div>
+</header>
+
+<main id="top">
+  <div class="stage" id="stage">
+    <div class="pin" id="pin">
+      <canvas id="film" role="img" aria-label="{{ film.alt }}"></canvas>
+      <div class="shade"></div>
+      <span class="ph-tag film-tag">{{ 'Example film' if preview else 'Illustration' }}</span>
+
+      <div class="beat b-hook" data-from="0" data-to="{{ (film.beats[0]['from'] - 0.06)|round(2) }}"><div class="in">
+        <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>
+        <p class="hook">{{ film.hook }}</p>
+        <p class="hook-sub">{{ film.hook_sub }}</p>
+        <div class="cue" aria-hidden="true"><i></i>Scroll</div>
+      </div></div>
+
+      {% for b in film.beats %}
+      <div class="beat b-step" data-from="{{ b['from'] }}" data-to="{{ b['to'] }}"><div class="in">
+        <div class="eyebrow">{{ b.eyebrow }}</div>
+        <p class="step-line">{{ b.line }}</p>
+      </div></div>
+      {% endfor %}
+
+      <div class="beat b-end" data-from="{{ film.end_from }}" data-to="1.01"><div class="in">
+        <div class="eyebrow">Step {{ film.beats|length + 1 }} &middot; Yours</div>
+        <p class="end-name">{{ biz.name }}</p>
+        {% if biz.show_rating %}<p class="end-rating"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{{ biz.rating_str }} from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</p>{% endif %}
+        <div class="end-row">
+          <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
+          <a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>
+        </div>
+      </div></div>
+
+      <div class="hud" aria-hidden="true"><div class="in">
+        <span>Before</span>
+        <div class="rail"><b id="fill"></b><i id="knob"></i></div>
+        <span class="pct" id="pct">0%</span>
+      </div></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="intro-grid">
+        <div>
+          <p class="kicker">{{ t.kicker }} in {{ biz.town }}</p>
+          <h2>{{ t.promise }}</h2>
+        </div>
+        <p class="lede">One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.</p>
+      </div>
+      <div class="proof">
+        {% if biz.show_rating %}
+        <div><strong{% if biz.animate_rating %} data-count="{{ biz.rating_str }}" data-dp="1"{% endif %}>{{ biz.rating_str }}</strong><span><span class="stars-bar" role="img" aria-label="{{ biz.rating_str }} out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span style="width: {{ biz.rating_pct }}%">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> on Google</span></div>
+        <div><strong{% if biz.animate_rating %} data-count="{{ biz.reviews }}"{% endif %}>{{ biz.reviews }}</strong><span>Google review{{ 's' if biz.reviews != 1 }}</span></div>
+        {% endif %}
+        <div><strong>{{ pc_label or biz.town }}</strong><span>{{ biz.town }} and nearby</span></div>
+        {% for c in t.creds[:1] %}
+        {% if c.value %}<div><strong>{{ c.short or c.label }}</strong><span>{{ c.value }}</span></div>
+        {% elif preview %}<div class="ph"><span class="ph-tag">Placeholder</span><b>{{ c.short or c.label }}</b><span>Your number goes here</span></div>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="band">
+    <div class="wrap">
+      <p class="kicker">What we do</p>
+      <h2>{{ 'Pick the job. Get a straight price.' if price_json != '[]' else 'Pick the job. Get a quote.' }}</h2>
+      <ul class="jobs">
+        {% for sv in t.services_full %}
+        <li>
+          <div><h3>{{ sv.title }}</h3><p>{{ sv.blurb }}</p></div>
+          <div class="job-side">
+            {% if sv.low is not none %}<span class="price"><small>Guide price</small>&pound;{{ "{:,}".format(sv.low) }}&ndash;&pound;{{ "{:,}".format(sv.high) }}{% if sv.unit %}<small>{{ sv.unit }}</small>{% endif %}</span>{% endif %}
+            <span class="job-acts">
+              <a class="btn btn-line js-quote" href="#quote" data-job="{{ sv.title }}"{% if sv.low is not none %} data-note="Guide price was &pound;{{ '{:,}'.format(sv.low) }}&ndash;&pound;{{ '{:,}'.format(sv.high) }}{{ ' ' ~ sv.unit if sv.unit }}."{% endif %}>Get a price</a>
+              {% if biz.whatsapp %}<a class="icon-btn wa" aria-label="Send a photo of the {{ sv.title|lower }} job on WhatsApp" href="{{ biz.whatsapp }}?text={{ ('Hi ' ~ biz.name ~ ', I need help with ' ~ sv.title|lower ~ '. Here is a photo of the job:')|urlencode }}">{{ wa_icon|safe }}</a>{% endif %}
+            </span>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if price_json != '[]' and preview %}<p class="prices-note"><span class="ph-tag">Example prices</span> You set your own before the site goes live.</p>{% endif %}
+    </div>
+  </section>
+
+  {% if preview or biz.show_rating %}
+  <section id="reviews">
+    <div class="wrap reviews-grid">
+      <div class="score">
+        <p class="kicker">Straight from Google</p>
+        <h2>What customers say</h2>
+        {% if biz.show_rating %}
+        <span class="score-num">{{ biz.rating_str }}</span>
+        <span class="stars-bar" role="img" aria-label="{{ biz.rating_str }} out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span style="width: {{ biz.rating_pct }}%">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span>
+        <p>From {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</p>
+        <a href="{{ biz.maps }}" rel="noopener" target="_blank">Read them on Google</a>
+        {% else %}
+        <p>Reviews from your Google listing show here as customers leave them.</p>
+        {% endif %}
+      </div>
+      {% if preview %}
+      <div>
+        <div class="cards" id="cards">
+          {% for i in range(3) %}
+          <div class="review-card" aria-hidden="true">
+            <span class="ph-tag">Your real review here</span>
+            <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <div class="skel"></div><div class="skel"></div><div class="skel s"></div>
+            <div class="review-who"><i></i><div class="skel"></div></div>
+          </div>
+          {% endfor %}
+        </div>
+        <p class="reviews-note">On the live site these cards show your latest Google reviews, word for word, pulled straight from your listing.</p>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% set real = (gallery|selectattr("src")|list) if own else [] %}
+  {% if real or (places_key and place_id) %}
+  <section id="work" class="band"{% if not real %} hidden{% endif %}>
+    <div class="wrap">
+      <p class="kicker">Recent work</p>
+      <h2>{{ t.gallery_intro }}</h2>
+      <div class="gallery" id="gallery">
+        {% for g in real[:6] %}
+        <figure class="tile"><img src="{{ g.src }}" alt="{{ g.caption }}" loading="lazy">{% if g.caption %}<figcaption>{{ g.caption }}</figcaption>{% endif %}</figure>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section id="areas">
+    <div class="wrap areas-grid">
+      <div class="town-box"><svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="92"/></svg><div class="town-word" aria-hidden="true" style="--chars: {{ [biz.town_longest + 1, 5]|max }}">{{ biz.town|replace("-", "-​") }}</div></div>
+      <div>
+        <p class="kicker">Areas we cover</p>
+        <h2>Based in {{ biz.town }}.</h2>
+        <ul class="areas">
+          {% for a in areas %}<li>{{ a }}</li>{% endfor %}
+        </ul>
+        <form class="cover" id="cover" novalidate>
+          <label for="cover-in">Do we cover you?</label>
+          <div class="cover-row">
+            <input id="cover-in" placeholder="Postcode or town, e.g. {{ biz.pc_example }}" autocomplete="postal-code">
+            <button class="btn btn-brand" type="submit">Check</button>
+          </div>
+          <div class="cover-result" id="cover-out" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="band">
+    <div class="wrap">
+      <p class="kicker">Good to know</p>
+      <h2>Common questions</h2>
+      <div class="faq">
+        {% for q in t.faqs %}
+        <details{% if loop.first %} open{% endif %}><summary>{{ q[0] }}</summary><p>{{ q[1] }}</p></details>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="quote-band" id="quote">
+    <div class="wrap quote-grid">
+      <div class="quote-side">
+        <p class="kicker">Ready when you are</p>
+        <h2>Need a {{ t.cta_noun }} in {{ biz.town }}?</h2>
+        <p>{{ t.quote_intro }}</p>
+        <div class="end-row">
+          <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
+          {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp a photo</a>{% endif %}
+        </div>
+        <div class="creds">
+          {% for c in t.creds %}
+          {% if c.value %}<div class="cred real"><strong>{{ c.label }}</strong><span>{{ c.value }}</span></div>
+          {% elif preview %}<div class="cred"><span class="ph-tag">Placeholder</span><strong>{{ c.label }}</strong><span>{{ c.hint }}</span></div>{% endif %}
+          {% endfor %}
+        </div>
+      </div>
+{{ quote_form("q", "Get a free quote") }}
+    </div>
+  </section>
+
+  {% if preview and pay.once %}
+  <section class="golive" id="go-live">
+    <div class="wrap">
+      <p class="kicker">For {{ biz.name }}</p>
+      <h2>Like it? Make it yours.</h2>
+      <div class="plans">
+        <div class="plan">
+          <h3>Pay once</h3>
+          <span class="amount">&pound;500</span>
+          <p>One payment. Your website, finished with your own photos and details.</p>
+          <a class="btn btn-line" href="{{ pay.once }}?client_reference_id={{ lead_id }}" rel="noopener">Choose pay once</a>
+        </div>
+        {% if pay.monthly %}
+        <div class="plan best">
+          <span class="tag">Most popular</span>
+          <h3>Website + care plan</h3>
+          <span class="amount">&pound;599 <small>then &pound;49/month</small></span>
+          <p>Your website set up, then hosting and changes looked after every month.</p>
+          <a class="btn btn-brand" href="{{ pay.monthly }}?client_reference_id={{ lead_id }}" rel="noopener">Choose care plan</a>
+        </div>
+        {% endif %}
+      </div>
+      <p class="golive-note">Secure card payment by Stripe. Questions first? Reply to our email or ring your Maystone contact. <a id="share-wa" href="https://wa.me/?text={{ ('Have a look at the new website for ' ~ biz.name)|urlencode }}">Show someone on WhatsApp</a></p>
+    </div>
+  </section>
+  {% endif %}
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-top"><strong>{{ biz.name }}</strong><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></div>
+    <p>{{ t.label }} in {{ biz.town }} and the surrounding area.</p>
+    {% if legal.company %}<p>{{ legal.company }}</p>
+    {% elif biz.is_ltd and preview %}<p><span class="ph-tag">Placeholder</span>Company number, country of registration and registered office go here.</p>{% endif %}
+    {% if preview %}<p><span class="ph-tag">Placeholder</span>Privacy notice: how enquiries from this site are stored and used.</p>
+    {% else %}<p>Enquiries sent through this site are only used to reply to you about your job.</p>{% endif %}
+    <p>&copy; {{ year }} {{ biz.name }}. Website by Maystone.{% if not preview %} The film at the top is an illustration.{% endif %}</p>
+  </div>
+</footer>
+
+<dialog class="qd" id="qd" aria-labelledby="d-title">
+{{ quote_form("d", "Get a price", true) }}
+</dialog>
+
+<nav class="action-bar" aria-label="Quick contact">
+  <a class="btn btn-brand" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call now</a>
+  {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp</a>{% else %}<a class="btn btn-line js-quote" href="#quote">Get a quote</a>{% endif %}
+</nav>
+
+<script>
+/* The film: frames drawn to a canvas as the visitor scrolls, with a cross-fade between neighbouring frames. */
+(function () {
+  var BASE = {{ film.base|tojson }}, N = {{ film.frames|int }};
+  var tall = window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches;
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var stage = document.getElementById("stage"), pin = document.getElementById("pin"), cv = document.getElementById("film");
+  var top = document.getElementById("topbar"), fill = document.getElementById("fill"), knob = document.getElementById("knob"), pct = document.getElementById("pct");
+  var beats = [].slice.call(document.querySelectorAll(".beat"));
+  var ctx = cv.getContext && cv.getContext("2d");
+  var imgs = [], cur = 0, last = "", active = true, cw = 0, ch = 0;
+  if (!ctx) return;
+
+  function src(i) { return BASE + (tall ? "m/" : "d/") + ("000" + (i + 1)).slice(-4) + ".webp"; }
+  function size() {
+    // Some in-app browsers stretch the page to its full height; never let the film be taller than the screen.
+    var sh = (window.screen && screen.height) || innerHeight;
+    if (innerHeight > sh * 1.25) { pin.style.height = sh + "px"; stage.style.height = Math.round(sh * 4.2) + "px"; }
+    var w = pin.clientWidth, h = pin.clientHeight;
+    if (Math.abs(w - cw) < 2 && Math.abs(h - ch) < 140 && cw) return;   // ignore the address bar sliding in and out
+    cw = w; ch = h;
+    var r = Math.min(window.devicePixelRatio || 1, 2), k = Math.min(r, Math.sqrt(2600000 / Math.max(1, w * h)));
+    cv.width = Math.max(1, Math.round(w * k)); cv.height = Math.max(1, Math.round(h * k)); last = "";
+    document.documentElement.style.setProperty("--head", top.offsetHeight + "px");
+  }
+  function ready(i) { return imgs[i] && imgs[i].ok ? imgs[i] : null; }
+  function near(i) { for (var d = 1; d < N; d++) { if (ready(i - d)) return ready(i - d); if (ready(i + d)) return ready(i + d); } return null; }
+  function paint(im, a) {
+    var s = Math.max(cv.width / im.naturalWidth, cv.height / im.naturalHeight), w = im.naturalWidth * s, h = im.naturalHeight * s;
+    ctx.globalAlpha = a; ctx.drawImage(im, (cv.width - w) / 2, (cv.height - h) / 2, w, h); ctx.globalAlpha = 1;
+  }
+  function draw(x) {
+    var i = Math.floor(x), f = x - i, a = ready(i) || near(i), b = ready(i + 1);
+    if (!a) return;
+    var key = i + ":" + (b ? f.toFixed(2) : "0") + ":" + (ready(i) ? 1 : 0);
+    if (key === last) return;
+    last = key;
+    paint(a, 1); if (b && f > .02) paint(b, f);
+  }
+  function progress() {
+    var r = stage.getBoundingClientRect(), span = stage.offsetHeight - pin.offsetHeight;
+    return span > 0 ? Math.min(1, Math.max(0, -r.top / span)) : 0;
+  }
+  function beat(p) {
+    for (var j = 0; j < beats.length; j++) {
+      var b = beats[j], a = +b.getAttribute("data-from"), z = +b.getAttribute("data-to"), e = .05, o;
+      o = (p < a || p > z) ? 0 : Math.min(1, a === 0 ? 1 : (p - a) / e, z > 1 ? 1 : (z - p) / e);
+      b.style.opacity = o.toFixed(3);
+      b.style.transform = "translateY(" + ((1 - o) * 18).toFixed(1) + "px)";
+      if (o > .5) b.classList.add("on"); else b.classList.remove("on");
+    }
+  }
+  function tick() {
+    requestAnimationFrame(tick);
+    if (!active) return;
+    var p = progress(), target = p * (N - 1);
+    cur = calm ? target : cur + (target - cur) * .2;
+    if (Math.abs(target - cur) < .003) cur = target;
+    draw(cur);
+    fill.style.width = (p * 100) + "%"; knob.style.left = (p * 100) + "%";
+    pct.textContent = p > .985 ? "After" : Math.round(p * 100) + "%";
+    beat(p);
+  }
+  function chrome() {
+    var r = stage.getBoundingClientRect(), head = top.offsetHeight;
+    top.classList.toggle("solid", r.bottom < head + 4);
+    top.classList.toggle("scrolled", scrollY > 30);
+    document.body.classList.toggle("in-film", r.bottom > innerHeight * .6);
+    var doc = document.documentElement, max = doc.scrollHeight - innerHeight;
+    document.getElementById("prog").style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 0) + "%";
+  }
+  size(); chrome();
+  addEventListener("resize", function () { size(); chrome(); });
+  addEventListener("scroll", chrome, { passive: true });
+  if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { active = es[0].isIntersecting; if (active) last = ""; }).observe(stage);
+
+  // First frame (already preloaded), then key frames spread through the film, then the rest.
+  var order = [0], seen = { 0: 1 };
+  for (var step = 32; step >= 1; step = step / 2) for (var i = 0; i < N; i += step) if (!seen[i]) { seen[i] = 1; order.push(i); }
+  var q = 0, busy = 0;
+  function pump() {
+    while (busy < 4 && q < order.length) (function (i) {
+      busy++;
+      var im = new Image();
+      im.onload = function () { im.ok = true; busy--; last = ""; pump(); };
+      im.onerror = function () { busy--; pump(); };
+      im.src = src(i); imgs[i] = im;
+    })(order[q++]);
+  }
+  pump();
+  requestAnimationFrame(tick);
+})();
+
+/* The rest of the page */
+(function () {
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var AREAS = {{ coverage_json|safe }};
+  var BIZ = {{ biz.name|tojson }};
+  var TICK = '{{ tick_svg|replace("\n", "") }}';
+  var $ = function (q, el) { return (el || document).querySelector(q); };
+  var $$ = function (q, el) { return Array.prototype.slice.call((el || document).querySelectorAll(q)); };
+  function onView(el, fn, margin) {
+    if (!("IntersectionObserver" in window)) { fn(); return; }
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); fn(); } }); }, { rootMargin: margin || "0px 0px -15% 0px" });
+    io.observe(el);
+  }
+  function tween(from, to, ms, step) {
+    if (calm) { step(to); return; }
+    var t0 = performance.now();
+    (function f(now) { var k = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - k, 3); step(from + (to - from) * e); if (k < 1) requestAnimationFrame(f); })(t0);
+  }
+
+  /* Accent lines draw in, rating and review count count up */
+  $$(".kicker").forEach(function (k) { onView(k, function () { k.classList.add("in"); }); });
+  $$("[data-count]").forEach(function (el) {
+    if (calm) return;
+    var to = parseFloat(el.getAttribute("data-count")), dp = +(el.getAttribute("data-dp") || 0);
+    onView(el, function () { tween(0, to, 1100, function (v) { el.textContent = v.toFixed(dp); }); });
+  });
+
+  /* Quote pop-up, opened from every "Get a price" / "Get a free quote" */
+  var dlg = $("#qd");
+  function openQuote(job, note) {
+    if (job) $("#d-job").value = job;
+    $("#d-details").value = note || "";
+    if (dlg && dlg.showModal) { dlg.showModal(); setTimeout(function () { $("#d-name").focus(); }, 50); }
+    else { if (job) $("#q-job").value = job; location.hash = "quote"; }
+  }
+  $$(".js-quote").forEach(function (a) {
+    a.addEventListener("click", function (e) { e.preventDefault(); openQuote(a.getAttribute("data-job"), a.getAttribute("data-note")); });
+  });
+  if (dlg) {
+    $$("[data-close]", dlg).forEach(function (b) { b.addEventListener("click", function () { dlg.close(); }); });
+    dlg.addEventListener("click", function (e) { if (e.target === dlg) dlg.close(); });
+  }
+
+  /* Forms: check, send (live sites), then confirm with a drawn tick */
+  var TRACK = {{ track|tojson }}, LEAD = {{ lead_id|tojson }}, LIVE = {{ 'false' if preview else 'true' }};
+  $$(".qform").forEach(function (form) {
+    var status = $(".form-status", form), p = form.id.split("-")[0];
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var missing = ["name", "phone", "postcode"].filter(function (n) { return !$("#" + p + "-" + n).value.trim(); });
+      status.hidden = false;
+      if (missing.length) {
+        status.innerHTML = "<span><strong>Add your name, phone and postcode</strong> so we can get back to you.</span>";
+        $("#" + p + "-" + missing[0]).focus();
+        return;
+      }
+      if (!LIVE || !TRACK) {
+        status.innerHTML = TICK + "<span><strong>This is a preview.</strong> On your live site, this enquiry goes straight to your phone and email.</span>";
+        return;
+      }
+      if ($("#" + p + "-web").value) return;
+      var body = new URLSearchParams({ action: "enquiry", id: LEAD });
+      ["name", "phone", "postcode", "job", "details", "email"].forEach(function (k) { body.append(k, (form.elements[k] && form.elements[k].value) || ""); });
+      try { fetch(TRACK, { method: "POST", mode: "no-cors", credentials: "omit", body: body }).catch(function () {}); } catch (err) {}
+      status.innerHTML = TICK + "<span><strong>Thanks, your enquiry is sent.</strong> We will be in touch soon.</span>";
+      form.reset();
+    });
+  });
+
+  /* Do we cover you? */
+  var cover = $("#cover");
+  if (cover) cover.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var raw = $("#cover-in").value.trim(), out = $("#cover-out");
+    if (!raw) { out.innerHTML = '<span class="maybe">Type your postcode or town.</span>'; return; }
+    var q = raw.toUpperCase().replace(/\s+/g, ""), outward = q;
+    if (/^[A-Z]{1,2}\d[A-Z\d]?\d[A-Z]{2}$/.test(q)) outward = q.slice(0, -3);
+    var hit = null;
+    AREAS.forEach(function (a) { if (!hit && (a.pc.indexOf(outward) > -1 || a.name.toUpperCase().replace(/[\s-]/g, "") === q.replace(/-/g, ""))) hit = a.name; });
+    if (!hit) AREAS.forEach(function (a) { if (!hit && q.length > 3 && a.name.toUpperCase().replace(/[\s-]/g, "").indexOf(q.replace(/-/g, "")) === 0) hit = a.name; });
+    out.innerHTML = hit
+      ? '<span class="ok">' + TICK + "</span><span>Yes, " + BIZ.replace(/[<>&"]/g, "") + " covers " + hit + ".</span>"
+      : '<span class="maybe">' + raw.replace(/[<>&"]/g, "") + " may be a bit further out. Send us a message and we'll let you know.</span>";
+  });
+  var ring = $(".ring");
+  if (ring) onView(ring, function () { ring.classList.add("in"); });
+
+  /* Preview: share this page on WhatsApp */
+  var share = $("#share-wa");
+  if (share) share.href = "https://wa.me/?text=" + encodeURIComponent("Have a look at the new website for " + BIZ + ": " + location.href);
+})();
+</script>
+{% if places_key and place_id %}
+<script>
+/* Live Google listing (previews only): the business's own photos and latest reviews, loaded in the
+   visitor's browser from the Places API (New) and never stored. Anything that fails keeps the placeholders. */
+(function () {
+  var KEY = {{ places_key|tojson }}, PID = {{ place_id|tojson }}, NAME = {{ biz.name|tojson }};
+  if (!window.fetch || !KEY || !PID) return;
+  var REF = "no-referrer-when-downgrade";
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+  function norm(s) { return String(s || "").toLowerCase().replace(/&/g, " and ").replace(/\b(ltd|limited|and|the)\b/g, "").replace(/[^a-z0-9]/g, ""); }
+  function photos(list, gname) {
+    var me = [norm(NAME), norm(gname)].filter(Boolean);
+    var own = list.filter(function (p) {
+      return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
+    }).slice(0, 3);
+    var work = document.getElementById("work"), box = document.getElementById("gallery");
+    if (!own.length || !work || !box) return;
+    var go = function () {
+      own.forEach(function (photo) {
+        var img = new Image();
+        img.referrerPolicy = REF; img.alt = ""; img.decoding = "async";
+        img.onload = function () {
+          var fig = el("figure", "tile"), a = (photo.authorAttributions || [])[0] || {}, c = el("span", "g-credit");
+          if (a.uri) { var l = el("a", "", a.displayName || "Google"); l.href = a.uri; l.target = "_blank"; l.rel = "noopener"; c.append("Photo: ", l); }
+          else c.textContent = "Photo: " + (a.displayName || "Google");
+          fig.append(img, c); box.append(fig); work.hidden = false;
+        };
+        img.src = "https://places.googleapis.com/v1/" + photo.name + "/media?maxWidthPx=1200&key=" + encodeURIComponent(KEY);
+      });
+    };
+    // Photos are fetched only when the visitor gets near the section (keeps within the free daily cap).
+    var anchor = document.getElementById("areas");
+    if (!("IntersectionObserver" in window) || !anchor) return go();
+    var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); go(); } }, { rootMargin: "600px" });
+    io.observe(anchor);
+  }
+  function reviews(list) {
+    var good = list.filter(function (r) { return r.rating >= 4 && r.text && r.text.text; }).slice(0, 3);
+    var box = document.getElementById("cards");
+    if (!good.length || !box) return;
+    box.textContent = "";
+    good.forEach(function (r) {
+      var card = el("div", "review-card"), a = r.authorAttribution || {};
+      card.append(el("span", "stars", "★★★★★".slice(0, Math.round(r.rating))));
+      card.append(el("p", "", r.text.text));
+      var who = el("div", "review-who");
+      if (a.photoUri) { var av = new Image(); av.referrerPolicy = REF; av.alt = ""; av.src = a.photoUri; who.append(av); } else who.append(el("i"));
+      var name = el("div"), link = el(a.uri ? "a" : "span", "", a.displayName || "Google user");
+      if (a.uri) { link.href = a.uri; link.target = "_blank"; link.rel = "noopener"; }
+      name.append(link, el("small", "", r.relativePublishTimeDescription || ""));
+      who.append(name); card.append(who); box.append(card);
+    });
+    var note = document.querySelector("#reviews .reviews-note");
+    if (note) note.textContent = "Your latest Google reviews, word for word. The live site keeps them up to date.";
+    box.after(el("p", "g-source", "Reviews and photos from Google Maps"));
+  }
+  fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(PID) + "?languageCode=en-GB&regionCode=GB", {
+    headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,photos,reviews" },
+    referrerPolicy: REF, credentials: "omit"
+  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (p) {
+    if (!p) return;
+    try { reviews(p.reviews || []); } catch (e) {}
+    try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) {}
+  }).catch(function () {});
+})();
+</script>
+{% endif %}
+{% if preview and track %}<script>try{fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true}).catch(function(){});}catch(e){}</script>{% endif %}
+</body>
+</html>

@@ -18,6 +18,7 @@ They show tagged "Example photo"; with none, tiles show "Your photo here".
 """
 import csv
 import json
+import os
 import re
 import shutil
 import sys
@@ -26,7 +27,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from trades import NEARBY, POSTCODES, PRICES, STEPS, TRADES, group_for
+from trades import FILMS, NEARBY, POSTCODES, PRICES, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
 try:
@@ -194,7 +195,22 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     # Google place ID from the Maps link: previews load the listing's own photos and reviews live.
     m = re.search(r"place_id[:=]([A-Za-z0-9_-]{10,})", row.get("Google Maps") or "")
     place_id = m.group(1) if m else ""
-    html = env.get_template("call_me.html").render(
+    # Scroll film (signature hero) for trade groups that have one. Previews share one copy of the frames
+    # (engine/films/<group>/); a live site gets its own copy so it can move to the customer's domain.
+    film = None
+    film_src = HERE / "films" / group
+    if group in FILMS and (film_src / "m" / "0001.webp").exists() and (film_src / "d" / "0001.webp").exists():
+        if preview:
+            base = os.path.relpath(film_src, out_dir).replace(os.sep, "/") + "/"
+        else:
+            shutil.copytree(film_src, out_dir / "film", dirs_exist_ok=True)
+            base = "film/"
+        film = dict(FILMS[group], base=base)
+    pcs = sorted(POSTCODES.get(town) or [], key=lambda c: (re.sub(r"\d", "", c), int(re.sub(r"\D", "", c) or 0)))
+    same_area = len({re.sub(r"\d", "", c) for c in pcs}) == 1
+    pc_label = f"{pcs[0]}–{pcs[-1]}" if len(pcs) > 1 and same_area else (pcs[0] if pcs else "")
+    html = env.get_template("film.html" if film else "call_me.html").render(
+        film=film, pc_label=pc_label,
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
