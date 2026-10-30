@@ -857,14 +857,32 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     if (note) note.textContent = "Your latest Google reviews, word for word. The live site keeps them up to date.";
     box.after(el("p", "g-source", "Reviews and photos from Google Maps"));
   }
-  fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(PID) + "?languageCode=en-GB&regionCode=GB", {
-    headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,photos,reviews" },
-    referrerPolicy: REF, credentials: "omit"
-  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (p) {
-    if (!p) return;
-    try { reviews(p.reviews || []); } catch (e) {}
-    try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) {}
-  }).catch(function () {});
+  // Open the page with #check on the end to see on screen what Google sent back (for testing on phones).
+  function report(msg) {
+    if (location.hash !== "#check") return;
+    var b = document.getElementById("gcheck");
+    if (!b) { b = el("div"); b.id = "gcheck"; b.style.cssText = "position:fixed;left:12px;right:12px;bottom:96px;z-index:99;background:#111;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:10px 12px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.4)"; document.body.appendChild(b); }
+    b.textContent = "Google check: " + msg;
+  }
+  function load(tries) {
+    fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(PID) + "?languageCode=en-GB&regionCode=GB", {
+      headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,photos,reviews" },
+      referrerPolicy: REF, credentials: "omit", cache: "no-store"
+    }).then(function (r) {
+      if (r.ok) return r.json();
+      r.text().then(function (t) { report("refused (" + r.status + ") " + t.replace(/\s+/g, " ").slice(0, 220)); }).catch(function () {});
+      return null;
+    }).then(function (p) {
+      if (!p) return;
+      report("loaded " + (p.reviews || []).length + " reviews and " + (p.photos || []).length + " photos");
+      try { reviews(p.reviews || []); } catch (e) { report("reviews error: " + e.message); }
+      try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) { report("photos error: " + e.message); }
+    }).catch(function (e) {
+      report("blocked before reaching Google: " + (e && e.message));
+      if (tries > 0) setTimeout(function () { load(tries - 1); }, 2500);   // one retry on a flaky connection
+    });
+  }
+  load(1);
 })();
 </script>
 {% endif %}
