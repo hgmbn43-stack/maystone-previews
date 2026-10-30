@@ -191,10 +191,13 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         "name": name, "telephone": biz["tel"], "areaServed": areas,
         "address": {"@type": "PostalAddress", "addressLocality": town, "addressCountry": "GB"},
     }
+    # Google place ID from the Maps link: previews load the listing's own photos and reviews live.
+    m = re.search(r"place_id[:=]([A-Za-z0-9_-]{10,})", row.get("Google Maps") or "")
+    place_id = m.group(1) if m else ""
     html = env.get_template("call_me.html").render(
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
-        track=CONFIG.get("track", ""), own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
+        track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
         schema_json=json.dumps(schema).replace("</", "<\\/"),
         price_json=json.dumps(price_json).replace("</", "<\\/"),
         coverage_json=json.dumps(coverage).replace("</", "<\\/"),

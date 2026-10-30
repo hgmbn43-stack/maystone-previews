@@ -248,6 +248,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .review-who i { width: 2rem; height: 2rem; border-radius: 50%; background: var(--tint); display: block; }
 .review-who .skel { width: 6rem; }
 .reviews-note { margin-top: 1rem; color: var(--ink-soft); font-size: .92rem; }
+.review-card p { margin: 0; font-size: .95rem; display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+.review-who a { font-weight: 700; color: inherit; text-decoration: none; }
+.review-who small { display: block; color: var(--ink-soft); font-size: .8rem; }
+.review-who img { width: 2rem; height: 2rem; border-radius: 50%; object-fit: cover; }
+.g-credit { position: absolute; right: .6rem; bottom: .6rem; max-width: calc(100% - 1.2rem); padding: .2rem .5rem; border-radius: 999px; background: rgba(15, 20, 24, .7); color: #fff; font-size: .68rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g-credit a { color: inherit; }
+.tile .g-credit { bottom: auto; top: .7rem; right: .7rem; left: auto; }
+.g-source { margin-top: .6rem; color: var(--ink-soft); font-size: .8rem; font-family: Roboto, Arial, sans-serif; }
 
 /* Areas */
 .areas-panel { display: grid; gap: 2rem; align-items: center; }
@@ -972,6 +980,81 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
   if (share) share.href = 'https://wa.me/?text=' + encodeURIComponent('Have a look at the new website for ' + BIZ + ': ' + location.href);
 })();
 </script>
+{% if places_key and place_id %}
+<script>
+/* Live Google listing (previews only): the business's own photos and latest reviews, loaded in the
+   visitor's browser from the Places API (New) and never stored. Anything that fails keeps the examples. */
+(function () {
+  var KEY = {{ places_key|tojson }}, PID = {{ place_id|tojson }}, NAME = {{ biz.name|tojson }};
+  if (!window.fetch || !KEY || !PID) return;
+  var REF = "no-referrer-when-downgrade";
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+  function norm(s) { return String(s || "").toLowerCase().replace(/&/g, " and ").replace(/\b(ltd|limited|and|the)\b/g, "").replace(/[^a-z0-9]/g, ""); }
+  function credit(a) {
+    var c = el("span", "g-credit"), who = (a && a.displayName) || "Google";
+    if (a && a.uri) { var l = el("a", "", who); l.href = a.uri; l.target = "_blank"; l.rel = "noopener"; c.append("Photo: ", l); }
+    else c.textContent = "Photo: " + who;
+    return c;
+  }
+  function swap(box, photo, alt) {
+    var img = new Image();
+    img.referrerPolicy = REF; img.alt = alt || ""; img.decoding = "async";
+    img.onload = function () {
+      var old = box.querySelector("img");
+      if (old) old.replaceWith(img); else box.prepend(img);
+      var tag = box.querySelector(".ph-tag"); if (tag) tag.textContent = "From your Google listing";
+      var cap = box.querySelector("figcaption"); if (cap) cap.remove();
+      box.appendChild(credit((photo.authorAttributions || [])[0]));
+    };
+    img.src = "https://places.googleapis.com/v1/" + photo.name + "/media?maxWidthPx=1200&key=" + encodeURIComponent(KEY);
+  }
+  function photos(list, gname) {
+    var me = [norm(NAME), norm(gname)].filter(Boolean);
+    var own = list.filter(function (p) {
+      return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
+    }).slice(0, 3);
+    if (!own.length) return;
+    var hero = document.querySelector(".hero-frame");
+    if (hero) swap(hero, own[0], NAME);
+    var tiles = [].slice.call(document.querySelectorAll("#work .tile")).slice(0, 2), rest = own.slice(1);
+    if (!tiles.length || !rest.length) return;
+    var go = function () { rest.forEach(function (p, i) { if (tiles[i]) swap(tiles[i], p, ""); }); };
+    if (!("IntersectionObserver" in window)) return go();
+    var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { io.disconnect(); go(); } }, { rootMargin: "300px" });
+    io.observe(tiles[0]);
+  }
+  function reviews(list, maps) {
+    var good = list.filter(function (r) { return r.rating >= 4 && r.text && r.text.text; }).slice(0, 3);
+    var box = document.querySelector("#reviews .review-cards");
+    if (!good.length || !box) return;
+    box.textContent = "";
+    good.forEach(function (r) {
+      var card = el("div", "review-card"), a = r.authorAttribution || {};
+      card.append(el("span", "stars", "★★★★★".slice(0, Math.round(r.rating))));
+      card.append(el("p", "", r.text.text));
+      var who = el("div", "review-who");
+      if (a.photoUri) { var av = new Image(); av.referrerPolicy = REF; av.alt = ""; av.src = a.photoUri; who.append(av); } else who.append(el("i"));
+      var name = el("div"), link = el(a.uri ? "a" : "span", "", a.displayName || "Google user");
+      if (a.uri) { link.href = a.uri; link.target = "_blank"; link.rel = "noopener"; }
+      name.append(link, el("small", "", r.relativePublishTimeDescription || ""));
+      who.append(name); card.append(who); box.append(card);
+    });
+    var note = document.querySelector("#reviews .reviews-note");
+    if (note) note.textContent = "Your latest Google reviews, word for word. The live site keeps them up to date.";
+    var src = el("p", "g-source", "Reviews and photos from Google Maps");
+    box.after(src);
+  }
+  fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(PID) + "?languageCode=en-GB&regionCode=GB", {
+    headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,googleMapsUri,photos,reviews" },
+    referrerPolicy: REF, credentials: "omit"
+  }).then(function (r) { return r.ok ? r.json() : null; }).then(function (p) {
+    if (!p) return;
+    try { reviews(p.reviews || [], p.googleMapsUri); } catch (e) {}
+    try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) {}
+  }).catch(function () {});
+})();
+</script>
+{% endif %}
 {% if preview and track %}<script>try{fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true}).catch(function(){});}catch(e){}</script>{% endif %}
 </body>
 </html>
