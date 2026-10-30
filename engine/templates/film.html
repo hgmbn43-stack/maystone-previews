@@ -43,7 +43,9 @@
   --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --radius: 16px;
   --head: 4.4rem;
+  --tb: 0px;   /* height of the phone browser's bar when it is showing */
 }
+@supports (height: 100lvh) { :root { --tb: calc(100lvh - 100svh); } }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground: #15191d; --paper: #1b2025; --card: #20262c; --ink: #ece6dc; --ink-soft: #a9a196; --line: #30363c;
@@ -110,7 +112,7 @@ section { padding-block: clamp(4rem, 9vw, 7rem); }
 
 /* The film */
 .stage { position: relative; height: 420vh; height: 420svh; background: var(--night); }
-.pin { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--night) url("{{ film.base }}d/0001.webp") center / cover no-repeat; }
+.pin { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--night) url("{{ film.base }}d/0001.webp") center / cover no-repeat; }
 @media (max-aspect-ratio: 1/1) { .pin { background-image: url("{{ film.base }}m/0001.webp"); } }
 canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .shade { position: absolute; inset: 0; pointer-events: none;
@@ -120,9 +122,9 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .beat { position: absolute; left: 0; right: 0; color: #fff; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); opacity: 0; transform: translateY(18px); pointer-events: none; }
 .beat.on { pointer-events: auto; }
 .beat .in { max-width: 1180px; margin-inline: auto; }
-.b-hook { bottom: 16vh; opacity: 1; transform: none; }
+.b-hook { bottom: calc(var(--tb) + 16vh); bottom: calc(var(--tb) + 16svh); opacity: 1; transform: none; }
 .b-step { top: 20vh; }
-.b-end { bottom: 13vh; }
+.b-end { bottom: calc(var(--tb) + 13vh); bottom: calc(var(--tb) + 13svh); }
 .who { display: grid; gap: .15rem; font-family: var(--display); text-shadow: 0 1px 14px rgba(0,0,0,.45); }
 .who b { font-weight: 750; font-size: 1.05rem; font-stretch: 88%; }
 .who span { font: 600 .72rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
@@ -138,7 +140,7 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .end-rating .stars { color: var(--star); letter-spacing: .08em; }
 .end-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.2rem; }
 .phone { font: 850 clamp(1.8rem, 4.4vw, 2.7rem)/1 var(--display); font-stretch: 78%; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: .2rem; white-space: nowrap; }
-.hud { position: absolute; left: 0; right: 0; bottom: max(1.1rem, env(safe-area-inset-bottom, 0px)); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; pointer-events: none; }
+.hud { position: absolute; left: 0; right: 0; bottom: calc(var(--tb) + max(1.1rem, env(safe-area-inset-bottom, 0px))); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; pointer-events: none; }
 .hud .in { max-width: 1180px; margin-inline: auto; display: grid; grid-template-columns: auto 1fr auto; gap: .9rem; align-items: center; font: 600 .7rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .rail { position: relative; height: 2px; background: rgba(255,255,255,.28); border-radius: 2px; }
 .rail b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 2px; }
@@ -146,7 +148,7 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .pct { min-width: 3.4rem; text-align: right; font-variant-numeric: tabular-nums; }
 @media (max-width: 720px) {
   .ribbon .long { display: none; } .ribbon .short { display: inline; }
-  .b-step { top: auto; bottom: 13vh; }
+  .b-step { top: auto; bottom: calc(var(--tb) + 13vh); bottom: calc(var(--tb) + 13svh); }
   .shade { background: linear-gradient(180deg, rgba(10,14,18,.55) 0%, rgba(10,14,18,0) 20%, rgba(10,14,18,0) 40%, rgba(10,14,18,.86) 100%); }
 }
 
