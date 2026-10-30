@@ -138,6 +138,9 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .end-name { font: 900 clamp(2.6rem, 8.6vw, 7.2rem)/.88 var(--display); font-stretch: 64%; margin-top: .5rem; max-width: 14ch; text-shadow: 0 2px 30px rgba(0,0,0,.4); }
 .end-rating { margin-top: .9rem; font-weight: 650; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
 .end-rating .stars { color: var(--star); letter-spacing: .08em; }
+.end-quote { margin: .9rem 0 0; max-width: 34ch; }
+.end-quote blockquote { margin: 0; font-size: clamp(1rem, 2.1vw, 1.2rem); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+.end-quote figcaption { margin-top: .4rem; font: 600 .7rem/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
 .end-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.2rem; }
 .phone { font: 850 clamp(1.8rem, 4.4vw, 2.7rem)/1 var(--display); font-stretch: 78%; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: .2rem; white-space: nowrap; }
 .hud { position: absolute; left: 0; right: 0; bottom: calc(var(--tb) + max(1.1rem, env(safe-area-inset-bottom, 0px))); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; pointer-events: none; }
@@ -388,6 +391,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <div class="eyebrow">Step {{ film.beats|length + 1 }} &middot; Yours</div>
         <p class="end-name">{{ biz.name }}</p>
         {% if biz.show_rating %}<p class="end-rating"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{{ biz.rating_str }} from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</p>{% endif %}
+        {% if places_key and place_id %}<figure class="end-quote" id="end-quote" hidden><blockquote></blockquote><figcaption></figcaption></figure>{% endif %}
         <div class="end-row">
           <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
           <a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>
@@ -836,6 +840,14 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       name.append(link, el("small", "", r.relativePublishTimeDescription || ""));
       who.append(name); card.append(who); box.append(card);
     });
+    // The film ends on one real customer's words: the shortest 5-star review with something to say.
+    var q = document.getElementById("end-quote"), five = list.filter(function (r) { return r.rating >= 5 && r.text && r.text.text && r.text.text.trim().length >= 40; });
+    if (q && five.length) {
+      var best = five.slice().sort(function (x, y) { return x.text.text.length - y.text.text.length; })[0];
+      q.querySelector("blockquote").textContent = "\u201c" + best.text.text.trim() + "\u201d";
+      q.querySelector("figcaption").textContent = ((best.authorAttribution || {}).displayName || "A customer") + " \u00b7 Google review";
+      q.hidden = false;
+    }
     var note = document.querySelector("#reviews .reviews-note");
     if (note) note.textContent = "Your latest Google reviews, word for word. The live site keeps them up to date.";
     box.after(el("p", "g-source", "Reviews and photos from Google Maps"));
