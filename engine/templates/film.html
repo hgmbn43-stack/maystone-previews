@@ -131,6 +131,9 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .who b { font-weight: 750; font-size: 1.05rem; font-stretch: 88%; }
 .who span { font: 600 .72rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
 .hook { font: 900 clamp(3.2rem, 11.5vw, 9.6rem)/.86 var(--display); font-stretch: 66%; letter-spacing: -.01em; margin-top: .9rem; max-width: 9ch; text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+/* longer questions ("Charging off an extension lead?") get a smaller size so four lines never reach the header */
+.hook.long { font-size: clamp(2.9rem, 9vw, 7.2rem); max-width: 10ch; }
+@media (min-aspect-ratio: 1/1) { .hook { font-size: min(clamp(3.2rem, 11.5vw, 9.6rem), 18vh); } .hook.long { font-size: min(clamp(2.9rem, 9vw, 7.2rem), 14vh); } }
 .hook-sub { margin-top: 1rem; font-size: 1.1rem; max-width: 30ch; opacity: .92; }
 .cue { display: inline-flex; gap: .55rem; align-items: center; margin-top: 1.3rem; font: 600 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .cue i { width: 1px; height: 2.4rem; background: linear-gradient(#fff, transparent); transform-origin: top; animation: drip 1.8s ease-in-out infinite; }
@@ -388,7 +391,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
       <div class="beat b-hook" data-from="0" data-to="{{ film.hook_to }}"><div class="in">
         <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>
-        <p class="hook">{{ film.hook }}</p>
+        <p class="hook{% if film.hook|length > 24 %} long{% endif %}">{{ film.hook }}</p>
         <p class="hook-sub">{{ film.hook_sub }}</p>
         <div class="cue" aria-hidden="true"><i></i>Scroll</div>
       </div></div>

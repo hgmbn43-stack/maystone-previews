@@ -1,0 +1,59 @@
+{
+ "note": "MiniMax H3 failed (refunded). Now Seedance 2.0 Mini 720p 4s 9:16 (4 credits). Fallback: flux_3_video 720p 5s (30). Videos: MiniMax H3 4s 2K 9:16. When done: download mp4 to /home/claude/lib/film_<id>.mp4, contact-sheet QA, then python3 engine/film_frames.py <mp4> engine/films/plumbing/<film id>, build, test, commit, push.",
+ "films": {
+  "bathroom-02": {
+   "after": "d36d3e3f-909e-4169-b7cb-5924ea0c489f",
+   "before": "b546059a-bff1-48f0-9a1c-2275b6b69a5d",
+   "video_minimax_failed": "eb25a309-a2a2-4e09-8016-f7e6c53821c7",
+   "video": "188926ca-b55f-4e97-84e8-01b61e4007e6"
+  },
+  "wetroom-03": {
+   "after": "bb3c024c-9d8f-4aff-a25a-94a829f40c78",
+   "before": "072161ac-c533-42f1-a1d0-9f19829867df",
+   "video_minimax_failed": "9efcd398-2f58-4031-b448-8157386e7991",
+   "video": "51e3168d-3e53-4393-95ed-1c90780ed4e5"
+  },
+  "cottage-04": {
+   "after": "8c63156d-3eb1-4448-a474-cfbf9e003e3e",
+   "before": "6c2a5135-b7f0-46fe-a079-0ce9758d73f8",
+   "video_minimax_failed": "0cf06d93-7820-4316-8694-278843872586",
+   "video": "d96a5b96-23a6-4e59-bb5f-3a0c4f2c5704"
+  },
+  "ensuite-05": {
+   "after": "f797cf33-6b9a-4c60-b689-7b8da15edf80",
+   "before": "764f0e3a-1c2b-402c-94a7-d9bd6fe67d96",
+   "video_minimax_failed": "70538c35-918a-4247-8efa-7227ea825116",
+   "video": "b1d40c13-2aca-4aeb-aabe-bec03fecfd83"
+  },
+  "boiler-06": {
+   "after": "77604a3d-5943-41fa-bd67-ff24d4769bd9",
+   "before": "64c6e08d-4343-464d-bfc4-d2beaa0a5e16",
+   "video_minimax_failed": "c6a44b0d-9349-4746-aa9f-4acee69f7f32",
+   "video": "1d581f50-f07b-434b-8e10-5a6fba1cf806"
+  },
+  "radiators-07": {
+   "after": "6df8ea9c-2ef6-4d05-b407-451887814188",
+   "before": "4db7407a-f0d2-453b-9986-916683b6c85d",
+   "video_minimax_failed": "5aa6d9bc-b7d7-4202-9ee7-e87d46ab3bcb",
+   "video": "416d7ef1-510c-4fab-a675-6ca594201c8c"
+  },
+  "cylinder-08": {
+   "after": "e4672cc0-8c80-4ca1-83cb-7bb39d67caa0",
+   "before": "a3a32acc-3e2c-4813-b178-842f7240ce17",
+   "video_minimax_failed": "9f5b9188-b4cc-4df4-a1ad-32942bf5e353",
+   "video": "ecddd922-39ad-4a1e-971a-086761f22259"
+  },
+  "sink-09": {
+   "after": "3bf450b6-fa3a-497e-8704-7e9e2cc27611",
+   "before": "7475488f-0f0e-4f19-8402-0fea04d5702c",
+   "video_minimax_failed": "865c4ce3-5a45-4420-b325-6a9fff3ec4cc",
+   "video": "7916c48b-ddf5-4c59-b72b-3e70e7ec6e37"
+  },
+  "shower-10": {
+   "after": "799fca93-cdfd-425a-a8a3-186b709a40fe",
+   "before": "380a518e-3b0b-421b-81e7-577edadd0e60",
+   "video_minimax_failed": "b0fdd50c-0361-4eca-9511-2be3273b748e",
+   "video": "7ee6e837-5803-4a27-907e-dbd43470f014"
+  }
+ }
+}

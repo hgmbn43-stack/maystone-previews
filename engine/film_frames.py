@@ -5,6 +5,8 @@ Usage:
 
 Writes OUT_DIR/m/0001.webp ... (64 frames, 540x960, about 2 MB) from a tall 9:16 film and, with --wide,
 OUT_DIR/d/0001.webp ... (64 frames, 1280px wide) from a 16:9 film. Needs ffmpeg.
+Busy scenes (foliage, gravel, brick) compress badly, so the tall set steps the quality down, then the size
+(480x854), until it fits the phone budget (TALL_BUDGET_MB).
 
 Library film:   OUT_DIR = engine/films/<group>/<film id>   (then add it to FILMS in trades.py)
 Customer film:  OUT_DIR = leads/<lead id>/film             (optional leads/<lead id>/film/film.json with
@@ -16,6 +18,9 @@ import sys
 from pathlib import Path
 
 FRAMES = 64
+TALL_BUDGET_MB = 2.4
+# (quality, width, height) tried in order until the tall set fits the budget
+TALL_STEPS = [(44, 540, 960), (32, 540, 960), (24, 540, 960), (24, 480, 854)]
 
 
 def duration(video):
@@ -33,7 +38,15 @@ def frames(video, out, scale, quality):
                     "-c:v", "libwebp", "-quality", str(quality), "-compression_level", "6", str(out / "%04d.webp")], check=True)
     files = sorted(out.glob("*.webp"))
     size = sum(f.stat().st_size for f in files) / 1e6
-    print(f"{out}: {len(files)} frames, {size:.1f} MB")
+    print(f"{out}: {len(files)} frames, {size:.1f} MB (quality {quality})")
+    return size
+
+
+def tall_frames(video, out):
+    for q, w, h in TALL_STEPS:
+        size = frames(video, out, f"scale={w}:{h}:force_original_aspect_ratio=increase:flags=lanczos,crop={w}:{h}", q)
+        if size <= TALL_BUDGET_MB:
+            break
 
 
 def main():
@@ -46,7 +59,7 @@ def main():
     if len(args) != 2:
         sys.exit(__doc__)
     tall, out = Path(args[0]), Path(args[1])
-    frames(tall, out / "m", "scale=540:960:force_original_aspect_ratio=increase:flags=lanczos,crop=540:960", 44)
+    tall_frames(tall, out / "m")
     if wide:
         frames(wide, out / "d", "scale=1280:-2:flags=lanczos", 55)
 
