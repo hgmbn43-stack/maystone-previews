@@ -818,21 +818,40 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     var me = [norm(NAME), norm(gname)].filter(Boolean);
     var own = list.filter(function (p) {
       return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
-    }).slice(0, 3);
+    }).filter(function (p) {
+      // Banner-shaped uploads (logos, cover graphics) are never job photos.
+      var r = (p.widthPx || 4) / (p.heightPx || 3);
+      return r < 2.2 && r > 0.45;
+    }).slice(0, 5);
     var work = document.getElementById("work"), box = document.getElementById("gallery");
     if (!own.length || !work || !box) return;
+    // Logos and graphics are mostly one flat colour; real job photos never are.
+    function graphic(img) {
+      try {
+        var c = document.createElement("canvas"); c.width = 48; c.height = Math.max(1, Math.round(48 * img.naturalHeight / img.naturalWidth));
+        var x = c.getContext("2d"); x.drawImage(img, 0, 0, c.width, c.height);
+        var d = x.getImageData(0, 0, c.width, c.height).data, seen = {}, top = 0, n = d.length / 4;
+        for (var i = 0; i < d.length; i += 4) { var k = (d[i] >> 4) * 256 + (d[i + 1] >> 4) * 16 + (d[i + 2] >> 4); seen[k] = (seen[k] || 0) + 1; if (seen[k] > top) top = seen[k]; }
+        return top / n >= 0.45;
+      } catch (e) { return false; }
+    }
     var go = function () {
-      own.forEach(function (photo) {
-        var img = new Image();
-        img.referrerPolicy = REF; img.alt = ""; img.decoding = "async";
+      var shown = 0;
+      (function next(i) {
+        if (i >= own.length || shown >= 3) return;
+        var photo = own[i], img = new Image();
+        img.crossOrigin = "anonymous"; img.referrerPolicy = REF; img.alt = ""; img.decoding = "async";
         img.onload = function () {
+          if (graphic(img)) { report("skipped a logo or graphic"); return next(i + 1); }
           var fig = el("figure", "tile"), a = (photo.authorAttributions || [])[0] || {}, c = el("span", "g-credit");
           if (a.uri) { var l = el("a", "", a.displayName || "Google"); l.href = a.uri; l.target = "_blank"; l.rel = "noopener"; c.append("Photo: ", l); }
           else c.textContent = "Photo: " + (a.displayName || "Google");
-          fig.append(img, c); box.append(fig); work.hidden = false;
+          fig.append(img, c); box.append(fig); work.hidden = false; shown++;
+          next(i + 1);
         };
+        img.onerror = function () { next(i + 1); };
         img.src = "https://places.googleapis.com/v1/" + photo.name + "/media?maxWidthPx=1200&key=" + encodeURIComponent(KEY);
-      });
+      })(0);
     };
     // Photos are fetched only when the visitor gets near the section (keeps within the free daily cap).
     var anchor = document.getElementById("areas");

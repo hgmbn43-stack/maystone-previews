@@ -996,10 +996,21 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
     else c.textContent = "Photo: " + who;
     return c;
   }
+  // Logos and graphics are mostly one flat colour; real job photos never are.
+  function graphic(img) {
+    try {
+      var c = document.createElement("canvas"); c.width = 48; c.height = Math.max(1, Math.round(48 * img.naturalHeight / img.naturalWidth));
+      var x = c.getContext("2d"); x.drawImage(img, 0, 0, c.width, c.height);
+      var d = x.getImageData(0, 0, c.width, c.height).data, seen = {}, top = 0, n = d.length / 4;
+      for (var i = 0; i < d.length; i += 4) { var k = (d[i] >> 4) * 256 + (d[i + 1] >> 4) * 16 + (d[i + 2] >> 4); seen[k] = (seen[k] || 0) + 1; if (seen[k] > top) top = seen[k]; }
+      return top / n >= 0.45;
+    } catch (e) { return false; }
+  }
   function swap(box, photo, alt) {
     var img = new Image();
-    img.referrerPolicy = REF; img.alt = alt || ""; img.decoding = "async";
+    img.crossOrigin = "anonymous"; img.referrerPolicy = REF; img.alt = alt || ""; img.decoding = "async";
     img.onload = function () {
+      if (graphic(img)) return;   // a logo or graphic: keep the example photo
       var old = box.querySelector("img");
       if (old) old.replaceWith(img); else box.prepend(img);
       var tag = box.querySelector(".ph-tag"); if (tag) tag.textContent = "From your Google listing";
@@ -1012,6 +1023,9 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
     var me = [norm(NAME), norm(gname)].filter(Boolean);
     var own = list.filter(function (p) {
       return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
+    }).filter(function (p) {
+      var r = (p.widthPx || 4) / (p.heightPx || 3);
+      return r < 2.2 && r > 0.45;   // banner-shaped uploads are logos or cover graphics
     }).slice(0, 3);
     if (!own.length) return;
     var hero = document.querySelector(".hero-frame");
