@@ -866,11 +866,22 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     // Logos and graphics are mostly one flat colour; real job photos never are.
     function graphic(img) {
       try {
-        var c = document.createElement("canvas"); c.width = 48; c.height = Math.max(1, Math.round(48 * img.naturalHeight / img.naturalWidth));
-        var x = c.getContext("2d"); x.drawImage(img, 0, 0, c.width, c.height);
-        var d = x.getImageData(0, 0, c.width, c.height).data, seen = {}, top = 0, n = d.length / 4;
-        for (var i = 0; i < d.length; i += 4) { var k = (d[i] >> 4) * 256 + (d[i + 1] >> 4) * 16 + (d[i + 2] >> 4); seen[k] = (seen[k] || 0) + 1; if (seen[k] > top) top = seen[k]; }
-        return top / n >= 0.45;
+        // Trim plain borders (phone-screenshot bars, white margins), then see how much is one flat colour.
+        // Logos measure 0.44+ and real job photos 0.11 or less (tested 6 Nov 2026).
+        var W = 64, H = Math.max(1, Math.round(64 * img.naturalHeight / img.naturalWidth));
+        var c = document.createElement("canvas"); c.width = W; c.height = H;
+        var x = c.getContext("2d"); x.drawImage(img, 0, 0, W, H);
+        var d = x.getImageData(0, 0, W, H).data;
+        var at = function (X, Y) { var i = (Y * W + X) * 4; return [d[i], d[i + 1], d[i + 2]]; };
+        var far = function (a, b) { return Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]) + Math.abs(a[2] - b[2]) > 40; };
+        var row = function (Y) { var a = at(0, Y); for (var X = 1; X < W; X++) if (far(at(X, Y), a)) return false; return true; };
+        var col = function (X, t, b) { var a = at(X, t); for (var Y = t; Y <= b; Y++) if (far(at(X, Y), a)) return false; return true; };
+        var t = 0, b = H - 1, l = 0, r = W - 1;
+        while (t < b && row(t)) t++; while (b > t && row(b)) b--;
+        while (l < r && col(l, t, b)) l++; while (r > l && col(r, t, b)) r--;
+        var seen = {}, top = 0, n = 0;
+        for (var Y = t; Y <= b; Y++) for (var X = l; X <= r; X++) { var p = at(X, Y), k = (p[0] >> 4) * 256 + (p[1] >> 4) * 16 + (p[2] >> 4); seen[k] = (seen[k] || 0) + 1; n++; if (seen[k] > top) top = seen[k]; }
+        return top / n >= 0.3;
       } catch (e) { return false; }
     }
     var go = function () {
