@@ -95,12 +95,15 @@ function processRows_(sh, first, last) {
     var email = String(r[C.email - 1]).trim();
     var link = String(r[C.link - 1]).trim();
     var okEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // A "yes" can be texted instead of emailed: a UK mobile typed in Client email, or a mobile in the Phone column.
+    var okMobile = isUkMobile_(email) || isUkMobile_(r[C.phone - 1]);
 
-    // 1. Publish preview
-    if (/^yes/i.test(String(r[C.outcome - 1]).trim()) && okEmail && !link) {
+    // 1. Publish preview (email OR mobile – the rep texts the link themselves after a clear yes)
+    if (/^yes/i.test(String(r[C.outcome - 1]).trim()) && (okEmail || okMobile) && !link) {
       try {
         link = publish_(r);
         sh.getRange(rowNum, C.link).setValue(link);
+        if (!okEmail) sh.getRange(rowNum, C.link).setNote('No email: text or WhatsApp this link yourself, only after a clear yes on the call. It goes live in about 2 minutes.');
       } catch (err) {
         sh.getRange(rowNum, C.link).setNote('Preview not published: ' + err.message);
         continue;
@@ -120,6 +123,12 @@ function processRows_(sh, first, last) {
       }
     }
   }
+}
+
+/** True for a UK mobile number (07…, +447…, 447…); spaces, dashes and brackets ignored. */
+function isUkMobile_(v) {
+  var s = String(v || '').replace(/[\s\-().]/g, '');
+  return /^(?:\+?44|0)7\d{9}$/.test(s);
 }
 
 function publish_(r) {
