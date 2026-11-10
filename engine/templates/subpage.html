@@ -56,6 +56,12 @@
 .foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
 .foot-links a { color: inherit; }
 .top .links a[aria-current] { color: var(--accent); }
+.two-lists { display: grid; gap: 1.2rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 2rem !important; }
+h2.sm { font-size: clamp(1.5rem, 3.6vw, 2rem); max-width: none; margin: 0 0 .6rem; }
+.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.ticks li { position: relative; padding-left: 1.7rem; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .45em; width: .95rem; height: .55rem; border-left: 2.5px solid var(--accent); border-bottom: 2.5px solid var(--accent); transform: rotate(-45deg); }
+.ticks.dots li::before { width: .5rem; height: .5rem; border: 0; border-radius: 50%; background: var(--accent); transform: none; top: .55em; left: .2rem; }
 </style>
 <script type="application/ld+json">{{ page.schema|safe }}</script>
 </head>
@@ -102,6 +108,13 @@
       {% if page.guide %}<p class="guide"><span>Guide price</span><b>&pound;{{ '{:,}'.format(page.guide.low) }}&ndash;&pound;{{ '{:,}'.format(page.guide.high) }}</b>{% if page.guide.unit %}<span>{{ page.guide.unit }}</span>{% endif %}</p>
       <p class="prices-note"><span class="ph-tag">Example price</span> You set your own before the site goes live.</p>{% endif %}
       {% if page.postcodes %}<p><strong>Postcodes:</strong> {{ page.postcodes|join(', ') }}</p>{% endif %}
+      {% if page.includes %}
+      <div class="two-lists">
+        <div><h2 class="sm">What's included</h2><ul class="ticks">{% for x in page.includes %}<li>{{ x }}</li>{% endfor %}</ul></div>
+        {% if page.signs %}<div><h2 class="sm">When people call us</h2><ul class="ticks dots">{% for x in page.signs %}<li>{{ x }}</li>{% endfor %}</ul></div>{% endif %}
+      </div>
+      {% if preview %}<p class="prices-note"><span class="ph-tag">Example wording</span> You check it and we change anything that doesn't fit how you work.</p>{% endif %}
+      {% endif %}
     </div>
   </section>
 

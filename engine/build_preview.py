@@ -171,6 +171,8 @@ BADGES = [("Checkatrade", r"checka ?trade"), ("TrustMark", r"trust ?mark"), ("Ga
           ("Guild of Master Craftsmen", r"guild of master"), ("Painting & Decorating Association", r"\bpda\b|painting (and|&) decorating assoc"),
           ("CHAS", r"\bchas\b"), ("Constructionline", r"constructionline"), ("Competent Roofer", r"competent roofer"),
           ("OFTEC", r"\boftec\b"), ("HETAS", r"\bhetas\b")]
+from service_copy import COPY, HELP  # noqa: E402
+
 NOUN = {"kitchens_bathrooms": "Kitchen & bathroom fitter", "handyman": "Handyman", "local": "Local business"}
 
 
@@ -199,12 +201,15 @@ def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, are
     pages = []
     for i, sp in enumerate(svc_pages):
         sv = sp["sv"]
+        copy = (COPY.get(group) or {}).get(sv["title"]) or {}
         guide = {"low": sv["low"], "high": sv["high"], "unit": sv.get("unit", "")} if sv.get("low") is not None else None
         pages.append(dict(kind="service", path=sp["path"], job=sv["title"],
             title=f"{sv['title']} in {town} | {name}",
             description=f"{sv['title']} in {town} and nearby from {name}. {sv['blurb']} Call {phone}.",
             crumbs=["Services", sv["title"]], kicker=t["label"], h1=f"{sv['title']} in {town}", lede=sv["blurb"],
+            includes=copy.get("includes") or [], signs=copy.get("signs") or [],
             paras=[p for p in [
+                copy.get("intro", ""),
                 f"{name} is a local {(t.get('cta_noun') or 'business')} based in {town}" + (f", covering {_join(others)} and the villages around them." if others else "."),
                 f"Need help with {sv['title'][0].lower() + sv['title'][1:]}? {contact_line}",
                 rating_line] if p],
@@ -398,6 +403,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
         svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address,
+        help=(HELP.get(group) or []) if film and not t.get("venue") else [],
         hide_photos=[int(x) for x in re.findall(r"\d+", str(row.get("Hide photos") or ""))],
         schema_json=json.dumps(schema).replace("</", "<\\/"),
         price_json=json.dumps(price_json).replace("</", "<\\/"),

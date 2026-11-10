@@ -364,6 +364,23 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .areas li:has(a):hover { border-color: var(--accent); }
 .foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
 .foot-links a { color: inherit; }
+/* "What's gone wrong?" helper */
+.help-pick { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.help-btn { font: 700 1rem/1.2 var(--body); padding: .85rem 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; min-height: 48px; }
+.help-btn[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+.help-btn.sos { border-color: #d94a3a; color: #b3261e; }
+.help-card { margin-top: 1.4rem; padding: clamp(1.1rem, 3vw, 1.8rem); border-radius: 1.2rem; background: var(--card); border: 1px solid var(--line); max-width: 46rem; }
+.help-now { font: 700 .78rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #b3261e; margin: 0 0 .5rem; }
+.help-steps { margin: 0 0 1.2rem; padding-left: 1.3rem; display: grid; gap: .5rem; }
+.help-q { border: 0; padding: 0; margin: 0 0 1.1rem; }
+.help-q legend { font-weight: 700; margin-bottom: .5rem; }
+.help-q label { display: inline-block; margin: 0 .4rem .5rem 0; }
+.help-q input { position: absolute; opacity: 0; pointer-events: none; }
+.help-q span { display: inline-block; padding: .55rem .9rem; border-radius: 999px; border: 1.5px solid var(--line); cursor: pointer; font-weight: 600; font-size: .95rem; }
+.help-q input:checked + span { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.help-q input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.help-acts { display: flex; flex-wrap: wrap; gap: .6rem; }
+.help-sos { font-weight: 700; color: #b3261e; margin: 0; }
 .action-bar { display: none; }
 @media (max-width: 760px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -437,7 +454,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     <details class="menu"><summary aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
       <div class="menu-panel">
         <a href="#top">Home</a>
-        <a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book a table' if t.venue else 'Get a quote' }}</a>
+        <a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if help %}<a href="#help">What's gone wrong?</a>{% endif %}{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book a table' if t.venue else 'Get a quote' }}</a>
         {% if svc_pages %}<p>Services</p>{% for sp in svc_pages %}<a href="{{ sp.path }}">{{ sp.name }}</a>{% endfor %}
         <p>Areas we cover</p>{% for ap in area_pages %}<a href="{{ ap.path }}">{{ ap.name }}</a>{% endfor %}
         <p>Get in touch</p><a href="contact/">Contact</a>{% endif %}
@@ -554,6 +571,40 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         {% endfor %}
       </ul>
       {% if price_json != '[]' and preview %}<p class="prices-note"><span class="ph-tag">Example prices</span> You set your own before the site goes live.</p>{% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if help %}
+  <section id="help">
+    <div class="wrap">
+      <p class="kicker">Quick help</p>
+      <h2>What's gone wrong?</h2>
+      <p class="lede" style="margin-top:1rem">Tap the closest match. You'll get the first thing to do right now, and {{ 'a message you can send us on WhatsApp in one tap' if biz.whatsapp else 'a quick way to get hold of us' }}.</p>
+      <div class="help-pick" role="tablist">
+        {% for h in help %}<button type="button" class="help-btn{{ ' sos' if h.emergency }}" data-k="{{ h.key }}" aria-pressed="false">{{ h.label }}</button>{% endfor %}
+      </div>
+      {% for h in help %}
+      <div class="help-card" id="help-{{ h.key }}" data-label="{{ h.label }}" hidden>
+        <p class="help-now">Do this now</p>
+        <ol class="help-steps">{% for st in h.now %}<li>{{ st }}</li>{% endfor %}</ol>
+        {% if h.emergency %}
+        <p class="help-sos">This is an emergency: follow the steps above first. Once you're safe, ring us on <a href="tel:{{ biz.tel }}">{{ biz.phone }}</a>.</p>
+        {% else %}
+        {% for q in h.q %}
+        {% set qn = h.key ~ '-q' ~ loop.index0 %}
+        <fieldset class="help-q" data-q="{{ q[0] }}"><legend>{{ q[0] }}</legend>
+          {% for opt in q[1] %}<label><input type="radio" name="{{ qn }}" value="{{ opt }}"><span>{{ opt }}</span></label>{% endfor %}
+        </fieldset>
+        {% endfor %}
+        <div class="help-acts">
+          {% if biz.whatsapp %}<a class="btn btn-wa help-wa" href="{{ biz.whatsapp }}" data-base="{{ biz.whatsapp }}">{{ wa_icon|safe }}Send on WhatsApp</a>{% endif %}
+          <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
+          {% if not biz.whatsapp %}<a class="btn btn-line js-quote" href="#quote" data-job="{{ h.label }}">Get a quote</a>{% endif %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
     </div>
   </section>
   {% endif %}
@@ -1160,6 +1211,28 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   if (!m || !top) return;
   m.addEventListener("toggle", function () { if (m.open) document.documentElement.style.setProperty("--menu-top", top.getBoundingClientRect().bottom + "px"); });
   m.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { m.open = false; }); });
+})();
+</script>
+<script>
+/* "What's gone wrong?": tap a problem, see the first steps, pick answers, and the WhatsApp message writes itself. */
+(function () {
+  var box = document.getElementById("help"); if (!box) return;
+  var NAME = {{ biz.name|tojson }};
+  function msg(card) {
+    var lines = ["Hi " + NAME + ", " + card.dataset.label.charAt(0).toLowerCase() + card.dataset.label.slice(1) + "."];
+    card.querySelectorAll(".help-q").forEach(function (f) { var c = f.querySelector("input:checked"); if (c) lines.push(f.dataset.q + " " + c.value); });
+    lines.push("Can you help?");
+    var a = card.querySelector(".help-wa"); if (a) a.href = a.dataset.base + "?text=" + encodeURIComponent(lines.join("\n"));
+  }
+  box.querySelectorAll(".help-btn").forEach(function (b) {
+    b.addEventListener("click", function () {
+      box.querySelectorAll(".help-btn").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      box.querySelectorAll(".help-card").forEach(function (c) { c.hidden = c.id !== "help-" + b.dataset.k; });
+      var card = document.getElementById("help-" + b.dataset.k); msg(card);
+      if (card.getBoundingClientRect().top > innerHeight * .7) card.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+  box.querySelectorAll(".help-card").forEach(function (card) { card.addEventListener("change", function () { msg(card); }); });
 })();
 </script>
 </body>
