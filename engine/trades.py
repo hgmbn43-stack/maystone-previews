@@ -1078,3 +1078,58 @@ FILMS = {
          "alt": "A box room: the flat-pack boxes are built into a desk and shelves and the pictures are hung."},
     ],
 }
+
+
+# ---------------------------------------------------------------------------------------------------
+# Cafes (VISIT US mode of the film template, 10 Nov 2026). A cafe isn't a trade: the page swaps the
+# services/prices for an example menu, "Areas we cover" for Find us (live opening hours, address and a
+# map from the Google listing), and the quote form for a table/event enquiry. Everything example is
+# labelled on previews; the owner sends their real menu and hours before it goes live.
+TRADES["cafe"] = {
+    "label": "Cafe",
+    "kicker": "Cafe",
+    "promise": "Good coffee, homemade food and a warm welcome.",
+    "services_title": "On the menu",
+    "services_intro": "Breakfast, lunch, cakes and coffee.",
+    "services": [
+        ("Breakfast", "Bacon rolls, eggs on toast and a full English to start the day."),
+        ("Lunch", "Soups, sandwiches, jacket potatoes and the day's specials."),
+        ("Cakes and bakes", "Homemade cakes, scones and traybakes, baked fresh."),
+        ("Coffee and tea", "Coffees, pots of tea, hot chocolate and cold drinks."),
+        ("For the little ones", "Smaller plates, snacks and drinks for children."),
+    ],
+    "menu_prices": ["from £4.50", "from £6.95", "from £2.95", "from £2.60", "from £3.50"],
+    "creds": [
+        {"label": "Food hygiene rating", "short": "Hygiene", "hint": "Your Food Standards Agency rating (0–5). We can link it to your official record."},
+        {"label": "Allergen information", "hint": "How customers can ask about allergens in your food."},
+    ],
+    "gallery": ["Inside the cafe", "Fresh bakes", "Coffee", "Lunch", "The garden", "Our counter"],
+    "gallery_intro": "A look inside.",
+    "quote_intro": "Booking a table for a group, or planning a party or event? Send us the details and we'll get back to you.",
+    "faqs": [
+        ("Do I need to book?", "Just pop in. For groups of six or more, send us a message first so we can save you a table."),
+        ("Do you cater for allergies?", "Tell us about any allergies when you order and we'll talk you through what's in each dish."),
+        ("Can I hire the cafe for an event?", "Send us the date and how many people, and we'll let you know what's possible."),
+        ("How do I find you?", "The map below has directions. Ring us if you get lost."),
+    ],
+    "cta_noun": "cafe",
+    "ba_text": "Before and after opening.",
+    "venue": True,
+}
+TRADES["cafe"].update({"brand": "#4a2f22", "stripe": "#d59a52", "soft": "#faf3ea"})
+PALETTES["cafe"] = {"brand": "#4a2f22", "stripe": "#d59a52", "soft": "#faf3ea"}
+PRICES["cafe"] = [None] * 5
+SCENES["cafe-open"] = {
+    "hook": "Fancy a coffee?", "hook_sub": "Scroll to watch us open up.",
+    "beats": [("Step 1 · Open up", "Lights on, chairs down, tables set."),
+              ("Step 2 · Bake", "Cakes out, flowers on, coffee on.")],
+    "quote_words": ["coffee", "cake", "food", "staff", "friendly", "lovely", "lunch", "breakfast", "garden"],
+    "prefer": [],
+}
+FILMS["cafe"] = [
+    {"id": "garden-cafe-01", "scene": "cafe-open", "accent": "#b58f69", "accent_ink": "#7b5e40", "accent_dark": "#cbab8c",
+     "ground": "#f5ede6",
+     "alt": "A cafe opening up: the lights come on, the chairs come down, and cakes, flowers and coffee appear."},
+]
+# Cafes, coffee shops, tea rooms and bakeries first, so "The Walled Garden Cafe" isn't treated as a gardener.
+CATEGORY_RULES.insert(0, ("cafe", r"\bcaf[eé]s?\b|coffee|tea ?room|bakery|bistro|brasserie|restaurant|deli\b|sandwich"))

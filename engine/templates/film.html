@@ -322,6 +322,22 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .foot .ph-tag { margin-right: .4rem; }
 
 /* Quick contact on phones, once the film is out of the way */
+/* Cafe mode: menu, live hours and map */
+.menu .price { font-size: 1rem; }
+.today .is-open { color: var(--ok, #1f8a4c); }
+.today .is-closed { color: var(--ink-soft); }
+.findus { align-items: start; }
+.map-box { position: relative; border-radius: 1.2rem; overflow: hidden; min-height: 18rem; }
+.map-box.has-map { border: 1px solid var(--line); background: var(--paper); }
+.map-box iframe { display: block; width: 100%; height: 100%; min-height: 22rem; border: 0; }
+.addr { font-size: 1.1rem; margin: .4rem 0 1.2rem; }
+.hours h3 { font-size: 1rem; margin: 0 0 .6rem; }
+.hours-list { list-style: none; margin: 0 0 .4rem; padding: 0; display: grid; gap: .1rem; max-width: 26rem; }
+.hours-list li { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem .7rem; border-radius: .5rem; }
+.hours-list li b { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.hours-list li.today { background: color-mix(in srgb, var(--accent) 16%, transparent); font-weight: 700; }
+.hours-wait { margin: 0 0 1rem; }
+.findus .end-row { margin-top: 1.4rem; }
 .action-bar { display: none; }
 @media (max-width: 760px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -351,7 +367,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <script>document.documentElement.className += " js";</script>
 {% set phone_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>{% endset %}
 {% set wa_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>{% endset %}
-{% set wa_text = ("Hi " ~ biz.name ~ ", I found your website and I'd like a quote. Here's a photo of the job:")|urlencode %}
+{% set wa_text = (("Hi " ~ biz.name ~ ", I found your website and I'd like to ask about a table.") if t.venue else ("Hi " ~ biz.name ~ ", I found your website and I'd like a quote. Here's a photo of the job:"))|urlencode %}
 {% set tick_svg %}<svg class="draw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12.5l5 5L20 6.5"/></svg>{% endset %}
 {% macro quote_form(p, title, with_close=false) %}
     <form class="qform" id="{{ p }}-form" novalidate>
@@ -361,6 +377,14 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <div class="field"><label for="{{ p }}-phone">Phone</label><input id="{{ p }}-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required></div>
       </div>
       <div class="field-row">
+        {% if t.venue %}
+        <div class="field"><label for="{{ p }}-postcode">Date and time</label><input id="{{ p }}-postcode" name="postcode" placeholder="e.g. Sat 14th, 11am" required></div>
+        <div class="field"><label for="{{ p }}-job">What's it for?</label>
+          <select id="{{ p }}-job" name="job">
+            <option>Table for a group</option><option>Party or event</option><option>Something else</option>
+          </select>
+        </div>
+        {% else %}
         <div class="field"><label for="{{ p }}-postcode">Postcode</label><input id="{{ p }}-postcode" name="postcode" autocomplete="postal-code" required></div>
         <div class="field"><label for="{{ p }}-job">Type of job</label>
           <select id="{{ p }}-job" name="job">
@@ -368,11 +392,12 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
             <option>Something else</option>
           </select>
         </div>
+        {% endif %}
       </div>
-      <div class="field"><label for="{{ p }}-details">What do you need? <span class="hint">(optional)</span></label><textarea id="{{ p }}-details" name="details"></textarea></div>
+      <div class="field"><label for="{{ p }}-details">{{ 'How many people, and anything we should know?' if t.venue else 'What do you need?' }} <span class="hint">(optional)</span></label><textarea id="{{ p }}-details" name="details"></textarea></div>
       <div class="field"><label for="{{ p }}-email">Email <span class="hint">(optional)</span></label><input id="{{ p }}-email" name="email" type="email" autocomplete="email"></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave blank<input id="{{ p }}-web" name="website" tabindex="-1" autocomplete="off"></label></div>
-      {% if biz.whatsapp %}<p class="hint">Got photos? <a href="{{ biz.whatsapp }}?text={{ wa_text }}">Send them on WhatsApp</a> and we can price it faster.</p>{% endif %}
+      {% if biz.whatsapp and not t.venue %}<p class="hint">Got photos? <a href="{{ biz.whatsapp }}?text={{ wa_text }}">Send them on WhatsApp</a> and we can price it faster.</p>{% endif %}
       <button class="btn btn-brand" type="submit">Send my enquiry</button>
       <div class="form-status" role="status" hidden></div>
     </form>
@@ -381,7 +406,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. The film, prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
   <div class="bar">
     <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
-    <nav class="links" aria-label="Main"><a href="#services">Services</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">Areas</a><a href="#quote">Get a quote</a></nav>
+    <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a></nav>
     <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
   </div>
   <div class="prog" aria-hidden="true"><b id="prog"></b></div>
@@ -409,18 +434,19 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       {% endfor %}
 
       <div class="beat b-end" data-from="{{ film.end_from }}" data-to="1.01"><div class="in">
-        <div class="eyebrow">Step {{ film.beats|length + 1 }} &middot; Yours</div>
+        <div class="eyebrow">Step {{ film.beats|length + 1 }} &middot; {{ 'Come in' if t.venue else 'Yours' }}</div>
         <p class="end-name">{{ biz.name }}</p>
         {% if biz.show_rating %}<p class="end-rating"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>{{ biz.rating_str }} from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</p>{% endif %}
         {% if places_key and place_id %}<figure class="end-quote" id="end-quote" hidden><blockquote></blockquote><figcaption></figcaption></figure>{% endif %}
         <div class="end-row">
           <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
-          <a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>
+          {% if t.venue %}<a class="btn btn-ghost" href="{{ biz.maps }}" target="_blank" rel="noopener">Get directions</a>
+          {% else %}<a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>{% endif %}
         </div>
       </div></div>
 
       <div class="hud" aria-hidden="true"><div class="in">
-        <span>Before</span>
+        <span>{{ 'Closed' if t.venue else 'Before' }}</span>
         <div class="rail"><b id="fill"></b><i id="knob"></i></div>
         <span class="pct" id="pct">0%</span>
       </div></div>
@@ -434,22 +460,40 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           <p class="kicker">{{ t.kicker }} in {{ biz.town }}</p>
           <h2>{{ t.promise }}</h2>
         </div>
-        <p class="lede">One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.</p>
+        <p class="lede">{% if t.venue %}Pop in for breakfast, lunch, or a coffee and a slice of cake. Everyone's welcome.{% else %}One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.{% endif %}</p>
       </div>
       <div class="proof">
         {% if biz.show_rating %}
         <div><strong{% if biz.animate_rating %} data-count="{{ biz.rating_str }}" data-dp="1"{% endif %}>{{ biz.rating_str }}</strong><span><span class="stars-bar" role="img" aria-label="{{ biz.rating_str }} out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span style="width: {{ biz.rating_pct }}%">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> on Google</span></div>
         <div><strong{% if biz.animate_rating %} data-count="{{ biz.reviews }}"{% endif %}>{{ biz.reviews }}</strong><span>Google review{{ 's' if biz.reviews != 1 }}</span></div>
         {% endif %}
-        <div><strong>{{ pc_label or biz.town }}</strong><span>{{ biz.town }} and nearby</span></div>
+        {% if t.venue %}<div class="today"><strong id="today-open">{{ biz.town }}</strong><span id="today-hours">Find us below</span></div>
+        {% else %}<div><strong>{{ pc_label or biz.town }}</strong><span>{{ biz.town }} and nearby</span></div>{% endif %}
         {% for c in t.creds[:1] %}
         {% if c.value %}<div><strong>{{ c.short or c.label }}</strong><span>{{ c.value }}</span></div>
-        {% elif preview %}<div class="ph"><span class="ph-tag">Placeholder</span><b>{{ c.short or c.label }}</b><span>Your number goes here</span></div>{% endif %}
+        {% elif preview %}<div class="ph"><span class="ph-tag">Placeholder</span><b>{{ c.short or c.label }}</b><span>{{ 'Your rating goes here' if t.venue else 'Your number goes here' }}</span></div>{% endif %}
         {% endfor %}
       </div>
     </div>
   </section>
 
+  {% if t.venue %}
+  <section id="services" class="band">
+    <div class="wrap">
+      <p class="kicker">{{ t.services_title }}</p>
+      <h2>{{ t.services_intro }}</h2>
+      <ul class="jobs menu">
+        {% for sv in t.services %}
+        <li>
+          <div><h3>{{ sv[0] }}</h3><p>{{ sv[1] }}</p></div>
+          {% if preview %}<div class="job-side"><span class="price">{{ t.menu_prices[loop.index0] }}</span></div>{% endif %}
+        </li>
+        {% endfor %}
+      </ul>
+      {% if preview %}<p class="prices-note"><span class="ph-tag">Example menu</span> Send us your real menu and prices and we'll put them here.</p>{% endif %}
+    </div>
+  </section>
+  {% else %}
   <section id="services" class="band">
     <div class="wrap">
       <p class="kicker">What we do</p>
@@ -471,6 +515,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       {% if price_json != '[]' and preview %}<p class="prices-note"><span class="ph-tag">Example prices</span> You set your own before the site goes live.</p>{% endif %}
     </div>
   </section>
+  {% endif %}
 
   {% if preview or biz.show_rating %}
   <section id="reviews">
@@ -510,7 +555,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   {% if real or (places_key and place_id) %}
   <section id="work" class="band"{% if not real %} hidden{% endif %}>
     <div class="wrap">
-      <p class="kicker">Recent work</p>
+      <p class="kicker">{{ 'From our Google listing' if t.venue else 'Recent work' }}</p>
       <h2>{{ t.gallery_intro }}</h2>
       <div class="gallery" id="gallery">
         {% for g in real[:6] %}
@@ -521,6 +566,28 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   </section>
   {% endif %}
 
+  {% if t.venue %}
+  <section id="areas">
+    <div class="wrap areas-grid findus">
+      <div class="map-box" id="map-box">
+        <div class="town-box"><svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="92"/></svg><div class="town-word" aria-hidden="true" style="--chars: {{ [biz.town_longest + 1, 5]|max }}">{{ biz.town|replace("-", "-​") }}</div></div>
+      </div>
+      <div>
+        <p class="kicker">Find us</p>
+        <h2>Come and see us in {{ biz.town }}.</h2>
+        <p class="addr" id="addr">{{ biz.town }}</p>
+        <div class="hours" id="hours">
+          <h3>Opening hours</h3>
+          {% if preview %}<p class="hours-wait"><span class="ph-tag">From your Google listing</span> Your opening hours show here, straight from Google, and stay up to date.</p>{% endif %}
+        </div>
+        <div class="end-row">
+          <a class="btn btn-brand" href="{{ biz.maps }}" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn-line" href="tel:{{ biz.tel }}">Call {{ biz.phone }}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% else %}
   <section id="areas">
     <div class="wrap areas-grid">
       <div class="town-box"><svg class="ring" viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="40"/><circle cx="100" cy="100" r="66"/><circle cx="100" cy="100" r="92"/></svg><div class="town-word" aria-hidden="true" style="--chars: {{ [biz.town_longest + 1, 5]|max }}">{{ biz.town|replace("-", "-​") }}</div></div>
@@ -541,11 +608,13 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       </div>
     </div>
   </section>
+  {% endif %}
 
   <section id="faq" class="band">
     <div class="wrap">
       <p class="kicker">Good to know</p>
       <h2>Common questions</h2>
+      {% if t.venue and preview %}<p class="prices-note"><span class="ph-tag">Example answers</span> You check and change these before the site goes live.</p>{% endif %}
       <div class="faq">
         {% for q in t.faqs %}
         <details{% if loop.first %} open{% endif %}><summary>{{ q[0] }}</summary><p>{{ q[1] }}</p></details>
@@ -557,12 +626,12 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   <section class="quote-band" id="quote">
     <div class="wrap quote-grid">
       <div class="quote-side">
-        <p class="kicker">Ready when you are</p>
-        <h2>Need a {{ t.cta_noun }} in {{ biz.town }}?</h2>
+        <p class="kicker">{{ 'Planning a visit?' if t.venue else 'Ready when you are' }}</p>
+        <h2>{% if t.venue %}Book a table or ask about an event.{% else %}Need a {{ t.cta_noun }} in {{ biz.town }}?{% endif %}</h2>
         <p>{{ t.quote_intro }}</p>
         <div class="end-row">
           <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>
-          {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp a photo</a>{% endif %}
+          {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}{{ 'Message us' if t.venue else 'WhatsApp a photo' }}</a>{% endif %}
         </div>
         <div class="creds">
           {% for c in t.creds %}
@@ -571,7 +640,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           {% endfor %}
         </div>
       </div>
-{{ quote_form("q", "Get a free quote") }}
+{{ quote_form("q", "Send an enquiry" if t.venue else "Get a free quote") }}
     </div>
   </section>
 
@@ -606,22 +675,23 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <footer>
   <div class="wrap foot">
     <div class="foot-top"><strong>{{ biz.name }}</strong><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></div>
-    <p>{{ t.label }} in {{ biz.town }} and the surrounding area.</p>
+    <p>{% if t.venue %}{{ t.label }} in {{ biz.town }}.{% else %}{{ t.label }} in {{ biz.town }} and the surrounding area.{% endif %}</p>
     {% if legal.company %}<p>{{ legal.company }}</p>
     {% elif biz.is_ltd and preview %}<p><span class="ph-tag">Placeholder</span>Company number, country of registration and registered office go here.</p>{% endif %}
     {% if preview %}<p><span class="ph-tag">Placeholder</span>Privacy notice: how enquiries from this site are stored and used.</p>
-    {% else %}<p>Enquiries sent through this site are only used to reply to you about your job.</p>{% endif %}
+    {% else %}<p>Enquiries sent through this site are only used to reply to you{{ '' if t.venue else ' about your job' }}.</p>{% endif %}
     <p>&copy; {{ year }} {{ biz.name }}. Website by Maystone.{% if not preview and film.label == 'Illustration' %} The film at the top is an illustration.{% endif %}</p>
   </div>
 </footer>
 
 <dialog class="qd" id="qd" aria-labelledby="d-title">
-{{ quote_form("d", "Get a price", true) }}
+{{ quote_form("d", "Send an enquiry" if t.venue else "Get a price", true) }}
 </dialog>
 
 <nav class="action-bar" aria-label="Quick contact">
   <a class="btn btn-brand" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call now</a>
-  {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp</a>{% else %}<a class="btn btn-line js-quote" href="#quote">Get a quote</a>{% endif %}
+  {% if t.venue %}<a class="btn btn-line" href="{{ biz.maps }}" target="_blank" rel="noopener">Directions</a>
+  {% elif biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp</a>{% else %}<a class="btn btn-line js-quote" href="#quote">Get a quote</a>{% endif %}
 </nav>
 
 <script>
@@ -769,7 +839,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       var missing = ["name", "phone", "postcode"].filter(function (n) { return !$("#" + p + "-" + n).value.trim(); });
       status.hidden = false;
       if (missing.length) {
-        status.innerHTML = "<span><strong>Add your name, phone and postcode</strong> so we can get back to you.</span>";
+        status.innerHTML = "<span><strong>Add your name, phone and {{ 'the date' if t.venue else 'postcode' }}</strong> so we can get back to you.</span>";
         $("#" + p + "-" + missing[0]).focus();
         return;
       }
@@ -814,6 +884,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 /* Live Google listing (previews only): the business's own photos and latest reviews, loaded in the
    visitor's browser from the Places API (New) and never stored. Anything that fails keeps the placeholders. */
 (function () {
+  var VENUE = {{ 'true' if t.venue else 'false' }};
   var KEY = {{ places_key|tojson }}, PID = {{ place_id|tojson }}, NAME = {{ biz.name|tojson }}, HAS_LOGO = {{ 'true' if biz.logo else 'false' }};
   if (!window.fetch || !KEY || !PID) return;
   var REF = "no-referrer-when-downgrade";
@@ -948,9 +1019,44 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     if (!b) { b = el("div"); b.id = "gcheck"; b.style.cssText = "position:fixed;left:12px;right:12px;bottom:96px;z-index:99;background:#111;color:#fff;font:600 14px/1.4 system-ui,sans-serif;padding:10px 12px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.4)"; document.body.appendChild(b); }
     b.textContent = "Google check: " + msg;
   }
+  // Cafes: opening hours (with open now / closed now), the address and a map, all from the Google listing.
+  function venue(p) {
+    var cur = p.currentOpeningHours || {}, reg = p.regularOpeningHours || {};
+    var days = reg.weekdayDescriptions || cur.weekdayDescriptions || [];
+    var today = (new Date().getDay() + 6) % 7;   // Google's list starts on Monday
+    var box = document.getElementById("hours");
+    if (box && days.length) {
+      var wait = box.querySelector(".hours-wait"); if (wait) wait.remove();
+      var ul = el("ul", "hours-list");
+      days.forEach(function (d, i) {
+        var m = String(d).match(/^([^:]+):\s*(.*)$/), li = el("li", i === today ? "today" : "");
+        li.append(el("span", "", m ? m[1] : d), el("b", "", m ? m[2] : ""));
+        ul.append(li);
+      });
+      box.append(ul, el("p", "g-source", "Opening hours from Google Maps"));
+    }
+    var openNow = typeof cur.openNow === "boolean" ? cur.openNow : null;
+    var t1 = document.getElementById("today-open"), t2 = document.getElementById("today-hours");
+    if (t1 && openNow !== null) {
+      t1.textContent = openNow ? "Open now" : "Closed now";
+      t1.className = openNow ? "is-open" : "is-closed";
+      var line = days[today] ? String(days[today]).replace(/^[^:]+:\s*/, "") : "";
+      if (t2) t2.textContent = line ? "Today: " + line : "See opening hours";
+    }
+    if (p.formattedAddress) { var a = document.getElementById("addr"); if (a) a.textContent = p.formattedAddress.replace(/, UK$/, ""); }
+    var loc = p.location, mb = document.getElementById("map-box");
+    if (loc && mb && typeof loc.latitude === "number") {
+      var la = loc.latitude, lo = loc.longitude, dx = .006, dy = .0032;
+      var f = document.createElement("iframe");
+      f.title = "Map showing " + NAME; f.loading = "lazy"; f.referrerPolicy = "no-referrer";
+      f.src = "https://www.openstreetmap.org/export/embed.html?bbox=" + [lo - dx, la - dy, lo + dx, la + dy].map(function (n) { return n.toFixed(5); }).join("%2C") +
+        "&layer=mapnik&marker=" + la.toFixed(5) + "%2C" + lo.toFixed(5);
+      mb.textContent = ""; mb.append(f); mb.classList.add("has-map");
+    }
+  }
   function load(tries) {
     fetch("https://places.googleapis.com/v1/places/" + encodeURIComponent(PID) + "?languageCode=en-GB&regionCode=GB", {
-      headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,photos,reviews" },
+      headers: { "X-Goog-Api-Key": KEY, "X-Goog-FieldMask": "displayName,photos,reviews" + (VENUE ? ",regularOpeningHours,currentOpeningHours,formattedAddress,location" : "") },
       referrerPolicy: REF, credentials: "omit", cache: "no-store"
     }).then(function (r) {
       if (r.ok) return r.json();
@@ -961,6 +1067,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       report("loaded " + (p.reviews || []).length + " reviews and " + (p.photos || []).length + " photos");
       try { reviews(p.reviews || []); } catch (e) { report("reviews error: " + e.message); }
       try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) { report("photos error: " + e.message); }
+      if (VENUE) { try { venue(p); } catch (e) { report("hours error: " + e.message); } }
     }).catch(function (e) {
       report("blocked before reaching Google: " + (e && e.message));
       if (tries > 0) setTimeout(function () { load(tries - 1); }, 2500);   // one retry on a flaky connection

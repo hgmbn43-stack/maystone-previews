@@ -39,6 +39,7 @@ IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 SCHEMA_TYPE = {
     "plumbing": "Plumber", "electrical": "Electrician", "roofing": "RoofingContractor",
     "building": "GeneralContractor", "decorating": "HousePainter", "local": "LocalBusiness",
+    "cafe": "CafeOrCoffeeShop",
 }
 
 DEMOS = [

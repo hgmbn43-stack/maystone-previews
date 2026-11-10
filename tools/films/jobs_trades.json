@@ -747,6 +747,17 @@
     "video": "1febaa71-183c-4e90-b286-7afddf8abe42",
     "video_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHiHLQ3iEcWyVNxZsZo4qa2jPw/hf_20261105_094717_1febaa71-183c-4e90-b286-7afddf8abe42.mp4"
    }
+  },
+  "cafe": {
+   "garden-cafe-01": {
+    "after": "ad3e1cbd-62c5-43df-ae1f-471bf39f6001",
+    "after_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHiHLQ3iEcWyVNxZsZo4qa2jPw/hf_20261110_122710_ad3e1cbd-62c5-43df-ae1f-471bf39f6001.png",
+    "before": "97432ab8-86ed-476e-bb2f-db93f2d26893",
+    "before_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHiHLQ3iEcWyVNxZsZo4qa2jPw/hf_20261110_122755_97432ab8-86ed-476e-bb2f-db93f2d26893.png",
+    "video": "2d30c0ba-83ac-4244-9f2e-cc2a837b8cee",
+    "video_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3LHiHLQ3iEcWyVNxZsZo4qa2jPw/hf_20261110_122935_2d30c0ba-83ac-4244-9f2e-cc2a837b8cee.mp4",
+    "note": "Cafe opening-up film (10 Nov 2026). Before = same room closed: lights off, chairs stacked on tables, empty counter."
+   }
   }
  }
 }
