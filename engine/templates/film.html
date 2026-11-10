@@ -980,7 +980,8 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     io.observe(anchor);
   }
   function reviews(list) {
-    var good = list.filter(function (r) { return r.rating >= 4 && r.text && r.text.text; }).slice(0, 3);
+    // Google's top reviews in Google's own order, whatever the rating: hiding low ones is banned under the DMCC Act.
+    var good = list.filter(function (r) { return r.text && r.text.text; }).slice(0, 3);
     var box = document.getElementById("cards");
     if (!good.length || !box) return;
     box.textContent = "";
