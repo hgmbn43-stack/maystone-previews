@@ -140,6 +140,9 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .hook.long { font-size: clamp(2.9rem, 9vw, 7.2rem); max-width: 10ch; }
 @media (min-aspect-ratio: 1/1) { .hook { font-size: min(clamp(3.2rem, 11.5vw, 9.6rem), 18vh); } .hook.long { font-size: min(clamp(2.9rem, 9vw, 7.2rem), 14vh); } }
 .hook-sub { margin-top: 1rem; font-size: 1.1rem; max-width: 30ch; opacity: .92; }
+.hook-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.1rem; }
+.hook-acts .btn { min-height: 48px; }
+@media (max-height: 700px) { .hook-sub { display: none; } .hook-acts { margin-top: .8rem; } }
 .cue { display: inline-flex; gap: .55rem; align-items: center; margin-top: 1.3rem; font: 600 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
 .cue i { width: 1px; height: 2.4rem; background: linear-gradient(#fff, transparent); transform-origin: top; animation: drip 1.8s ease-in-out infinite; }
 @keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
@@ -236,6 +239,11 @@ canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block
 .gallery { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); margin-top: 2.4rem; }
 .tile { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; max-width: 100%; background: var(--paper); }
 .tile img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: no-preference) {
+  .gallery { perspective: 900px; }
+  .tile { transform: rotateX(var(--tilt, 0deg)); transition: transform .2s linear; }
+  .tile img { transform: scale(var(--zoom, 1.06)) translateY(var(--drift, 0%)); transition: transform .2s linear; will-change: transform; }
+}
 .tile figcaption, .g-credit { position: absolute; left: .7rem; bottom: .7rem; max-width: calc(100% - 1.4rem); padding: .3rem .7rem; border-radius: 999px; background: rgba(14, 21, 28, .72); color: #fff; font-size: .78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .g-credit a { color: inherit; }
 
@@ -423,6 +431,12 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>
         <p class="hook{% if film.hook|length > 24 %} long{% endif %}">{{ film.hook }}</p>
         <p class="hook-sub">{{ film.hook_sub }}</p>
+        <div class="hook-acts">
+          <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
+          {% if t.venue %}<a class="btn btn-ghost" href="{{ biz.maps }}" target="_blank" rel="noopener">Directions</a>
+          {% elif biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp</a>
+          {% else %}<a class="btn btn-ghost js-quote" href="#quote">Get a quote</a>{% endif %}
+        </div>
         <div class="cue" aria-hidden="true"><i></i>Scroll</div>
       </div></div>
 
@@ -877,6 +891,29 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   /* Preview: share this page on WhatsApp */
   var share = $("#share-wa");
   if (share) share.href = "https://wa.me/?text=" + encodeURIComponent("Have a look at the new website for " + BIZ + ": " + location.href);
+})();
+</script>
+<script>
+/* Photos move as you scroll: each gallery photo zooms in slowly and tilts a little as it passes through the screen. */
+(function () {
+  if (!window.matchMedia || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var ticking = false;
+  function frame() {
+    ticking = false;
+    var h = innerHeight;
+    document.querySelectorAll("#gallery .tile").forEach(function (t) {
+      var r = t.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > h) return;
+      var p = Math.max(-1, Math.min(1, ((r.top + r.height / 2) - h / 2) / (h / 2 + r.height / 2)));   // -1 above .. 1 below
+      t.style.setProperty("--tilt", (p * 6).toFixed(2) + "deg");
+      t.style.setProperty("--zoom", (1.16 - (1 - Math.abs(p)) * .1).toFixed(3));
+      t.style.setProperty("--drift", (p * -4).toFixed(2) + "%");
+    });
+  }
+  function ask() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
+  addEventListener("scroll", ask, { passive: true });
+  addEventListener("resize", ask);
+  new MutationObserver(ask).observe(document.getElementById("gallery") || document.body, { childList: true });
 })();
 </script>
 {% if places_key and place_id %}
