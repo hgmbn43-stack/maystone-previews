@@ -108,6 +108,18 @@ section { padding-block: clamp(4rem, 9vw, 7rem); }
 .mark strong { font: 750 1rem/1.1 var(--display); font-stretch: 85%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .links { display: none; gap: 1.6rem; font-weight: 600; font-size: .95rem; }
 .links a { text-decoration: none; opacity: .85; }
+/* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
+.menu { position: relative; flex: none; }
+.menu > summary { list-style: none; cursor: pointer; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; border: 1.5px solid currentColor; opacity: .9; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu > summary svg { width: 20px; height: 20px; }
+.menu-panel { position: fixed; left: 0; right: 0; top: var(--menu-top, 64px); max-height: calc(100dvh - var(--menu-top, 64px)); overflow-y: auto; background: var(--ground); color: var(--ink); border-top: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.18); padding: 1rem max(20px, env(safe-area-inset-left, 0px)) 1.6rem; }
+.menu-panel p { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin: 1rem 0 .3rem; }
+.menu-panel a { display: block; padding: .6rem 0; font-weight: 700; font-size: 1.1rem; color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .menu { display: none; } }
+.bar > .btn-accent { margin-left: auto; }
+.bar > .menu { margin-left: -.4rem; }
+
 .links a:hover { opacity: 1; }
 @media (min-width: 900px) { .links { display: flex; } }
 .top .btn { min-height: 44px; padding: .55rem 1.05rem; font-size: .95rem; }
@@ -422,6 +434,15 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
     <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a>{% if svc_pages %}<a href="contact/">Contact</a>{% endif %}</nav>
     <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
+    <details class="menu"><summary aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <div class="menu-panel">
+        <a href="#top">Home</a>
+        <a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book a table' if t.venue else 'Get a quote' }}</a>
+        {% if svc_pages %}<p>Services</p>{% for sp in svc_pages %}<a href="{{ sp.path }}">{{ sp.name }}</a>{% endfor %}
+        <p>Areas we cover</p>{% for ap in area_pages %}<a href="{{ ap.path }}">{{ ap.name }}</a>{% endfor %}
+        <p>Get in touch</p><a href="contact/">Contact</a>{% endif %}
+      </div>
+    </details>
   </div>
   <div class="prog" aria-hidden="true"><b id="prog"></b></div>
 </header>
@@ -1132,5 +1153,14 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 </script>
 {% endif %}
 {% if preview and track %}<script>try{fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true}).catch(function(){});}catch(e){}</script>{% endif %}
+<script>
+/* Phone menu: sits just under the header and closes when a link is tapped. */
+(function () {
+  var m = document.querySelector(".menu"), top = document.getElementById("topbar");
+  if (!m || !top) return;
+  m.addEventListener("toggle", function () { if (m.open) document.documentElement.style.setProperty("--menu-top", top.getBoundingClientRect().bottom + "px"); });
+  m.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { m.open = false; }); });
+})();
+</script>
 </body>
 </html>
