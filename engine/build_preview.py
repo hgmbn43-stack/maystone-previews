@@ -165,6 +165,91 @@ def film_context(film, base, label):
     return ctx
 
 
+BADGES = [("Checkatrade", r"checka ?trade"), ("TrustMark", r"trust ?mark"), ("Gas Safe registered", r"gas ?safe"),
+          ("NICEIC", r"niceic"), ("NAPIT", r"napit"), ("Federation of Master Builders", r"\bfmb\b|master builders"),
+          ("Which? Trusted Trader", r"which\??\s*trusted"), ("TrustATrader", r"trust ?a ?trader"),
+          ("Guild of Master Craftsmen", r"guild of master"), ("Painting & Decorating Association", r"\bpda\b|painting (and|&) decorating assoc"),
+          ("CHAS", r"\bchas\b"), ("Constructionline", r"constructionline"), ("Competent Roofer", r"competent roofer"),
+          ("OFTEC", r"\boftec\b"), ("HETAS", r"\bhetas\b")]
+NOUN = {"kitchens_bathrooms": "Kitchen & bathroom fitter", "handyman": "Handyman", "local": "Local business"}
+
+
+def _join(items):
+    items = [i for i in items if i]
+    return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1] if items else ""
+
+
+def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, area_pages, preview, canonical, badges, address):
+    """Service, area and contact pages. They reuse the home page's styles so the whole site matches."""
+    m = re.search(r"<style>(.*?)</style>", home_html, re.S)
+    css = m.group(1) if m else ""
+    noun = NOUN.get(group) or (t.get("cta_noun") or t["label"]).capitalize()
+    btype = SCHEMA_TYPE.get(group, "HomeAndConstructionBusiness")
+    provider = {"@type": btype, "name": biz["name"], "telephone": biz["tel"], "areaServed": areas[:5],
+                "address": {"@type": "PostalAddress", "addressLocality": biz["town"], "addressCountry": "GB"}}
+    if address:
+        provider["address"]["streetAddress"] = address
+    town, name, phone = biz["town"], biz["name"], biz["phone"]
+    others = [a for a in areas[1:4]]
+    rating_line = (f"Customers rate us {biz['rating_str']} out of 5 from {biz['reviews']} Google review{'s' if biz['reviews'] != 1 else ''}."
+                   if biz.get("show_rating") else "")
+    contact_line = (f"Call {phone}{', or send a photo of the job on WhatsApp,' if biz.get('whatsapp') else ''} "
+                    "and we'll talk it through and give you a clear price before any work starts.")
+    faqs = list(t.get("faqs") or [])
+    pages = []
+    for i, sp in enumerate(svc_pages):
+        sv = sp["sv"]
+        guide = {"low": sv["low"], "high": sv["high"], "unit": sv.get("unit", "")} if sv.get("low") is not None else None
+        pages.append(dict(kind="service", path=sp["path"], job=sv["title"],
+            title=f"{sv['title']} in {town} | {name}",
+            description=f"{sv['title']} in {town} and nearby from {name}. {sv['blurb']} Call {phone}.",
+            crumbs=["Services", sv["title"]], kicker=t["label"], h1=f"{sv['title']} in {town}", lede=sv["blurb"],
+            paras=[p for p in [
+                f"{name} is a local {(t.get('cta_noun') or 'business')} based in {town}" + (f", covering {_join(others)} and the villages around them." if others else "."),
+                f"Need help with {sv['title'][0].lower() + sv['title'][1:]}? {contact_line}",
+                rating_line] if p],
+            guide=guide, faqs=[faqs[(i + k) % len(faqs)] for k in range(min(2, len(faqs)))] if faqs else [],
+            schema={"@context": "https://schema.org", "@type": "Service", "serviceType": sv["title"], "areaServed": areas[:5], "provider": provider}))
+    for ap in area_pages:
+        a = ap["name"]
+        svc_names = [s["name"][0].lower() + s["name"][1:] for s in svc_pages[:3]]
+        home = a == town
+        pages.append(dict(kind="area", path=ap["path"], job="",
+            title=f"{noun} in {a} | {name}",
+            description=f"{name}: {t['label'].lower()} in {a}. {('Based in ' + town) if home else ('Local to ' + a + ', based in ' + town)}. Call {phone}.",
+            crumbs=["Areas", a], kicker="Areas we cover", h1=f"{noun} in {a}",
+            lede=(f"Based in {town}, {name} works across {town} and the surrounding area." if home
+                  else f"{name} covers {a} from our base in {town}, close by."),
+            paras=[p for p in [
+                f"From {_join(svc_names)} to smaller jobs, we're a local {(t.get('cta_noun') or 'business')} who know {a}." if svc_names else "",
+                contact_line, rating_line] if p],
+            postcodes=POSTCODES.get(a) or [], guide=None, faqs=faqs[-2:] if not home else faqs[:2],
+            schema=dict(provider, **{"@context": "https://schema.org", "areaServed": a})))
+    pages.append(dict(kind="contact", path="contact/", job="",
+        title=f"Contact {name} | {t['label']} in {town}",
+        description=f"Get in touch with {name}, {t['label'].lower()} in {town}. Call {phone}.",
+        crumbs=["Contact"], kicker="Contact", h1="Get in touch.", lede=f"{contact_line}",
+        paras=[], guide=None, faqs=[],
+        schema={"@context": "https://schema.org", "@type": "ContactPage", "about": provider}))
+    tpl = env.get_template("subpage.html")
+    for pg in pages:
+        depth = pg["path"].strip("/").count("/") + 1
+        root = "../" * depth
+        page_css = css.replace('url("assets/', f'url("{root}assets/')
+        pg["schema"] = json.dumps(pg["schema"]).replace("</", "<\\/")
+        out = tpl.render(page=pg, root=root, css=page_css, biz=biz, t=t, areas=areas[:5], svc_pages=svc_pages,
+                         area_pages=area_pages, preview=preview, canonical=canonical, badges=badges, address=address,
+                         year=date.today().year)
+        dest = out_dir / pg["path"] / "index.html"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(out, encoding="utf-8")
+    if canonical:   # live sites: a sitemap for Google
+        urls = [""] + [pg["path"] for pg in pages]
+        (out_dir / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + "".join(f"  <url><loc>{canonical}{u}</loc></url>\n" for u in urls) + "</urlset>\n", encoding="utf-8")
+        (out_dir / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {canonical}sitemap.xml\n", encoding="utf-8")
+
+
 def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, domain="", film_id=None):
     """details: what the customer sent through the details form (business, phone, creds, company).
     lead_dir: folder with the customer's own photos: hero.*, side.*, logo.*, 1.*, 2.* ..."""
@@ -292,6 +377,18 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             shutil.copytree(chosen["folder"], out_dir / "film", dirs_exist_ok=True)
             base = "film/"
         film = film_context(chosen, base, "Example film" if preview else "Illustration")
+    # Extra pages (10 Nov 2026): one per service, one per town covered (home town + up to 4 nearby), and Contact.
+    # Film pages only; a cafe stays one page (menu, hours and map are all on it).
+    multi = bool(film) and not t.get("venue")
+    svc_pages = [{"name": sv["title"], "path": f"services/{slugify(sv['title'])}/", "sv": sv} for sv in services] if multi else []
+    area_pages = [{"name": a, "path": f"areas/{slugify(a)}/"} for a in areas[:5]] if multi else []
+    # Badges: named in the details form's "Registrations and memberships" box (or a badges list). Only ones they say they have.
+    reg_text = " ".join([str(x) for x in (details.get("creds_list") or [])[:1]] + [str(v) for v in (details.get("creds") or {}).values()])
+    badges = [str(b).strip() for b in (details.get("badges") or []) if str(b).strip()]
+    for label, pat in BADGES:
+        if re.search(pat, reg_text, re.I) and label not in badges:
+            badges.append(label)
+    address = str(details.get("address") or "").strip()
     pcs = sorted(POSTCODES.get(town) or [], key=lambda c: (re.sub(r"\d", "", c), int(re.sub(r"\D", "", c) or 0)))
     same_area = len({re.sub(r"\d", "", c) for c in pcs}) == 1
     pc_label = f"{pcs[0]}–{pcs[-1]}" if len(pcs) > 1 and same_area else (pcs[0] if pcs else "")
@@ -300,12 +397,16 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
+        svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address,
         hide_photos=[int(x) for x in re.findall(r"\d+", str(row.get("Hide photos") or ""))],
         schema_json=json.dumps(schema).replace("</", "<\\/"),
         price_json=json.dumps(price_json).replace("</", "<\\/"),
         coverage_json=json.dumps(coverage).replace("</", "<\\/"),
     )
     (out_dir / "index.html").write_text(html, encoding="utf-8")
+    if multi:
+        write_subpages(env, out_dir, html, group=group, t=t, biz=biz, areas=areas, svc_pages=svc_pages, area_pages=area_pages,
+                       preview=preview, canonical=f"https://{domain}/" if domain else "", badges=badges, address=address)
     return {"Lead ID": lead_id, "Business": name, "Group": group, "Path": str(out_dir / "index.html")}, None
 
 

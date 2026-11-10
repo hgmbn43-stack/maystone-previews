@@ -346,6 +346,12 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .hours-list li.today { background: color-mix(in srgb, var(--accent) 16%, transparent); font-weight: 700; }
 .hours-wait { margin: 0 0 1rem; }
 .findus .end-row { margin-top: 1.4rem; }
+.svc-link { color: inherit; text-decoration: none; }
+.svc-link:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.areas li a { color: inherit; text-decoration: none; }
+.areas li:has(a):hover { border-color: var(--accent); }
+.foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
+.foot-links a { color: inherit; }
 .action-bar { display: none; }
 @media (max-width: 760px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -414,7 +420,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. The film, prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
   <div class="bar">
     <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
-    <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a></nav>
+    <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a>{% if svc_pages %}<a href="contact/">Contact</a>{% endif %}</nav>
     <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
   </div>
   <div class="prog" aria-hidden="true"><b id="prog"></b></div>
@@ -515,7 +521,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       <ul class="jobs">
         {% for sv in t.services_full %}
         <li>
-          <div><h3>{{ sv.title }}</h3><p>{{ sv.blurb }}</p></div>
+          <div><h3>{% if svc_pages %}<a class="svc-link" href="{{ svc_pages[loop.index0].path }}">{{ sv.title }}</a>{% else %}{{ sv.title }}{% endif %}</h3><p>{{ sv.blurb }}</p></div>
           <div class="job-side">
             {% if sv.low is not none %}<span class="price"><small>Guide price</small>&pound;{{ "{:,}".format(sv.low) }}&ndash;&pound;{{ "{:,}".format(sv.high) }}{% if sv.unit %}<small>{{ sv.unit }}</small>{% endif %}</span>{% endif %}
             <span class="job-acts">
@@ -609,7 +615,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <p class="kicker">Areas we cover</p>
         <h2>Based in {{ biz.town }}.</h2>
         <ul class="areas">
-          {% for a in areas %}<li>{{ a }}</li>{% endfor %}
+          {% for a in areas %}<li>{% if loop.index0 < area_pages|length %}<a href="{{ area_pages[loop.index0].path }}">{{ a }}</a>{% else %}{{ a }}{% endif %}</li>{% endfor %}
         </ul>
         <form class="cover" id="cover" novalidate>
           <label for="cover-in">Do we cover you?</label>
@@ -689,7 +695,13 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <footer>
   <div class="wrap foot">
     <div class="foot-top"><strong>{{ biz.name }}</strong><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></div>
-    <p>{% if t.venue %}{{ t.label }} in {{ biz.town }}.{% else %}{{ t.label }} in {{ biz.town }} and the surrounding area.{% endif %}</p>
+    {% if svc_pages %}<ul class="foot-links">
+      {% for sp in svc_pages %}<li><a href="{{ sp.path }}">{{ sp.name }}</a></li>{% endfor %}
+      {% for ap in area_pages %}<li><a href="{{ ap.path }}">{{ ap.name }}</a></li>{% endfor %}
+      <li><a href="contact/">Contact</a></li>
+    </ul>{% endif %}
+    {% if badges %}<p>{{ badges|join(' · ') }}</p>{% endif %}
+    <p>{% if t.venue %}{{ t.label }} in {{ biz.town }}.{% else %}{{ t.label }} in {{ biz.town }} and the surrounding area.{% endif %}{% if address %} {{ address }}.{% endif %}</p>
     {% if legal.company %}<p>{{ legal.company }}</p>
     {% elif biz.is_ltd and preview %}<p><span class="ph-tag">Placeholder</span>Company number, country of registration and registered office go here.</p>{% endif %}
     {% if preview %}<p><span class="ph-tag">Placeholder</span>Privacy notice: how enquiries from this site are stored and used.</p>

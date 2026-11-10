@@ -1,0 +1,158 @@
+{#- Extra pages for a lead's site (10 Nov 2026): one per service, one per town covered, and Contact.
+    Styles are copied from the lead's own home page at build time (css), so every page matches it.
+    root = relative path back to the site's home ("../../" from services/x/, "../" from contact/). -#}
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}">
+{% if preview %}<meta name="robots" content="noindex">{% endif %}
+{% if canonical %}<link rel="canonical" href="{{ canonical }}{{ page.path }}">{% endif %}
+<link rel="preload" href="{{ root }}assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+{{ css|safe }}
+/* Sub-page bits */
+.sub-hero { padding-block: clamp(7.5rem, 14vw, 10rem) clamp(2.5rem, 6vw, 4rem); }
+.sub-hero h1 { font-weight: 900; font-stretch: 68%; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: .92; letter-spacing: -.01em; margin-top: .8rem; max-width: 16ch; }
+.crumbs { font: 600 .78rem/1.4 var(--mono); letter-spacing: .06em; color: var(--ink-soft); margin: 0 0 1.4rem; }
+.crumbs a { color: inherit; }
+.sub-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.sub-acts .btn { min-height: 48px; }
+.sub-body { padding-top: 0; }
+.sub-body .wrap > * + * { margin-top: 1.1rem; }
+.sub-body p { max-width: 62ch; }
+.guide { display: inline-flex; align-items: baseline; gap: .6rem; padding: .8rem 1.1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.guide b { font: 850 1.6rem/1 var(--display); font-stretch: 74%; color: var(--brand-text); }
+.steps3 { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); counter-reset: s; }
+.steps3 li { counter-increment: s; padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.steps3 li::before { content: counter(s, decimal-leading-zero); display: block; font: 600 .78rem/1 var(--mono); color: var(--accent-ink); margin-bottom: .6rem; }
+.steps3 h3 { font-size: 1.15rem; }
+.steps3 p { color: var(--ink-soft); margin: .35rem 0 0; font-size: .98rem; }
+.linklist { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.linklist a { display: inline-block; padding: .5rem 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: .95rem; color: inherit; text-decoration: none; }
+.linklist a:hover, .linklist a[aria-current] { border-color: var(--accent); }
+.rate-line { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-weight: 600; }
+.rate-line .stars { color: #f5b301; letter-spacing: .08em; }
+.badges { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.badges li { padding: .45rem .9rem; border-radius: .6rem; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .92rem; }
+.contact-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.contact-grid > div { padding: 1.3rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.contact-grid h3 { font-size: 1.1rem; margin-bottom: .4rem; }
+.contact-grid a { font-weight: 700; }
+.foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
+.foot-links a { color: inherit; }
+.top .links a[aria-current] { color: var(--accent); }
+</style>
+<script type="application/ld+json">{{ page.schema|safe }}</script>
+</head>
+<body class="sub">
+{% set phone_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>{% endset %}
+{% set wa_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>{% endset %}
+{% set wa_text = ("Hi " ~ biz.name ~ ", I found your website and I'd like a quote" ~ ((" for " ~ page.job|lower) if page.job else "") ~ ". Here's a photo of the job:")|urlencode %}
+<header class="top solid" id="topbar">
+  {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. Prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
+  <div class="bar">
+    <a class="mark" href="{{ root }}" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ root }}{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
+    <nav class="links" aria-label="Main"><a href="{{ root }}">Home</a><a href="{{ root }}#services">Services</a><a href="{{ root }}#areas">Areas</a><a href="{{ root }}contact/"{% if page.kind == 'contact' %} aria-current="page"{% endif %}>Contact</a></nav>
+    <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="sub-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="{{ root }}">Home</a>{% for c in page.crumbs %} &rsaquo; {{ c }}{% endfor %}</nav>
+      <p class="kicker">{{ page.kicker }}</p>
+      <h1>{{ page.h1 }}</h1>
+      <p class="lede" style="margin-top:1rem">{{ page.lede }}</p>
+      {% if biz.show_rating %}<p class="rate-line" style="margin-top:1rem"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><a href="{{ biz.maps }}" target="_blank" rel="noopener">{{ biz.rating_str }} from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</a></p>{% endif %}
+      <div class="sub-acts">
+        <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
+        {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp a photo</a>{% endif %}
+        <a class="btn btn-line" href="{{ root }}#quote">Get a free quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sub-body">
+    <div class="wrap">
+      {% for para in page.paras %}<p>{{ para }}</p>{% endfor %}
+      {% if page.guide %}<p class="guide"><span>Guide price</span><b>&pound;{{ '{:,}'.format(page.guide.low) }}&ndash;&pound;{{ '{:,}'.format(page.guide.high) }}</b>{% if page.guide.unit %}<span>{{ page.guide.unit }}</span>{% endif %}</p>
+      <p class="prices-note"><span class="ph-tag">Example price</span> You set your own before the site goes live.</p>{% endif %}
+      {% if page.postcodes %}<p><strong>Postcodes:</strong> {{ page.postcodes|join(', ') }}</p>{% endif %}
+    </div>
+  </section>
+
+  {% if page.kind == 'contact' %}
+  <section class="band">
+    <div class="wrap contact-grid">
+      <div><h3>Call</h3><p><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></p><p class="hint">The quickest way to reach us.</p></div>
+      {% if biz.whatsapp %}<div><h3>WhatsApp</h3><p><a href="{{ biz.whatsapp }}?text={{ wa_text }}">Send us a message</a></p><p class="hint">Add a photo of the job and we can price it faster.</p></div>{% endif %}
+      <div><h3>Get a quote</h3><p><a href="{{ root }}#quote">Fill in the quote form</a></p><p class="hint">Tell us what you need and we'll get back to you.</p></div>
+      <div><h3>Where we are</h3><p>{{ address or biz.town }}</p><p class="hint">Covering {{ areas|join(', ') }}.</p></div>
+    </div>
+  </section>
+  {% else %}
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Simple from the first call.</h2>
+      <ol class="steps3" style="margin-top:2rem">
+        {% for s in t.steps %}<li><h3>{{ s[0] }}</h3><p>{{ s[1] }}</p></li>{% endfor %}
+      </ol>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if badges %}
+  <section>
+    <div class="wrap">
+      <p class="kicker">Accredited</p>
+      <ul class="badges">{% for b in badges %}<li>{{ b }}</li>{% endfor %}</ul>
+    </div>
+  </section>
+  {% endif %}
+
+  <section{% if page.kind != 'contact' %} class="band"{% endif %} style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="wrap">
+      <p class="kicker">{{ 'Our services' if page.kind != 'service' else 'Other services' }}</p>
+      <ul class="linklist">{% for s in svc_pages %}<li><a href="{{ root }}{{ s.path }}"{% if s.path == page.path %} aria-current="page"{% endif %}>{{ s.name }}</a></li>{% endfor %}</ul>
+      <p class="kicker" style="margin-top:2rem">Areas we cover</p>
+      <ul class="linklist">{% for a in area_pages %}<li><a href="{{ root }}{{ a.path }}"{% if a.path == page.path %} aria-current="page"{% endif %}>{{ a.name }}</a></li>{% endfor %}</ul>
+    </div>
+  </section>
+
+  {% if page.faqs %}
+  <section>
+    <div class="wrap">
+      <p class="kicker">Good to know</p>
+      <h2>Common questions</h2>
+      <div class="faq">
+        {% for q in page.faqs %}<details{% if loop.first %} open{% endif %}><summary>{{ q[0] }}</summary><p>{{ q[1] }}</p></details>{% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-top"><strong>{{ biz.name }}</strong><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></div>
+    <ul class="foot-links">
+      <li><a href="{{ root }}">Home</a></li>
+      {% for s in svc_pages %}<li><a href="{{ root }}{{ s.path }}">{{ s.name }}</a></li>{% endfor %}
+      {% for a in area_pages %}<li><a href="{{ root }}{{ a.path }}">{{ a.name }}</a></li>{% endfor %}
+      <li><a href="{{ root }}contact/">Contact</a></li>
+    </ul>
+    <p>{{ t.label }} in {{ biz.town }} and the surrounding area.{% if address %} {{ address }}.{% endif %}</p>
+    <p>&copy; {{ year }} {{ biz.name }}. Website by Maystone.</p>
+  </div>
+</footer>
+<nav class="action-bar" aria-label="Quick contact">
+  <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call now</a>
+  {% if biz.whatsapp %}<a class="btn btn-wa" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp</a>{% else %}<a class="btn btn-line" href="{{ root }}#quote">Get a quote</a>{% endif %}
+</nav>
+</body>
+</html>
