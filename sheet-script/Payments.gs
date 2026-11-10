@@ -83,7 +83,7 @@ function stripePoll_() {
     }
     var sh = hit.sheet, r = hit.row;
     if (String(sh.getRange(r, C2.paid).getValue()).trim()) return; // already recorded
-    var pkg = s.mode === 'subscription' ? 'Care plan (£298 + £49/mo)' : 'Pay once (£500)';
+    var pkg = s.mode === 'subscription' ? 'Care plan (£49/mo, 12-month minimum)' : 'Pay once (£500)';
     sh.getRange(r, C2.pkg).setValue(pkg);
     sh.getRange(r, C2.paid).setValue('Paid ' + amount + ' – ' + Utilities.formatDate(new Date(s.created * 1000), 'Europe/London', 'dd/MM/yyyy'));
     var biz = sh.getRange(r, C.biz).getValue();
