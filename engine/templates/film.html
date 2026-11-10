@@ -922,6 +922,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
    visitor's browser from the Places API (New) and never stored. Anything that fails keeps the placeholders. */
 (function () {
   var VENUE = {{ 'true' if t.venue else 'false' }};
+  var HIDE = {{ hide_photos|tojson }};
   var KEY = {{ places_key|tojson }}, PID = {{ place_id|tojson }}, NAME = {{ biz.name|tojson }}, HAS_LOGO = {{ 'true' if biz.logo else 'false' }};
   if (!window.fetch || !KEY || !PID) return;
   var REF = "no-referrer-when-downgrade";
@@ -931,13 +932,13 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     var me = [norm(NAME), norm(gname)].filter(Boolean), logoDone = false;
     var own = list.filter(function (p) {
       return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
-    });
+    }).filter(function (p, i) { return HIDE.indexOf(i + 1) < 0; });   // "Hide photos" on the lead: 1 = their first Google photo
     // Banner-shaped uploads (logos, cover graphics) are never job photos, but one may be their logo.
     var odd = function (p) { var r = (p.widthPx || 4) / (p.heightPx || 3); return r >= 2.2 || r <= 0.45; };
     var banner = own.filter(odd)[0];
     if (banner && !HAS_LOGO) {
       var bi = new Image(); bi.crossOrigin = "anonymous"; bi.referrerPolicy = REF;
-      bi.onload = function () { if (graphic(bi)) useLogo(bi); };
+      bi.onload = function () { if (graphic(bi) === "logo") useLogo(bi); };
       bi.src = "https://places.googleapis.com/v1/" + banner.name + "/media?maxWidthPx=800&key=" + encodeURIComponent(KEY);
     }
     own = own.filter(function (p) { return !odd(p); }).slice(0, 5);
@@ -989,7 +990,10 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         while (l < r && col(l, t, b)) l++; while (r > l && col(r, t, b)) r--;
         var seen = {}, top = 0, n = 0;
         for (var Y = t; Y <= b; Y++) for (var X = l; X <= r; X++) { var p = at(X, Y), k = (p[0] >> 4) * 256 + (p[1] >> 4) * 16 + (p[2] >> 4); seen[k] = (seen[k] || 0) + 1; n++; if (seen[k] > top) top = seen[k]; }
-        return top / n >= 0.3;
+        // A screenshot of a post or advert (e.g. a van photo with their logo on it, shown small inside
+        // big plain bars) leaves under 45% of the picture after trimming: not a job photo either.
+        if (top / n >= 0.3) return "logo";
+        return (r - l + 1) * (b - t + 1) < W * H * 0.45 ? "post" : false;
       } catch (e) { return false; }
     }
     var go = function () {
@@ -999,7 +1003,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         var photo = own[i], img = new Image();
         img.crossOrigin = "anonymous"; img.referrerPolicy = REF; img.alt = ""; img.decoding = "async";
         img.onload = function () {
-          if (graphic(img)) { report("skipped a logo or graphic"); useLogo(img); return next(i + 1); }
+          var kind = graphic(img); if (kind) { report("skipped a " + kind); if (kind === "logo") useLogo(img); return next(i + 1); }
           var fig = el("figure", "tile"), a = (photo.authorAttributions || [])[0] || {}, c = el("span", "g-credit");
           if (a.uri) { var l = el("a", "", a.displayName || "Google"); l.href = a.uri; l.target = "_blank"; l.rel = "noopener"; c.append("Photo: ", l); }
           else c.textContent = "Photo: " + (a.displayName || "Google");

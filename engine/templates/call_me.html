@@ -985,6 +985,7 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
 /* Live Google listing (previews only): the business's own photos and latest reviews, loaded in the
    visitor's browser from the Places API (New) and never stored. Anything that fails keeps the examples. */
 (function () {
+  var HIDE = {{ hide_photos|tojson }};
   var KEY = {{ places_key|tojson }}, PID = {{ place_id|tojson }}, NAME = {{ biz.name|tojson }};
   if (!window.fetch || !KEY || !PID) return;
   var REF = "no-referrer-when-downgrade";
@@ -1014,7 +1015,10 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
       while (l < r && col(l, t, b)) l++; while (r > l && col(r, t, b)) r--;
       var seen = {}, top = 0, n = 0;
       for (var Y = t; Y <= b; Y++) for (var X = l; X <= r; X++) { var p = at(X, Y), k = (p[0] >> 4) * 256 + (p[1] >> 4) * 16 + (p[2] >> 4); seen[k] = (seen[k] || 0) + 1; n++; if (seen[k] > top) top = seen[k]; }
-      return top / n >= 0.3;
+      // A screenshot of a post or advert (e.g. a van photo with their logo on it, shown small inside
+      // big plain bars) leaves under 45% of the picture after trimming: not a job photo either.
+      if (top / n >= 0.3) return "logo";
+      return (r - l + 1) * (b - t + 1) < W * H * 0.45 ? "post" : false;
     } catch (e) { return false; }
   }
   function swap(box, photo, alt) {
@@ -1034,7 +1038,7 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
     var me = [norm(NAME), norm(gname)].filter(Boolean);
     var own = list.filter(function (p) {
       return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
-    }).filter(function (p) {
+    }).filter(function (p, i) { return HIDE.indexOf(i + 1) < 0; }).filter(function (p) {
       var r = (p.widthPx || 4) / (p.heightPx || 3);
       return r < 2.2 && r > 0.45;   // banner-shaped uploads are logos or cover graphics
     }).slice(0, 3);

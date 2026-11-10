@@ -300,6 +300,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
+        hide_photos=[int(x) for x in re.findall(r"\d+", str(row.get("Hide photos") or ""))],
         schema_json=json.dumps(schema).replace("</", "<\\/"),
         price_json=json.dumps(price_json).replace("</", "<\\/"),
         coverage_json=json.dumps(coverage).replace("</", "<\\/"),
