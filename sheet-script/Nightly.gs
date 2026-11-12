@@ -30,6 +30,7 @@ function nightlySort_() {
   var bin = ss.getSheetByName('Binned');
   var binned = 0, added = 0;
   TABS.forEach(function (name) {
+    if (name === 'Binned') return;
     var sh = ss.getSheetByName(name);
     if (!sh) return;
     var last = lastIdRow_(sh);
@@ -46,7 +47,8 @@ function nightlySort_() {
       if (/not\s*rec/i.test(called)) {
         if (!bin) {
           bin = ss.insertSheet('Binned');
-          bin.getRange(1, 1, 1, width + 1).setValues([sh.getRange(1, 1, 1, width).getValues()[0].concat(['From tab'])]).setFontWeight('bold');
+          var hdr = sh.getRange(1, 1, 1, width).getValues()[0].concat(['From tab']); hdr[0] = 'Binned lead'; // not 'Lead ID', so it is never treated as a rep tab
+          bin.getRange(1, 1, 1, width + 1).setValues([hdr]).setFontWeight('bold');
           bin.hideSheet();
         }
         bin.appendRow(v.concat([name]));
