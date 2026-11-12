@@ -53,7 +53,7 @@ function switchOn() {
     return;
   }
   if (!PropertiesService.getUserProperties().getProperty('GH_TOKEN')) { ui.alert('Do step 1 (GitHub key) first.'); return; }
-  ScriptApp.getProjectTriggers().forEach(function (t) { if (t.getHandlerFunction() !== 'farmDaily') ScriptApp.deleteTrigger(t); });
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (['farmDaily', 'nightlySort'].indexOf(t.getHandlerFunction()) === -1) ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('onEditRun').forSpreadsheet(SpreadsheetApp.getActive()).onEdit().create();
   ScriptApp.newTrigger('processAll').timeBased().everyMinutes(5).create();
   processAll();
