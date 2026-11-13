@@ -1150,5 +1150,7 @@ BRAND = {
         "palette": {"ground": "#14181b", "paper": "#1a1f23", "card": "#20262b", "ink": "#ece7df", "ink_soft": "#a7a198",
                     "line": "#323a40", "accent": "#c8743a", "accent_ink": "#e3955c", "brand": "#c8743a", "brand_text": "#e3955c"},
         "swatches": [("Slate", "#14181b"), ("Stone", "#ece7df"), ("Copper", "#c8743a")],
+        # One photo per service tile, in the order of TRADES["roofing"]["services"].
+        "tiles": ["tile-repairs.webp", "tile-new-roof.webp", "tile-flat-roof.webp", "tile-chimney.webp", "tile-fascias.webp", "tile-inspection.webp"],
     },
 }

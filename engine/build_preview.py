@@ -387,13 +387,17 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     if film and str(row.get("Look") or "").strip().lower() == "brand" and group in BRAND:
         bd = dict(BRAND[group])
         hero_src = HERE / "heroes" / (bd["hero"] + "-wide.webp")
+        folder = bd["hero"].split("/")[0]
         if preview:
             rel = os.path.relpath(HERE / "heroes", out_dir).replace(os.sep, "/") + "/"
+            bd["tile_base"] = f"{rel}{folder}/"
         else:
             (out_dir / "hero").mkdir(parents=True, exist_ok=True)
             for size in ("wide", "tall"):
                 shutil.copy(HERE / "heroes" / f"{bd['hero']}-{size}.webp", out_dir / "hero" / f"{bd['hero'].split('/')[-1]}-{size}.webp")
-            rel, bd["hero"] = "hero/", bd["hero"].split("/")[-1]
+            for tile in bd.get("tiles") or []:
+                shutil.copy(HERE / "heroes" / folder / tile, out_dir / "hero" / tile)
+            rel, bd["hero"], bd["tile_base"] = "hero/", bd["hero"].split("/")[-1], "hero/"
         if hero_src.exists():
             bd.update(wide=f"{rel}{bd['hero']}-wide.webp", tall=f"{rel}{bd['hero']}-tall.webp",
                       sub=bd["sub"].format(town=biz["town"]), label="Example photo" if preview else "")

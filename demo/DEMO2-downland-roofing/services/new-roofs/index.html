@@ -372,10 +372,37 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .help-q input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .help-acts { display: flex; flex-wrap: wrap; gap: .6rem; }
 .help-sos { font-weight: 700; color: #b3261e; margin: 0; }
+
+/* BRAND look, below the first screen: big headings with copper key words, photo tiles, big review cards, motion */
+body.brand section h2 { font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: .9; font-stretch: 66%; max-width: 14ch; }
+body.brand section h2 em { font-style: normal; color: var(--accent-ink); }
+body.brand .kicker { color: var(--accent-ink); }
+body.brand .band { background: var(--paper); }
+.jobs.tiles { border: 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); }
+.jobs.tiles li { grid-template-columns: 1fr; padding: 0 0 1.3rem; border: 1px solid var(--line); border-radius: 1.3rem; overflow: hidden; background: var(--card); align-content: start; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
+.jobs.tiles li:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 22px 50px rgba(0,0,0,.35); }
+.jobs.tiles li > div { padding-inline: 1.3rem; }
+.tile-img { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
+.tile-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
+.jobs.tiles li:hover .tile-img img { transform: scale(1.06); }
+.tile-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,13,16,.55)); }
+.tile-img .ph-tag { position: absolute; top: .8rem; left: .8rem; z-index: 1; }
+.jobs.tiles .job-side { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; padding-top: .4rem; }
+body.brand .review-card { padding: 1.8rem; border-radius: 1.3rem; }
+body.brand .review-card .stars { color: var(--accent); font-size: 1.6rem; letter-spacing: .12em; }
+body.brand .review-card blockquote, body.brand .review-card p { font-size: 1.12rem; line-height: 1.55; }
+body.brand .score-num { color: var(--accent-ink); font-size: clamp(6rem, 18vw, 10rem); }
+body.brand .stars-bar span { color: var(--accent); }
+body.brand .quote-band { background: linear-gradient(90deg, rgba(10,13,16,.94), rgba(10,13,16,.78)), var(--qb-img) center / cover no-repeat; }
+@media (prefers-reduced-motion: no-preference) {
+  body.brand .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
+  body.brand .rv.is-in { opacity: 1; transform: none; }
+}
 /* BRAND look: one striking photo, a short punchy headline and an accent colour on a dark base */
 .bhero { position: relative; min-height: 100svh; display: grid; align-items: end; color: #f4f0ea; overflow: hidden; isolation: isolate; }
 .bhero picture, .bhero img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .bhero img { object-fit: cover; object-position: 60% 50%; z-index: -2; animation: bhZoom 14s ease-out both; }
+.bhero .film-tag { top: auto; bottom: 1rem; right: 1rem; left: auto; }
 @keyframes bhZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
 .bh-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,13,16,.55) 0%, rgba(10,13,16,.1) 38%, rgba(10,13,16,.55) 62%, rgba(10,13,16,.94) 100%); }
 .bh-in { padding-block: 8.5rem clamp(2.2rem, 7vh, 4.5rem); }
