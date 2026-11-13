@@ -1,0 +1,569 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rewires in Hove | Brightwire Electrical</title>
+<meta name="description" content="Rewires in Hove and nearby from Brightwire Electrical. Full and partial rewires for older properties. Call 07700 900590.">
+<meta name="robots" content="noindex"><link rel="preload" href="../../assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+
+@font-face {
+  font-family: "Archivo"; font-style: normal; font-display: swap;
+  font-weight: 100 900; font-stretch: 62% 125%;
+  src: url("../../assets/archivo.woff2") format("woff2-variations"), url("../../assets/archivo.woff2") format("woff2");
+}
+/* Layout: a pinned full-screen film that rebuilds the job as you scroll (400vh of scroll), then one calm page in the
+   film's own colours: stone ground, the trade's brand colour for numbers, one accent picked from the film for buttons and rails. */
+:root {
+  --ground: #f6ede7;
+  --paper: #fbf8f3;
+  --card: #ffffff;
+  --ink: #16202a;
+  --ink-soft: #5b646d;
+  --line: #ddd5c9;
+  --brand: #1c2433;
+  --brand-text: #1c2433;
+  --accent: #bb8c62;
+  --accent-ink: #805c3a;
+  --on-accent: #16110a;
+  --btn: #1c2433;
+  --btn-ink: #ffffff;
+  --night: #0e151c;
+  --on-night: #f3efe8;
+  --night-soft: #b7b0a6;
+  --star: #e3a008;
+  --ok: #1d7a4c;
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --radius: 16px;
+  --head: 4.4rem;
+  --tb: 0px;   /* height of the phone browser's bar when it is showing */
+}
+@supports (height: 100lvh) { :root { --tb: calc(100lvh - 100svh); } }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #15191d; --paper: #1b2025; --card: #20262c; --ink: #ece6dc; --ink-soft: #a9a196; --line: #30363c;
+    --brand-text: color-mix(in srgb, #f0b21c 80%, #ffffff); --accent-ink: #d1a986;
+    --btn: var(--accent); --btn-ink: var(--on-accent); --ok: #5fcf96;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #15191d; --paper: #1b2025; --card: #20262c; --ink: #ece6dc; --ink-soft: #a9a196; --line: #30363c;
+  --brand-text: color-mix(in srgb, #f0b21c 80%, #ffffff); --accent-ink: #d1a986;
+  --btn: var(--accent); --btn-ink: var(--on-accent); --ok: #5fcf96;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--ground); color: var(--ink); font: 400 1.0625rem/1.6 var(--body); }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+p { margin: 0; }
+h1, h2, h3 { margin: 0; font-family: var(--display); text-wrap: balance; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+.kicker { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); display: flex; align-items: center; gap: .7rem; }
+.kicker::before { content: ""; width: 2.2rem; height: 2px; background: var(--accent); border-radius: 2px; transform-origin: left; flex: none; }
+h2 { font-weight: 900; font-stretch: 68%; font-size: clamp(2.3rem, 6vw, 4.3rem); line-height: .92; letter-spacing: -.01em; margin-top: .75rem; max-width: 17ch; }
+section { padding-block: clamp(4rem, 9vw, 7rem); }
+.ph-tag { display: inline-block; justify-self: start; font: 600 .66rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .38rem .6rem; border-radius: 999px; background: rgba(14, 21, 28, .78); color: #fff; }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 48px; padding: .7rem 1.25rem; border-radius: 999px;
+  border: 1.5px solid transparent; font: 700 1rem/1.1 var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: transform .12s ease, filter .15s ease, background .2s ease, border-color .2s ease; }
+.btn svg { width: 1.1em; height: 1.1em; flex: none; }
+.btn:active { transform: translateY(1px) scale(.98); }
+.btn:hover { filter: brightness(1.06); }
+.btn-accent { background: var(--accent); color: var(--on-accent); }
+.btn-brand { background: var(--btn); color: var(--btn-ink); }
+.btn-line { background: transparent; color: var(--ink); border-color: color-mix(in srgb, var(--ink) 28%, transparent); }
+.btn-line:hover { border-color: var(--ink); }
+.btn-ghost { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.65); }
+.btn-wa { background: #25d366; color: #0b3d1f; }
+
+/* Top bar: floats over the film, turns solid once the film has played */
+.top { position: fixed; top: 0; left: 0; right: 0; z-index: 50; color: #fff; padding-top: env(safe-area-inset-top, 0px); transition: background .35s ease, color .35s ease, box-shadow .35s ease; }
+.top.solid { background: color-mix(in srgb, var(--ground) 92%, transparent); color: var(--ink); box-shadow: 0 1px 0 var(--line); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px); }
+.ribbon { font-size: .8rem; line-height: 1.35; padding: .45rem max(20px, env(safe-area-inset-right, 0px)) .45rem max(20px, env(safe-area-inset-left, 0px)); background: rgba(14, 21, 28, .55); color: #fff; overflow: hidden; max-height: 4rem; transition: max-height .35s ease, padding .35s ease; }
+.ribbon .short { display: none; }
+.top.scrolled .ribbon { max-height: 0; padding-block: 0; }
+.bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem max(20px, env(safe-area-inset-right, 0px)) .75rem max(20px, env(safe-area-inset-left, 0px)); max-width: 1220px; margin-inline: auto; }
+.mark { display: flex; align-items: center; gap: .6rem; text-decoration: none; min-width: 0; }
+.mark .mono { display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: 50%; border: 1.5px solid currentColor; font: 800 .8rem/1 var(--display); font-stretch: 80%; flex: none; }
+.mark img { height: 2.3rem; width: auto; max-width: 7rem; object-fit: contain; flex: none; }
+.g-logo { display: inline-grid; place-items: center; height: 2.5rem; max-width: 8.5rem; padding: .3rem .55rem; border-radius: .6rem; flex: none; box-shadow: 0 0 0 1px rgba(127,127,127,.25); }
+.g-logo img { display: block; max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; }
+.end-logo { height: clamp(3.4rem, 9vw, 5.5rem); max-width: min(17rem, 70vw); padding: .5rem .8rem; border-radius: .9rem; margin-bottom: .4rem; animation: logoIn .7s ease both; }
+@keyframes logoIn { from { opacity: 0; transform: translateY(8px) scale(.96); } }
+@media (prefers-reduced-motion: reduce) { .end-logo { animation: none; } }
+.mark strong { font: 750 1rem/1.1 var(--display); font-stretch: 85%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.links { display: none; gap: 1.6rem; font-weight: 600; font-size: .95rem; }
+.links a { text-decoration: none; opacity: .85; }
+/* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
+.menu { position: relative; flex: none; }
+.menu > summary { list-style: none; cursor: pointer; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; border: 1.5px solid currentColor; opacity: .9; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu > summary svg { width: 20px; height: 20px; }
+.menu-panel { position: fixed; left: 0; right: 0; top: var(--menu-top, 64px); max-height: calc(100dvh - var(--menu-top, 64px)); overflow-y: auto; background: var(--ground); color: var(--ink); border-top: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.18); padding: 1rem max(20px, env(safe-area-inset-left, 0px)) 1.6rem; }
+.menu-panel p { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin: 1rem 0 .3rem; }
+.menu-panel a { display: block; padding: .6rem 0; font-weight: 700; font-size: 1.1rem; color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .menu { display: none; } }
+.bar > .btn-accent { margin-left: auto; }
+.bar > .menu { margin-left: -.4rem; }
+
+.links a:hover { opacity: 1; }
+@media (min-width: 900px) { .links { display: flex; } }
+.top .btn { min-height: 44px; padding: .55rem 1.05rem; font-size: .95rem; }
+.prog { height: 2px; background: transparent; }
+.prog b { display: block; height: 100%; width: 0; background: var(--accent); opacity: 0; transition: opacity .3s ease; }
+.top.solid .prog b { opacity: 1; }
+
+/* The film */
+.stage { position: relative; height: 420vh; height: 420svh; background: var(--night); }
+.pin { position: sticky; top: 0; height: 100vh; height: 100lvh; overflow: hidden; background: var(--night); }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--night) url("../../engine/films/electrical/kitchen-lights-02/m/0001.webp") center / cover no-repeat; }
+.shade { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(10,14,18,.5) 0%, rgba(10,14,18,0) 58%),
+    linear-gradient(180deg, rgba(10,14,18,.6) 0%, rgba(10,14,18,0) 24%, rgba(10,14,18,0) 52%, rgba(10,14,18,.82) 100%); }
+.film-tag { position: absolute; top: calc(var(--head) + .6rem); right: max(20px, env(safe-area-inset-right, 0px)); }
+.beat { position: absolute; left: 0; right: 0; color: #fff; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); opacity: 0; transform: translateY(18px); pointer-events: none; }
+.beat.on { pointer-events: auto; }
+.beat .in { max-width: 1180px; margin-inline: auto; }
+.b-hook { bottom: calc(var(--tb) + 16vh); bottom: calc(var(--tb) + 16svh); opacity: 1; transform: none; }
+.b-step { top: 20vh; }
+.b-end { bottom: calc(var(--tb) + 13vh); bottom: calc(var(--tb) + 13svh); }
+.who { display: grid; gap: .15rem; font-family: var(--display); text-shadow: 0 1px 14px rgba(0,0,0,.45); }
+.who b { font-weight: 750; font-size: 1.05rem; font-stretch: 88%; }
+.who span { font: 600 .72rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.hook { font: 900 clamp(3.2rem, 11.5vw, 9.6rem)/.86 var(--display); font-stretch: 66%; letter-spacing: -.01em; margin-top: .9rem; max-width: 9ch; text-shadow: 0 2px 30px rgba(0,0,0,.35); }
+/* longer questions ("Charging off an extension lead?") get a smaller size so four lines never reach the header */
+.hook.long { font-size: clamp(2.9rem, 9vw, 7.2rem); max-width: 10ch; }
+@media (min-aspect-ratio: 1/1) { .hook { font-size: min(clamp(3.2rem, 11.5vw, 9.6rem), 18vh); } .hook.long { font-size: min(clamp(2.9rem, 9vw, 7.2rem), 14vh); } }
+.hook-sub { margin-top: 1rem; font-size: 1.1rem; max-width: 30ch; opacity: .92; }
+.hook-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.1rem; }
+.hook-acts .btn { min-height: 48px; }
+@media (max-height: 700px) { .hook-sub { display: none; } .hook-acts { margin-top: .8rem; } }
+.cue { display: inline-flex; gap: .55rem; align-items: center; margin-top: 1.3rem; font: 600 .72rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.cue i { width: 1px; height: 2.4rem; background: linear-gradient(#fff, transparent); transform-origin: top; animation: drip 1.8s ease-in-out infinite; }
+@keyframes drip { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+.eyebrow { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .9; }
+.step-line { font: 850 clamp(2.2rem, 6.4vw, 5.2rem)/.92 var(--display); font-stretch: 70%; margin-top: .5rem; max-width: 12ch; text-shadow: 0 2px 24px rgba(0,0,0,.45); }
+.end-name { font: 900 clamp(2.6rem, 8.6vw, 7.2rem)/.88 var(--display); font-stretch: 64%; margin-top: .5rem; max-width: 14ch; text-shadow: 0 2px 30px rgba(0,0,0,.4); }
+.end-rating { margin-top: .9rem; font-weight: 650; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.end-rating .stars { color: var(--star); letter-spacing: .08em; }
+.end-quote { margin: .9rem 0 0; max-width: 34ch; }
+.end-quote blockquote { margin: 0; font-size: clamp(1rem, 2.1vw, 1.2rem); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 0 1px 14px rgba(0,0,0,.55); }
+.end-quote figcaption { margin-top: .4rem; font: 600 .7rem/1.3 var(--mono); letter-spacing: .12em; text-transform: uppercase; opacity: .85; }
+.end-row { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; margin-top: 1.2rem; }
+.phone { font: 850 clamp(1.8rem, 4.4vw, 2.7rem)/1 var(--display); font-stretch: 78%; text-decoration: none; border-bottom: 3px solid var(--accent); padding-bottom: .2rem; white-space: nowrap; }
+.hud { position: absolute; left: 0; right: 0; bottom: calc(var(--tb) + max(1.1rem, env(safe-area-inset-bottom, 0px))); padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); color: #fff; pointer-events: none; }
+.hud .in { max-width: 1180px; margin-inline: auto; display: grid; grid-template-columns: auto 1fr auto; gap: .9rem; align-items: center; font: 600 .7rem/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
+.rail { position: relative; height: 2px; background: rgba(255,255,255,.28); border-radius: 2px; }
+.rail b { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--accent); border-radius: 2px; }
+.rail i { position: absolute; top: 50%; left: 0; width: .8rem; height: .8rem; margin: -.4rem 0 0 -.4rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent); }
+.pct { min-width: 3.4rem; text-align: right; font-variant-numeric: tabular-nums; }
+/* A film made for phones: on wider screens it sits in a framed panel on the right, with the captions on the left. */
+@media (min-aspect-ratio: 1/1) {
+  .stage { --panel-h: calc(100vh - var(--head) - 9vh); --panel-w: calc(var(--panel-h) * 9 / 16); --panel-r: max(5vw, calc((100vw - 1180px) / 2 + 20px)); }
+  .pin { background: radial-gradient(ellipse 60% 70% at 72% 55%, color-mix(in srgb, var(--accent) 22%, var(--night)) 0%, var(--night) 70%); }
+  canvas { inset: auto; top: calc(var(--head) + 4vh); right: var(--panel-r); width: var(--panel-w); height: var(--panel-h); border-radius: 22px; box-shadow: 0 30px 80px rgba(0, 0, 0, .55); }
+  .shade { display: none; }
+  .film-tag { top: calc(var(--head) + 4vh + 14px); right: calc(var(--panel-r) + 14px); }
+  .beat .in, .hud .in { padding-right: calc(var(--panel-w) + 5vw); }
+}
+@media (max-width: 720px) {
+  .ribbon .long { display: none; } .ribbon .short { display: inline; }
+  .b-step { top: auto; bottom: calc(var(--tb) + 13vh); bottom: calc(var(--tb) + 13svh); }
+  .shade { background: linear-gradient(180deg, rgba(10,14,18,.55) 0%, rgba(10,14,18,0) 20%, rgba(10,14,18,0) 40%, rgba(10,14,18,.86) 100%); }
+}
+
+/* At a glance */
+.intro-grid { display: grid; gap: 1.6rem 3rem; }
+@media (min-width: 900px) { .intro-grid { grid-template-columns: 1.15fr 1fr; align-items: end; } }
+.lede { color: var(--ink-soft); font-size: 1.15rem; max-width: 44ch; }
+.proof { display: flex; flex-wrap: wrap; gap: 2rem 3.4rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
+.proof > div { display: grid; gap: .3rem; align-content: start; }
+.proof strong { font: 900 3.3rem/1 var(--display); font-stretch: 68%; color: var(--brand-text); font-variant-numeric: tabular-nums; }
+.proof span { color: var(--ink-soft); font-size: .95rem; }
+.proof .ph { border: 1.5px dashed var(--line); border-radius: 12px; padding: .8rem 1rem; gap: .45rem; }
+.proof .ph b { font: 800 1.4rem/1 var(--display); font-stretch: 80%; }
+.stars-bar { position: relative; display: inline-block; color: color-mix(in srgb, var(--star) 25%, var(--line)); letter-spacing: .08em; line-height: 1; }
+.stars-bar span { position: absolute; inset: 0 auto 0 0; overflow: hidden; white-space: nowrap; color: var(--star); }
+
+/* Services: one list, each job with its guide price and a one-tap quote */
+.band { background: var(--paper); }
+.jobs { list-style: none; margin: 2.6rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.jobs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .6rem 2rem; padding-block: 1.45rem; border-bottom: 1px solid var(--line); align-items: center; }
+.jobs h3 { font-weight: 850; font-stretch: 74%; font-size: clamp(1.55rem, 3.4vw, 2.3rem); line-height: 1; display: flex; align-items: baseline; gap: .6rem; transition: color .25s ease, transform .35s ease; }
+.jobs h3::after { content: "\2192"; font-size: .7em; color: var(--accent); opacity: 0; transform: translateX(-.4rem); transition: opacity .25s ease, transform .35s ease; }
+.jobs li:hover h3, .jobs li:focus-within h3 { color: var(--brand-text); }
+.jobs li:hover h3::after, .jobs li:focus-within h3::after { opacity: 1; transform: none; }
+.jobs p { color: var(--ink-soft); margin-top: .45rem; max-width: 52ch; }
+.job-side { display: flex; align-items: center; gap: 1.2rem; justify-content: flex-end; }
+.price { font: 600 .95rem/1.25 var(--mono); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.price small { display: block; color: var(--ink-soft); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; }
+.job-acts { display: flex; gap: .5rem; }
+.icon-btn { display: inline-grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; flex: none; text-decoration: none; }
+.icon-btn svg { width: 1.3rem; height: 1.3rem; }
+.icon-btn.wa { background: #25d366; color: #0b3d1f; }
+.prices-note { margin-top: 1.4rem; }
+@media (max-width: 720px) {
+  .jobs li { grid-template-columns: 1fr; }
+  .job-side { justify-content: space-between; }
+  .price { text-align: left; }
+}
+
+/* Reviews */
+.reviews-grid { display: grid; gap: 2.4rem 3.5rem; }
+@media (min-width: 960px) { .reviews-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 2fr); align-items: start; } }
+.score-num { display: block; font: 900 clamp(4.5rem, 12vw, 7.5rem)/.85 var(--display); font-stretch: 66%; color: var(--brand-text); margin-top: 1.2rem; font-variant-numeric: tabular-nums; }
+.score .stars-bar { font-size: 1.5rem; margin-top: .6rem; }
+.score p { margin-top: .5rem; color: var(--ink-soft); }
+.score a { display: inline-block; margin-top: .9rem; font-weight: 700; color: var(--brand-text); }
+.cards { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+.review-card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem; display: grid; gap: .75rem; align-content: start; }
+.review-card .stars { color: var(--star); letter-spacing: .08em; }
+.review-card p { font-size: .98rem; display: -webkit-box; -webkit-line-clamp: 8; -webkit-box-orient: vertical; overflow: hidden; }
+.skel { height: .7rem; border-radius: 4px; background: color-mix(in srgb, var(--line) 60%, transparent); }
+.skel.s { width: 60%; }
+.review-who { display: flex; align-items: center; gap: .6rem; margin-top: .3rem; min-width: 0; }
+.review-who i, .review-who img { width: 2.1rem; height: 2.1rem; border-radius: 50%; background: color-mix(in srgb, var(--brand) 12%, var(--paper)); display: block; flex: none; object-fit: cover; }
+.review-who a { font-weight: 700; text-decoration: none; }
+.review-who small { display: block; color: var(--ink-soft); font-size: .8rem; }
+.review-who .skel { width: 6rem; }
+.reviews-note, .g-source { margin-top: 1rem; color: var(--ink-soft); font-size: .9rem; }
+
+/* Recent work (the business's own photos only) */
+.gallery { display: grid; gap: .9rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); margin-top: 2.4rem; }
+.tile { position: relative; margin: 0; border-radius: var(--radius); overflow: hidden; aspect-ratio: 4 / 3; max-width: 100%; background: var(--paper); }
+.tile img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: no-preference) {
+  .gallery { perspective: 900px; }
+  .tile { transform: rotateX(var(--tilt, 0deg)); transition: transform .2s linear; }
+  .tile img { transform: scale(var(--zoom, 1.06)) translateY(var(--drift, 0%)); transition: transform .2s linear; will-change: transform; }
+}
+.tile figcaption, .g-credit { position: absolute; left: .7rem; bottom: .7rem; max-width: calc(100% - 1.4rem); padding: .3rem .7rem; border-radius: 999px; background: rgba(14, 21, 28, .72); color: #fff; font-size: .78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.g-credit a { color: inherit; }
+
+/* Areas */
+.areas-grid { display: grid; gap: 2.5rem; align-items: center; }
+@media (min-width: 900px) { .areas-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.town-box { position: relative; display: grid; align-items: center; min-height: clamp(9rem, 40vw, 19rem); overflow: hidden; container-type: inline-size; }
+.town-word { position: relative; z-index: 1; font: 900 clamp(3rem, calc(150cqi / var(--chars)), 8rem)/.86 var(--display); font-stretch: 62%; color: var(--brand-text); letter-spacing: -.02em; overflow-wrap: break-word; }
+.ring { position: absolute; inset: 50% auto auto 38%; width: min(95%, 25rem); aspect-ratio: 1; transform: translate(-50%, -50%); color: var(--accent); opacity: .6; pointer-events: none; }
+.ring circle { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-dasharray: 4 7; }
+.areas { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1.4rem 0 0; }
+.areas li { padding: .45rem .95rem; background: var(--card); border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: .95rem; }
+.cover { display: grid; gap: .6rem; margin-top: 1.6rem; }
+.cover label { font-weight: 700; }
+.cover-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+.cover-row input { flex: 1 1 12rem; min-width: 0; }
+.cover-result { display: flex; align-items: center; gap: .6rem; font-weight: 650; min-height: 1.6em; }
+.cover-result svg { width: 1.6rem; height: 1.6rem; flex: none; }
+.cover-result .ok { color: var(--ok); }
+.cover-result .maybe { color: var(--ink-soft); font-weight: 500; }
+
+/* FAQ */
+.faq { display: grid; gap: .6rem; max-width: 52rem; margin-top: 2.2rem; }
+.faq details { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding-inline: 1.3rem; }
+.faq summary { cursor: pointer; padding: 1.15rem 2.6rem 1.15rem 0; font-weight: 700; font-size: 1.05rem; list-style: none; position: relative; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; position: absolute; right: 0; top: .85rem; width: 1.8rem; height: 1.8rem; display: grid; place-items: center; border-radius: 50%; border: 1.5px solid var(--line); color: var(--accent-ink); font-size: 1.2rem; }
+.faq details[open] summary::after { content: "\2212"; }
+.faq details p { padding-bottom: 1.25rem; color: var(--ink-soft); max-width: 46rem; }
+
+/* Quote band: back to the film's night colour */
+.quote-band { background: var(--night); color: var(--on-night); }
+.quote-band .kicker { color: var(--accent); }
+.quote-band h2 { color: var(--on-night); }
+.quote-band .ph-tag { background: rgba(255,255,255,.14); }
+.quote-grid { display: grid; gap: 2.5rem 4rem; }
+@media (min-width: 960px) { .quote-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: start; } }
+.quote-side { display: grid; gap: 1.2rem; align-content: start; }
+.quote-side > p { color: var(--night-soft); max-width: 42ch; }
+.quote-side .end-row { margin-top: .3rem; }
+.creds { display: grid; gap: .6rem; margin-top: .6rem; }
+.cred { border: 1.5px dashed rgba(255,255,255,.25); border-radius: 12px; padding: .85rem 1rem; display: grid; gap: .3rem; }
+.cred.real { border-style: solid; border-color: rgba(255,255,255,.18); }
+.cred span { color: var(--night-soft); font-size: .92rem; }
+.qform { background: var(--card); color: var(--ink); border-radius: 22px; padding: clamp(1.3rem, 3vw, 2rem); display: grid; gap: 1rem; position: relative; }
+.qd-head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.qd-head h3 { font-weight: 850; font-stretch: 78%; font-size: 1.7rem; }
+.qd-close { background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 50%; width: 2.6rem; height: 2.6rem; font-size: 1.4rem; cursor: pointer; flex: none; }
+.field { display: grid; gap: .35rem; }
+.field-row { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); }
+label { font-weight: 650; font-size: .93rem; }
+.hint { font-weight: 400; color: var(--ink-soft); }
+input, select, textarea { font: inherit; font-size: 1rem; color: var(--ink); background: var(--ground); border: 1.5px solid var(--line); border-radius: 12px; padding: .75rem .9rem; width: 100%; min-height: 50px; }
+input:focus, select:focus, textarea:focus { border-color: var(--brand-text); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+textarea { min-height: 7rem; resize: vertical; }
+.qform .btn-brand { justify-self: start; }
+.form-status { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; border-radius: 12px; border: 1.5px solid var(--ok); }
+.form-status strong { color: var(--ok); }
+.form-status svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--ok); }
+.draw path { stroke-dasharray: 30; stroke-dashoffset: 0; }
+dialog.qd { border: 0; padding: 0; width: min(36rem, calc(100vw - 24px)); max-height: calc(100dvh - 24px); border-radius: 22px; background: transparent; color: var(--ink); }
+dialog.qd::backdrop { background: rgba(10, 14, 18, .62); }
+dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-height: calc(100dvh - 24px); }
+
+/* Go live (previews only) */
+.golive { background: var(--paper); }
+.plans { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); max-width: 52rem; margin-top: 2.4rem; }
+.plan { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 1.6rem; display: grid; gap: .6rem; align-content: start; position: relative; }
+.plan.best { border: 2px solid var(--accent); }
+.plan .tag { position: absolute; top: -.8rem; left: 1.4rem; background: var(--accent); color: var(--on-accent); font-size: .75rem; font-weight: 700; padding: .25rem .7rem; border-radius: 999px; }
+.plan h3 { font-weight: 800; font-stretch: 85%; font-size: 1.3rem; }
+.plan .amount { font: 900 2.9rem/1 var(--display); font-stretch: 66%; color: var(--brand-text); }
+.plan .amount small { font: 600 1rem/1 var(--body); color: var(--ink-soft); }
+.plan p { color: var(--ink-soft); }
+.plan .btn { margin-top: .4rem; justify-self: start; }
+.golive-note { margin-top: 1.25rem; color: var(--ink-soft); font-size: .92rem; max-width: 52rem; }
+.golive-note a { color: var(--brand-text); font-weight: 700; }
+
+footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
+.foot { display: grid; gap: .8rem; }
+.foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem 2rem; align-items: center; color: var(--ink); }
+.foot-top strong { font: 800 1.2rem/1.1 var(--display); font-stretch: 82%; }
+.foot-top a { font-weight: 700; text-decoration: none; }
+.foot .ph-tag { margin-right: .4rem; }
+
+/* Quick contact on phones, once the film is out of the way */
+/* Cafe mode: menu, live hours and map */
+.menu .price { font-size: 1rem; }
+.today .is-open { color: var(--ok, #1f8a4c); }
+.today .is-closed { color: var(--ink-soft); }
+.findus { align-items: start; }
+.map-box { position: relative; border-radius: 1.2rem; overflow: hidden; min-height: 18rem; }
+.map-box.has-map { border: 1px solid var(--line); background: var(--paper); }
+.map-box iframe { display: block; width: 100%; height: 100%; min-height: 22rem; border: 0; }
+.addr { font-size: 1.1rem; margin: .4rem 0 1.2rem; }
+.hours h3 { font-size: 1rem; margin: 0 0 .6rem; }
+.hours-list { list-style: none; margin: 0 0 .4rem; padding: 0; display: grid; gap: .1rem; max-width: 26rem; }
+.hours-list li { display: flex; justify-content: space-between; gap: 1rem; padding: .45rem .7rem; border-radius: .5rem; }
+.hours-list li b { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+.hours-list li.today { background: color-mix(in srgb, var(--accent) 16%, transparent); font-weight: 700; }
+.hours-wait { margin: 0 0 1rem; }
+.findus .end-row { margin-top: 1.4rem; }
+.svc-link { color: inherit; text-decoration: none; }
+.svc-link:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.areas li a { color: inherit; text-decoration: none; }
+.areas li:has(a):hover { border-color: var(--accent); }
+.foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
+.foot-links a { color: inherit; }
+/* "What's gone wrong?" helper */
+.help-pick { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.help-btn { font: 700 1rem/1.2 var(--body); padding: .85rem 1.15rem; border-radius: 1rem; border: 1.5px solid var(--line); background: var(--card); color: var(--ink); cursor: pointer; min-height: 48px; }
+.help-btn[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+.help-btn.sos { border-color: #d94a3a; color: #b3261e; }
+.help-card { margin-top: 1.4rem; padding: clamp(1.1rem, 3vw, 1.8rem); border-radius: 1.2rem; background: var(--card); border: 1px solid var(--line); max-width: 46rem; }
+.help-now { font: 700 .78rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: #b3261e; margin: 0 0 .5rem; }
+.help-steps { margin: 0 0 1.2rem; padding-left: 1.3rem; display: grid; gap: .5rem; }
+.help-q { border: 0; padding: 0; margin: 0 0 1.1rem; }
+.help-q legend { font-weight: 700; margin-bottom: .5rem; }
+.help-q label { display: inline-block; margin: 0 .4rem .5rem 0; }
+.help-q input { position: absolute; opacity: 0; pointer-events: none; }
+.help-q span { display: inline-block; padding: .55rem .9rem; border-radius: 999px; border: 1.5px solid var(--line); cursor: pointer; font-weight: 600; font-size: .95rem; }
+.help-q input:checked + span { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 16%, transparent); }
+.help-q input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.help-acts { display: flex; flex-wrap: wrap; gap: .6rem; }
+.help-sos { font-weight: 700; color: #b3261e; margin: 0; }
+/* BRAND look: one striking photo, a short punchy headline and an accent colour on a dark base */
+.bhero { position: relative; min-height: 100svh; display: grid; align-items: end; color: #f4f0ea; overflow: hidden; isolation: isolate; }
+.bhero picture, .bhero img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bhero img { object-fit: cover; object-position: 60% 50%; z-index: -2; animation: bhZoom 14s ease-out both; }
+@keyframes bhZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+.bh-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,13,16,.55) 0%, rgba(10,13,16,.1) 38%, rgba(10,13,16,.55) 62%, rgba(10,13,16,.94) 100%); }
+.bh-in { padding-block: 8.5rem clamp(2.2rem, 7vh, 4.5rem); }
+.bh-name { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font: 700 .95rem/1.3 var(--body); letter-spacing: .01em; margin: 0 0 1rem; }
+.bh-name .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+.bh-where { font-weight: 500; opacity: .75; }
+.bh-h { font: 900 clamp(3.3rem, 13vw, 8.6rem)/.88 var(--display); font-stretch: 66%; letter-spacing: -.015em; margin: 0; max-width: 9.5ch; text-wrap: balance; animation: bhUp .9s .1s cubic-bezier(.2,.7,.2,1) both; }
+.bh-h em { font-style: normal; color: var(--accent-ink); }
+.bh-sub { margin: 1.1rem 0 0; max-width: 34rem; font-size: clamp(1.02rem, 2.6vw, 1.2rem); line-height: 1.5; color: rgba(244,240,234,.86); animation: bhUp .9s .25s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; animation: bhUp .9s .4s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts .btn { min-height: 52px; }
+.bhero .btn-ghost { color: #f4f0ea; border-color: rgba(244,240,234,.55); background: rgba(10,13,16,.25); backdrop-filter: blur(6px); }
+.bh-stats { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(244,240,234,.18); animation: bhUp .9s .55s cubic-bezier(.2,.7,.2,1) both; }
+.bh-stats li { flex: 1 1 8rem; padding: .9rem 1rem .2rem 0; }
+.bh-stats b { display: block; font: 850 1.35rem/1.1 var(--display); font-stretch: 75%; color: var(--accent-ink); }
+.bh-stats span { font-size: .85rem; color: rgba(244,240,234,.72); }
+@keyframes bhUp { from { opacity: 0; transform: translateY(18px); } }
+@media (min-aspect-ratio: 1/1) {
+  .bh-shade { background: linear-gradient(90deg, rgba(10,13,16,.88) 0%, rgba(10,13,16,.55) 38%, rgba(10,13,16,.05) 70%), linear-gradient(0deg, rgba(10,13,16,.6), transparent 40%); }
+  .bhero img { object-position: 70% 50%; }
+}
+@media (max-aspect-ratio: 1/1) { .bhero { align-items: start; } .bh-in { padding-top: 7.5rem; } }
+@media (prefers-reduced-motion: reduce) { .bhero img, .bh-h, .bh-sub, .bh-acts, .bh-stats { animation: none; } }
+.action-bar { display: none; }
+@media (max-width: 760px) {
+  body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
+  .action-bar { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: .6rem; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    padding: .65rem max(12px, env(safe-area-inset-right, 0px)) calc(.65rem + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));
+    background: color-mix(in srgb, var(--ground) 94%, transparent); border-top: 1px solid var(--line); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    transition: transform .35s ease; }
+  .action-bar .btn { min-height: 52px; }
+  body.in-film .action-bar { transform: translateY(110%); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .kicker::before { transform: scaleX(.05); transition: transform .9s cubic-bezier(.6,0,.2,1); }
+  .js .kicker.in::before { transform: none; }
+  .ring circle { stroke-dashoffset: 400; transition: stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1); }
+  .ring.in circle { stroke-dashoffset: 0; }
+  .ring circle:nth-child(2) { transition-delay: .15s; } .ring circle:nth-child(3) { transition-delay: .3s; }
+  .draw path { stroke-dashoffset: 30; animation: draw .5s .05s ease forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .btn:hover svg, .btn:active svg { animation: buzz .5s ease; }
+  @keyframes buzz { 0%,100% { transform: rotate(0); } 20% { transform: rotate(-14deg); } 40% { transform: rotate(12deg); } 60% { transform: rotate(-8deg); } 80% { transform: rotate(5deg); } }
+}
+@media (prefers-reduced-motion: reduce) { .cue i { animation: none; } .jobs h3, .jobs h3::after { transition: none; } }
+
+/* Sub-page bits */
+/* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
+.menu { position: relative; flex: none; }
+.menu > summary { list-style: none; cursor: pointer; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 999px; border: 1.5px solid currentColor; opacity: .9; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu > summary svg { width: 20px; height: 20px; }
+.menu-panel { position: fixed; left: 0; right: 0; top: var(--menu-top, 64px); max-height: calc(100dvh - var(--menu-top, 64px)); overflow-y: auto; background: var(--ground); color: var(--ink); border-top: 1px solid var(--line); box-shadow: 0 18px 40px rgba(0,0,0,.18); padding: 1rem max(20px, env(safe-area-inset-left, 0px)) 1.6rem; }
+.menu-panel p { font: 600 .74rem/1.3 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin: 1rem 0 .3rem; }
+.menu-panel a { display: block; padding: .6rem 0; font-weight: 700; font-size: 1.1rem; color: inherit; text-decoration: none; border-bottom: 1px solid var(--line); }
+@media (min-width: 900px) { .menu { display: none; } }
+.bar > .btn-accent { margin-left: auto; }
+.bar > .menu { margin-left: -.4rem; }
+
+.sub-hero { padding-block: clamp(7.5rem, 14vw, 10rem) clamp(2.5rem, 6vw, 4rem); }
+.sub-hero h1 { font-weight: 900; font-stretch: 68%; font-size: clamp(2.6rem, 8vw, 5.2rem); line-height: .92; letter-spacing: -.01em; margin-top: .8rem; max-width: 16ch; }
+.crumbs { font: 600 .78rem/1.4 var(--mono); letter-spacing: .06em; color: var(--ink-soft); margin: 0 0 1.4rem; }
+.crumbs a { color: inherit; }
+.sub-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; }
+.sub-acts .btn { min-height: 48px; }
+.sub-body { padding-top: 0; }
+.sub-body .wrap > * + * { margin-top: 1.1rem; }
+.sub-body p { max-width: 62ch; }
+.guide { display: inline-flex; align-items: baseline; gap: .6rem; padding: .8rem 1.1rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.guide b { font: 850 1.6rem/1 var(--display); font-stretch: 74%; color: var(--brand-text); }
+.steps3 { list-style: none; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); counter-reset: s; }
+.steps3 li { counter-increment: s; padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.steps3 li::before { content: counter(s, decimal-leading-zero); display: block; font: 600 .78rem/1 var(--mono); color: var(--accent-ink); margin-bottom: .6rem; }
+.steps3 h3 { font-size: 1.15rem; }
+.steps3 p { color: var(--ink-soft); margin: .35rem 0 0; font-size: .98rem; }
+.linklist { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.linklist a { display: inline-block; padding: .5rem 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 999px; font-weight: 600; font-size: .95rem; color: inherit; text-decoration: none; }
+.linklist a:hover, .linklist a[aria-current] { border-color: var(--accent); }
+.rate-line { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; font-weight: 600; }
+.rate-line .stars { color: #f5b301; letter-spacing: .08em; }
+.badges { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.badges li { padding: .45rem .9rem; border-radius: .6rem; border: 1px solid var(--line); background: var(--card); font-weight: 700; font-size: .92rem; }
+.contact-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.contact-grid > div { padding: 1.3rem; border: 1px solid var(--line); border-radius: 1rem; background: var(--card); }
+.contact-grid h3 { font-size: 1.1rem; margin-bottom: .4rem; }
+.contact-grid a { font-weight: 700; }
+.foot-links { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; list-style: none; padding: 0; margin: .4rem 0 1rem; font-size: .95rem; }
+.foot-links a { color: inherit; }
+.top .links a[aria-current] { color: var(--accent); }
+.two-lists { display: grid; gap: 1.2rem 2.5rem; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); margin-top: 2rem !important; }
+h2.sm { font-size: clamp(1.5rem, 3.6vw, 2rem); max-width: none; margin: 0 0 .6rem; }
+.ticks { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.ticks li { position: relative; padding-left: 1.7rem; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: .45em; width: .95rem; height: .55rem; border-left: 2.5px solid var(--accent); border-bottom: 2.5px solid var(--accent); transform: rotate(-45deg); }
+.ticks.dots li::before { width: .5rem; height: .5rem; border: 0; border-radius: 50%; background: var(--accent); transform: none; top: .55em; left: .2rem; }
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Service", "serviceType": "Rewires", "areaServed": ["Hove", "Brighton", "Portslade", "Southwick", "Shoreham-by-Sea"], "provider": {"@type": "Electrician", "name": "Brightwire Electrical", "telephone": "+447700900590", "areaServed": ["Hove", "Brighton", "Portslade", "Southwick", "Shoreham-by-Sea"], "address": {"@type": "PostalAddress", "addressLocality": "Hove", "addressCountry": "GB"}}}</script>
+</head>
+<body class="sub">
+<header class="top solid" id="topbar">
+<div class="ribbon"><span class="long">Website preview for Brightwire Electrical, made by Maystone. Prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>  <div class="bar">
+    <a class="mark" href="../../" aria-label="Brightwire Electrical home"><span class="mono">BE</span><strong>Brightwire Electrical</strong></a>
+    <nav class="links" aria-label="Main"><a href="../../">Home</a><a href="../../#services">Services</a><a href="../../#areas">Areas</a><a href="../../contact/">Contact</a></nav>
+    <a class="btn btn-accent" href="tel:+447700900590" aria-label="Call 07700 900590"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>07700 900590</a>
+    <details class="menu"><summary aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
+      <div class="menu-panel">
+        <a href="../../">Home</a>
+        <p>Services</p><a href="../../services/fault-finding/">Fault finding</a><a href="../../services/fuse-board-upgrades/">Fuse board upgrades</a><a href="../../services/eicr-safety-reports/">EICR safety reports</a><a href="../../services/rewires/">Rewires</a><a href="../../services/lighting-and-sockets/">Lighting and sockets</a><a href="../../services/ev-chargers/">EV chargers</a>        <p>Areas we cover</p><a href="../../areas/hove/">Hove</a><a href="../../areas/brighton/">Brighton</a><a href="../../areas/portslade/">Portslade</a><a href="../../areas/southwick/">Southwick</a><a href="../../areas/shoreham-by-sea/">Shoreham-by-Sea</a>        <p>Get in touch</p><a href="../../contact/">Contact</a><a href="../../#quote">Get a free quote</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<main id="top">
+  <section class="sub-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Home</a> &rsaquo; Services &rsaquo; Rewires</nav>
+      <p class="kicker">Electrician</p>
+      <h1>Rewires in Hove</h1>
+      <p class="lede" style="margin-top:1rem">Full and partial rewires for older properties.</p>
+<p class="rate-line" style="margin-top:1rem"><span class="stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span><a href="https://www.google.com/maps" target="_blank" rel="noopener">5.0 from 7 Google reviews</a></p>      <div class="sub-acts">
+        <a class="btn btn-accent" href="tel:+447700900590"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 07700 900590</a>
+<a class="btn btn-wa" href="https://wa.me/447700900590?text=Hi%20Brightwire%20Electrical%2C%20I%20found%20your%20website%20and%20I%27d%20like%20a%20quote%20for%20rewires.%20Here%27s%20a%20photo%20of%20the%20job%3A"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>WhatsApp a photo</a>        <a class="btn btn-line" href="../../#quote">Get a free quote</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sub-body">
+    <div class="wrap">
+<p>Old wiring can be unsafe and often can&#39;t cope with modern appliances. A full or partial rewire is planned around your home, so the disruption is kept to a minimum and you end up with sockets and lights where you actually need them.</p><p>Brightwire Electrical is a local electrician based in Hove, covering Brighton, Portslade and Southwick and the villages around them.</p><p>Need help with rewires? Call 07700 900590, or send a photo of the job on WhatsApp, and we&#39;ll talk it through and give you a clear price before any work starts.</p><p>Customers rate us 5.0 out of 5 from 7 Google reviews.</p><p class="guide"><span>Guide price</span><b>&pound;3,500&ndash;&pound;8,000</b></p>
+      <p class="prices-note"><span class="ph-tag">Example price</span> You set your own before the site goes live.</p>      <div class="two-lists">
+        <div><h2 class="sm">What's included</h2><ul class="ticks"><li>A survey and plan of the new layout</li><li>New cables, sockets, switches and lighting points</li><li>A new consumer unit where needed</li><li>Testing and certifying the finished work</li></ul></div>
+<div><h2 class="sm">When people call us</h2><ul class="ticks dots"><li>Old rubber or fabric-covered cables</li><li>Not enough sockets and lots of extension leads</li><li>Renovating or buying an older property</li></ul></div>      </div>
+<p class="prices-note"><span class="ph-tag">Example wording</span> You check it and we change anything that doesn't fit how you work.</p>    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Simple from the first call.</h2>
+      <ol class="steps3" style="margin-top:2rem">
+<li><h3>Call or send a photo</h3><p>Tell us what you need. A quick photo of the job helps us price it.</p></li><li><h3>Get a clear quote</h3><p>We explain what needs doing and what it costs before any work starts.</p></li><li><h3>Job done properly</h3><p>The work is finished to a high standard and the area left clean and tidy.</p></li>      </ol>
+    </div>
+  </section>
+
+
+  <section class="band" style="padding-top:clamp(2.5rem,6vw,4rem)">
+    <div class="wrap">
+      <p class="kicker">Other services</p>
+      <ul class="linklist"><li><a href="../../services/fault-finding/">Fault finding</a></li><li><a href="../../services/fuse-board-upgrades/">Fuse board upgrades</a></li><li><a href="../../services/eicr-safety-reports/">EICR safety reports</a></li><li><a href="../../services/rewires/" aria-current="page">Rewires</a></li><li><a href="../../services/lighting-and-sockets/">Lighting and sockets</a></li><li><a href="../../services/ev-chargers/">EV chargers</a></li></ul>
+      <p class="kicker" style="margin-top:2rem">Areas we cover</p>
+      <ul class="linklist"><li><a href="../../areas/hove/">Hove</a></li><li><a href="../../areas/brighton/">Brighton</a></li><li><a href="../../areas/portslade/">Portslade</a></li><li><a href="../../areas/southwick/">Southwick</a></li><li><a href="../../areas/shoreham-by-sea/">Shoreham-by-Sea</a></li></ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="kicker">Good to know</p>
+      <h2>Common questions</h2>
+      <div class="faq">
+<details open><summary>How long does a rewire take?</summary><p>A typical three-bed house takes around 5 to 10 days, depending on the size and how much is being done.</p></details><details><summary>What is an EICR?</summary><p>An Electrical Installation Condition Report checks the safety of the wiring in a property. Landlords in England need one at least every 5 years.</p></details>      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="foot-top"><strong>Brightwire Electrical</strong><a href="tel:+447700900590">07700 900590</a></div>
+    <ul class="foot-links">
+      <li><a href="../../">Home</a></li>
+<li><a href="../../services/fault-finding/">Fault finding</a></li><li><a href="../../services/fuse-board-upgrades/">Fuse board upgrades</a></li><li><a href="../../services/eicr-safety-reports/">EICR safety reports</a></li><li><a href="../../services/rewires/">Rewires</a></li><li><a href="../../services/lighting-and-sockets/">Lighting and sockets</a></li><li><a href="../../services/ev-chargers/">EV chargers</a></li><li><a href="../../areas/hove/">Hove</a></li><li><a href="../../areas/brighton/">Brighton</a></li><li><a href="../../areas/portslade/">Portslade</a></li><li><a href="../../areas/southwick/">Southwick</a></li><li><a href="../../areas/shoreham-by-sea/">Shoreham-by-Sea</a></li>      <li><a href="../../contact/">Contact</a></li>
+    </ul>
+    <p>Electrician in Hove and the surrounding area.</p>
+    <p>&copy; 2026 Brightwire Electrical. Website by Maystone.</p>
+  </div>
+</footer>
+<nav class="action-bar" aria-label="Quick contact">
+  <a class="btn btn-accent" href="tel:+447700900590"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call now</a>
+<a class="btn btn-wa" href="https://wa.me/447700900590?text=Hi%20Brightwire%20Electrical%2C%20I%20found%20your%20website%20and%20I%27d%20like%20a%20quote%20for%20rewires.%20Here%27s%20a%20photo%20of%20the%20job%3A"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>WhatsApp</a></nav>
+<script>
+/* Phone menu: sits just under the header and closes when a link is tapped. */
+(function () {
+  var m = document.querySelector(".menu"), top = document.getElementById("topbar");
+  if (!m || !top) return;
+  m.addEventListener("toggle", function () { if (m.open) document.documentElement.style.setProperty("--menu-top", top.getBoundingClientRect().bottom + "px"); });
+  m.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", function () { m.open = false; }); });
+})();
+</script>
+</body>
+</html>

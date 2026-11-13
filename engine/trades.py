@@ -1133,3 +1133,22 @@ FILMS["cafe"] = [
 ]
 # Cafes, coffee shops, tea rooms and bakeries first, so "The Walled Garden Cafe" isn't treated as a gardener.
 CATEGORY_RULES.insert(0, ("cafe", r"\bcaf[eé]s?\b|coffee|tea ?room|bakery|bistro|brasserie|restaurant|deli\b|sandwich"))
+
+
+# ---------------------------------------------------------------------------------------------------
+# BRAND look (13 Nov 2026): a premium first screen instead of the scroll film. One striking full-screen
+# photo, a short punchy headline (last part in the accent colour), and an unexpected accent colour on a
+# dark base, so the site doesn't look like every other trade site. Everything below stays the same.
+# Turned on per lead with "Look": "brand" (and for the roofing demo). Images in engine/heroes/<group>/.
+BRAND = {
+    "roofing": {
+        "hero": "roofing/slate-01",
+        "alt": "A slate roof and chimney at sunset after rain",
+        "headline": ("Roofs that take", "the weather."),
+        "sub": "Repairs, new roofs, flat roofs and chimneys across {town} and nearby. A written price before we start, and a tidy site when we're done.",
+        # Slate and copper: dark, strong and weatherproof, with copper instead of the usual roofer red.
+        "palette": {"ground": "#14181b", "paper": "#1a1f23", "card": "#20262b", "ink": "#ece7df", "ink_soft": "#a7a198",
+                    "line": "#323a40", "accent": "#c8743a", "accent_ink": "#e3955c", "brand": "#c8743a", "brand_text": "#e3955c"},
+        "swatches": [("Slate", "#14181b"), ("Stone", "#ece7df"), ("Copper", "#c8743a")],
+    },
+}

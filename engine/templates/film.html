@@ -381,6 +381,33 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .help-q input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .help-acts { display: flex; flex-wrap: wrap; gap: .6rem; }
 .help-sos { font-weight: 700; color: #b3261e; margin: 0; }
+/* BRAND look: one striking photo, a short punchy headline and an accent colour on a dark base */
+.bhero { position: relative; min-height: 100svh; display: grid; align-items: end; color: #f4f0ea; overflow: hidden; isolation: isolate; }
+.bhero picture, .bhero img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bhero img { object-fit: cover; object-position: 60% 50%; z-index: -2; animation: bhZoom 14s ease-out both; }
+@keyframes bhZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+.bh-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,13,16,.55) 0%, rgba(10,13,16,.1) 38%, rgba(10,13,16,.55) 62%, rgba(10,13,16,.94) 100%); }
+.bh-in { padding-block: 8.5rem clamp(2.2rem, 7vh, 4.5rem); }
+.bh-name { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font: 700 .95rem/1.3 var(--body); letter-spacing: .01em; margin: 0 0 1rem; }
+.bh-name .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
+.bh-where { font-weight: 500; opacity: .75; }
+.bh-h { font: 900 clamp(3.3rem, 13vw, 8.6rem)/.88 var(--display); font-stretch: 66%; letter-spacing: -.015em; margin: 0; max-width: 9.5ch; text-wrap: balance; animation: bhUp .9s .1s cubic-bezier(.2,.7,.2,1) both; }
+.bh-h em { font-style: normal; color: var(--accent-ink); }
+.bh-sub { margin: 1.1rem 0 0; max-width: 34rem; font-size: clamp(1.02rem, 2.6vw, 1.2rem); line-height: 1.5; color: rgba(244,240,234,.86); animation: bhUp .9s .25s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; animation: bhUp .9s .4s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts .btn { min-height: 52px; }
+.bhero .btn-ghost { color: #f4f0ea; border-color: rgba(244,240,234,.55); background: rgba(10,13,16,.25); backdrop-filter: blur(6px); }
+.bh-stats { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(244,240,234,.18); animation: bhUp .9s .55s cubic-bezier(.2,.7,.2,1) both; }
+.bh-stats li { flex: 1 1 8rem; padding: .9rem 1rem .2rem 0; }
+.bh-stats b { display: block; font: 850 1.35rem/1.1 var(--display); font-stretch: 75%; color: var(--accent-ink); }
+.bh-stats span { font-size: .85rem; color: rgba(244,240,234,.72); }
+@keyframes bhUp { from { opacity: 0; transform: translateY(18px); } }
+@media (min-aspect-ratio: 1/1) {
+  .bh-shade { background: linear-gradient(90deg, rgba(10,13,16,.88) 0%, rgba(10,13,16,.55) 38%, rgba(10,13,16,.05) 70%), linear-gradient(0deg, rgba(10,13,16,.6), transparent 40%); }
+  .bhero img { object-position: 70% 50%; }
+}
+@media (max-aspect-ratio: 1/1) { .bhero { align-items: start; } .bh-in { padding-top: 7.5rem; } }
+@media (prefers-reduced-motion: reduce) { .bhero img, .bh-h, .bh-sub, .bh-acts, .bh-stats { animation: none; } }
 .action-bar { display: none; }
 @media (max-width: 760px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -405,8 +432,23 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 }
 @media (prefers-reduced-motion: reduce) { .cue i { animation: none; } .jobs h3, .jobs h3::after { transition: none; } }
 </style>
+{% if brand %}<style>
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
+  --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
+  --accent: {{ brand.palette.accent }}; --accent-ink: {{ brand.palette.accent_ink }};
+  --brand: {{ brand.palette.brand }}; --brand-text: {{ brand.palette.brand_text }};
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
+  --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
+  --accent: {{ brand.palette.accent }}; --accent-ink: {{ brand.palette.accent_ink }};
+} }
+body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color: #140d07; border-color: var(--accent); }
+</style>{% endif %}
 </head>
-<body class="in-film">
+<body class="{{ 'brand' if brand else 'in-film' }}">
 <script>document.documentElement.className += " js";</script>
 {% set phone_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>{% endset %}
 {% set wa_icon %}<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>{% endset %}
@@ -465,6 +507,31 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 </header>
 
 <main id="top">
+  {% if brand %}
+  <section class="bhero" aria-label="{{ biz.name }}">
+    <picture>
+      <source media="(min-aspect-ratio: 1/1)" srcset="{{ brand.wide }}">
+      <img src="{{ brand.tall }}" alt="{{ brand.alt }}" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="bh-shade"></div>
+    {% if brand.label %}<span class="ph-tag film-tag">{{ brand.label }}</span>{% endif %}
+    <div class="wrap bh-in">
+      <h1 class="bh-name"><span class="dot"></span>{{ biz.name }} <span class="bh-where">&middot; {{ t.kicker }} in {{ biz.town }}</span></h1>
+      <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>
+      <p class="bh-sub">{{ brand.sub }}</p>
+      <div class="bh-acts">
+        <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
+        {% if biz.whatsapp %}<a class="btn btn-ghost" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp a photo</a>
+        {% else %}<a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>{% endif %}
+      </div>
+      <ul class="bh-stats">
+        {% if biz.show_rating %}<li><b>{{ biz.rating_str }}&#9733;</b><span>{{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</span></li>{% endif %}
+        <li><b>Written</b><span>price before we start</span></li>
+        <li><b>Local</b><span>{{ biz.town }} and nearby</span></li>
+      </ul>
+    </div>
+  </section>
+  {% else %}
   <div class="stage" id="stage">
     <div class="pin" id="pin">
       <canvas id="film" role="img" aria-label="{{ film.alt }}"></canvas>
@@ -510,6 +577,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       </div></div>
     </div>
   </div>
+  {% endif %}
 
   <section id="about">
     <div class="wrap">
@@ -795,6 +863,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <script>
 /* The film: frames drawn to a canvas as the visitor scrolls, with a cross-fade between neighbouring frames. */
 (function () {
+  if (!document.getElementById("stage")) return;   // brand look: no film
   var BASE = {{ film.base|tojson }}, N = {{ film.frames|int }}, WIDE = {{ 'true' if film.wide else 'false' }};
   var tall = !WIDE || (window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches);
   var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -28,7 +28,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from trades import FILM_TIMING, FILMS, NEARBY, POSTCODES, PRICES, SCENES, STEPS, TRADES, group_for
+from trades import BRAND, FILM_TIMING, FILMS, NEARBY, POSTCODES, PRICES, SCENES, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
 try:
@@ -45,7 +45,7 @@ SCHEMA_TYPE = {
 DEMOS = [
     {"Lead ID": "DEMO1", "Business": "Harbour Heating & Plumbing", "Trade": "Plumber", "Town": "Worthing",
      "Phone": "07700 900417", "Google rating": "4.9", "Google reviews": "38", "Google Maps": "https://www.google.com/maps"},
-    {"Lead ID": "DEMO2", "Business": "Downland Roofing", "Trade": "Roofing contractor", "Town": "Lancing",
+    {"Lead ID": "DEMO2", "Business": "Downland Roofing", "Trade": "Roofing contractor", "Town": "Lancing", "Look": "brand",
      "Phone": "01903 960123", "Google rating": "4.6", "Google reviews": "12", "Google Maps": "https://www.google.com/maps"},
     {"Lead ID": "DEMO3", "Business": "Fairlight Decorating", "Trade": "Painter", "Town": "Brighton",
      "Phone": "07700 900862", "Google rating": "", "Google reviews": "0", "Google Maps": "https://www.google.com/maps"},
@@ -382,6 +382,22 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             shutil.copytree(chosen["folder"], out_dir / "film", dirs_exist_ok=True)
             base = "film/"
         film = film_context(chosen, base, "Example film" if preview else "Illustration")
+    # BRAND look (13 Nov 2026): premium photo first screen instead of the film, when the lead asks for it.
+    brand = None
+    if film and str(row.get("Look") or "").strip().lower() == "brand" and group in BRAND:
+        bd = dict(BRAND[group])
+        hero_src = HERE / "heroes" / (bd["hero"] + "-wide.webp")
+        if preview:
+            rel = os.path.relpath(HERE / "heroes", out_dir).replace(os.sep, "/") + "/"
+        else:
+            (out_dir / "hero").mkdir(parents=True, exist_ok=True)
+            for size in ("wide", "tall"):
+                shutil.copy(HERE / "heroes" / f"{bd['hero']}-{size}.webp", out_dir / "hero" / f"{bd['hero'].split('/')[-1]}-{size}.webp")
+            rel, bd["hero"] = "hero/", bd["hero"].split("/")[-1]
+        if hero_src.exists():
+            bd.update(wide=f"{rel}{bd['hero']}-wide.webp", tall=f"{rel}{bd['hero']}-tall.webp",
+                      sub=bd["sub"].format(town=biz["town"]), label="Example photo" if preview else "")
+            brand = bd
     # Extra pages (10 Nov 2026): one per service, one per town covered (home town + up to 4 nearby), and Contact.
     # Film pages only; a cafe stays one page (menu, hours and map are all on it).
     multi = bool(film) and not t.get("venue")
@@ -402,7 +418,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
-        svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address,
+        svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address, brand=brand,
         help=(HELP.get(group) or []) if film and not t.get("venue") else [],
         hide_photos=[int(x) for x in re.findall(r"\d+", str(row.get("Hide photos") or ""))],
         schema_json=json.dumps(schema).replace("</", "<\\/"),
