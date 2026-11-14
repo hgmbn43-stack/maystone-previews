@@ -408,7 +408,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url("../../assets/cormorant-500i.woff2") format("woff2"); }
 @font-face { font-family: "Manrope"; font-style: normal; font-weight: 300 800; font-display: swap; src: url("../../assets/manrope.woff2") format("woff2"); }
 
-:root, :root[data-theme="light"], :root[data-theme="dark"] {
+:root:not(#_) {
   --ground: #0f1612; --paper: #161d19; --card: #1d2420;
   --ink: #ece7df; --ink-soft: #a7a198; --line: #313733;
   --accent: #a3b86c; --accent-ink: #bccf88;

@@ -8,7 +8,7 @@
 @font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url("assets/cormorant-500i.woff2") format("woff2"); }
 @font-face { font-family: "Manrope"; font-style: normal; font-weight: 300 800; font-display: swap; src: url("assets/manrope.woff2") format("woff2"); }
 
-:root, :root[data-theme="light"], :root[data-theme="dark"] {
+:root:not(#_) {
   --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
   --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
   --accent: {{ brand.palette.accent }}; --accent-ink: {{ brand.palette.accent_ink }};
