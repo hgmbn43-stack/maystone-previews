@@ -1085,6 +1085,6 @@ dialog.qd form { box-shadow: 0 30px 80px rgba(0,0,0,.4); overflow: auto; max-hei
 })();
 </script>
 {% endif %}
-{% if preview and track %}<script>try{fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true}).catch(function(){});}catch(e){}</script>{% endif %}
+{% if preview and track %}<script>try{var st=/[?&]me\b/.test(location.search);try{if(st)localStorage.setItem("ms_staff","1");st=st||localStorage.getItem("ms_staff")==="1";}catch(e){}if(!st)fetch({{ (track ~ "?v=" ~ lead_id)|tojson }},{credentials:"omit",mode:"no-cors",keepalive:true}).catch(function(){});}catch(e){}</script>{% endif %}
 </body>
 </html>
