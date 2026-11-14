@@ -55,7 +55,7 @@ function sendDetailsLink_(sh, r, to) {
 /** Menu: send the details form to the customer on the selected row. */
 function sendDetailsFormMenu() {
   var ui = SpreadsheetApp.getUi(), sh = SpreadsheetApp.getActiveSheet(), r = sh.getActiveRange().getRow();
-  if (TABS.indexOf(sh.getName()) === -1 || r < 2) { ui.alert('Click a lead row on a rep's call list tab first.'); return; }
+  if (TABS.indexOf(sh.getName()) === -1 || r < 2) { ui.alert('Click a lead row on a rep call list tab first.'); return; }
   ensureClientHeaders_();
   try { sendDetailsLink_(sh, r); ui.alert('Details form sent to ' + sh.getRange(r, CX.email).getValue()); }
   catch (e) { ui.alert('Not sent: ' + e.message); }
