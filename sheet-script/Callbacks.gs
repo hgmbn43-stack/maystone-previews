@@ -99,9 +99,9 @@ function morningCallbacks() {
   var overdue = all.filter(function (r) { return r[14] === 'Overdue' && Utilities.formatDate(r[0], tz, 'yyyy-MM-dd') < today; });
   if (!todays.length && !overdue.length) return;
   var line = function (r) {
-    return '<tr><td style="padding:6px 10px"><b>' + r[2] + '</b>' + (r[14] === 'Overdue' ? '<br><small>' + r[1] + '</small>' : '') + '</td><td style="padding:6px 10px"><b>' + esc_(r[4]) + '</b><br><small>' + esc_([r[5], r[6]].filter(String).join(' · ')) + '</small></td>' +
-      '<td style="padding:6px 10px"><a href="tel:' + String(r[7]).replace(/[^\d+]/g, '') + '">' + esc_(r[7]) + '</a></td><td style="padding:6px 10px">' + (r[3] ? esc_(r[3]) : '<b style="color:#E0531F">Unclaimed</b>') + '</td>' +
-      '<td style="padding:6px 10px"><small>Booked by ' + esc_(r[9] || r[12]) + '</small>' + (r[11] ? '<br><a href="' + r[11] + '">Preview</a>' : '') + '</td></tr>';
+    return '<tr><td style="padding:6px 10px"><b>' + r[2] + '</b>' + (r[14] === 'Overdue' ? '<br><small>' + r[1] + '</small>' : '') + '</td><td style="padding:6px 10px"><b>' + cbEsc_(r[4]) + '</b><br><small>' + cbEsc_([r[5], r[6]].filter(String).join(' · ')) + '</small></td>' +
+      '<td style="padding:6px 10px"><a href="tel:' + String(r[7]).replace(/[^\d+]/g, '') + '">' + cbEsc_(r[7]) + '</a></td><td style="padding:6px 10px">' + (r[3] ? cbEsc_(r[3]) : '<b style="color:#E0531F">Unclaimed</b>') + '</td>' +
+      '<td style="padding:6px 10px"><small>Booked by ' + cbEsc_(r[9] || r[12]) + '</small>' + (r[11] ? '<br><a href="' + r[11] + '">Preview</a>' : '') + '</td></tr>';
   };
   var table = function (rows) { return '<table style="border-collapse:collapse;font:14px Arial,sans-serif;border:1px solid #ddd">' + rows.map(line).join('') + '</table>'; };
   var html = '<div style="font:15px Arial,sans-serif;color:#142D4C">' +
@@ -121,3 +121,5 @@ function installMorning() {
   buildCallbacks();
   return 'Morning email set for 8am. Callbacks tab built.';
 }
+
+function cbEsc_(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
