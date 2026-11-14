@@ -1145,6 +1145,10 @@ CATEGORY_RULES.insert(0, ("cafe", r"\bcaf[eé]s?\b|coffee|tea ?room|bakery|bistr
 U = "https://images.unsplash.com/photo-"
 WIDE, TALL = "?w=2000&q=72&auto=format&fit=crop", "?w=900&h=1600&q=70&auto=format&fit=crop"
 ABOUT, SQ = "?w=900&h=1125&q=70&auto=format&fit=crop", "?w=500&h=500&q=65&auto=format&fit=crop"
+# Pexels photos (also free for commercial use, no credit needed), used where Unsplash was thin.
+X = "https://images.pexels.com/photos/"
+PX_WIDE, PX_TALL = "?auto=compress&cs=tinysrgb&fit=crop&w=2000&h=1125", "?auto=compress&cs=tinysrgb&fit=crop&w=900&h=1600"
+PX_ABOUT, PX_SQ = "?auto=compress&cs=tinysrgb&fit=crop&w=900&h=1125", "?auto=compress&cs=tinysrgb&fit=crop&w=500&h=500"
 
 
 def _mix(h1, h2, t):
@@ -1262,13 +1266,9 @@ BRAND = {
         # Charcoal and plaster pink
         "palette": _pal("#1a1918", "#d39a86", "#e2b2a1"),
         "light": _light("#94513a"),
-        "photos": {"wide": U + "1482731215275-a1f151646268" + WIDE, "tall": U + "1482731215275-a1f151646268" + TALL, "about": U + "1661168929701-ea898de2dabd" + ABOUT,
-                   "tiles": [U + "1768839725085-829e6ac7ac26" + SQ,
-                      U + "1635513262547-520ac21726ce" + SQ,
-                      U + "1629814559102-3f0b56c250f6" + SQ,
-                      U + "1718816281207-3b253cff549a" + SQ,
-                      U + "1644329615817-036a646f9348" + SQ,
-                      U + "1543060747-53cb56d6b105" + SQ]},
+        "photos": { "wide": X + "6473982/pexels-photo-6473982.jpeg" + PX_WIDE, "tall": X + "6473982/pexels-photo-6473982.jpeg" + PX_TALL, "about": X + "6474308/pexels-photo-6474308.jpeg" + PX_ABOUT,
+                   "tiles": [X + "5691622/pexels-photo-5691622.jpeg" + PX_SQ, X + "5691672/pexels-photo-5691672.jpeg" + PX_SQ, X + "10383588/pexels-photo-10383588.jpeg" + PX_SQ,
+                             X + "5493673/pexels-photo-5493673.jpeg" + PX_SQ, X + "6474343/pexels-photo-6474343.jpeg" + PX_SQ, U + "1543060747-53cb56d6b105" + SQ]},
         "story_kicker": "Start to finish",
         "story": ('Watch a tired room', 'turn smooth.'),
         "about": ('A local plasterer who', 'leaves it clean.'),
@@ -1357,13 +1357,9 @@ BRAND = {
         # Navy and safety orange
         "palette": _pal("#12161d", "#e07a35", "#ec955a"),
         "light": _light("#a24c14"),
-        "photos": {"wide": U + "1662394027253-dc37506c2587" + WIDE, "tall": U + "1662394027253-dc37506c2587" + TALL, "about": U + "1765518440022-10242cc86895" + ABOUT,
-                   "tiles": [U + "1657664066011-ed54a1be81d2" + SQ,
-                      U + "1789841418236-2060e2af1e78" + SQ,
-                      U + "1607400201515-c2c41c07d307" + SQ,
-                      U + "1786204697642-328c597b6f05" + SQ,
-                      U + "1605117882932-f9e32b03fea9" + SQ,
-                      U + "1731168273756-e02cae42265b" + SQ]},
+        "photos": { "wide": X + "5768187/pexels-photo-5768187.jpeg" + PX_WIDE, "tall": X + "5768187/pexels-photo-5768187.jpeg" + PX_TALL, "about": X + "31544574/pexels-photo-31544574/free-photo-of-senior-man-painting-exterior-wall-on-scaffolding.jpeg" + PX_ABOUT,
+                   "tiles": [X + "4554425/pexels-photo-4554425.jpeg" + PX_SQ, X + "7218567/pexels-photo-7218567.jpeg" + PX_SQ, X + "5691548/pexels-photo-5691548.jpeg" + PX_SQ,
+                             U + "1786204697642-328c597b6f05" + SQ, U + "1605117882932-f9e32b03fea9" + SQ, X + "5691518/pexels-photo-5691518.jpeg" + PX_SQ]},
         "story_kicker": "Start to finish",
         "story": ('Watch the to-do list', 'shrink.'),
         "about": ('A local handyman who', 'gets it done.'),
