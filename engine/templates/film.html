@@ -557,7 +557,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
   <section id="about">
     <div class="wrap">
-      {% if brand %}<figure class="about-img"><img src="{{ brand.tile_base }}{{ brand.tiles[1] }}" alt="" loading="lazy" decoding="async">{% if preview %}<figcaption>Example photo</figcaption>{% endif %}</figure>{% endif %}
+      {% if brand %}<figure class="about-img"><img src="{{ brand.about_img or (brand.tile_base ~ brand.tiles[1]) }}" alt="Roofers at work on a slate roof" loading="lazy" decoding="async">{% if preview %}<figcaption>Example photo</figcaption>{% endif %}</figure>{% endif %}
       <div class="intro-grid">
         <div>
           <p class="kicker">{{ t.kicker }} in {{ biz.town }}</p>

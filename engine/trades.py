@@ -1153,6 +1153,19 @@ BRAND = {
         "light": {"bone": "#f0ebe2", "bone_2": "#e8e2d6", "bone_card": "#f8f5ef", "bone_ink": "#16191c",
                   "bone_soft": "#5b5850", "bone_line": "#d3ccbd", "accent_deep": "#9a4f22"},
         # Signature look (14 Nov 2026): headings are two parts, the second set in accent italics.
+        # Real photos (14 Nov 2026), not AI: free Unsplash photos (free for commercial use, no credit needed),
+        # hotlinked from images.unsplash.com and marked "Example photo" on previews. Used instead of the AI images.
+        "photos": {
+            "wide": "https://images.unsplash.com/photo-1763665814538-8ba04597286c?w=2000&q=72&auto=format&fit=crop",
+            "tall": "https://images.unsplash.com/photo-1763665814538-8ba04597286c?w=900&h=1600&q=70&auto=format&fit=crop",
+            "about": "https://images.unsplash.com/photo-1681049400158-0ff6249ac315?w=900&h=1125&q=70&auto=format&fit=crop",
+            "tiles": ["https://images.unsplash.com/photo-1516357456231-cfb2dcb7eb3d?w=500&h=500&q=65&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1763665814605-a6489a3bf2a0?w=500&h=500&q=65&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1541888894402-f3b1af908be4?w=500&h=500&q=65&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1786412126367-6128a7c80035?w=500&h=500&q=65&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1654531015087-8cc3d04d1b2d?w=500&h=500&q=65&auto=format&fit=crop",
+                      "https://images.unsplash.com/photo-1759329935140-86037c3beaa5?w=500&h=500&q=65&auto=format&fit=crop"],
+        },
         "story_kicker": "A roof, start to finish",
         "story": ("Watch a roof", "come together."),
         "about": ("Local roofers who", "turn up."),

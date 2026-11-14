@@ -389,8 +389,15 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         bd = dict(BRAND[group])
         bd["palette"] = {**bd["palette"], **(bd.get("light") or {})}
         hero_src = HERE / "heroes" / (bd["hero"] + "-wide.webp")
+        ph = bd.get("photos")
+        if ph:  # real (Unsplash) photos, hotlinked: no files to copy
+            bd.update(wide=ph["wide"], tall=ph["tall"], about_img=ph.get("about", ""), tile_base="", tiles=ph["tiles"],
+                      sub=bd["sub"].format(town=biz["town"]), label="Example photo" if preview else "")
+            brand = bd
         folder = bd["hero"].split("/")[0]
-        if preview:
+        if ph:
+            pass
+        elif preview:
             rel = os.path.relpath(HERE / "heroes", out_dir).replace(os.sep, "/") + "/"
             bd["tile_base"] = f"{rel}{folder}/"
         else:
@@ -400,7 +407,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             for tile in bd.get("tiles") or []:
                 shutil.copy(HERE / "heroes" / folder / tile, out_dir / "hero" / tile)
             rel, bd["hero"], bd["tile_base"] = "hero/", bd["hero"].split("/")[-1], "hero/"
-        if hero_src.exists():
+        if not ph and hero_src.exists():
             bd.update(wide=f"{rel}{bd['hero']}-wide.webp", tall=f"{rel}{bd['hero']}-tall.webp",
                       sub=bd["sub"].format(town=biz["town"]), label="Example photo" if preview else "")
             brand = bd
