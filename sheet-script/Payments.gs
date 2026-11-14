@@ -134,6 +134,7 @@ function notify_(tab, subject, body) {
   var to = {};
   to[OWNER_EMAIL] = true;
   if (tab && REP_EMAILS[tab]) to[REP_EMAILS[tab]] = true;
+  if (REP_EMAILS.Fin) to[REP_EMAILS.Fin] = true; // setter model: both closers hear about hot leads
   try { GmailApp.sendEmail(Object.keys(to).join(','), subject, body, { name: 'Maystone sheet' }); } catch (e) { console.error(e); }
 }
 

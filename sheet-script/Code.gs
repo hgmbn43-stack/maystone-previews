@@ -13,7 +13,15 @@
 
 var REPO = 'hgmbn43-stack/maystone-previews';
 var SITE = 'https://hgmbn43-stack.github.io/maystone-previews/';
-var TABS = ['Harvey', 'Fin'];
+var NOT_REP_TABS = ['Summary', 'Binned', 'Callbacks', 'AI receptionist list', 'Leads'];
+/** Every rep's call list tab (header A1 = "Lead ID"), so new reps' tabs work without a code change. */
+var TABS = (function () {
+  try {
+    return SpreadsheetApp.openById('1QWrKee1Li45r1Zw2YcIV4XMSUyC-oFueAx4wWglWoEQ').getSheets().filter(function (s) {
+      return NOT_REP_TABS.indexOf(s.getName()) === -1 && String(s.getRange(1, 1).getValue()).trim() === 'Lead ID';
+    }).map(function (s) { return s.getName(); });
+  } catch (e) { return ['Harvey', 'Fin']; }
+})();
 var SENDER = 'hello@maystone.uk';
 var SENDER_NAME = 'Maystone';
 // 1-based column numbers
@@ -30,6 +38,7 @@ function onOpen() {
     .addItem('5. Set Stripe key', 'setStripeKey')
     .addItem('Send details form (selected row)', 'sendDetailsFormMenu')
     .addSeparator()
+    .addItem('Rebuild Callbacks tab', 'buildCallbacks')
     .addItem('Farm leads now', 'farmNow')
     .addItem('Run now', 'processAll')
     .addToUi();
@@ -53,7 +62,7 @@ function switchOn() {
     return;
   }
   if (!PropertiesService.getUserProperties().getProperty('GH_TOKEN')) { ui.alert('Do step 1 (GitHub key) first.'); return; }
-  ScriptApp.getProjectTriggers().forEach(function (t) { if (['farmDaily', 'nightlySort'].indexOf(t.getHandlerFunction()) === -1) ScriptApp.deleteTrigger(t); });
+  ScriptApp.getProjectTriggers().forEach(function (t) { if (['farmDaily', 'nightlySort', 'morningCallbacks'].indexOf(t.getHandlerFunction()) === -1) ScriptApp.deleteTrigger(t); });
   ScriptApp.newTrigger('onEditRun').forSpreadsheet(SpreadsheetApp.getActive()).onEdit().create();
   ScriptApp.newTrigger('processAll').timeBased().everyMinutes(5).create();
   processAll();
@@ -63,6 +72,7 @@ function switchOn() {
 /** Installable on-edit trigger: react straight away to edits in Outcome, Client email or Approved. */
 function onEditRun(e) {
   if (!e || !e.range) return;
+  try { if (callbackEdit_(e)) return; } catch (err) { console.error('callbackEdit_: ' + err); }
   var sh = e.range.getSheet();
   if (TABS.indexOf(sh.getName()) === -1) return;
   var c1 = e.range.getColumn(), c2 = e.range.getLastColumn();
@@ -81,6 +91,7 @@ function processAll() {
     try { farmPoll_(); } catch (e) { console.error('farmPoll_: ' + e); }
     try { stripePoll_(); } catch (e) { console.error('stripePoll_: ' + e); }
     try { clientPoll_(); } catch (e) { console.error('clientPoll_: ' + e); }
+    try { buildCallbacks(); } catch (e) { console.error('buildCallbacks: ' + e); }
   });
 }
 

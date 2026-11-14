@@ -4,7 +4,15 @@
  * been sent, views are counted in the Call Lists sheet and the rep is emailed on the first view.
  * Deploy: Web app, execute as me, access Anyone.
  */
-var TABS = ['Harvey', 'Fin'];
+var NOT_REP_TABS = ['Summary', 'Binned', 'Callbacks', 'AI receptionist list', 'Leads'];
+/** Every rep's call list tab (header A1 = "Lead ID"), so new reps' tabs work without a code change. */
+var TABS = (function () {
+  try {
+    return SpreadsheetApp.openById('1QWrKee1Li45r1Zw2YcIV4XMSUyC-oFueAx4wWglWoEQ').getSheets().filter(function (s) {
+      return NOT_REP_TABS.indexOf(s.getName()) === -1 && String(s.getRange(1, 1).getValue()).trim() === 'Lead ID';
+    }).map(function (s) { return s.getName(); });
+  } catch (e) { return ['Harvey', 'Fin']; }
+})();
 var C = { biz: 2, sent: 15 };
 var C2 = { pkg: 18, paid: 19, views: 16, hot: 17 };
 var REP_EMAILS = { Harvey: 'harvey@maystone.uk', Fin: 'fin.john@icloud.com' };
@@ -59,6 +67,7 @@ function notify_(tab, subject, body) {
   var to = {};
   to[OWNER_EMAIL] = true;
   if (tab && REP_EMAILS[tab]) to[REP_EMAILS[tab]] = true;
+  if (REP_EMAILS.Fin) to[REP_EMAILS.Fin] = true; // setter model: both closers hear about hot leads
   try { GmailApp.sendEmail(Object.keys(to).join(','), subject, body, { name: 'Maystone sheet' }); } catch (e) { console.error(e); }
 }
 
