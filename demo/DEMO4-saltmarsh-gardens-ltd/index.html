@@ -398,8 +398,273 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 }
 @media (prefers-reduced-motion: reduce) { .cue i { animation: none; } .jobs h3, .jobs h3::after { transition: none; } }
 </style>
-</head>
-<body class="in-film">
+<style>
+/* SIGNATURE look (14 Nov 2026). Garrard's design language on the preview engine: an elegant serif with the
+   key words in accent italics, thin lines, small spaced labels, and dark sections alternating with warm
+   bone ones. Every section has its own format so the page never repeats itself:
+   photo hero > moving strip > split photo/about > pinned scroll film > numbered service rows >
+   three-step timeline > problem picker > Google photo strip > review wall > areas > FAQ > quote > plans.
+   Colours come from BRAND[group]["palette"] in trades.py. */
+@font-face { font-family: "Cormorant"; font-style: normal; font-weight: 500; font-display: swap; src: url("assets/cormorant-500.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-display: swap; src: url("assets/cormorant-500i.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 300 800; font-display: swap; src: url("assets/manrope.woff2") format("woff2"); }
+
+:root, :root[data-theme="light"], :root[data-theme="dark"] {
+  --ground: #0f1612; --paper: #161d19; --card: #1d2420;
+  --ink: #ece7df; --ink-soft: #a7a198; --line: #313733;
+  --accent: #a3b86c; --accent-ink: #bccf88;
+  --brand: #a3b86c; --brand-text: #bccf88;
+  --btn: #a3b86c; --btn-ink: #14100b; --on-accent: #14100b;
+  --night: #0f1612; --on-night: #ece7df; --night-soft: #a7a198;
+  --star: #a3b86c;
+  --display: "Cormorant", "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --body: "Manrope", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --mono: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --radius: 4px;
+  color-scheme: dark;
+}
+/* Light ("bone") sections: the same components, lighter variables */
+body.brand #about, body.brand #process, body.brand #help, body.brand #areas, body.brand #faq, body.brand .golive {
+  --ground: #f0ebe2; --paper: #e8e2d6; --card: #f8f5ef;
+  --ink: #16191c; --ink-soft: #5b5850; --line: #d3ccbd;
+  --accent-ink: #536a24; --brand-text: #536a24;
+  background: var(--ground); color: var(--ink); color-scheme: light;
+}
+body.brand #faq { background: var(--paper); }
+body.brand { font: 400 1rem/1.7 var(--body); -webkit-font-smoothing: antialiased; }
+body.brand .band { background: var(--ground); }
+body.brand section { padding-block: clamp(4.5rem, 10vw, 8.5rem); }
+
+/* Type */
+body.brand h1, body.brand h2, body.brand h3 { font-family: var(--display); font-weight: 500; font-stretch: normal; letter-spacing: -.005em; }
+body.brand h2 { font-size: clamp(2.5rem, 7vw, 4.6rem); line-height: 1.02; max-width: 16ch; margin-top: 1rem; }
+body.brand h2 em, body.brand .bh-h em, body.brand .hook em { font-style: italic; color: var(--accent-ink); }
+body.brand .kicker, body.brand .eyebrow { font: 600 .7rem/1.4 var(--body); letter-spacing: .26em; text-transform: uppercase; color: var(--accent-ink); }
+body.brand .kicker::before { width: 2.6rem; height: 1px; border-radius: 0; }
+body.brand .lede { font-size: 1.08rem; line-height: 1.75; }
+body.brand .ph-tag { font: 600 .6rem/1 var(--body); letter-spacing: .16em; border-radius: 2px; }
+
+/* Buttons: pills, with the accent one as the only solid */
+body.brand .btn { font: 700 .86rem/1.1 var(--body); letter-spacing: .01em; padding: .8rem 1.4rem; }
+body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color: #14100b; border-color: var(--accent); }
+body.brand .btn-line { border-color: color-mix(in srgb, var(--ink) 30%, transparent); }
+body.brand .btn-ghost { background: transparent; color: #f4efe6; border-color: rgba(244,239,230,.5); }
+body.brand .btn-wa { background: transparent; color: inherit; border-color: color-mix(in srgb, currentColor 35%, transparent); }
+body.brand .btn-wa svg { color: #25d366; }
+body.brand .icon-btn.wa { background: transparent; color: #25d366; border: 1px solid var(--line); }
+
+/* Header */
+body.brand .top .mark strong { font: 500 1.25rem/1 var(--display); letter-spacing: .14em; text-transform: uppercase; }
+body.brand .top .mono { display: none; }
+body.brand .top .links a { font: 600 .74rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+body.brand .top.solid { background: color-mix(in srgb, #0f1612 94%, transparent); color: #ece7df; box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+body.brand .menu-panel { background: #0f1612; color: #ece7df; }
+body.brand .menu-panel a { font: 500 1.5rem/1.2 var(--display); border-color: rgba(255,255,255,.1); }
+
+/* 1. Hero: one photo, a serif headline, two buttons, three quiet facts */
+.bhero { position: relative; min-height: 100svh; display: grid; grid-template-rows: 1fr auto; color: #f4efe6; overflow: hidden; isolation: isolate; padding: 0 !important; }
+.bhero picture, .bhero img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.bhero img { object-fit: cover; object-position: 62% 50%; z-index: -2; animation: bhZoom 16s ease-out both; }
+@keyframes bhZoom { from { transform: scale(1.1); } to { transform: scale(1); } }
+.bh-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(12,14,16,.62) 0%, rgba(12,14,16,.12) 34%, rgba(12,14,16,.6) 66%, rgba(12,14,16,.96) 100%); }
+.bhero .film-tag { position: absolute; top: auto; bottom: 1rem; right: 1rem; left: auto; }
+.bh-in { align-self: end; width: 100%; padding-top: 8rem; padding-bottom: 2.2rem; }
+.bh-name { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem; font: 600 .7rem/1.5 var(--body) !important; letter-spacing: .26em !important; text-transform: uppercase; color: #bccf88; margin: 0 0 1.3rem; }
+.bh-name i { width: 2.6rem; height: 1px; background: var(--accent); }
+.bh-name span { color: rgba(244,239,230,.7); }
+.bh-h { font: 500 clamp(3.4rem, 13.5vw, 8rem)/.96 var(--display); letter-spacing: -.012em; margin: 0; max-width: 9ch; text-wrap: balance; animation: bhUp 1s .1s cubic-bezier(.2,.7,.2,1) both; }
+.bh-sub { margin: 1.4rem 0 0; max-width: 33rem; font-size: clamp(.98rem, 2.4vw, 1.1rem); line-height: 1.7; color: rgba(244,239,230,.82); animation: bhUp 1s .25s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.8rem; animation: bhUp 1s .4s cubic-bezier(.2,.7,.2,1) both; }
+.bh-acts .btn { min-height: 52px; }
+.bh-stats { list-style: none; margin: 0 auto; width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(244,239,230,.16); padding-block: 1.1rem calc(1.3rem + env(safe-area-inset-bottom, 0px)); animation: bhUp 1s .55s cubic-bezier(.2,.7,.2,1) both; }
+.bh-stats li { padding-right: .8rem; }
+.bh-stats li + li { padding-left: 1rem; border-left: 1px solid rgba(244,239,230,.16); }
+.bh-stats b { display: block; font: 500 clamp(1.5rem, 5vw, 2.1rem)/1.1 var(--display); color: #f4efe6; }
+.bh-stats span { display: block; font: 600 .62rem/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; color: rgba(244,239,230,.62); margin-top: .25rem; }
+.bh-scroll { display: none; }
+@keyframes bhUp { from { opacity: 0; transform: translateY(20px); } }
+@media (min-aspect-ratio: 1/1) {
+  .bh-shade { background: linear-gradient(90deg, rgba(12,14,16,.92) 0%, rgba(12,14,16,.6) 36%, rgba(12,14,16,.05) 68%), linear-gradient(0deg, rgba(12,14,16,.85), transparent 38%); }
+  .bhero img { object-position: 70% 50%; }
+  .bh-in { padding-bottom: 3.2rem; }
+  .bh-scroll { display: block; position: absolute; right: 2.2rem; top: 50%; writing-mode: vertical-rl; font: 600 .62rem/1 var(--body); letter-spacing: .34em; text-transform: uppercase; color: rgba(244,239,230,.6); }
+  .bh-scroll::after { content: ""; display: block; width: 1px; height: 4.5rem; margin: 1rem auto 0; background: linear-gradient(rgba(244,239,230,.7), transparent); animation: drip 2s ease-in-out infinite; transform-origin: top; }
+}
+
+/* 2. Moving strip of services */
+.bmarquee { overflow: hidden; background: #0f1612; color: #ece7df; border-block: 1px solid rgba(255,255,255,.09); padding-block: 1.15rem; }
+.bmarquee > div { display: flex; align-items: center; gap: 2.2rem; width: max-content; animation: bmar 38s linear infinite; }
+.bmarquee span { font: 500 italic clamp(1.3rem, 3.4vw, 1.8rem)/1 var(--display); white-space: nowrap; }
+.bmarquee i { font-style: normal; color: var(--accent); font-size: .8rem; }
+@keyframes bmar { to { transform: translateX(-50%); } }
+
+/* 3. About: a framed photo beside the words, then figures on a ruled line */
+body.brand #about .wrap { display: grid; gap: 2.6rem 4.5rem; }
+.about-img { position: relative; margin: 0; aspect-ratio: 4 / 5; max-height: 34rem; }
+.about-img img { width: 100%; height: 100%; object-fit: cover; }
+.about-img::before { content: ""; position: absolute; inset: 1.1rem -1.1rem -1.1rem 1.1rem; border: 1px solid var(--accent); z-index: -1; }
+body.brand #about .wrap { isolation: isolate; }
+.about-img figcaption { position: absolute; left: 0; bottom: 0; background: #0f1612; color: #ece7df; font: 600 .6rem/1 var(--body); letter-spacing: .2em; text-transform: uppercase; padding: .7rem 1rem; }
+body.brand .intro-grid { grid-template-columns: 1fr; align-content: center; gap: 1.4rem; }
+body.brand .proof { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; margin-top: 1rem; padding-top: 0; border-top: 1px solid var(--line); }
+body.brand .proof > div { padding: 1.5rem 1rem 1.5rem 0; border-bottom: 1px solid var(--line); }
+body.brand .proof strong { font: 500 clamp(2.6rem, 8vw, 3.8rem)/1 var(--display); color: var(--ink); }
+body.brand .proof span { font: 600 .66rem/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; }
+body.brand .proof .stars-bar { letter-spacing: .1em; font-size: .8rem; }
+body.brand .proof .ph { border-radius: 0; border-style: dashed; border-width: 0 0 1px; padding: 1.5rem 1rem 1.5rem 0; }
+body.brand .proof .ph b { font: 500 1.6rem/1.1 var(--display); }
+@media (min-width: 900px) {
+  body.brand #about .wrap { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); align-items: center; }
+  body.brand .proof { grid-template-columns: repeat(4, 1fr); }
+  body.brand .proof > div + div { padding-left: 1.6rem; border-left: 1px solid var(--line); }
+}
+
+/* 4. The scroll film as a story: outlined numerals, a ruled panel */
+body.brand #story { background: #0f1612; }
+body.brand .hook { font: 500 clamp(3rem, 10.5vw, 6.4rem)/.98 var(--display); letter-spacing: -.01em; max-width: 10ch; }
+body.brand .hook-sub { font-size: 1rem; opacity: .8; }
+body.brand .b-step .in > *, body.brand .b-end .in > * { position: relative; }
+.big-no { display: block; font: 500 clamp(4.5rem, 16vw, 8rem)/.8 var(--display); color: transparent; -webkit-text-stroke: 1px #a3b86c; opacity: .85; margin-bottom: .8rem; }
+body.brand .step-line { font: 500 clamp(2.3rem, 7vw, 4.6rem)/1.02 var(--display); max-width: 12ch; margin-top: .7rem; }
+body.brand .end-name { font: 500 clamp(2.6rem, 8vw, 5.6rem)/1 var(--display); }
+body.brand .end-row .phone { font: 500 clamp(1.8rem, 5vw, 2.6rem)/1 var(--display); }
+body.brand .hud .in { font: 600 .62rem/1 var(--body); letter-spacing: .22em; }
+body.brand canvas { border-radius: 2px !important; }
+
+/* 5. Services: a numbered index. Number, name, what it is, price, thumbnail */
+body.brand #services { background: #161d19; }
+.jobs.rows { counter-reset: job; margin-top: 3rem; }
+.jobs.rows li { counter-increment: job; position: relative; display: grid; grid-template-columns: 2.6rem minmax(0, 1fr) 5.2rem; grid-template-areas: "no body img" "no side img"; gap: .5rem 1rem; padding-block: 1.5rem; align-items: start; transition: background .4s ease, padding .4s ease; }
+.jobs.rows li::before { content: counter(job, decimal-leading-zero); grid-area: no; font: 600 .68rem/1 var(--body); letter-spacing: .14em; color: var(--accent-ink); padding-top: .75rem; }
+.jobs.rows li > div:not(.job-side) { grid-area: body; }
+.jobs.rows .job-side { grid-area: side; justify-content: flex-start; gap: 1rem; flex-wrap: wrap; margin-top: .5rem; }
+.jobs.rows .tile-img { grid-area: img; display: block; position: relative; aspect-ratio: 1; overflow: hidden; align-self: start; }
+.jobs.rows .tile-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .5s ease; filter: saturate(.85); }
+.jobs.rows .tile-img .ph-tag { display: none; }
+.jobs.rows h3 { font: 500 clamp(1.7rem, 5vw, 2.5rem)/1.1 var(--display); }
+.jobs.rows h3::after { color: var(--accent-ink); }
+.jobs.rows p { font-size: .94rem; margin-top: .35rem; }
+.jobs.rows .price { font: 600 .92rem/1.3 var(--body); text-align: left; letter-spacing: .02em; }
+.jobs.rows .price small { font: 600 .58rem/1.4 var(--body); letter-spacing: .18em; }
+.jobs.rows .btn-line { min-height: 40px; padding: .5rem 1rem; font-size: .78rem; }
+.jobs.rows .icon-btn { width: 40px; height: 40px; }
+.jobs.rows li:hover .tile-img img { transform: scale(1.12); filter: none; }
+@media (min-width: 900px) {
+  .jobs.rows li { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1.2fr) auto 7.5rem; grid-template-areas: "no body body side img"; align-items: center; gap: 2rem; padding-block: 1.3rem; }
+  .jobs.rows li > div:not(.job-side) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 2rem; align-items: center; }
+  .jobs.rows p { margin-top: 0; }
+  .jobs.rows li::before { padding-top: 0; }
+  .jobs.rows .job-side { margin-top: 0; flex-wrap: nowrap; }
+  .jobs.rows .tile-img { aspect-ratio: 4 / 3; }
+  .jobs.rows li:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); padding-inline: 1rem; }
+}
+
+/* 6. How it works: three steps on a line that draws itself */
+.timeline { list-style: none; padding: 0; margin: 3.2rem 0 0; display: grid; gap: 0; position: relative; }
+.timeline li { position: relative; padding: 0 0 2.4rem 3.4rem; }
+.timeline li::before { content: ""; position: absolute; left: .95rem; top: .4rem; bottom: -.4rem; width: 1px; background: var(--line); }
+.timeline li:last-child::before { display: none; }
+.timeline .t-no { position: absolute; left: 0; top: 0; width: 2rem; height: 2rem; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--accent); background: var(--ground); font: 600 .62rem/1 var(--body); letter-spacing: .08em; color: var(--accent-ink); z-index: 1; }
+.timeline h3 { font: 500 clamp(1.6rem, 4.6vw, 2.1rem)/1.15 var(--display); }
+.timeline p { color: var(--ink-soft); margin-top: .5rem; max-width: 34ch; font-size: .96rem; }
+@media (min-width: 900px) {
+  .timeline { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+  .timeline li { padding: 3.4rem 0 0; }
+  .timeline li::before { left: 2rem; right: -3rem; top: 1rem; bottom: auto; width: auto; height: 1px; }
+}
+
+/* 7. Problem picker */
+body.brand .help-pick { gap: .7rem; margin-top: 2rem; }
+body.brand .help-btn { font: 500 1.3rem/1.2 var(--display); border-radius: 2px; border-width: 1px; padding: 1.1rem 1.4rem; background: var(--card); transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+body.brand .help-btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+body.brand .help-btn[aria-pressed="true"] { background: #0f1612; color: #ece7df; border-color: #0f1612; }
+body.brand .help-card { border-radius: 2px; border-left: 2px solid var(--accent); }
+body.brand .help-q span { border-width: 1px; }
+@media (min-width: 900px) { body.brand .help-pick { display: grid; grid-template-columns: repeat(3, 1fr); } body.brand .help-btn { text-align: left; min-height: 6.5rem; display: flex; align-items: flex-end; } }
+
+/* 8. Their Google photos: a strip you swipe */
+body.brand #work { background: #0f1612; }
+body.brand .gallery { display: flex; gap: .8rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; margin-right: calc(-1 * max(20px, env(safe-area-inset-right, 0px))); perspective: none; scrollbar-width: thin; }
+body.brand .tile { flex: 0 0 min(78vw, 26rem); scroll-snap-align: start; border-radius: 0; transform: none; }
+
+/* 9. Reviews: a wall of quotes */
+body.brand #reviews { background: #0f1612; }
+body.brand .score-num { font: 500 clamp(5rem, 20vw, 9rem)/.9 var(--display); color: var(--ink); margin-top: 1.6rem; }
+body.brand .score a { color: var(--accent-ink); font: 600 .74rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+body.brand .cards { gap: 1rem; }
+body.brand .review-card { background: transparent; border-radius: 0; padding: 1.8rem; gap: 1rem; transition: border-color .3s ease, transform .3s ease; }
+body.brand .review-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+body.brand .review-card .stars { font-size: .8rem; letter-spacing: .3em; color: var(--accent); }
+body.brand .review-card p, body.brand .review-card blockquote { font: 500 1.3rem/1.4 var(--display); margin: 0; }
+body.brand .review-who { border-top: 1px solid var(--line); padding-top: 1rem; }
+body.brand .review-who a, body.brand .review-who small { font: 600 .66rem/1.5 var(--body); letter-spacing: .14em; text-transform: uppercase; }
+@media (min-width: 960px) { body.brand .cards { grid-template-columns: 1.3fr 1fr; } body.brand .review-card:first-child { grid-row: span 2; } body.brand .review-card:first-child p { font-size: 1.7rem; -webkit-line-clamp: 12; } }
+
+/* 10. Areas */
+body.brand .town-word { font: 500 italic clamp(3rem, calc(150cqi / var(--chars)), 8rem)/1 var(--display); color: var(--accent-ink); }
+body.brand .areas li { background: transparent; border-radius: 2px; font: 600 .74rem/1.2 var(--body); letter-spacing: .1em; text-transform: uppercase; padding: .6rem 1rem; transition: background .25s ease, color .25s ease, border-color .25s ease; }
+body.brand .areas li:hover { background: #0f1612; color: #ece7df; border-color: #0f1612; }
+
+/* 11. FAQ: ruled lines, not boxes */
+body.brand .faq { gap: 0; border-top: 1px solid var(--line); }
+body.brand .faq details { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; padding-inline: 0; }
+body.brand .faq summary { font: 500 clamp(1.3rem, 3.6vw, 1.6rem)/1.25 var(--display); padding-block: 1.4rem; }
+body.brand .faq summary::after { top: 1.35rem; border-color: var(--accent); color: var(--accent-ink); }
+
+/* 12. Quote: the photo again, a phone number you can't miss, and a quiet form */
+body.brand .quote-band { background: linear-gradient(90deg, rgba(12,14,16,.95), rgba(12,14,16,.8)), var(--qb-img) center / cover no-repeat; color: #ece7df; }
+body.brand .quote-band .phone { font: 500 clamp(2.2rem, 8vw, 3.4rem)/1 var(--display); text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: .2rem; }
+body.brand .quote-band .cred { border-radius: 0; border-width: 0 0 1px; border-style: solid; border-color: rgba(255,255,255,.14); padding-inline: 0; }
+body.brand .quote-band form { border-radius: 2px; background: color-mix(in srgb, #1d2420 92%, transparent); border: 1px solid rgba(255,255,255,.1); }
+body.brand .quote-band form h3, body.brand dialog form h3 { font: 500 1.9rem/1.1 var(--display); }
+body.brand form label { font: 600 .64rem/1.4 var(--body); letter-spacing: .16em; text-transform: uppercase; }
+body.brand form input, body.brand form select, body.brand form textarea { border-radius: 0; border-width: 0 0 1px; background: transparent; padding-inline: 0; font-family: var(--body); }
+body.brand form input:focus, body.brand form select:focus, body.brand form textarea:focus { outline: none; border-color: var(--accent); }
+body.brand .cover-row input { border-width: 0 0 1px; }
+
+/* 13. Plans (previews) */
+body.brand .golive .plan { border-radius: 2px; }
+body.brand .golive .amount { font: 500 clamp(2.4rem, 7vw, 3.2rem)/1 var(--display); color: var(--ink); }
+body.brand .golive .amount small { font: 600 .66rem/1.4 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+
+/* Footer: the name, huge and outlined */
+body.brand footer { background: #0f1612; color: #a7a198; overflow: hidden; }
+.foot-giant { margin: 0 0 1.2rem; padding: 2.5rem max(20px, env(safe-area-inset-left, 0px)) 0; font: 500 calc((100vw - 40px) / (var(--n, 16) * .74))/.9 var(--display); letter-spacing: .02em; text-transform: uppercase; white-space: nowrap; color: transparent; -webkit-text-stroke: 1px rgba(240,235,226,.22); }
+body.brand .foot-top strong { font: 500 1.4rem/1 var(--display); letter-spacing: .12em; text-transform: uppercase; color: #ece7df; }
+body.brand .foot-links a { font: 600 .68rem/1.5 var(--body); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+body.brand .action-bar { background: color-mix(in srgb, #0f1612 94%, transparent); }
+
+/* Sub-pages share the look */
+body.brand .sub-hero h1 { font: 500 clamp(2.8rem, 9vw, 5.4rem)/1 var(--display); }
+body.brand .crumbs { font: 600 .66rem/1.5 var(--body); letter-spacing: .16em; text-transform: uppercase; }
+body.brand .guide, body.brand .steps3 li, body.brand .contact-grid > div, body.brand .linklist a { border-radius: 2px; }
+body.brand .guide b { font: 500 2rem/1 var(--display); }
+body.brand .steps3 h3, body.brand .contact-grid h3 { font: 500 1.5rem/1.2 var(--display); }
+body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
+
+/* Things slide in as you reach them */
+@media (prefers-reduced-motion: no-preference) {
+  body.brand .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform 1s cubic-bezier(.2,.7,.2,1); }
+  body.brand .rv.is-in { opacity: 1; transform: none; }
+  .about-img.rv { clip-path: inset(0 0 100% 0); transform: none !important; transition: clip-path 1.3s cubic-bezier(.2,.7,.2,1), opacity .4s ease; }
+  .about-img.rv.is-in { clip-path: inset(0 -2rem -2rem 0); }
+}
+@media (prefers-reduced-motion: reduce) { .bhero img, .bh-h, .bh-sub, .bh-acts, .bh-stats, .bmarquee > div { animation: none; } }
+
+/* Phone polish */
+@media (max-width: 700px) {
+  body.brand .top .mark strong { font-size: .92rem; letter-spacing: .1em; white-space: normal; line-height: 1.1; overflow: visible; }
+  .bhero .film-tag { top: calc(var(--head) + 2.6rem); bottom: auto; }
+}
+@media (min-width: 900px) {
+  body.brand #faq .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); column-gap: 5rem; align-content: start; }
+  body.brand #faq .wrap > * { grid-column: 1; }
+  body.brand #faq .faq { grid-column: 2; grid-row: 1 / span 6; }
+  body.brand #process .wrap { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.6fr); column-gap: 4rem; }
+  body.brand #process .wrap > * { grid-column: 1; }
+  body.brand #process .timeline { grid-column: 2; grid-row: 1 / span 4; margin-top: 1rem; }
+}</style></head>
+<body class="brand">
 <script>document.documentElement.className += " js";</script>
 <header class="top" id="topbar">
 <div class="ribbon"><span class="long">Website preview for Saltmarsh Gardens Ltd, made by Maystone. The film, prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>  <div class="bar">
@@ -418,29 +683,64 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
 
 <main id="top">
-  <div class="stage" id="stage">
+  <section class="bhero" aria-label="Saltmarsh Gardens Ltd">
+    <picture>
+      <source media="(min-aspect-ratio: 1/1)" srcset="https://images.unsplash.com/photo-1734079692160-fcbe4be6ab96?w=2000&amp;q=72&amp;auto=format&amp;fit=crop">
+      <img src="https://images.unsplash.com/photo-1734079692160-fcbe4be6ab96?w=900&amp;h=1600&amp;q=70&amp;auto=format&amp;fit=crop" alt="A gardener wheeling a barrow across a lawn" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="bh-shade"></div>
+<span class="ph-tag film-tag">Example photo</span>    <div class="wrap bh-in">
+      <h1 class="bh-name"><i></i>Landscaper and gardener in Littlehampton</h1>
+      <p class="bh-h">Gardens you&#39;ll want to <em>be in.</em></p>
+      <p class="bh-sub">Patios, fencing, turf, planting and garden upkeep across Littlehampton and nearby. A clear price before we start, and a tidy job when we&#39;re done.</p>
+      <div class="bh-acts">
+        <a class="btn btn-accent js-quote" href="#quote">Get a free quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="tel:+447700900235"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 07700 900235</a>
+      </div>
+    </div>
+    <ul class="bh-stats wrap">
+<li><b>5.0</b><span>from 21 Google reviews</span></li>      <li><b>Written</b><span>price before we start</span></li>
+      <li><b>Local</b><span>Littlehampton and nearby</span></li>
+    </ul>
+    <span class="bh-scroll" aria-hidden="true">Scroll</span>
+  </section>
+  <div class="bmarquee" aria-hidden="true"><div>
+<span>Patios and paving</span><i>&#10022;</i><span>Fencing</span><i>&#10022;</i><span>Turf and lawns</span><i>&#10022;</i><span>Garden maintenance</span><i>&#10022;</i><span>Planting and beds</span><i>&#10022;</i><span>Tree and hedge work</span><i>&#10022;</i><span>Patios and paving</span><i>&#10022;</i><span>Fencing</span><i>&#10022;</i><span>Turf and lawns</span><i>&#10022;</i><span>Garden maintenance</span><i>&#10022;</i><span>Planting and beds</span><i>&#10022;</i><span>Tree and hedge work</span><i>&#10022;</i>  </div></div>
+
+  <section id="about">
+    <div class="wrap">
+<figure class="about-img"><img src="https://images.unsplash.com/photo-1734079692087-91bac04efcd1?w=900&amp;h=1125&amp;q=70&amp;auto=format&amp;fit=crop" alt="Roofers at work on a slate roof" loading="lazy" decoding="async"><figcaption>Example photo</figcaption></figure>      <div class="intro-grid">
+        <div>
+          <p class="kicker">Landscaper and gardener in Littlehampton</p>
+          <h2>Local landscapers who <em>love the work.</em></h2>
+        </div>
+        <p class="lede">One local landscaper from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.</p>
+      </div>
+      <div class="proof">
+        <div><strong data-count="5.0" data-dp="1">5.0</strong><span><span class="stars-bar" role="img" aria-label="5.0 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span style="width: 100%">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> on Google</span></div>
+        <div><strong data-count="21">21</strong><span>Google reviews</span></div>
+<div><strong>BN17</strong><span>Littlehampton and nearby</span></div><div class="ph"><span class="ph-tag">Placeholder</span><b>Licensed</b><span>Your number goes here</span></div>      </div>
+    </div>
+  </section>
+
+  <div id="story">  <div class="stage" id="stage">
     <div class="pin" id="pin">
       <canvas id="film" role="img" aria-label="A back garden: the weeds and cracked slabs clear and a light grey porcelain patio is laid, then the lawn turns green."></canvas>
       <div class="shade"></div>
       <span class="ph-tag film-tag">Example film</span>
 
       <div class="beat b-hook" data-from="0" data-to="0.14"><div class="in">
-        <h1 class="who"><b>Saltmarsh Gardens Ltd</b><span>Landscaper and gardener in Littlehampton</span></h1>
-        <p class="hook">Garden a mess?</p>
-        <p class="hook-sub">Scroll to watch a new patio go down.</p>
-        <div class="hook-acts">
-          <a class="btn btn-accent" href="tel:+447700900235"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 07700 900235</a>
-<a class="btn btn-wa" href="https://wa.me/447700900235?text=Hi%20Saltmarsh%20Gardens%20Ltd%2C%20I%20found%20your%20website%20and%20I%27d%20like%20a%20quote.%20Here%27s%20a%20photo%20of%20the%20job%3A"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3 .78.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.46-.72-1.69-.8s-.39-.12-.55.12-.63.8-.78.96-.29.19-.53.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33a.45.45 0 0 0-.02-.42c-.06-.12-.55-1.33-.76-1.82s-.4-.41-.55-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.65c1.53.66 2.13.72 2.9.6a2.5 2.5 0 0 0 1.62-1.14 2 2 0 0 0 .14-1.14c-.06-.1-.22-.16-.47-.28z"/></svg>WhatsApp</a>
-        </div>
-        <div class="cue" aria-hidden="true"><i></i>Scroll</div>
+        <div class="eyebrow">Start to finish</div>
+        <p class="hook">Watch a garden <em>come together.</em></p>
+        <p class="hook-sub">Keep scrolling to watch it happen.</p>
       </div></div>
 
       <div class="beat b-step" data-from="0.2" data-to="0.42"><div class="in">
-        <div class="eyebrow">Step 1 · Dig out</div>
+<span class="big-no" aria-hidden="true">01</span>        <div class="eyebrow">Step 1 · Dig out</div>
         <p class="step-line">Old slabs and weeds cleared. Base laid.</p>
       </div></div>
       <div class="beat b-step" data-from="0.5" data-to="0.74"><div class="in">
-        <div class="eyebrow">Step 2 · Lay</div>
+<span class="big-no" aria-hidden="true">02</span>        <div class="eyebrow">Step 2 · Lay</div>
         <p class="step-line">New patio laid, pointed and finished.</p>
       </div></div>
 
@@ -459,32 +759,15 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       </div></div>
     </div>
   </div>
-
-
-  <section id="about">
-    <div class="wrap">
-      <div class="intro-grid">
-        <div>
-          <p class="kicker">Landscaper and gardener in Littlehampton</p>
-          <h2>Patios, lawns, fencing and garden care from a local landscaper.</h2>
-        </div>
-        <p class="lede">One local landscaper from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.</p>
-      </div>
-      <div class="proof">
-        <div><strong data-count="5.0" data-dp="1">5.0</strong><span><span class="stars-bar" role="img" aria-label="5.0 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;<span style="width: 100%">&#9733;&#9733;&#9733;&#9733;&#9733;</span></span> on Google</span></div>
-        <div><strong data-count="21">21</strong><span>Google reviews</span></div>
-<div><strong>BN17</strong><span>Littlehampton and nearby</span></div><div class="ph"><span class="ph-tag">Placeholder</span><b>Licensed</b><span>Your number goes here</span></div>      </div>
-    </div>
-  </section>
-
+</div>
 
   <section id="services" class="band">
     <div class="wrap">
       <p class="kicker">What we do</p>
       <h2>Pick the job. Get a straight price.</h2>
-      <ul class="jobs">
+      <ul class="jobs rows">
         <li>
-          <div><h3><a class="svc-link" href="services/patios-and-paving/">Patios and paving</a></h3><p>Porcelain, sandstone and block paving.</p></div>
+<a class="tile-img" href="services/patios-and-paving/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1719324923613-ff0884b031ed?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/patios-and-paving/">Patios and paving</a></h3><p>Porcelain, sandstone and block paving.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;3,000&ndash;&pound;8,000</span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Patios and paving" data-note="Guide price was &pound;3,000&ndash;&pound;8,000.">Get a price</a>
@@ -492,7 +775,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </div>
         </li>
         <li>
-          <div><h3><a class="svc-link" href="services/fencing/">Fencing</a></h3><p>Panel, closeboard and feather-edge fencing and gates.</p></div>
+<a class="tile-img" href="services/fencing/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1769831190663-95fe8454d8c9?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/fencing/">Fencing</a></h3><p>Panel, closeboard and feather-edge fencing and gates.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;1,000&ndash;&pound;3,000</span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Fencing" data-note="Guide price was &pound;1,000&ndash;&pound;3,000.">Get a price</a>
@@ -500,7 +783,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </div>
         </li>
         <li>
-          <div><h3><a class="svc-link" href="services/turf-and-lawns/">Turf and lawns</a></h3><p>New turf, artificial grass and lawn care.</p></div>
+<a class="tile-img" href="services/turf-and-lawns/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1734079692079-aae7e24a7035?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/turf-and-lawns/">Turf and lawns</a></h3><p>New turf, artificial grass and lawn care.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;600&ndash;&pound;2,500</span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Turf and lawns" data-note="Guide price was &pound;600&ndash;&pound;2,500.">Get a price</a>
@@ -508,7 +791,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </div>
         </li>
         <li>
-          <div><h3><a class="svc-link" href="services/garden-maintenance/">Garden maintenance</a></h3><p>Regular mowing, hedges, weeding and tidy-ups.</p></div>
+<a class="tile-img" href="services/garden-maintenance/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1668189777890-495c36095340?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/garden-maintenance/">Garden maintenance</a></h3><p>Regular mowing, hedges, weeding and tidy-ups.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;25&ndash;&pound;40<small>an hour</small></span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Garden maintenance" data-note="Guide price was &pound;25&ndash;&pound;40 an hour.">Get a price</a>
@@ -516,7 +799,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </div>
         </li>
         <li>
-          <div><h3><a class="svc-link" href="services/planting-and-beds/">Planting and beds</a></h3><p>Borders, raised beds and planting schemes.</p></div>
+<a class="tile-img" href="services/planting-and-beds/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1601001815894-4bb6c81416d7?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/planting-and-beds/">Planting and beds</a></h3><p>Borders, raised beds and planting schemes.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;300&ndash;&pound;1,500</span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Planting and beds" data-note="Guide price was &pound;300&ndash;&pound;1,500.">Get a price</a>
@@ -524,7 +807,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </div>
         </li>
         <li>
-          <div><h3><a class="svc-link" href="services/tree-and-hedge-work/">Tree and hedge work</a></h3><p>Cutting back, shaping and clearing.</p></div>
+<a class="tile-img" href="services/tree-and-hedge-work/" tabindex="-1" aria-hidden="true"><img src="https://images.unsplash.com/photo-1734079692079-172d8243ebd3?w=500&amp;h=500&amp;q=65&amp;auto=format&amp;fit=crop" alt="" loading="lazy" decoding="async"><span class="ph-tag">Example photo</span></a>          <div><h3><a class="svc-link" href="services/tree-and-hedge-work/">Tree and hedge work</a></h3><p>Cutting back, shaping and clearing.</p></div>
           <div class="job-side">
 <span class="price"><small>Guide price</small>&pound;200&ndash;&pound;800</span>            <span class="job-acts">
               <a class="btn btn-line js-quote" href="#quote" data-job="Tree and hedge work" data-note="Guide price was &pound;200&ndash;&pound;800.">Get a price</a>
@@ -535,6 +818,14 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <p class="prices-note"><span class="ph-tag">Example prices</span> You set your own before the site goes live.</p>    </div>
   </section>
 
+  <section id="process">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>Three steps to <em>a better garden.</em></h2>
+      <ol class="timeline">
+<li><span class="t-no">01</span><h3>Call or send a photo</h3><p>Tell us what you need. A quick photo of the job helps us price it.</p></li><li><span class="t-no">02</span><h3>Get a clear quote</h3><p>We explain what needs doing and what it costs before any work starts.</p></li><li><span class="t-no">03</span><h3>Job done properly</h3><p>The work is finished to a high standard and the area left clean and tidy.</p></li>      </ol>
+    </div>
+  </section>
 
 
   <section id="reviews">
@@ -607,7 +898,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     </div>
   </section>
 
-  <section class="quote-band" id="quote">
+  <section class="quote-band" id="quote" style="--qb-img: url('https://images.unsplash.com/photo-1734079692160-fcbe4be6ab96?w=2000&amp;q=72&amp;auto=format&amp;fit=crop')">
     <div class="wrap quote-grid">
       <div class="quote-side">
         <p class="kicker">Ready when you are</p>
@@ -668,7 +959,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 </main>
 
 <footer>
-  <div class="wrap foot">
+<p class="foot-giant" aria-hidden="true" style="--n: 21">Saltmarsh Gardens Ltd</p>  <div class="wrap foot">
     <div class="foot-top"><strong>Saltmarsh Gardens Ltd</strong><a href="tel:+447700900235">07700 900235</a></div>
 <ul class="foot-links">
 <li><a href="services/patios-and-paving/">Patios and paving</a></li><li><a href="services/fencing/">Fencing</a></li><li><a href="services/turf-and-lawns/">Turf and lawns</a></li><li><a href="services/garden-maintenance/">Garden maintenance</a></li><li><a href="services/planting-and-beds/">Planting and beds</a></li><li><a href="services/tree-and-hedge-work/">Tree and hedge work</a></li><li><a href="areas/littlehampton/">Littlehampton</a></li><li><a href="areas/rustington/">Rustington</a></li><li><a href="areas/angmering/">Angmering</a></li><li><a href="areas/east-preston/">East Preston</a></li><li><a href="areas/arundel/">Arundel</a></li>      <li><a href="contact/">Contact</a></li>
@@ -709,7 +1000,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <script>
 /* The film: frames drawn to a canvas as the visitor scrolls, with a cross-fade between neighbouring frames. */
 (function () {
-  var BRAND = false;
+  var BRAND = true;
   var BASE = "../../engine/films/gardens/patio-01/", N = 64, WIDE = false;
   var tall = !WIDE || (window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches);
   var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -953,5 +1244,24 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   box.querySelectorAll(".help-card").forEach(function (card) { card.addEventListener("change", function () { msg(card); }); });
 })();
 </script>
-</body>
+<script>
+/* Signature look: accent italics on the last words of each heading, and things slide in as you scroll. */
+(function () {
+  document.querySelectorAll("main section h2").forEach(function (h) {
+    if (h.querySelector("em") || h.children.length) return;
+    var w = h.textContent.trim().split(/\s+/); if (w.length < 3) return;
+    var n = w.length > 5 ? 2 : 1, tail = w.splice(w.length - n, n).join(" ");
+    h.textContent = w.join(" ") + " "; var em = document.createElement("em"); em.textContent = tail; h.append(em);
+  });
+  if (!("IntersectionObserver" in window)) return;
+  var els = document.querySelectorAll("main section:not(.bhero) .wrap > *, .jobs.rows > li, .review-card, .timeline > li, .faq details");
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
+  els.forEach(function (el) {
+    el.classList.add("rv");
+    var sib = el.parentNode ? [].indexOf.call(el.parentNode.children, el) : 0;
+    el.style.transitionDelay = (el.matches(".timeline > li, .jobs.rows > li, .review-card") ? Math.min(sib, 5) * 90 : 0) + "ms";
+    io.observe(el);
+  });
+})();
+</script></body>
 </html>

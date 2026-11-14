@@ -55,6 +55,14 @@ DEMOS = [
      "Phone": "07700 900590", "Google rating": "5", "Google reviews": "7", "Google Maps": "https://www.google.com/maps"},
     {"Lead ID": "DEMO6", "Business": "Flintstone Plastering", "Trade": "Plasterer", "Town": "Shoreham-by-Sea",
      "Phone": "07700 900318", "Google rating": "4.8", "Google reviews": "16", "Google Maps": "https://www.google.com/maps"},
+    {"Lead ID": "DEMO7", "Business": "Adur Valley Builders", "Trade": "Builder", "Town": "Steyning",
+     "Phone": "07700 900741", "Google rating": "4.9", "Google reviews": "27", "Google Maps": "https://www.google.com/maps"},
+    {"Lead ID": "DEMO8", "Business": "Oakbeam Joinery", "Trade": "Carpenter", "Town": "Horsham",
+     "Phone": "07700 900652", "Google rating": "5", "Google reviews": "14", "Google Maps": "https://www.google.com/maps"},
+    {"Lead ID": "DEMO9", "Business": "Coastline Kitchens & Bathrooms", "Trade": "Kitchen fitter", "Town": "Worthing",
+     "Phone": "07700 900583", "Google rating": "4.7", "Google reviews": "33", "Google Maps": "https://www.google.com/maps"},
+    {"Lead ID": "DEMO10", "Business": "Handy Hands Sussex", "Trade": "Handyman", "Town": "Hove",
+     "Phone": "07700 900164", "Google rating": "4.9", "Google reviews": "19", "Google Maps": "https://www.google.com/maps"},
 ]
 
 
@@ -383,11 +391,12 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             shutil.copytree(chosen["folder"], out_dir / "film", dirs_exist_ok=True)
             base = "film/"
         film = film_context(chosen, base, "Example film" if preview else "Illustration")
-    # BRAND look (13 Nov 2026): premium photo first screen instead of the film, when the lead asks for it.
+    # SIGNATURE look (14 Nov 2026): the default for every trade in BRAND. "Look": "classic" on a lead turns it off.
     brand = None
-    if film and str(row.get("Look") or "").strip().lower() == "brand" and group in BRAND:
+    if film and str(row.get("Look") or "").strip().lower() != "classic" and group in BRAND:
         bd = dict(BRAND[group])
         bd["palette"] = {**bd["palette"], **(bd.get("light") or {})}
+        bd.setdefault("hero", "none/none")
         hero_src = HERE / "heroes" / (bd["hero"] + "-wide.webp")
         ph = bd.get("photos")
         if ph:  # real (Unsplash) photos, hotlinked: no files to copy

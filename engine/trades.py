@@ -1140,6 +1140,30 @@ CATEGORY_RULES.insert(0, ("cafe", r"\bcaf[eé]s?\b|coffee|tea ?room|bakery|bistr
 # photo, a short punchy headline (last part in the accent colour), and an unexpected accent colour on a
 # dark base, so the site doesn't look like every other trade site. Everything below stays the same.
 # Turned on per lead with "Look": "brand" (and for the roofing demo). Images in engine/heroes/<group>/.
+
+# Shared bits for the signature look. Photos are free Unsplash photos, hotlinked and marked "Example photo".
+U = "https://images.unsplash.com/photo-"
+WIDE, TALL = "?w=2000&q=72&auto=format&fit=crop", "?w=900&h=1600&q=70&auto=format&fit=crop"
+ABOUT, SQ = "?w=900&h=1125&q=70&auto=format&fit=crop", "?w=500&h=500&q=65&auto=format&fit=crop"
+
+
+def _mix(h1, h2, t):
+    a = [int(h1[i:i + 2], 16) for i in (1, 3, 5)]
+    b = [int(h2[i:i + 2], 16) for i in (1, 3, 5)]
+    return "#" + "".join(f"{round(x + (y - x) * t):02x}" for x, y in zip(a, b))
+
+
+def _pal(ground, accent, accent_ink):
+    """Dark palette from a ground colour and one accent. Text is warm bone; lines and cards are lifted ground."""
+    return {"ground": ground, "paper": _mix(ground, "#ffffff", .03), "card": _mix(ground, "#ffffff", .06),
+            "ink": "#ece7df", "ink_soft": "#a7a198", "line": _mix(ground, "#ffffff", .14),
+            "accent": accent, "accent_ink": accent_ink, "brand": accent, "brand_text": accent_ink}
+
+
+def _light(accent_deep):
+    return {"bone": "#f0ebe2", "bone_2": "#e8e2d6", "bone_card": "#f8f5ef", "bone_ink": "#16191c",
+            "bone_soft": "#5b5850", "bone_line": "#d3ccbd", "accent_deep": accent_deep}
+
 BRAND = {
     "roofing": {
         "hero": "roofing/slate-01",
@@ -1173,5 +1197,176 @@ BRAND = {
         "swatches": [("Slate", "#14181b"), ("Stone", "#ece7df"), ("Copper", "#c8743a")],
         # One photo per service tile, in the order of TRADES["roofing"]["services"].
         "tiles": ["tile-repairs.webp", "tile-new-roof.webp", "tile-flat-roof.webp", "tile-chimney.webp", "tile-fascias.webp", "tile-inspection.webp"],
+    },
+    "plumbing": {
+        "alt": "Heating pipework and valves in a boiler cupboard",
+        "headline": ('Heating and plumbing,', 'sorted.'),
+        "sub": "Boiler repairs, new boilers, leaks and radiators across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Navy and brass
+        "palette": _pal("#10161d", "#c6a15b", "#d9b878"),
+        "light": _light("#7d5f22"),
+        "photos": {"wide": U + "1650551182956-47efa0f90b64" + WIDE, "tall": U + "1650551182956-47efa0f90b64" + TALL, "about": U + "1676210134188-4c05dd172f89" + ABOUT,
+                   "tiles": [U + "1676210134190-3f2c0d5cf58d" + SQ,
+                      U + "1650551182991-b07558247564" + SQ,
+                      U + "1639866496281-573747d7051f" + SQ,
+                      U + "1562159937-194305937c6a" + SQ,
+                      U + "1523495909838-79c67b15be34" + SQ,
+                      U + "1595514535316-b8c85bf9bbf9" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch a room', 'come back to life.'),
+        "about": ('A local plumber who', 'picks up.'),
+        "process": ('Three steps to', 'a warm house.'),
+    },
+    "electrical": {
+        "alt": "An electrician working on a meter cupboard",
+        "headline": ('Wiring done', 'properly.'),
+        "sub": "Fault finding, fuse boards, safety reports and rewires across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Graphite and amber
+        "palette": _pal("#111315", "#e3a72f", "#ecbb55"),
+        "light": _light("#86600f"),
+        "photos": {"wide": U + "1621905251918-48416bd8575a" + WIDE, "tall": U + "1621905251918-48416bd8575a" + TALL, "about": U + "1660330590022-9f4ff56b63f6" + ABOUT,
+                   "tiles": [U + "1553873002-785d775854c9" + SQ,
+                      U + "1576446470246-499c738d1c8e" + SQ,
+                      U + "1576446468729-7674e99608f5" + SQ,
+                      U + "1557516300-46e218a6961f" + SQ,
+                      U + "1630806293051-7b66c27ec042" + SQ,
+                      U + "1646753020826-c518face72ad" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch the old wiring', 'go.'),
+        "about": ('A local electrician who', 'turns up.'),
+        "process": ('Three steps to', 'safe wiring.'),
+    },
+    "building": {
+        "alt": "A house extension going up under scaffolding",
+        "headline": ('Built to', 'last.'),
+        "sub": "Extensions, renovations, loft conversions and brickwork across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Forest and brick
+        "palette": _pal("#131815", "#b5573a", "#d77a5c"),
+        "light": _light("#933f24"),
+        "photos": {"wide": U + "1601303981881-f630d27a7df5" + WIDE, "tall": U + "1601303981881-f630d27a7df5" + TALL, "about": U + "1617720356637-6264c1c0b4bb" + ABOUT,
+                   "tiles": [U + "1754063257992-bb9eabdbdd86" + SQ,
+                      U + "1634586648651-f1fb9ec10d90" + SQ,
+                      U + "1601303981778-0f61e3d2da64" + SQ,
+                      U + "1788330937192-907ee7b8db55" + SQ,
+                      U + "1517581177682-a085bb7ffb15" + SQ,
+                      U + "1701850009190-2859ba2aeea6" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch an extension', 'rise.'),
+        "about": ('Local builders who', 'finish the job.'),
+        "process": ('Three steps to', 'more space.'),
+    },
+    "plastering": {
+        "alt": "A plasterer working on a ceiling",
+        "headline": ('Walls as smooth as', 'glass.'),
+        "sub": "Skimming, re-plastering, rendering and ceilings across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Charcoal and plaster pink
+        "palette": _pal("#1a1918", "#d39a86", "#e2b2a1"),
+        "light": _light("#94513a"),
+        "photos": {"wide": U + "1482731215275-a1f151646268" + WIDE, "tall": U + "1482731215275-a1f151646268" + TALL, "about": U + "1661168929701-ea898de2dabd" + ABOUT,
+                   "tiles": [U + "1768839725085-829e6ac7ac26" + SQ,
+                      U + "1635513262547-520ac21726ce" + SQ,
+                      U + "1629814559102-3f0b56c250f6" + SQ,
+                      U + "1718816281207-3b253cff549a" + SQ,
+                      U + "1644329615817-036a646f9348" + SQ,
+                      U + "1543060747-53cb56d6b105" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch a tired room', 'turn smooth.'),
+        "about": ('A local plasterer who', 'leaves it clean.'),
+        "process": ('Three steps to', 'perfect walls.'),
+    },
+    "carpentry": {
+        "alt": "A joiner at work in a timber workshop",
+        "headline": ('Made to fit.', 'Built to last.'),
+        "sub": "Fitted wardrobes, doors, staircases, flooring and decking across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Espresso and oak
+        "palette": _pal("#17130f", "#c08a4e", "#d6a46c"),
+        "light": _light("#80562a"),
+        "photos": {"wide": U + "1769353086138-19ee65291a04" + WIDE, "tall": U + "1769353086138-19ee65291a04" + TALL, "about": U + "1631396326838-de37e5f8bcbc" + ABOUT,
+                   "tiles": [U + "1722349674028-a148f4364e43" + SQ,
+                      U + "1559871753-75a00941f6b2" + SQ,
+                      U + "1713184359231-832519897def" + SQ,
+                      U + "1761053130711-2515ef532bb5" + SQ,
+                      U + "1716904519810-349244919824" + SQ,
+                      U + "1788296817269-8df0458ab799" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch it get', 'built.'),
+        "about": ('A local joiner who', 'measures twice.'),
+        "process": ('Three steps to', 'made-to-measure.'),
+    },
+    "decorating": {
+        "alt": "A decorator painting from a ladder",
+        "headline": ("A finish you'll", 'notice.'),
+        "sub": "Interior and exterior painting, wallpapering and woodwork across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Plum and sage
+        "palette": _pal("#161319", "#9fb48a", "#b7c9a3"),
+        "light": _light("#4f6638"),
+        "photos": {"wide": U + "1742900280861-32bed068938b" + WIDE, "tall": U + "1742900280861-32bed068938b" + TALL, "about": U + "1652829069629-959f8927f608" + ABOUT,
+                   "tiles": [U + "1693985120993-e9b203ce7631" + SQ,
+                      U + "1613844044163-1ad2f2d0b152" + SQ,
+                      U + "1627815416399-ddaae0e2fa54" + SQ,
+                      U + "1464316325666-63beaf639dbb" + SQ,
+                      U + "1652918320939-47f66eb1b684" + SQ,
+                      U + "1761986757577-140af8859587" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch a room', 'change colour.'),
+        "about": ('A local decorator who', 'respects your home.'),
+        "process": ('Three steps to', 'a fresh room.'),
+    },
+    "kitchens_bathrooms": {
+        "alt": "A shaker-style kitchen with an island",
+        "headline": ('Kitchens and bathrooms,', 'fitted right.'),
+        "sub": "Kitchen and bathroom fitting, tiling, flooring and showers across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Marble and verdigris
+        "palette": _pal("#131617", "#6fae9b", "#8cc5b3"),
+        "light": _light("#2f6b5a"),
+        "photos": {"wide": U + "1701421047855-d7bafd8d6f69" + WIDE, "tall": U + "1701421047855-d7bafd8d6f69" + TALL, "about": U + "1523413307857-ef24c53571ae" + ABOUT,
+                   "tiles": [U + "1522790979484-0ca297a0b0f6" + SQ,
+                      U + "1771681278446-6f8eb0c7323f" + SQ,
+                      U + "1523413363574-c30aa1c2a516" + SQ,
+                      U + "1548268364-3acee266b695" + SQ,
+                      U + "1771929662486-f793e08f0f16" + SQ,
+                      U + "1655043126266-20372f823c6a" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch a room', 'get fitted.'),
+        "about": ('Local fitters who', 'sweat the details.'),
+        "process": ('Three steps to', 'a new room.'),
+    },
+    "gardens": {
+        "alt": "A gardener wheeling a barrow across a lawn",
+        "headline": ("Gardens you'll want to", 'be in.'),
+        "sub": "Patios, fencing, turf, planting and garden upkeep across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Forest and moss
+        "palette": _pal("#0f1612", "#a3b86c", "#bccf88"),
+        "light": _light("#536a24"),
+        "photos": {"wide": U + "1734079692160-fcbe4be6ab96" + WIDE, "tall": U + "1734079692160-fcbe4be6ab96" + TALL, "about": U + "1734079692087-91bac04efcd1" + ABOUT,
+                   "tiles": [U + "1719324923613-ff0884b031ed" + SQ,
+                      U + "1769831190663-95fe8454d8c9" + SQ,
+                      U + "1734079692079-aae7e24a7035" + SQ,
+                      U + "1668189777890-495c36095340" + SQ,
+                      U + "1601001815894-4bb6c81416d7" + SQ,
+                      U + "1734079692079-172d8243ebd3" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch a garden', 'come together.'),
+        "about": ('Local landscapers who', 'love the work.'),
+        "process": ('Three steps to', 'a better garden.'),
+    },
+    "handyman": {
+        "alt": "A handyman cutting timber at a workbench",
+        "headline": ('The jobs you keep', 'putting off.'),
+        "sub": "Flat-pack, fixing, small repairs and odd jobs across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
+        # Navy and safety orange
+        "palette": _pal("#12161d", "#e07a35", "#ec955a"),
+        "light": _light("#a24c14"),
+        "photos": {"wide": U + "1662394027253-dc37506c2587" + WIDE, "tall": U + "1662394027253-dc37506c2587" + TALL, "about": U + "1765518440022-10242cc86895" + ABOUT,
+                   "tiles": [U + "1657664066011-ed54a1be81d2" + SQ,
+                      U + "1789841418236-2060e2af1e78" + SQ,
+                      U + "1607400201515-c2c41c07d307" + SQ,
+                      U + "1786204697642-328c597b6f05" + SQ,
+                      U + "1605117882932-f9e32b03fea9" + SQ,
+                      U + "1731168273756-e02cae42265b" + SQ]},
+        "story_kicker": "Start to finish",
+        "story": ('Watch the to-do list', 'shrink.'),
+        "about": ('A local handyman who', 'gets it done.'),
+        "process": ('Three steps to', 'a finished list.'),
     },
 }
