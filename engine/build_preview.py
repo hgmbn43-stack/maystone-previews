@@ -181,10 +181,9 @@ def _join(items):
     return items[0] if len(items) == 1 else ", ".join(items[:-1]) + " and " + items[-1] if items else ""
 
 
-def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, area_pages, preview, canonical, badges, address):
+def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, area_pages, preview, canonical, badges, address, brand=None):
     """Service, area and contact pages. They reuse the home page's styles so the whole site matches."""
-    m = re.search(r"<style>(.*?)</style>", home_html, re.S)
-    css = m.group(1) if m else ""
+    css = "\n".join(re.findall(r"<style>(.*?)</style>", home_html, re.S))
     noun = NOUN.get(group) or (t.get("cta_noun") or t["label"]).capitalize()
     btype = SCHEMA_TYPE.get(group, "HomeAndConstructionBusiness")
     provider = {"@type": btype, "name": biz["name"], "telephone": biz["tel"], "areaServed": areas[:5],
@@ -242,7 +241,7 @@ def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, are
         root = "../" * depth
         page_css = css.replace('url("assets/', f'url("{root}assets/')
         pg["schema"] = json.dumps(pg["schema"]).replace("</", "<\\/")
-        out = tpl.render(page=pg, root=root, css=page_css, biz=biz, t=t, areas=areas[:5], svc_pages=svc_pages,
+        out = tpl.render(page=pg, root=root, css=page_css, brand=brand, biz=biz, t=t, areas=areas[:5], svc_pages=svc_pages,
                          area_pages=area_pages, preview=preview, canonical=canonical, badges=badges, address=address,
                          year=date.today().year)
         dest = out_dir / pg["path"] / "index.html"
@@ -289,7 +288,9 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     out_dir = out_root / f"{lead_id}-{slugify(slug_name)}"
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "assets").mkdir(exist_ok=True)
-    shutil.copyfile(HERE / "assets" / "archivo.woff2", out_dir / "assets" / "archivo.woff2")
+    for f in (HERE / "assets").iterdir():
+        if f.is_file():
+            shutil.copyfile(f, out_dir / "assets" / f.name)
 
     # Photo library: images/<group>/ holds hero.*, side.*, before.*, after.* and
     # gallery photos named 1.*, 2.* ... Any slot without a file shows a placeholder.
@@ -386,6 +387,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     brand = None
     if film and str(row.get("Look") or "").strip().lower() == "brand" and group in BRAND:
         bd = dict(BRAND[group])
+        bd["palette"] = {**bd["palette"], **(bd.get("light") or {})}
         hero_src = HERE / "heroes" / (bd["hero"] + "-wide.webp")
         folder = bd["hero"].split("/")[0]
         if preview:
@@ -432,7 +434,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     (out_dir / "index.html").write_text(html, encoding="utf-8")
     if multi:
         write_subpages(env, out_dir, html, group=group, t=t, biz=biz, areas=areas, svc_pages=svc_pages, area_pages=area_pages,
-                       preview=preview, canonical=f"https://{domain}/" if domain else "", badges=badges, address=address)
+                       preview=preview, canonical=f"https://{domain}/" if domain else "", badges=badges, address=address, brand=brand)
     return {"Lead ID": lead_id, "Business": name, "Group": group, "Path": str(out_dir / "index.html")}, None
 
 

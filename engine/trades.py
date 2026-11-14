@@ -1149,6 +1149,14 @@ BRAND = {
         # Slate and copper: dark, strong and weatherproof, with copper instead of the usual roofer red.
         "palette": {"ground": "#14181b", "paper": "#1a1f23", "card": "#20262b", "ink": "#ece7df", "ink_soft": "#a7a198",
                     "line": "#323a40", "accent": "#c8743a", "accent_ink": "#e3955c", "brand": "#c8743a", "brand_text": "#e3955c"},
+        # Light sections ("bone"), so the page alternates dark and light like a magazine.
+        "light": {"bone": "#f0ebe2", "bone_2": "#e8e2d6", "bone_card": "#f8f5ef", "bone_ink": "#16191c",
+                  "bone_soft": "#5b5850", "bone_line": "#d3ccbd", "accent_deep": "#9a4f22"},
+        # Signature look (14 Nov 2026): headings are two parts, the second set in accent italics.
+        "story_kicker": "A roof, start to finish",
+        "story": ("Watch a roof", "come together."),
+        "about": ("Local roofers who", "turn up."),
+        "process": ("Three steps to", "a dry roof."),
         "swatches": [("Slate", "#14181b"), ("Stone", "#ece7df"), ("Copper", "#c8743a")],
         # One photo per service tile, in the order of TRADES["roofing"]["services"].
         "tiles": ["tile-repairs.webp", "tile-new-roof.webp", "tile-flat-roof.webp", "tile-chimney.webp", "tile-fascias.webp", "tile-inspection.webp"],

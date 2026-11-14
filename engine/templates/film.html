@@ -382,59 +382,6 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 .help-acts { display: flex; flex-wrap: wrap; gap: .6rem; }
 .help-sos { font-weight: 700; color: #b3261e; margin: 0; }
 
-/* BRAND look, below the first screen: big headings with copper key words, photo tiles, big review cards, motion */
-body.brand section h2 { font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: .9; font-stretch: 66%; max-width: 14ch; }
-body.brand section h2 em { font-style: normal; color: var(--accent-ink); }
-body.brand .kicker { color: var(--accent-ink); }
-body.brand .band { background: var(--paper); }
-.jobs.tiles { border: 0; display: grid; gap: 1.2rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 21rem), 1fr)); }
-.jobs.tiles li { grid-template-columns: 1fr; padding: 0 0 1.3rem; border: 1px solid var(--line); border-radius: 1.3rem; overflow: hidden; background: var(--card); align-content: start; transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
-.jobs.tiles li:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 22px 50px rgba(0,0,0,.35); }
-.jobs.tiles li > div { padding-inline: 1.3rem; }
-.tile-img { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; }
-.tile-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.7,.2,1); }
-.jobs.tiles li:hover .tile-img img { transform: scale(1.06); }
-.tile-img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(10,13,16,.55)); }
-.tile-img .ph-tag { position: absolute; top: .8rem; left: .8rem; z-index: 1; }
-.jobs.tiles .job-side { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; padding-top: .4rem; }
-body.brand .review-card { padding: 1.8rem; border-radius: 1.3rem; }
-body.brand .review-card .stars { color: var(--accent); font-size: 1.6rem; letter-spacing: .12em; }
-body.brand .review-card blockquote, body.brand .review-card p { font-size: 1.12rem; line-height: 1.55; }
-body.brand .score-num { color: var(--accent-ink); font-size: clamp(6rem, 18vw, 10rem); }
-body.brand .stars-bar span { color: var(--accent); }
-body.brand .quote-band { background: linear-gradient(90deg, rgba(10,13,16,.94), rgba(10,13,16,.78)), var(--qb-img) center / cover no-repeat; }
-@media (prefers-reduced-motion: no-preference) {
-  body.brand .rv { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .9s cubic-bezier(.2,.7,.2,1); }
-  body.brand .rv.is-in { opacity: 1; transform: none; }
-}
-/* BRAND look: one striking photo, a short punchy headline and an accent colour on a dark base */
-.bhero { position: relative; min-height: 100svh; display: grid; align-items: end; color: #f4f0ea; overflow: hidden; isolation: isolate; }
-.bhero picture, .bhero img { position: absolute; inset: 0; width: 100%; height: 100%; }
-.bhero img { object-fit: cover; object-position: 60% 50%; z-index: -2; animation: bhZoom 14s ease-out both; }
-.bhero .film-tag { top: auto; bottom: 1rem; right: 1rem; left: auto; }
-@keyframes bhZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
-.bh-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(10,13,16,.55) 0%, rgba(10,13,16,.1) 38%, rgba(10,13,16,.55) 62%, rgba(10,13,16,.94) 100%); }
-.bh-in { padding-block: 8.5rem clamp(2.2rem, 7vh, 4.5rem); }
-.bh-name { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; font: 700 .95rem/1.3 var(--body); letter-spacing: .01em; margin: 0 0 1rem; }
-.bh-name .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
-.bh-where { font-weight: 500; opacity: .75; }
-.bh-h { font: 900 clamp(3.3rem, 13vw, 8.6rem)/.88 var(--display); font-stretch: 66%; letter-spacing: -.015em; margin: 0; max-width: 9.5ch; text-wrap: balance; animation: bhUp .9s .1s cubic-bezier(.2,.7,.2,1) both; }
-.bh-h em { font-style: normal; color: var(--accent-ink); }
-.bh-sub { margin: 1.1rem 0 0; max-width: 34rem; font-size: clamp(1.02rem, 2.6vw, 1.2rem); line-height: 1.5; color: rgba(244,240,234,.86); animation: bhUp .9s .25s cubic-bezier(.2,.7,.2,1) both; }
-.bh-acts { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.6rem; animation: bhUp .9s .4s cubic-bezier(.2,.7,.2,1) both; }
-.bh-acts .btn { min-height: 52px; }
-.bhero .btn-ghost { color: #f4f0ea; border-color: rgba(244,240,234,.55); background: rgba(10,13,16,.25); backdrop-filter: blur(6px); }
-.bh-stats { list-style: none; padding: 0; margin: 2rem 0 0; display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid rgba(244,240,234,.18); animation: bhUp .9s .55s cubic-bezier(.2,.7,.2,1) both; }
-.bh-stats li { flex: 1 1 8rem; padding: .9rem 1rem .2rem 0; }
-.bh-stats b { display: block; font: 850 1.35rem/1.1 var(--display); font-stretch: 75%; color: var(--accent-ink); }
-.bh-stats span { font-size: .85rem; color: rgba(244,240,234,.72); }
-@keyframes bhUp { from { opacity: 0; transform: translateY(18px); } }
-@media (min-aspect-ratio: 1/1) {
-  .bh-shade { background: linear-gradient(90deg, rgba(10,13,16,.88) 0%, rgba(10,13,16,.55) 38%, rgba(10,13,16,.05) 70%), linear-gradient(0deg, rgba(10,13,16,.6), transparent 40%); }
-  .bhero img { object-position: 70% 50%; }
-}
-@media (max-aspect-ratio: 1/1) { .bhero { align-items: start; } .bh-in { padding-top: 7.5rem; } }
-@media (prefers-reduced-motion: reduce) { .bhero img, .bh-h, .bh-sub, .bh-acts, .bh-stats { animation: none; } }
 .action-bar { display: none; }
 @media (max-width: 760px) {
   body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -460,19 +407,7 @@ body.brand .quote-band { background: linear-gradient(90deg, rgba(10,13,16,.94), 
 @media (prefers-reduced-motion: reduce) { .cue i { animation: none; } .jobs h3, .jobs h3::after { transition: none; } }
 </style>
 {% if brand %}<style>
-:root, :root[data-theme="light"], :root[data-theme="dark"] {
-  --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
-  --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
-  --accent: {{ brand.palette.accent }}; --accent-ink: {{ brand.palette.accent_ink }};
-  --brand: {{ brand.palette.brand }}; --brand-text: {{ brand.palette.brand_text }};
-  color-scheme: dark;
-}
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
-  --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
-  --accent: {{ brand.palette.accent }}; --accent-ink: {{ brand.palette.accent_ink }};
-} }
-body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color: #140d07; border-color: var(--accent); }
+{% include "brand.css" %}
 </style>{% endif %}
 </head>
 <body class="{{ 'brand' if brand else 'in-film' }}">
@@ -533,32 +468,7 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
   <div class="prog" aria-hidden="true"><b id="prog"></b></div>
 </header>
 
-<main id="top">
-  {% if brand %}
-  <section class="bhero" aria-label="{{ biz.name }}">
-    <picture>
-      <source media="(min-aspect-ratio: 1/1)" srcset="{{ brand.wide }}">
-      <img src="{{ brand.tall }}" alt="{{ brand.alt }}" fetchpriority="high" decoding="async">
-    </picture>
-    <div class="bh-shade"></div>
-    {% if brand.label %}<span class="ph-tag film-tag">{{ brand.label }}</span>{% endif %}
-    <div class="wrap bh-in">
-      <h1 class="bh-name"><span class="dot"></span>{{ biz.name }} <span class="bh-where">&middot; {{ t.kicker }} in {{ biz.town }}</span></h1>
-      <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>
-      <p class="bh-sub">{{ brand.sub }}</p>
-      <div class="bh-acts">
-        <a class="btn btn-accent" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
-        {% if biz.whatsapp %}<a class="btn btn-ghost" href="{{ biz.whatsapp }}?text={{ wa_text }}">{{ wa_icon|safe }}WhatsApp a photo</a>
-        {% else %}<a class="btn btn-ghost js-quote" href="#quote">Get a free quote</a>{% endif %}
-      </div>
-      <ul class="bh-stats">
-        {% if biz.show_rating %}<li><b>{{ biz.rating_str }}&#9733;</b><span>{{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</span></li>{% endif %}
-        <li><b>Written</b><span>price before we start</span></li>
-        <li><b>Local</b><span>{{ biz.town }} and nearby</span></li>
-      </ul>
-    </div>
-  </section>
-  {% else %}
+{% macro stage_block() %}
   <div class="stage" id="stage">
     <div class="pin" id="pin">
       <canvas id="film" role="img" aria-label="{{ film.alt }}"></canvas>
@@ -566,6 +476,11 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
       <span class="ph-tag film-tag">{{ film.label }}</span>
 
       <div class="beat b-hook" data-from="0" data-to="{{ film.hook_to }}"><div class="in">
+        {% if brand %}
+        <div class="eyebrow">{{ brand.story_kicker }}</div>
+        <p class="hook">{{ brand.story[0] }} <em>{{ brand.story[1] }}</em></p>
+        <p class="hook-sub">Keep scrolling to watch it happen.</p>
+        {% else %}
         <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>
         <p class="hook{% if film.hook|length > 24 %} long{% endif %}">{{ film.hook }}</p>
         <p class="hook-sub">{{ film.hook_sub }}</p>
@@ -576,10 +491,12 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
           {% else %}<a class="btn btn-ghost js-quote" href="#quote">Get a quote</a>{% endif %}
         </div>
         <div class="cue" aria-hidden="true"><i></i>Scroll</div>
+        {% endif %}
       </div></div>
 
       {% for b in film.beats %}
       <div class="beat b-step" data-from="{{ b['from'] }}" data-to="{{ b['to'] }}"><div class="in">
+        {% if brand %}<span class="big-no" aria-hidden="true">0{{ loop.index }}</span>{% endif %}
         <div class="eyebrow">{{ b.eyebrow }}</div>
         <p class="step-line">{{ b.line }}</p>
       </div></div>
@@ -604,14 +521,47 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
       </div></div>
     </div>
   </div>
+{% endmacro %}
+
+<main id="top">
+  {% if brand %}
+  <section class="bhero" aria-label="{{ biz.name }}">
+    <picture>
+      <source media="(min-aspect-ratio: 1/1)" srcset="{{ brand.wide }}">
+      <img src="{{ brand.tall }}" alt="{{ brand.alt }}" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="bh-shade"></div>
+    {% if brand.label %}<span class="ph-tag film-tag">{{ brand.label }}</span>{% endif %}
+    <div class="wrap bh-in">
+      <h1 class="bh-name"><i></i>{{ t.kicker }} in {{ biz.town }}</h1>
+      <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>
+      <p class="bh-sub">{{ brand.sub }}</p>
+      <div class="bh-acts">
+        <a class="btn btn-accent js-quote" href="#quote">Get a free quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-ghost" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
+      </div>
+    </div>
+    <ul class="bh-stats wrap">
+      {% if biz.show_rating %}<li><b>{{ biz.rating_str }}</b><span>from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</span></li>{% endif %}
+      <li><b>Written</b><span>price before we start</span></li>
+      <li><b>Local</b><span>{{ biz.town }} and nearby</span></li>
+    </ul>
+    <span class="bh-scroll" aria-hidden="true">Scroll</span>
+  </section>
+  <div class="bmarquee" aria-hidden="true"><div>
+    {% for k in range(2) %}{% for sv in t.services %}<span>{{ sv[0] }}</span><i>&#10022;</i>{% endfor %}{% endfor %}
+  </div></div>
+  {% else %}
+{{ stage_block() }}
   {% endif %}
 
   <section id="about">
     <div class="wrap">
+      {% if brand %}<figure class="about-img"><img src="{{ brand.tile_base }}{{ brand.tiles[1] }}" alt="" loading="lazy" decoding="async">{% if preview %}<figcaption>Example photo</figcaption>{% endif %}</figure>{% endif %}
       <div class="intro-grid">
         <div>
           <p class="kicker">{{ t.kicker }} in {{ biz.town }}</p>
-          <h2>{{ t.promise }}</h2>
+          <h2>{% if brand %}{{ brand.about[0] }} <em>{{ brand.about[1] }}</em>{% else %}{{ t.promise }}{% endif %}</h2>
         </div>
         <p class="lede">{% if t.venue %}Pop in for breakfast, lunch, or a coffee and a slice of cake. Everyone's welcome.{% else %}One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.{% endif %}</p>
       </div>
@@ -629,6 +579,10 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
       </div>
     </div>
   </section>
+
+  {% if brand %}
+  <div id="story">{{ stage_block() }}</div>
+  {% endif %}
 
   {% if t.venue %}
   <section id="services" class="band">
@@ -651,7 +605,7 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
     <div class="wrap">
       <p class="kicker">What we do</p>
       <h2>{{ 'Pick the job. Get a straight price.' if price_json != '[]' else 'Pick the job. Get a quote.' }}</h2>
-      <ul class="jobs{{ ' tiles' if brand and brand.tiles }}">
+      <ul class="jobs{{ ' rows' if brand and brand.tiles }}">
         {% for sv in t.services_full %}
         <li>
           {% if brand and brand.tiles %}<a class="tile-img" href="{{ svc_pages[loop.index0].path if svc_pages else '#quote' }}" tabindex="-1" aria-hidden="true"><img src="{{ brand.tile_base }}{{ brand.tiles[loop.index0 % brand.tiles|length] }}" alt="" loading="lazy" decoding="async">{% if preview %}<span class="ph-tag">Example photo</span>{% endif %}</a>{% endif %}
@@ -667,6 +621,18 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
         {% endfor %}
       </ul>
       {% if price_json != '[]' and preview %}<p class="prices-note"><span class="ph-tag">Example prices</span> You set your own before the site goes live.</p>{% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if brand %}
+  <section id="process">
+    <div class="wrap">
+      <p class="kicker">How it works</p>
+      <h2>{{ brand.process[0] }} <em>{{ brand.process[1] }}</em></h2>
+      <ol class="timeline">
+        {% for st in t.steps %}<li><span class="t-no">0{{ loop.index }}</span><h3>{{ st[0] }}</h3><p>{{ st[1] }}</p></li>{% endfor %}
+      </ol>
     </div>
   </section>
   {% endif %}
@@ -861,6 +827,7 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
 </main>
 
 <footer>
+  {% if brand %}<p class="foot-giant" aria-hidden="true" style="--n: {{ biz.name|length }}">{{ biz.name }}</p>{% endif %}
   <div class="wrap foot">
     <div class="foot-top"><strong>{{ biz.name }}</strong><a href="tel:{{ biz.tel }}">{{ biz.phone }}</a></div>
     {% if svc_pages %}<ul class="foot-links">
@@ -891,7 +858,7 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
 <script>
 /* The film: frames drawn to a canvas as the visitor scrolls, with a cross-fade between neighbouring frames. */
 (function () {
-  if (!document.getElementById("stage")) return;   // brand look: no film
+  var BRAND = {{ 'true' if brand else 'false' }};
   var BASE = {{ film.base|tojson }}, N = {{ film.frames|int }}, WIDE = {{ 'true' if film.wide else 'false' }};
   var tall = !WIDE || (window.matchMedia && matchMedia("(max-aspect-ratio: 1/1)").matches);
   var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -954,9 +921,16 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
   }
   function chrome() {
     var r = stage.getBoundingClientRect(), head = top.offsetHeight;
+    if (BRAND) {   // signature look: the header goes solid after the photo, and clears again over the film
+      var over = r.top < head && r.bottom > head + 4, hero = document.querySelector(".bhero");
+      top.classList.toggle("solid", !over && scrollY > (hero ? hero.offsetHeight - head - 4 : 0));
+      top.classList.toggle("scrolled", scrollY > 30);
+      document.body.classList.toggle("in-film", scrollY < innerHeight * .5 || (r.top < innerHeight * .4 && r.bottom > innerHeight * .6));
+    } else {
     top.classList.toggle("solid", r.bottom < head + 4);
     top.classList.toggle("scrolled", scrollY > 30);
     document.body.classList.toggle("in-film", r.bottom > innerHeight * .6);
+    }
     var doc = document.documentElement, max = doc.scrollHeight - innerHeight;
     document.getElementById("prog").style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 0) + "%";
   }
@@ -1333,7 +1307,7 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
 })();
 </script>
 {% if brand %}<script>
-/* BRAND look: copper on the key words of each heading, and sections slide in as you scroll. */
+/* Signature look: accent italics on the last words of each heading, and things slide in as you scroll. */
 (function () {
   document.querySelectorAll("main section h2").forEach(function (h) {
     if (h.querySelector("em") || h.children.length) return;
@@ -1342,9 +1316,14 @@ body.brand .btn-accent, body.brand .btn-brand { background: var(--accent); color
     h.textContent = w.join(" ") + " "; var em = document.createElement("em"); em.textContent = tail; h.append(em);
   });
   if (!("IntersectionObserver" in window)) return;
-  var els = document.querySelectorAll("main section:not(.bhero) .wrap > *, .jobs.tiles > li, .review-card");
+  var els = document.querySelectorAll("main section:not(.bhero) .wrap > *, .jobs.rows > li, .review-card, .timeline > li, .faq details");
   var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }); }, { rootMargin: "0px 0px -8% 0px" });
-  els.forEach(function (el, i) { el.classList.add("rv"); el.style.transitionDelay = (el.matches(".jobs.tiles > li") ? (i % 3) * 90 : 0) + "ms"; io.observe(el); });
+  els.forEach(function (el) {
+    el.classList.add("rv");
+    var sib = el.parentNode ? [].indexOf.call(el.parentNode.children, el) : 0;
+    el.style.transitionDelay = (el.matches(".timeline > li, .jobs.rows > li, .review-card") ? Math.min(sib, 5) * 90 : 0) + "ms";
+    io.observe(el);
+  });
 })();
 </script>{% endif %}
 </body>
