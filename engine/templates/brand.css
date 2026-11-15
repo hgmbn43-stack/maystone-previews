@@ -263,3 +263,8 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
   body.brand #process .wrap > * { grid-column: 1; }
   body.brand #process .timeline { grid-column: 2; grid-row: 1 / span 4; margin-top: 1rem; }
 }
+
+/* Visit picker chips: not the spaced-caps form-label style */
+body.brand .chips label { font: 500 .88rem/1.15 var(--body); letter-spacing: 0; text-transform: none; }
+body.brand .chips span { border-radius: 2px; }
+body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }

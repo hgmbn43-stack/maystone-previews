@@ -303,6 +303,20 @@ input, select, textarea { font: inherit; font-size: 1rem; color: var(--ink); bac
 input:focus, select:focus, textarea:focus { border-color: var(--brand-text); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
 textarea { min-height: 7rem; resize: vertical; }
 .qform .btn-brand { justify-self: start; }
+.visit { border: 0; margin: 0; padding: 0; display: grid; gap: .6rem; min-width: 0; }
+.visit legend { font-weight: 700; font-size: .95rem; margin-bottom: .5rem; padding: 0; }
+.chips { display: flex; gap: .45rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chips label { flex: 0 0 auto; cursor: pointer; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips span { display: grid; place-items: center; min-width: 3.6rem; min-height: 44px; padding: .45rem .8rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; line-height: 1.15; text-align: center; transition: background .2s, color .2s, border-color .2s; }
+.chips.days span { border-radius: 12px; }
+.chips.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+.chips.slots span { min-width: 0; padding-inline: .4rem; }
+.chips span small { display: block; font-size: .68rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em; }
+.chips input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #14100b); }
+.chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.visit-note b { color: var(--ink); }
 .form-status { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; border-radius: 12px; border: 1.5px solid var(--ok); }
 .form-status strong { color: var(--ok); }
 .form-status svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--ok); }
@@ -663,6 +677,11 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
   body.brand #process .wrap > * { grid-column: 1; }
   body.brand #process .timeline { grid-column: 2; grid-row: 1 / span 4; margin-top: 1rem; }
 }
+
+/* Visit picker chips: not the spaced-caps form-label style */
+body.brand .chips label { font: 500 .88rem/1.15 var(--body); letter-spacing: 0; text-transform: none; }
+body.brand .chips span { border-radius: 2px; }
+body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }
 /* Sub-page bits */
 /* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
 .menu { position: relative; flex: none; }

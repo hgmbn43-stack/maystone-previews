@@ -304,6 +304,20 @@ input, select, textarea { font: inherit; font-size: 1rem; color: var(--ink); bac
 input:focus, select:focus, textarea:focus { border-color: var(--brand-text); outline: none; box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 30%, transparent); }
 textarea { min-height: 7rem; resize: vertical; }
 .qform .btn-brand { justify-self: start; }
+.visit { border: 0; margin: 0; padding: 0; display: grid; gap: .6rem; min-width: 0; }
+.visit legend { font-weight: 700; font-size: .95rem; margin-bottom: .5rem; padding: 0; }
+.chips { display: flex; gap: .45rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.chips::-webkit-scrollbar { display: none; }
+.chips label { flex: 0 0 auto; cursor: pointer; }
+.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips span { display: grid; place-items: center; min-width: 3.6rem; min-height: 44px; padding: .45rem .8rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; line-height: 1.15; text-align: center; transition: background .2s, color .2s, border-color .2s; }
+.chips.days span { border-radius: 12px; }
+.chips.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
+.chips.slots span { min-width: 0; padding-inline: .4rem; }
+.chips span small { display: block; font-size: .68rem; opacity: .7; text-transform: uppercase; letter-spacing: .08em; }
+.chips input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #14100b); }
+.chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+.visit-note b { color: var(--ink); }
 .form-status { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; border-radius: 12px; border: 1.5px solid var(--ok); }
 .form-status strong { color: var(--ok); }
 .form-status svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--ok); }
@@ -663,7 +677,12 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
   body.brand #process .wrap { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1.6fr); column-gap: 4rem; }
   body.brand #process .wrap > * { grid-column: 1; }
   body.brand #process .timeline { grid-column: 2; grid-row: 1 / span 4; margin-top: 1rem; }
-}</style></head>
+}
+
+/* Visit picker chips: not the spaced-caps form-label style */
+body.brand .chips label { font: 500 .88rem/1.15 var(--body); letter-spacing: 0; text-transform: none; }
+body.brand .chips span { border-radius: 2px; }
+body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }</style></head>
 <body class="brand">
 <script>document.documentElement.className += " js";</script>
 <header class="top" id="topbar">
@@ -694,7 +713,7 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
       <p class="bh-h">Heating and plumbing, <em>sorted.</em></p>
       <p class="bh-sub">Boiler repairs, new boilers, leaks and radiators across Worthing and nearby. A clear price before we start, and a tidy job when we&#39;re done.</p>
       <div class="bh-acts">
-        <a class="btn btn-accent js-quote" href="#quote">Get a free quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-accent js-quote" href="#quote">Book a free quote <span aria-hidden="true">&rarr;</span></a>
         <a class="btn btn-ghost" href="tel:+447700900417"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Call 07700 900417</a>
       </div>
     </div>
@@ -971,6 +990,13 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
           </select>
         </div>
       </div>
+      <fieldset class="visit" data-visit>
+        <legend>Book a free quote visit <span class="hint">(optional)</span></legend>
+        <div class="chips days" role="radiogroup" aria-label="Day"></div>
+        <div class="chips slots" role="radiogroup" aria-label="Time">
+<label><input type="radio" name="slot" value="Morning"><span>Morning</span></label><label><input type="radio" name="slot" value="Afternoon"><span>Afternoon</span></label><label><input type="radio" name="slot" value="Evening"><span>Evening</span></label>        </div>
+        <p class="visit-note hint" aria-live="polite">Pick a day and time and we'll confirm by text.</p>
+      </fieldset>
       <div class="field"><label for="q-details">What do you need? <span class="hint">(optional)</span></label><textarea id="q-details" name="details"></textarea></div>
       <div class="field"><label for="q-email">Email <span class="hint">(optional)</span></label><input id="q-email" name="email" type="email" autocomplete="email"></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave blank<input id="q-web" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -1031,6 +1057,13 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
           </select>
         </div>
       </div>
+      <fieldset class="visit" data-visit>
+        <legend>Book a free quote visit <span class="hint">(optional)</span></legend>
+        <div class="chips days" role="radiogroup" aria-label="Day"></div>
+        <div class="chips slots" role="radiogroup" aria-label="Time">
+<label><input type="radio" name="slot" value="Morning"><span>Morning</span></label><label><input type="radio" name="slot" value="Afternoon"><span>Afternoon</span></label><label><input type="radio" name="slot" value="Evening"><span>Evening</span></label>        </div>
+        <p class="visit-note hint" aria-live="polite">Pick a day and time and we'll confirm by text.</p>
+      </fieldset>
       <div class="field"><label for="d-details">What do you need? <span class="hint">(optional)</span></label><textarea id="d-details" name="details"></textarea></div>
       <div class="field"><label for="d-email">Email <span class="hint">(optional)</span></label><input id="d-email" name="email" type="email" autocomplete="email"></div>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Leave blank<input id="d-web" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -1190,6 +1223,28 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
 
   /* Forms: check, send (live sites), then confirm with a drawn tick */
   var TRACK = "https://script.google.com/macros/s/AKfycbyHy9OQT8lM1U_xwEg2rpJqCG1PZApcAKPNbtpDUzI1Gw-Btro7IwNEr-GZwHxXf3Er/exec", LEAD = "DEMO1", LIVE = false;
+  /* Book a quote visit: the next working days as chips (no Sundays) */
+  var DN = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], MN = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  $$("[data-visit]").forEach(function (fs) {
+    var box = $(".days", fs), d = new Date(), start = d.getTime(), n = 0, html = "";
+    while (n < 8) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 0) continue;
+      var v = DN[d.getDay()] + " " + d.getDate() + " " + MN[d.getMonth()];
+      html += '<label><input type="radio" name="day" value="' + v + '"><span><small>' + (d.getTime() - start < 864e5 * 1.5 ? "Tmrw" : DN[d.getDay()]) + "</small>" + d.getDate() + " " + MN[d.getMonth()] + "</span></label>";
+      n++;
+    }
+    box.innerHTML = html;
+    fs.addEventListener("change", function () {
+      var day = fs.querySelector("[name=day]:checked"), slot = fs.querySelector("[name=slot]:checked"), note = $(".visit-note", fs);
+      if (day || slot) note.innerHTML = "Quote visit: <b>" + (day ? day.value : "any day") + ", " + (slot ? slot.value.toLowerCase() : "any time") + "</b>. We'll text you to confirm.";
+    });
+  });
+  function visitText(form) {
+    var day = form.querySelector("[name=day]:checked"), slot = form.querySelector("[name=slot]:checked");
+    return (day || slot) ? "Quote visit requested: " + (day ? day.value : "any day") + ", " + (slot ? slot.value.toLowerCase() : "any time") : "";
+  }
+
   $$(".qform").forEach(function (form) {
     var status = $(".form-status", form), p = form.id.split("-")[0];
     form.addEventListener("submit", function (e) {
@@ -1201,15 +1256,21 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
         $("#" + p + "-" + missing[0]).focus();
         return;
       }
+      var vt = visitText(form);
       if (!LIVE || !TRACK) {
-        status.innerHTML = TICK + "<span><strong>This is a preview.</strong> On your live site, this enquiry goes straight to your phone and email.</span>";
+        status.innerHTML = TICK + "<span><strong>This is a preview.</strong> On your live site, " + (vt ? "your enquiry and visit request go" : "this enquiry goes") + " straight to your phone and email.</span>";
         return;
       }
       if ($("#" + p + "-web").value) return;
       var body = new URLSearchParams({ action: "enquiry", id: LEAD });
-      ["name", "phone", "postcode", "job", "details", "email"].forEach(function (k) { body.append(k, (form.elements[k] && form.elements[k].value) || ""); });
+      ["name", "phone", "postcode", "job", "details", "email"].forEach(function (k) {
+        var v = (form.elements[k] && form.elements[k].value) || "";
+        if (k === "details" && vt) v = vt + (v ? "\n" + v : "");
+        body.append(k, v);
+      });
+      body.append("visit", vt);
       try { fetch(TRACK, { method: "POST", mode: "no-cors", credentials: "omit", body: body }).catch(function () {}); } catch (err) {}
-      status.innerHTML = TICK + "<span><strong>Thanks, your enquiry is sent.</strong> We will be in touch soon.</span>";
+      status.innerHTML = TICK + "<span><strong>Thanks, your enquiry is sent.</strong> " + (vt ? "We'll text you to confirm your visit." : "We will be in touch soon.") + "</span>";
       form.reset();
     });
   });
