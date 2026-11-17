@@ -682,6 +682,8 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
 body.brand .chips label { font: 500 .88rem/1.15 var(--body); letter-spacing: 0; text-transform: none; }
 body.brand .chips span { border-radius: 2px; }
 body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }
+/* Pub and cafe menus: prices in a fixed column so the rows line up */
+@media (min-width: 900px) { .jobs.rows.food li { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1.2fr) 9rem 7.5rem; } .jobs.rows.food .price { margin-left: auto; } }
 /* Sub-page bits */
 /* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
 .menu { position: relative; flex: none; }

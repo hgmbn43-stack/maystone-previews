@@ -39,7 +39,7 @@ IMAGE_EXT = {".jpg", ".jpeg", ".png", ".webp"}
 SCHEMA_TYPE = {
     "plumbing": "Plumber", "electrical": "Electrician", "roofing": "RoofingContractor",
     "building": "GeneralContractor", "decorating": "HousePainter", "local": "LocalBusiness",
-    "cafe": "CafeOrCoffeeShop",
+    "cafe": "CafeOrCoffeeShop", "pub": "BarOrPub",
 }
 
 DEMOS = [
@@ -106,7 +106,7 @@ def film_library(group):
     """Films for a trade group that have their frames in place, in library order."""
     out = []
     for f in FILMS.get(group, []):
-        folder = HERE / "films" / group / f["id"]
+        folder = HERE / "films" / f.get("dir", group) / f["id"]
         tall = sorted((folder / "m").glob("*.webp")) if (folder / "m").is_dir() else []
         if tall:
             out.append(dict(f, folder=folder, frames=len(tall), wide=(folder / "d" / "0001.webp").exists()))
@@ -420,6 +420,24 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             bd.update(wide=f"{rel}{bd['hero']}-wide.webp", tall=f"{rel}{bd['hero']}-tall.webp",
                       sub=bd["sub"].format(town=biz["town"]), label="Example photo" if preview else "")
             brand = bd
+    # Per-lead copy (17 Nov 2026): leads/<ID>.json "details": {"copy": {...}} replaces the trade's default words for one
+    # business, e.g. a pub's real menu and prices from its Google listing. Brand keys change the signature look's
+    # headings; the rest change the trade text. "menu": [{"title", "blurb", "price"}] is their real menu.
+    copy = details.get("copy") if isinstance(details.get("copy"), dict) else {}
+    if brand:
+        for k in ("headline", "sub", "about", "about_alt", "stats", "story", "process", "alt"):
+            if copy.get(k):
+                brand[k] = copy[k]
+    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note"):
+        if copy.get(k):
+            t[k] = copy[k]
+    if t.get("venue"):
+        if copy.get("menu"):
+            t["menu"], t["menu_real"] = [dict(m) for m in copy["menu"]], True
+        else:
+            t["menu"] = [{"title": a, "blurb": b, "price": pr} for (a, b), pr in zip(t["services"], t.get("menu_prices") or [])]
+            t["menu_real"] = False
+        t["services"] = [(m["title"], m.get("blurb", "")) for m in t["menu"]]
     # Extra pages (10 Nov 2026): one per service, one per town covered (home town + up to 4 nearby), and Contact.
     # Film pages only; a cafe stays one page (menu, hours and map are all on it).
     multi = bool(film) and not t.get("venue")

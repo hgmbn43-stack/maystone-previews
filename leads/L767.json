@@ -2,9 +2,100 @@
  "Lead ID": "L767",
  "Business": "Six Bells",
  "Trade": "Pub",
- "Town": "Polegate",
+ "Town": "Alfriston",
  "Phone": "01323 870811",
  "Google rating": "4.7",
  "Google reviews": "183",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ47zjCblx30cRMtcChavP0WA"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ47zjCblx30cRMtcChavP0WA",
+ "details": {
+  "address": "High Street, Alfriston, Polegate BN26 5TD",
+  "copy": {
+   "headline": [
+    "Homemade pies.",
+    "Proper pints."
+   ],
+   "sub": "A proper village pub on Alfriston High Street. Pies made here in small batches, well-kept ales, a fire in winter and a garden looking over the church.",
+   "about": [
+    "Walkers, locals",
+    "and dogs welcome."
+   ],
+   "lede": "Pop in after a walk on the South Downs Way. Grab a pint by the fire in winter, sit in the garden over the village green in summer, and have a pie whatever the weather.",
+   "stats": [
+    [
+     "Homemade",
+     "pies, made here"
+    ],
+    [
+     "Dogs",
+     "welcome inside"
+    ]
+   ],
+   "services_title": "On the menu",
+   "services_intro": "Pies made here, in small batches.",
+   "menu": [
+    {
+     "title": "The pies",
+     "blurb": "Made here in small batches: Steak & Kidney in Guinness gravy, Steak, Ale & Mushroom with Harvey's Sussex Best, Chicken, Ham & Leek, Lamb & Minted Potato, Cider Pork & Bramley Apple, Steak & Stilton and Steak & Black Pudding. With chips or mash, seasonal veg and gravy.",
+     "price": "£18.95–£19.95"
+    },
+    {
+     "title": "Veggie pie",
+     "blurb": "Chickpea, sweet potato and baby spinach in a creamy coconut and tomato curry sauce.",
+     "price": "£17.95"
+    },
+    {
+     "title": "Not in the mood for pie?",
+     "blurb": "Beer-battered cod and chips, homemade lasagne, or wholetail scampi.",
+     "price": "from £15.95"
+    },
+    {
+     "title": "Chips on the side",
+     "blurb": "Proper chips, or cheesy chips.",
+     "price": "£4.50–£5.50"
+    },
+    {
+     "title": "At the bar",
+     "blurb": "Well-kept ales including Harvey's, lagers, a good wine list, cocktails and spirits.",
+     "price": ""
+    },
+    {
+     "title": "The garden",
+     "blurb": "Tables looking over the village green and the church. Dogs very welcome.",
+     "price": ""
+    }
+   ],
+   "menu_note": "Taken from your menu on Google (August 2026). Send us any changes and we'll update it.",
+   "faqs": [
+    [
+     "Do I need to book?",
+     "It's worth booking at weekends. Our kitchen is small, so we can only take groups of up to six."
+    ],
+    [
+     "When are you open?",
+     "Thursday 12–3pm and 5:30–10pm, Friday 12–3pm and 5:30–11pm, Saturday 12–11pm and Sunday 12–10pm. Closed Monday to Wednesday."
+    ],
+    [
+     "Are dogs allowed?",
+     "Yes, dogs are welcome inside and in the garden."
+    ],
+    [
+     "Do you have vegetarian food?",
+     "Yes, the Chickpea, Sweet Potato & Spinach pie is vegetarian. Tell us about any allergies when you order."
+    ],
+    [
+     "Is there parking?",
+     "There's free on-street parking in the village."
+    ],
+    [
+     "Can I pay by card?",
+     "Yes, cards and contactless."
+    ]
+   ],
+   "enquiry_options": [
+    "Table for 2 to 6",
+    "Something else"
+   ],
+   "quote_intro": "Booking a table? Tell us the day, time and how many of you (up to six) and we'll confirm."
+  }
+ }
 }

@@ -1,4 +1,4 @@
-<!doctype html>
+{% set show_film = not (brand and t.venue) %}<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
@@ -8,8 +8,8 @@
 {% if preview %}<meta name="robots" content="noindex">{% endif %}
 {% if canonical %}<link rel="canonical" href="{{ canonical }}">{% endif %}
 <link rel="preload" href="assets/archivo.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" as="image" href="{{ film.base }}m/0001.webp"{% if film.wide %} media="(max-aspect-ratio: 1/1)"{% endif %}>
-{% if film.wide %}<link rel="preload" as="image" href="{{ film.base }}d/0001.webp" media="(min-aspect-ratio: 1/1)">{% endif %}
+{% if show_film %}<link rel="preload" as="image" href="{{ film.base }}m/0001.webp"{% if film.wide %} media="(max-aspect-ratio: 1/1)"{% endif %}>
+{% if film.wide %}<link rel="preload" as="image" href="{{ film.base }}d/0001.webp" media="(min-aspect-ratio: 1/1)">{% endif %}{% endif %}
 <script type="application/ld+json">{{ schema_json|safe }}</script>
 <style>
 @font-face {
@@ -442,7 +442,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <div class="field"><label for="{{ p }}-postcode">Date and time</label><input id="{{ p }}-postcode" name="postcode" placeholder="e.g. Sat 14th, 11am" required></div>
         <div class="field"><label for="{{ p }}-job">What's it for?</label>
           <select id="{{ p }}-job" name="job">
-            <option>Table for a group</option><option>Party or event</option><option>Something else</option>
+            {% for o in (t.enquiry_options or ['Table for a group', 'Party or event', 'Something else']) %}<option>{{ o }}</option>{% endfor %}
           </select>
         </div>
         {% else %}
@@ -561,14 +561,15 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>
       <p class="bh-sub">{{ brand.sub }}</p>
       <div class="bh-acts">
-        <a class="btn btn-accent js-quote" href="#quote">Book a free quote <span aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn-accent js-quote" href="#quote">{{ 'Book a table' if t.venue else 'Book a free quote' }} <span aria-hidden="true">&rarr;</span></a>
         <a class="btn btn-ghost" href="tel:{{ biz.tel }}">{{ phone_icon|safe }}Call {{ biz.phone }}</a>
       </div>
     </div>
     <ul class="bh-stats wrap">
       {% if biz.show_rating %}<li><b>{{ biz.rating_str }}</b><span>from {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</span></li>{% endif %}
+      {% if brand.stats %}{% for st in brand.stats %}<li><b>{{ st[0] }}</b><span>{{ st[1] }}</span></li>{% endfor %}{% else %}
       <li><b>Written</b><span>price before we start</span></li>
-      <li><b>Local</b><span>{{ biz.town }} and nearby</span></li>
+      <li><b>Local</b><span>{{ biz.town }} and nearby</span></li>{% endif %}
     </ul>
     <span class="bh-scroll" aria-hidden="true">Scroll</span>
   </section>
@@ -581,13 +582,13 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
   <section id="about">
     <div class="wrap">
-      {% if brand %}<figure class="about-img"><img src="{{ brand.about_img or (brand.tile_base ~ brand.tiles[1]) }}" alt="Roofers at work on a slate roof" loading="lazy" decoding="async">{% if preview %}<figcaption>Example photo</figcaption>{% endif %}</figure>{% endif %}
+      {% if brand %}<figure class="about-img"><img src="{{ brand.about_img or (brand.tile_base ~ brand.tiles[1]) }}" alt="{{ brand.about_alt or "" }}" loading="lazy" decoding="async">{% if preview %}<figcaption>Example photo</figcaption>{% endif %}</figure>{% endif %}
       <div class="intro-grid">
         <div>
           <p class="kicker">{{ t.kicker }} in {{ biz.town }}</p>
           <h2>{% if brand %}{{ brand.about[0] }} <em>{{ brand.about[1] }}</em>{% else %}{{ t.promise }}{% endif %}</h2>
         </div>
-        <p class="lede">{% if t.venue %}Pop in for breakfast, lunch, or a coffee and a slice of cake. Everyone's welcome.{% else %}One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.{% endif %}</p>
+        <p class="lede">{% if t.lede %}{{ t.lede }}{% elif t.venue %}Pop in for breakfast, lunch, or a coffee and a slice of cake. Everyone's welcome.{% else %}One local {{ t.cta_noun }} from the first call to the final check. A clear price before any work starts, and a tidy job when it's done.{% endif %}</p>
       </div>
       <div class="proof">
         {% if biz.show_rating %}
@@ -604,7 +605,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     </div>
   </section>
 
-  {% if brand %}
+  {% if brand and show_film %}
   <div id="story">{{ stage_block() }}</div>
   {% endif %}
 
@@ -613,6 +614,18 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     <div class="wrap">
       <p class="kicker">{{ t.services_title }}</p>
       <h2>{{ t.services_intro }}</h2>
+      {% if brand %}
+      <ul class="jobs food{{ ' rows' if brand.tiles }}">
+        {% for m in t.menu %}
+        <li>
+          {% if brand.tiles %}<span class="tile-img" aria-hidden="true"><img src="{{ brand.tile_base }}{{ brand.tiles[loop.index0 % brand.tiles|length] }}" alt="" loading="lazy" decoding="async"></span>{% endif %}
+          <div><h3>{{ m.title }}</h3><p>{{ m.blurb }}</p></div>
+          <div class="job-side">{% if m.price and (preview or t.menu_real) %}<span class="price">{{ m.price }}</span>{% endif %}</div>
+        </li>
+        {% endfor %}
+      </ul>
+      {% if preview %}<p class="prices-note"><span class="ph-tag">{{ 'From your Google listing' if t.menu_real else 'Example menu' }}</span> {{ t.menu_note or "Send us your real menu and prices and we'll put them here." }}</p>{% endif %}
+      {% else %}
       <ul class="jobs menu">
         {% for sv in t.services %}
         <li>
@@ -622,6 +635,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         {% endfor %}
       </ul>
       {% if preview %}<p class="prices-note"><span class="ph-tag">Example menu</span> Send us your real menu and prices and we'll put them here.</p>{% endif %}
+      {% endif %}
     </div>
   </section>
   {% else %}
@@ -649,7 +663,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   </section>
   {% endif %}
 
-  {% if brand %}
+  {% if brand and not t.venue %}
   <section id="process">
     <div class="wrap">
       <p class="kicker">How it works</p>
@@ -889,6 +903,19 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   var stage = document.getElementById("stage"), pin = document.getElementById("pin"), cv = document.getElementById("film");
   var top = document.getElementById("topbar"), fill = document.getElementById("fill"), knob = document.getElementById("knob"), pct = document.getElementById("pct");
   var beats = [].slice.call(document.querySelectorAll(".beat"));
+  if (!stage || !cv) {   // a page without the film (a pub or cafe in the signature look): header and progress bar only
+    var hdr = function () {
+      var hero = document.querySelector(".bhero"), head = top.offsetHeight;
+      top.classList.toggle("solid", scrollY > (hero ? hero.offsetHeight - head - 4 : 0));
+      top.classList.toggle("scrolled", scrollY > 30);
+      document.body.classList.toggle("in-film", scrollY < innerHeight * .5);
+      var doc = document.documentElement, max = doc.scrollHeight - innerHeight;
+      document.getElementById("prog").style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 0) + "%";
+      document.documentElement.style.setProperty("--head", head + "px");
+    };
+    hdr(); addEventListener("scroll", hdr, { passive: true }); addEventListener("resize", hdr);
+    return;
+  }
   var ctx = cv.getContext && cv.getContext("2d");
   var imgs = [], cur = 0, last = "", active = true, cw = 0, ch = 0;
   if (!ctx) return;

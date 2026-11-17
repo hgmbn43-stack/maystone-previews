@@ -682,7 +682,9 @@ body.brand h2.sm { font-size: clamp(1.9rem, 5vw, 2.6rem); }
 /* Visit picker chips: not the spaced-caps form-label style */
 body.brand .chips label { font: 500 .88rem/1.15 var(--body); letter-spacing: 0; text-transform: none; }
 body.brand .chips span { border-radius: 2px; }
-body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }</style></head>
+body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }
+/* Pub and cafe menus: prices in a fixed column so the rows line up */
+@media (min-width: 900px) { .jobs.rows.food li { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1.2fr) 9rem 7.5rem; } .jobs.rows.food .price { margin-left: auto; } }</style></head>
 <body class="brand">
 <script>document.documentElement.className += " js";</script>
 <header class="top" id="topbar">
@@ -719,8 +721,7 @@ body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }</style></head
     </div>
     <ul class="bh-stats wrap">
 <li><b>4.9</b><span>from 19 Google reviews</span></li>      <li><b>Written</b><span>price before we start</span></li>
-      <li><b>Local</b><span>Hove and nearby</span></li>
-    </ul>
+      <li><b>Local</b><span>Hove and nearby</span></li>    </ul>
     <span class="bh-scroll" aria-hidden="true">Scroll</span>
   </section>
   <div class="bmarquee" aria-hidden="true"><div>
@@ -728,7 +729,7 @@ body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }</style></head
 
   <section id="about">
     <div class="wrap">
-<figure class="about-img"><img src="https://images.pexels.com/photos/31544574/pexels-photo-31544574/free-photo-of-senior-man-painting-exterior-wall-on-scaffolding.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=900&amp;h=1125" alt="Roofers at work on a slate roof" loading="lazy" decoding="async"><figcaption>Example photo</figcaption></figure>      <div class="intro-grid">
+<figure class="about-img"><img src="https://images.pexels.com/photos/31544574/pexels-photo-31544574/free-photo-of-senior-man-painting-exterior-wall-on-scaffolding.jpeg?auto=compress&amp;cs=tinysrgb&amp;fit=crop&amp;w=900&amp;h=1125" alt="" loading="lazy" decoding="async"><figcaption>Example photo</figcaption></figure>      <div class="intro-grid">
         <div>
           <p class="kicker">Handyman in Hove</p>
           <h2>A local handyman who <em>gets it done.</em></h2>
@@ -1040,6 +1041,19 @@ body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }</style></head
   var stage = document.getElementById("stage"), pin = document.getElementById("pin"), cv = document.getElementById("film");
   var top = document.getElementById("topbar"), fill = document.getElementById("fill"), knob = document.getElementById("knob"), pct = document.getElementById("pct");
   var beats = [].slice.call(document.querySelectorAll(".beat"));
+  if (!stage || !cv) {   // a page without the film (a pub or cafe in the signature look): header and progress bar only
+    var hdr = function () {
+      var hero = document.querySelector(".bhero"), head = top.offsetHeight;
+      top.classList.toggle("solid", scrollY > (hero ? hero.offsetHeight - head - 4 : 0));
+      top.classList.toggle("scrolled", scrollY > 30);
+      document.body.classList.toggle("in-film", scrollY < innerHeight * .5);
+      var doc = document.documentElement, max = doc.scrollHeight - innerHeight;
+      document.getElementById("prog").style.width = (max > 0 ? Math.min(100, scrollY / max * 100) : 0) + "%";
+      document.documentElement.style.setProperty("--head", head + "px");
+    };
+    hdr(); addEventListener("scroll", hdr, { passive: true }); addEventListener("resize", hdr);
+    return;
+  }
   var ctx = cv.getContext && cv.getContext("2d");
   var imgs = [], cur = 0, last = "", active = true, cw = 0, ch = 0;
   if (!ctx) return;

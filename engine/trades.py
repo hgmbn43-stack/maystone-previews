@@ -1136,6 +1136,45 @@ CATEGORY_RULES.insert(0, ("cafe", r"\bcaf[eé]s?\b|coffee|tea ?room|bakery|bistr
 
 
 # ---------------------------------------------------------------------------------------------------
+# Pubs (17 Nov 2026): the cafe's VISIT US mode (menu, Find us with live hours and map, table enquiries) in the
+# signature look, without the scroll film. A lead can carry its real menu and words in "details": {"copy": ...}.
+TRADES["pub"] = dict(TRADES["cafe"], **{
+    "label": "Pub",
+    "kicker": "Pub",
+    "promise": "Proper food, well-kept beer and a warm welcome.",
+    "services_title": "On the menu",
+    "services_intro": "Proper pub food, cooked here.",
+    "services": [
+        ("Pub classics", "Pies, fish and chips, burgers and the day's specials."),
+        ("Sunday roast", "Roast of the day with all the trimmings."),
+        ("Lighter bites", "Sandwiches, soups and sharing plates."),
+        ("At the bar", "Cask ales, lagers, wine and spirits."),
+        ("The garden", "Tables outside for sunny days."),
+        ("Dogs welcome", "Bring the dog. There's water and a biscuit waiting."),
+    ],
+    "menu_prices": ["from £14.95", "from £16.95", "from £7.50", "", "", ""],
+    "gallery": ["The bar", "Food", "The garden", "Inside", "A pint", "Outside"],
+    "quote_intro": "Booking a table or planning a get-together? Send us the details and we'll get back to you.",
+    "faqs": [
+        ("Do I need to book?", "Walk-ins are welcome. At weekends it's worth booking, so send us a message first."),
+        ("Are dogs allowed?", "Yes, well-behaved dogs are welcome."),
+        ("Do you cater for allergies?", "Tell us about any allergies when you order and we'll talk you through what's in each dish."),
+        ("How do I find you?", "The map below has directions. Ring us if you get lost."),
+    ],
+    "enquiry_options": ["Table booking", "Party or get-together", "Something else"],
+    "cta_noun": "pub",
+    "lede": "",
+    "venue": True,
+})
+PALETTES["pub"] = {"brand": "#3a1d1a", "stripe": "#b5473f", "soft": "#f6efe7"}
+TRADES["pub"].update(PALETTES["pub"])
+PRICES["pub"] = [None] * 6
+# No pub film yet: the cafe's film stands in for the page's base colours only; signature pubs don't show a film.
+FILMS["pub"] = [dict(FILMS["cafe"][0], dir="cafe")]
+CATEGORY_RULES.insert(0, ("pub", r"\bpubs?\b|\binn\b|tavern|gastropub|free ?house|\bbar\b|ale ?house"))
+
+
+# ---------------------------------------------------------------------------------------------------
 # BRAND look (13 Nov 2026): a premium first screen instead of the scroll film. One striking full-screen
 # photo, a short punchy headline (last part in the accent colour), and an unexpected accent colour on a
 # dark base, so the site doesn't look like every other trade site. Everything below stays the same.
@@ -1365,4 +1404,23 @@ BRAND = {
         "about": ('A local handyman who', 'gets it done.'),
         "process": ('Three steps to', 'a finished list.'),
     },
+}
+
+
+# Pub signature look (17 Nov 2026): claret on dark oak. Real Unsplash photos, marked "Example photo".
+BRAND["pub"] = {
+    "alt": "A pint of ale on a table by an open fire",
+    "headline": ("Good food,", "proper pints."),
+    "sub": "A proper local in {town}. Food cooked here, well-kept beer and a warm welcome for everyone.",
+    "palette": _pal("#17110e", "#b5473f", "#d9776d"),
+    "light": _light("#8f2f28"),
+    "photos": {"wide": U + "1597076845776-0024e8e607a4" + WIDE, "tall": U + "1597076845776-0024e8e607a4" + TALL,
+               "about": U + "1565539383096-875303015bd2" + ABOUT,
+               "tiles": [U + "1567460074231-1e038921a459" + SQ, U + "1579208030886-b937da0925dc" + SQ,
+                         U + "1764397557799-258db31fe6a4" + SQ, U + "1560625172-a5d88acc3ba7" + SQ,
+                         U + "1775482080950-2a29a482ab1b" + SQ, U + "1592468257654-74160c844866" + SQ]},
+    "about_alt": "A pint being poured at the bar",
+    "story_kicker": "", "story": ("", ""), "process": ("", ""),
+    "about": ("Everyone's", "welcome here."),
+    "stats": [("Cooked", "here, every day"), ("Dogs", "welcome")],
 }
