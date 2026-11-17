@@ -1,4 +1,4 @@
-{% set show_film = not (brand and t.venue) %}<!doctype html>
+{% set show_film = not (brand and (t.venue or t.job_story)) %}<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
@@ -630,6 +630,26 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
   {% if brand and show_film %}
   <div id="story">{{ stage_block() }}</div>
+  {% elif t.job_story %}
+  <section id="story" class="jstory" aria-label="{{ t.job_story.title }}">
+    <div class="js-pin">
+      <div class="js-imgs">
+        {% for st in t.job_story.steps %}<figure class="js-img{{ ' on' if loop.first }}"><img src="{{ st.src }}" alt="{{ st.alt or st.title }}" {% if not loop.first %}loading="lazy" {% endif %}decoding="async"></figure>{% endfor %}
+        <div class="js-shade"></div>
+      </div>
+      <div class="js-text wrap">
+        <p class="kicker">{{ t.job_story.kicker }}</p>
+        <h2 class="js-h">{{ t.job_story.title }} <em>{{ t.job_story.em }}</em></h2>
+        <ol class="js-steps">
+          {% for st in t.job_story.steps %}
+          <li class="js-step{{ ' on' if loop.first }}"><span class="js-no">0{{ loop.index }}</span><div><h3>{{ st.title }}</h3><p>{{ st.text }}</p></div></li>
+          {% endfor %}
+        </ol>
+        <div class="js-bar" aria-hidden="true"><i></i></div>
+      </div>
+    </div>
+    <div class="js-track" style="height: {{ t.job_story.steps|length * 85 }}svh" aria-hidden="true"></div>
+  </section>
   {% endif %}
 
   {% if t.venue %}
@@ -765,7 +785,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   <section id="reviews">
     <div class="wrap reviews-grid">
       <div class="score">
-        <p class="kicker">Straight from Google</p>
+        <p class="kicker">{{ 'Facebook and Google' if t.static_reviews else 'Straight from Google' }}</p>
         <h2>What customers say</h2>
         {% if biz.show_rating %}
         <span class="score-num">{{ biz.rating_str }}</span>
@@ -776,7 +796,20 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <p>Reviews from your Google listing show here as customers leave them.</p>
         {% endif %}
       </div>
-      {% if preview %}
+      {% if t.static_reviews %}
+      <div>
+        <div class="cards" id="cards-static">
+          {% for r in t.static_reviews %}
+          <figure class="review-card">
+            <span class="stars" aria-label="Recommended">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <p>{{ r[0] }}</p>
+            <div class="review-who"><i aria-hidden="true">{{ r[1][:1] }}</i><div><b>{{ r[1] }}</b><small>{{ r[2] }}</small></div></div>
+          </figure>
+          {% endfor %}
+        </div>
+        <p class="reviews-note">From {{ 'your' if preview else 'our' }} Facebook and Google reviews.</p>
+      </div>
+      {% elif preview %}
       <div>
         <div class="cards" id="cards">
           {% for i in range(3) %}
@@ -799,7 +832,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   {% if real or (places_key and place_id) %}
   <section id="work" class="band"{% if not real %} hidden{% endif %}>
     <div class="wrap">
-      <p class="kicker">{{ 'From our Facebook' if fb_gallery else ('From our Google listing' if t.venue else 'Recent work') }}</p>
+      <p class="kicker">{{ (t.gallery_kicker or 'From our Facebook') if fb_gallery else ('From our Google listing' if t.venue else 'Recent work') }}</p>
       <h2>{{ t.gallery_intro }}</h2>
       <div class="gallery" id="gallery">
         {% for g in real[:6] %}
@@ -1202,6 +1235,31 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   new MutationObserver(ask).observe(document.getElementById("gallery") || document.body, { childList: true });
 })();
 </script>
+{% if t.job_story %}
+<script>
+/* Real job story: the section pins while you scroll; each step swaps in the next real photo. */
+(function () {
+  var sec = document.querySelector(".jstory"); if (!sec) return;
+  var imgs = sec.querySelectorAll(".js-img"), steps = sec.querySelectorAll(".js-step"), bar = sec.querySelector(".js-bar i"), n = imgs.length, cur = 0;
+  function show(i) {
+    if (i === cur) return; cur = i;
+    imgs.forEach(function (el, k) { el.classList.toggle("on", k === i); el.classList.toggle("past", k < i); });
+    steps.forEach(function (el, k) { el.classList.toggle("on", k === i); el.classList.toggle("done", k < i); });
+  }
+  function tick() {
+    var r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / Math.max(1, total)));
+    bar.style.transform = "scaleY(" + p + ")";
+    sec.style.setProperty("--p", p.toFixed(3));
+    show(Math.min(n - 1, Math.floor(p * n * 0.999)));
+  }
+  addEventListener("scroll", tick, { passive: true }); addEventListener("resize", tick); tick();
+  steps.forEach(function (el, k) { el.addEventListener("click", function () {
+    var total = sec.offsetHeight - innerHeight; scrollTo({ top: sec.offsetTop + total * (k + .5) / n, behavior: "smooth" });
+  }); });
+})();
+</script>
+{% endif %}
 {% if t.book %}
 <script>
 /* The menu book: pages from #mb-data, turned with the buttons, a tap on the page, a swipe or the arrow keys. */

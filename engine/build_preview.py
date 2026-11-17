@@ -208,7 +208,7 @@ def write_subpages(env, out_dir, home_html, group, t, biz, areas, svc_pages, are
     pages = []
     for i, sp in enumerate(svc_pages):
         sv = sp["sv"]
-        copy = (COPY.get(group) or {}).get(sv["title"]) or {}
+        copy = {k: sv[k] for k in ("intro", "includes", "signs") if sv.get(k)} or (COPY.get(group) or {}).get(sv["title"]) or {}
         guide = {"low": sv["low"], "high": sv["high"], "unit": sv.get("unit", "")} if sv.get("low") is not None else None
         pages.append(dict(kind="service", path=sp["path"], job=sv["title"],
             title=f"{sv['title']} in {town} | {name}",
@@ -343,6 +343,9 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         "logo": place(logo, "logo") if logo else "",
     }
     areas = [town] + [a for a in NEARBY.get(town, []) if a != town]
+    copy0 = ((details or {}).get("copy") or {}) if isinstance((details or {}).get("copy"), dict) else {}
+    if copy0.get("areas"):   # a business outside our NEARBY map (17 Nov 2026), e.g. Ipswich
+        areas = [town] + [a for a in copy0["areas"] if a != town]
     # Rating rules: show it from 4.0 up; only animate (count up) a strong rating.
     biz["show_rating"] = bool(reviews) and rating is not None and rating >= 4.0
     biz["animate_rating"] = biz["show_rating"] and rating >= 4.5
@@ -351,14 +354,25 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     # Services with guide prices for the "rough price" tool. Guide prices are example
     # ranges, so they only appear on previews, never on a customer's live site.
     services = []
-    for (title, blurb), band in zip(t["services"], PRICES.get(group, [])):
+    if copy0.get("services"):   # the business's own services: [{"title", "blurb", "low", "high", "unit", "includes", "intro"}]
+        t["services"] = [(sv["title"], sv["blurb"]) for sv in copy0["services"]]
+        for sv in copy0["services"]:
+            item = dict(sv, low=None, high=None, unit="")
+            if preview and sv.get("low") is not None:
+                item.update(low=sv["low"], high=sv["high"], unit=sv.get("unit", ""))
+            services.append(item)
+    for (title, blurb), band in ([] if copy0.get("services") else zip(t["services"], PRICES.get(group, []))):
         item = {"title": title, "blurb": blurb, "low": None, "high": None, "unit": ""}
         if band and preview:
             item.update(low=band[0], high=band[1], unit=band[2] if len(band) > 2 else "")
         services.append(item)
     t["services_full"] = services
     price_json = [x for x in services if x["low"] is not None]
-    coverage = [{"name": a, "pc": POSTCODES.get(a, [])} for a in areas]
+    coverage = [{"name": a, "pc": (copy0.get("postcodes") or {}).get(a) or POSTCODES.get(a, [])} for a in areas]
+    if copy0.get("postcodes"):
+        biz["pc_example"] = (copy0["postcodes"].get(town) or [town])[0]
+    if copy0.get("reviews"):
+        t["static_reviews"] = copy0["reviews"]
     schema = {
         "@context": "https://schema.org", "@type": SCHEMA_TYPE.get(group, "HomeAndConstructionBusiness"),
         "name": name, "telephone": biz["tel"], "areaServed": areas,
@@ -428,7 +442,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         for k in ("headline", "sub", "about", "about_alt", "stats", "story", "process", "alt"):
             if copy.get(k):
                 brand[k] = copy[k]
-    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro"):
+    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
         if copy.get(k):
             t[k] = copy[k]
     # The business's own photos (17 Nov 2026), e.g. from their Facebook with their permission: leads/<ID>/photos/*.jpg,
@@ -451,6 +465,10 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         fb_gallery = [{"src": "img/fb/" + g[0], "caption": g[1] if len(g) > 1 else ""} for g in (copy.get("gallery") or [])]
     if copy.get("book"):
         t["book"] = copy["book"]
+    if copy.get("job_story"):
+        js = dict(copy["job_story"])
+        js["steps"] = [dict(st, src="img/fb/" + st["photo"]) for st in js["steps"]]
+        t["job_story"] = js
     if t.get("venue"):
         if copy.get("menu"):
             t["menu"], t["menu_real"] = [dict(m) for m in copy["menu"]], True

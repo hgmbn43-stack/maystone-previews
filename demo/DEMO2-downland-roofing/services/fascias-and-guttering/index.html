@@ -775,6 +775,44 @@ body.brand .fm-sec > summary { font-weight: 500; }
 .mb-btn:disabled { opacity: .3; cursor: default; }
 .mb-count { min-width: 4rem; text-align: center; font: 600 .7rem/1.4 var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
 @media (prefers-reduced-motion: reduce) { .mb-book, .leaf, .mb-book.single .sp { transition: none !important; } .cv-tap { animation: none; } }
+
+/* Real job story (17 Nov 2026): the business's own photos, pinned while you scroll, one step per photo.
+   Used instead of the AI film when a lead has "job_story" in its copy. */
+.jstory { position: relative; padding: 0 !important; background: #14181b; color: #ece7df; }
+.js-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; }
+.js-track { margin-top: -100svh; }
+.js-imgs { position: absolute; inset: 0; }
+.js-img { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1s ease; }
+.js-img.on { opacity: 1; }
+.js-img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.12); transition: transform 7s ease-out; }
+.js-img.on img { transform: scale(1.02); }
+.js-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,10,8,.55) 0%, rgba(12,10,8,.15) 35%, rgba(12,10,8,.85) 72%, rgba(12,10,8,.97) 100%); }
+.js-text { position: relative; align-self: end; padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px)); display: grid; grid-template-columns: 1fr auto; column-gap: 1.2rem; }
+.js-text > .kicker, .js-h { grid-column: 1 / -1; }
+.js-h { font: 500 clamp(2.2rem, 7vw, 4.2rem)/1 var(--display); margin: .7rem 0 1.4rem; max-width: 14ch; color: #f4efe6; }
+.js-h em { font-style: italic; color: #e3955c; }
+.js-steps { list-style: none; margin: 0; padding: 0; display: grid; min-height: 9.5rem; }
+.js-step { grid-area: 1 / 1; display: flex; gap: 1rem; align-items: flex-start; opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; pointer-events: none; }
+.js-step.on { opacity: 1; transform: none; pointer-events: auto; }
+.js-no { font: 500 clamp(3rem, 12vw, 5rem)/.8 var(--display); color: transparent; -webkit-text-stroke: 1px #c8743a; flex: none; }
+.js-step h3 { font: 500 clamp(1.6rem, 5vw, 2.3rem)/1.1 var(--display); color: #f4efe6; margin: 0; }
+.js-step p { margin: .45rem 0 0; color: rgba(244,239,230,.82); max-width: 34rem; line-height: 1.6; }
+.js-bar { width: 2px; height: 100%; min-height: 8rem; background: rgba(244,239,230,.15); align-self: stretch; }
+.js-bar i { display: block; width: 100%; height: 100%; background: #c8743a; transform-origin: top; transform: scaleY(0); }
+@media (min-width: 900px) {
+  .js-shade { background: linear-gradient(90deg, rgba(12,10,8,.94) 0%, rgba(12,10,8,.7) 38%, rgba(12,10,8,.1) 70%), linear-gradient(0deg, rgba(12,10,8,.6), transparent 40%); }
+  .js-text { align-self: center; padding-bottom: 0; max-width: 1200px; }
+  .js-steps { max-width: 30rem; }
+  /* desktop: list all steps, the current one lit */
+  .js-steps { display: flex; flex-direction: column; gap: 1.2rem; min-height: 0; }
+  .js-step { grid-area: auto; opacity: .32; transform: none; pointer-events: auto; cursor: pointer; transition: opacity .5s ease; }
+  .js-step p { max-height: 0; overflow: hidden; margin: 0; transition: max-height .6s ease, margin .6s ease; }
+  .js-step.on { opacity: 1; }
+  .js-step.on p { max-height: 8rem; margin-top: .45rem; }
+  .js-no { font-size: 2.6rem; }
+  .js-step h3 { font-size: 1.9rem; }
+}
+@media (prefers-reduced-motion: reduce) { .js-img, .js-img img, .js-step { transition: none; } }
 /* Sub-page bits */
 /* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
 .menu { position: relative; flex: none; }

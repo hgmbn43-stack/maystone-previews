@@ -1,0 +1,306 @@
+{
+ "Lead ID": "W001",
+ "Business": "FCP Renovations",
+ "Trade": "Carpenter",
+ "Town": "Ipswich",
+ "Phone": "07952 432679",
+ "Google rating": "5",
+ "Google reviews": "2",
+ "Google Maps": "https://www.google.com/maps/place/Foys+Carpentry+and+plastering+services/@52.0434328,1.1424095,17z",
+ "details": {
+  "copy": {
+   "headline": [
+    "Handmade to fit",
+    "your home."
+   ],
+   "sub": "Carpentry, plastering and kitchen fitting across Ipswich, Suffolk, Norfolk and Essex. Over 30 years' experience, a clear quote up front and a tidy job at the end of every day.",
+   "kicker": "Carpentry & plastering",
+   "stats": [
+    [
+     "30+",
+     "years' experience"
+    ],
+    [
+     "Free",
+     "quotes"
+    ]
+   ],
+   "photos": {
+    "wide": "kitchen-hero.jpg",
+    "tall": "kitchen-long.jpg",
+    "about": "boarding.jpg",
+    "tiles": [
+     "bookcases.jpg",
+     "media-wall-blue.jpg",
+     "skim.jpg",
+     "kitchen-grey.jpg",
+     "stairs.jpg",
+     "knock-through.jpg"
+    ]
+   },
+   "about": [
+    "A small team that",
+    "cleans up after."
+   ],
+   "about_alt": "Marty drylining a wall, mid-job",
+   "lede": "Marty, Marcel and the team have over 30 years of carpentry, plastering and building experience. Every job is made to fit the room it's in, from a single shelf to a whole kitchen, and no job is too big or too small.",
+   "areas": [
+    "Woodbridge",
+    "Felixstowe",
+    "Stowmarket",
+    "Hadleigh",
+    "Colchester",
+    "Bury St Edmunds",
+    "Norwich"
+   ],
+   "postcodes": {
+    "Ipswich": [
+     "IP1",
+     "IP2",
+     "IP3",
+     "IP4",
+     "IP5",
+     "IP8",
+     "IP9",
+     "IP10"
+    ],
+    "Woodbridge": [
+     "IP12",
+     "IP13"
+    ],
+    "Felixstowe": [
+     "IP11"
+    ],
+    "Stowmarket": [
+     "IP14"
+    ],
+    "Hadleigh": [
+     "IP7"
+    ],
+    "Colchester": [
+     "CO1",
+     "CO2",
+     "CO3",
+     "CO4",
+     "CO5",
+     "CO6",
+     "CO7"
+    ],
+    "Bury St Edmunds": [
+     "IP28",
+     "IP29",
+     "IP30",
+     "IP31",
+     "IP32",
+     "IP33"
+    ],
+    "Norwich": [
+     "NR1",
+     "NR2",
+     "NR3",
+     "NR4",
+     "NR5",
+     "NR6",
+     "NR7"
+    ]
+   },
+   "services_title": "What we do",
+   "services_intro": "Bespoke, unique, handmade.",
+   "services": [
+    {
+     "title": "Bespoke carpentry",
+     "blurb": "Alcove bookcases, fitted cupboards, under-stair storage and one-off pieces, made to measure.",
+     "low": 400,
+     "high": 2500,
+     "intro": "Every piece is made for the space it's going in, in softwood or hardwood, painted or left natural.",
+     "includes": [
+      "Alcove shelving and bookcases",
+      "Fitted wardrobes and cupboards",
+      "Under-stair storage",
+      "Bespoke tables and seating"
+     ]
+    },
+    {
+     "title": "Media walls",
+     "blurb": "TV walls with a built-in fire, lit shelving and storage, designed around your room.",
+     "low": 1500,
+     "high": 5000,
+     "intro": "A media wall hides the cables, frames the TV and gives the room a focal point.",
+     "includes": [
+      "Stud frame and boarding",
+      "Electric fire and TV recess",
+      "LED lit shelving",
+      "Cupboards either side"
+     ]
+    },
+    {
+     "title": "Plastering",
+     "blurb": "Skimming, float and set, drylining, plasterboarding, coving and rendering.",
+     "low": 400,
+     "high": 800,
+     "unit": "per room",
+     "intro": "From one ceiling to a full re-plaster, finished smooth and ready for decorating.",
+     "includes": [
+      "Skimming walls and ceilings",
+      "Drylining and plasterboarding",
+      "Float and set",
+      "Coving and rendering"
+     ]
+    },
+    {
+     "title": "Kitchen installations",
+     "blurb": "Full kitchens fitted: units, worktops, appliances, flooring and the plastering around them.",
+     "low": 2500,
+     "high": 6000,
+     "intro": "We fit the whole room, so there's one team from the strip-out to the last cupboard handle.",
+     "includes": [
+      "Strip-out and making good",
+      "Units, worktops and appliances",
+      "Flooring",
+      "Plastering and finishing"
+     ]
+    },
+    {
+     "title": "Doors and staircases",
+     "blurb": "Internal doors hung, frames trued up in older houses, stairs repaired and new balustrades.",
+     "low": 120,
+     "high": 250,
+     "unit": "per door",
+     "intro": "Old houses rarely have square frames. We plane, pack and adjust until every door closes properly.",
+     "includes": [
+      "Internal doors and frames",
+      "Skirting and architrave",
+      "Staircase repairs",
+      "New spindles and handrails"
+     ]
+    },
+    {
+     "title": "Building work",
+     "blurb": "Knock-throughs, stud walls, alterations and general building for homes and businesses.",
+     "low": 500,
+     "high": 3000,
+     "intro": "General building for domestic and commercial customers, carried out by the same team that finishes the job.",
+     "includes": [
+      "Knock-throughs",
+      "Stud walls",
+      "Alterations",
+      "Commercial fit-outs"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From our recent jobs",
+    "title": "Bare walls to",
+    "em": "finished room.",
+    "steps": [
+     {
+      "photo": "knock-through.jpg",
+      "title": "Open it up",
+      "text": "Walls you don't need come out, the opening is made good and the room is ready to build."
+     },
+     {
+      "photo": "boarding.jpg",
+      "title": "Board and line",
+      "text": "Stud walls framed and boarded, old walls drylined so they're straight and flat."
+     },
+     {
+      "photo": "skim.jpg",
+      "title": "Skim",
+      "text": "A smooth new skim on the walls and ceilings, left to dry properly before anything goes on."
+     },
+     {
+      "photo": "kitchen-grey.jpg",
+      "title": "Fit",
+      "text": "Units, worktops and appliances fitted, every door and drawer lined up."
+     },
+     {
+      "photo": "kitchen-hero.jpg",
+      "title": "Finished",
+      "text": "Lights in, stools out, dust gone. A room you'll want to spend all day in."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "bookcases.jpg",
+     "Alcove bookcases"
+    ],
+    [
+     "media-wall.jpg",
+     "Media wall with built-in fire"
+    ],
+    [
+     "stairs.jpg",
+     "New door, spindles and handrail"
+    ],
+    [
+     "kitchen-white.jpg",
+     "Kitchen fit and fresh plaster"
+    ],
+    [
+     "alcove.jpg",
+     "Alcove shelves and cupboard, ready to paint"
+    ],
+    [
+     "table.jpg",
+     "Bespoke table and seating"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Recent jobs.",
+   "reviews": [
+    [
+     "Marty and Marcel built a custom-made set of cupboards for us in our spare bedroom. We'd trawled the Internet for hours looking for something we liked but didn't have any luck, so that's when we turned to Marty to create it for us and to our exact spec.",
+     "Jennie Page",
+     "Facebook"
+    ],
+    [
+     "I asked Marty to replace my doors and staircase. He did a fantastic job and I'm delighted with the results. The work was completed to a really good standard and Marty was punctual and fastidious about cleaning up at the end of each day. Highly recommended.",
+     "Steve Greenfield",
+     "Facebook"
+    ],
+    [
+     "Great service, done within the time frame given. We had walls and ceiling skimmed and new coving put up as well as new skirting, architrave, new door, new floor and a false wall put in for integrated fire. We are really pleased with the work.",
+     "Kat Terry",
+     "Facebook"
+    ],
+    [
+     "They repaired my stairs, very quick and efficient and very tidy. Then they built some bespoke bookcases in our alcoves. Very good craftsmen, friendly and very communicative. Would definitely recommend.",
+     "Amanda Walters",
+     "Facebook"
+    ],
+    [
+     "Marty has just installed six internal doors and put in shelving and done some other carpentry work for us. I'd recommend his company without any hesitation.",
+     "Margaret Jessop",
+     "Google"
+    ]
+   ],
+   "faqs": [
+    [
+     "Do you give free quotes?",
+     "Yes. Tell us about the job, send a few photos if you can, and we'll come back with a clear, free quote."
+    ],
+    [
+     "Which areas do you cover?",
+     "We're based in Ipswich and work across Suffolk, Norfolk and Essex."
+    ],
+    [
+     "Can you do the carpentry and the plastering?",
+     "Yes, that's what we do. One team strips out, boards, plasters and fits, so you're not juggling trades."
+    ],
+    [
+     "Do you make furniture to measure?",
+     "Yes. Bookcases, cupboards, wardrobes and media walls are made to fit the exact space, including awkward alcoves."
+    ],
+    [
+     "Do you work for businesses as well?",
+     "Yes, we take on domestic and commercial work."
+    ],
+    [
+     "Will you tidy up?",
+     "Every day. Customers mention it in their reviews."
+    ]
+   ]
+  }
+ }
+}
