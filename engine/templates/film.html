@@ -474,7 +474,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     </form>
 {% endmacro %}
 <header class="top" id="topbar">
-  {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. The film, prices and dashed boxes are examples for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
+  {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. {{ 'The film, prices and dashed boxes are examples' if show_film else 'Photos marked "Example" and the dashed boxes are placeholders' }} for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
   <div class="bar">
     <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
     <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a>{% if svc_pages %}<a href="contact/">Contact</a>{% endif %}</nav>
