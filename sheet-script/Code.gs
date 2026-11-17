@@ -13,7 +13,10 @@
 
 var REPO = 'hgmbn43-stack/maystone-previews';
 var SITE = 'https://hgmbn43-stack.github.io/maystone-previews/';
-var NOT_REP_TABS = ['Summary', 'Binned', 'Callbacks', 'AI receptionist list', 'Leads'];
+var NOT_REP_TABS = ['Summary', 'Binned', 'Callbacks', 'AI receptionist list', 'Leads', 'Backup Harvey 14 Nov'];
+/** Rep tab -> rep's email, for previews with no client email (the rep gets the link to send by text). */
+var REP_EMAILS = { Harvey: 'harvey@maystone.uk', Fin: 'fin.john@icloud.com', Dylan: 'dylanhazelton2@gmail.com', Oli: 'olisnow2006@gmail.com',
+  Levi: 'levitownsend2006@icloud.com', James: 'jamestucker2112@icloud.com', Ted: 'teddyshep@icloud.com', Daniel: 'danielchuiciudad27@gmail.com' };
 /** Every rep's call list tab (header A1 = "Lead ID"), so new reps' tabs work without a code change. */
 var TABS = (function () {
   try {
@@ -109,12 +112,12 @@ function processRows_(sh, first, last) {
     // A "yes" can be texted instead of emailed: a UK mobile typed in Client email, or a mobile in the Phone column.
     var okMobile = isUkMobile_(email) || isUkMobile_(r[C.phone - 1]);
 
-    // 1. Publish preview (email OR mobile – the rep texts the link themselves after a clear yes)
-    if (/^yes/i.test(String(r[C.outcome - 1]).trim()) && (okEmail || okMobile) && !link) {
+    // 1. Publish preview on every yes (no email needed – once approved, a no-email preview goes to the rep to send by text)
+    if (/^yes/i.test(String(r[C.outcome - 1]).trim()) && !link) {
       try {
         link = publish_(r);
         sh.getRange(rowNum, C.link).setValue(link);
-        if (!okEmail) sh.getRange(rowNum, C.link).setNote('No email: text or WhatsApp this link yourself, only after a clear yes on the call. It goes live in about 2 minutes.');
+        if (!okEmail) sh.getRange(rowNum, C.link).setNote('No client email: once Harvey ticks Approved, this link is emailed to the rep to send by text or WhatsApp.');
       } catch (err) {
         sh.getRange(rowNum, C.link).setNote('Preview not published: ' + err.message);
         continue;
@@ -124,11 +127,17 @@ function processRows_(sh, first, last) {
     // 2. Send once approved and live
     var approved = r[C.approved - 1] === true;
     var sent = String(r[C.sent - 1]).trim();
-    if (approved && link && okEmail && !sent) {
+    if (approved && link && !sent) {
       if (!isLive_(link)) continue; // page still building; the 5-minute run retries
+      var today = Utilities.formatDate(new Date(), 'Europe/London', 'dd/MM/yyyy');
       try {
-        sendPreview_(email, String(r[C.biz - 1]).trim(), link, sh.getName());
-        sh.getRange(rowNum, C.sent).setValue(Utilities.formatDate(new Date(), 'Europe/London', 'dd/MM/yyyy'));
+        if (okEmail) {
+          sendPreview_(email, String(r[C.biz - 1]).trim(), link, sh.getName());
+          sh.getRange(rowNum, C.sent).setValue(today);
+        } else {
+          var to = sendToRep_(sh.getName(), r, link, okMobile);
+          sh.getRange(rowNum, C.sent).setValue('To rep ' + today).setNote('No client email, so the link went to ' + to + ' to send by text or WhatsApp.');
+        }
       } catch (err) {
         sh.getRange(rowNum, C.sent).setNote('Not sent: ' + err.message);
       }
@@ -187,6 +196,25 @@ function sendPreview_(to, business, link, rep) {
     'Have a look and reply to this email or give us a ring with any changes.\n\n' +
     'Thanks,\n' + rep + '\nMaystone';
   GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, { from: SENDER, name: SENDER_NAME });
+}
+
+/** No client email: send the rep the link and a ready-to-copy text. Returns who it went to. */
+function sendToRep_(tab, r, link, okMobile) {
+  if (GmailApp.getAliases().indexOf(SENDER) === -1) throw new Error('cannot send as ' + SENDER);
+  var to = REP_EMAILS[tab] || 'harvey@maystone.uk';
+  var biz = String(r[C.biz - 1]).trim(), phone = String(r[C.phone - 1]).trim();
+  var first = tab;
+  var number = okMobile ? (isUkMobile_(r[C.email - 1]) ? String(r[C.email - 1]).trim() : phone) : '';
+  var body = 'Hi ' + first + ',\n\n' +
+    'The preview for ' + biz + ' is approved and ready. They didn\'t leave an email, so send it to them yourself.\n\n' +
+    (number ? 'Text or WhatsApp it to: ' + number + '\n\n' :
+      'Their number (' + phone + ') is a landline, so it can\'t take a text. Ring them back, get an email or mobile, and send it over.\n\n') +
+    'Copy and send this:\n\n' +
+    'Hi, it\'s ' + first + ' from Maystone. Here\'s the preview of your new website we talked about: ' + link + '\n' +
+    'Have a look and let me know what you think.\n\n' +
+    'Link: ' + link + '\n\nMaystone';
+  GmailApp.sendEmail(to, 'Send this preview: ' + biz, body, { from: SENDER, name: SENDER_NAME });
+  return to;
 }
 
 function gh_(method, path, payload) {
