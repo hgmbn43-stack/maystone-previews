@@ -17,7 +17,7 @@ var NOT_REP_TABS = ['Summary', 'Binned', 'Callbacks', 'AI receptionist list', 'L
 /** Rep tab -> rep's email, for previews with no client email (the rep gets the link to send by text). */
 var REP_EMAILS = { Harvey: 'harvey@maystone.uk', Fin: 'fin.john@icloud.com', Dylan: 'dylanhazelton2@gmail.com', Oli: 'olisnow2006@gmail.com',
   Levi: 'levitownsend2006@icloud.com', James: 'jamestucker2112@icloud.com', Ted: 'teddyshep@icloud.com', Daniel: 'danielchuiciudad27@gmail.com',
-  Gabriel: 'gabriel.rutherford0@gmail.com' };
+  Gabriel: 'gabriel.rutherford0@gmail.com', Leon: 'stroudleon7@gmail.com' };
 /** Every rep's call list tab (header A1 = "Lead ID"), so new reps' tabs work without a code change. */
 var TABS = (function () {
   try {
