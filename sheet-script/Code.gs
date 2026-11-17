@@ -196,7 +196,9 @@ function sendPreview_(to, business, link, rep) {
     'When you\'re happy, you can pick a package and pay securely at the bottom of the page, and we\'ll get it live.\n\n' +
     'Have a look and reply to this email or give us a ring with any changes.\n\n' +
     'Thanks,\n' + rep + '\nMaystone';
-  GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, { from: SENDER, name: SENDER_NAME });
+  var opts = { from: SENDER, name: SENDER_NAME };
+  if (REP_EMAILS[rep]) opts.cc = REP_EMAILS[rep]; // the rep who booked it gets a copy, so they can text it if the email bounces
+  GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, opts);
 }
 
 /** No client email: send the rep the link and a ready-to-copy text. Returns who it went to. */
