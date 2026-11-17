@@ -135,10 +135,11 @@ function processRows_(sh, first, last) {
         if (okEmail) {
           sendPreview_(email, String(r[C.biz - 1]).trim(), link, sh.getName());
           sh.getRange(rowNum, C.sent).setValue(today);
-        } else {
-          var to = sendToRep_(sh.getName(), r, link, okMobile);
-          sh.getRange(rowNum, C.sent).setValue('To rep ' + today).setNote('No client email, so the link went to ' + to + ' to send by text or WhatsApp.');
         }
+        // The rep always gets their own copy: a ?me link to look at (never counts as a view) and the link to text the client.
+        var to = sendToRep_(sh.getName(), r, link, okMobile, okEmail ? email : '');
+        if (!okEmail) sh.getRange(rowNum, C.sent).setValue('To rep ' + today);
+        sh.getRange(rowNum, C.sent).setNote((okEmail ? 'Emailed to ' + email + '. ' : 'No client email. ') + 'Rep copy sent to ' + to + '.');
       } catch (err) {
         sh.getRange(rowNum, C.sent).setNote('Not sent: ' + err.message);
       }
@@ -196,27 +197,30 @@ function sendPreview_(to, business, link, rep) {
     'When you\'re happy, you can pick a package and pay securely at the bottom of the page, and we\'ll get it live.\n\n' +
     'Have a look and reply to this email or give us a ring with any changes.\n\n' +
     'Thanks,\n' + rep + '\nMaystone';
-  var opts = { from: SENDER, name: SENDER_NAME };
-  if (REP_EMAILS[rep]) opts.cc = REP_EMAILS[rep]; // the rep who booked it gets a copy, so they can text it if the email bounces
-  GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, opts);
+  GmailApp.sendEmail(to, 'Your new website preview – ' + business, body, { from: SENDER, name: SENDER_NAME });
 }
 
-/** No client email: send the rep the link and a ready-to-copy text. Returns who it went to. */
-function sendToRep_(tab, r, link, okMobile) {
+/** The rep's copy of every approved preview: their own ?me link (their opens never count as views) and the plain link to text the client. */
+function sendToRep_(tab, r, link, okMobile, clientEmail) {
   if (GmailApp.getAliases().indexOf(SENDER) === -1) throw new Error('cannot send as ' + SENDER);
   var to = REP_EMAILS[tab] || 'harvey@maystone.uk';
   var biz = String(r[C.biz - 1]).trim(), phone = String(r[C.phone - 1]).trim();
   var first = tab;
   var number = okMobile ? (isUkMobile_(r[C.email - 1]) ? String(r[C.email - 1]).trim() : phone) : '';
+  var mine = link + (link.indexOf('?') === -1 ? '?me' : '&me');
   var body = 'Hi ' + first + ',\n\n' +
-    'The preview for ' + biz + ' is approved and ready. They didn\'t leave an email, so send it to them yourself.\n\n' +
+    'The preview for ' + biz + ' is approved and ready.\n\n' +
+    (clientEmail ? 'We\'ve emailed it to them at ' + clientEmail + '. If it bounces or they can\'t find it, text them the link below.\n\n'
+                 : 'They didn\'t leave an email, so send it to them yourself.\n\n') +
+    '1. YOUR LINK (open this one first, on your phone):\n' + mine + '\n' +
+    'Opening it marks your phone as staff, so your own clicks never count as the client viewing it.\n\n' +
+    '2. THE CLIENT\'S LINK (send this, don\'t open it):\n' + link + '\n\n' +
     (number ? 'Text or WhatsApp it to: ' + number + '\n\n' :
       'Their number (' + phone + ') is a landline, so it can\'t take a text. Ring them back, get an email or mobile, and send it over.\n\n') +
     'Copy and send this:\n\n' +
     'Hi, it\'s ' + first + ' from Maystone. Here\'s the preview of your new website we talked about: ' + link + '\n' +
-    'Have a look and let me know what you think.\n\n' +
-    'Link: ' + link + '\n\nMaystone';
-  GmailApp.sendEmail(to, 'Send this preview: ' + biz, body, { from: SENDER, name: SENDER_NAME });
+    'Have a look and let me know what you think.\n\nMaystone';
+  GmailApp.sendEmail(to, 'Your preview to send: ' + biz, body, { from: SENDER, name: SENDER_NAME });
   return to;
 }
 
