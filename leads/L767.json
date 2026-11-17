@@ -64,7 +64,7 @@
      "price": ""
     }
    ],
-   "menu_note": "Taken from your menu on Google (August 2026). Send us any changes and we'll update it.",
+   "menu_note": "The pies, mains and prices are from your menu on Google (August 2026); the Sunday roast and bar from your Facebook. Send us any changes and we'll update them.",
    "faqs": [
     [
      "Do I need to book?",
@@ -181,7 +181,270 @@
       ]
      ]
     }
-   ]
+   ],
+   "photos": {
+    "wide": "front.jpg",
+    "tall": "front.jpg",
+    "about": "inside.jpg"
+   },
+   "about_alt": "Inside the Six Bells: beams, a pink sofa, the fireplace and the bar",
+   "gallery": [
+    [
+     "garden-dog.jpg",
+     "The garden gate"
+    ],
+    [
+     "garden-church.jpg",
+     "The garden, looking over to the church"
+    ],
+    [
+     "fire.jpg",
+     "The fire's lit"
+    ],
+    [
+     "bar.jpg",
+     "The bar"
+    ],
+    [
+     "pizza-oven.jpg",
+     "Our wood-fired pizza oven"
+    ],
+    [
+     "taps.jpg",
+     "On tap"
+    ],
+    [
+     "fish-chips.jpg",
+     "Fish & chips"
+    ]
+   ],
+   "gallery_intro": "A look around.",
+   "book": {
+    "pages": [
+     {
+      "type": "cover",
+      "title": "Six Bells",
+      "sub": "Pie & Ale House",
+      "place": "Alfriston"
+     },
+     {
+      "type": "text",
+      "title": "Welcome",
+      "body": [
+       "Our traditional pies are entirely home-made here, using the finest ingredients and cooked in small batches.",
+       "Pull up a chair by the fire, or find a table in the garden looking over to the church. Dogs are very welcome."
+      ],
+      "small": "Groups of six or fewer, please. Our kitchen is small."
+     },
+     {
+      "type": "menu",
+      "title": "Homemade pies",
+      "note": "With mash or chunky chips, fresh seasonal veg and gravy. Or with salad, or half chips and half salad.",
+      "items": [
+       [
+        "Steak & Kidney",
+        "A British classic: diced beef and lamb's kidneys in a rich Guinness gravy.",
+        "£19.95"
+       ],
+       [
+        "Lamb & Minted Potato",
+        "Tender pieces of lamb with minted potato.",
+        "£19.95"
+       ],
+       [
+        "Steak, Ale & Mushroom",
+        "Diced steak, Harvey's Sussex Best bitter and a medley of mushrooms.",
+        "£19.95"
+       ],
+       [
+        "Cider Braised Pork & Bramley Apple",
+        "Cider-braised pork with Bramley apple and wholegrain mustard sauce.",
+        "£18.95"
+       ]
+      ]
+     },
+     {
+      "type": "menu",
+      "title": "More pies",
+      "items": [
+       [
+        "Chicken, Ham & Leek",
+        "Diced chicken breast, home-cooked gammon ham and leeks in a creamy white wine sauce.",
+        "£19.95"
+       ],
+       [
+        "Chickpea, Sweet Potato & Spinach (V)",
+        "Chickpea, sweet potato and baby spinach in a creamy coconut and tomato curry sauce.",
+        "£17.95"
+       ],
+       [
+        "Steak & Black Pudding",
+        "Diced steak and black pudding in Guinness gravy, topped with a peppercorn sauce.",
+        "£19.95"
+       ],
+       [
+        "Steak & Stilton",
+        "Diced beef in a rich Guinness gravy, topped with mature blue Stilton.",
+        "£19.95"
+       ]
+      ]
+     },
+     {
+      "type": "photo",
+      "src": "img/fb/pie.jpg",
+      "caption": "A pie, fresh from our kitchen"
+     },
+     {
+      "type": "photo",
+      "src": "img/fb/fish-chips.jpg",
+      "caption": "Beer-battered cod and chips"
+     },
+     {
+      "type": "menu",
+      "title": "Not in the mood for pie?",
+      "items": [
+       [
+        "Cod & Chips",
+        "Beer-battered cod with chips, garden peas and tartare sauce.",
+        "£16.95"
+       ],
+       [
+        "Lasagne",
+        "Homemade lasagne with chips, salad, or half chips and half salad.",
+        "£15.95"
+       ],
+       [
+        "Wholetail Scampi",
+        "Wholetail scampi with chips, garden peas and tartare sauce.",
+        "£15.95"
+       ],
+       [
+        "Chips",
+        "",
+        "£4.50"
+       ],
+       [
+        "Cheesy chips",
+        "",
+        "£5.50"
+       ]
+      ]
+     },
+     {
+      "type": "menu",
+      "title": "Sunday roast",
+      "note": "With roast potatoes, honey-roasted veg, braised red cabbage, cheesy leeks, Yorkshire pudding and red wine gravy.",
+      "items": [
+       [
+        "Roast top side of beef",
+        "Children (12 and under) £8.00",
+        "£16.00"
+       ],
+       [
+        "Baked gammon with honey & mustard",
+        "Children (12 and under) £7.50",
+        "£15.00"
+       ],
+       [
+        "Nut roast (V)",
+        "Children (12 and under) £7.50",
+        "£15.00"
+       ]
+      ]
+     },
+     {
+      "type": "photo",
+      "src": "img/fb/fire.jpg",
+      "caption": "Sundays by the fire"
+     },
+     {
+      "type": "photo",
+      "src": "img/fb/taps.jpg",
+      "caption": "Pulled fresh at the bar"
+     },
+     {
+      "type": "menu",
+      "title": "At the bar",
+      "note": "Well-kept ales, a good wine list, cocktails and spirits.",
+      "items": [
+       [
+        "Harvey's Sussex Best",
+        "Our local brewery",
+        "Cask"
+       ],
+       [
+        "Bass Premium Pale Ale",
+        "",
+        "Cask"
+       ],
+       [
+        "Camden Hells Lager",
+        "",
+        "Draught"
+       ],
+       [
+        "Guinness",
+        "",
+        "Draught"
+       ],
+       [
+        "Birra Moretti",
+        "",
+        "Draught"
+       ],
+       [
+        "Leffe Blonde",
+        "",
+        "Draught"
+       ],
+       [
+        "Stella Artois",
+        "",
+        "Draught"
+       ]
+      ]
+     },
+     {
+      "type": "cta",
+      "title": "Book a table",
+      "body": [
+       "Tell us the day, the time and how many of you, and we'll save you a table."
+      ],
+      "hours": [
+       [
+        "Monday to Wednesday",
+        "Closed"
+       ],
+       [
+        "Thursday",
+        "12–3pm, 5:30–10pm"
+       ],
+       [
+        "Friday",
+        "12–3pm, 5:30–11pm"
+       ],
+       [
+        "Saturday",
+        "12–11pm"
+       ],
+       [
+        "Sunday",
+        "12–10pm"
+       ]
+      ],
+      "button": "Book a table"
+     },
+     {
+      "type": "end"
+     },
+     {
+      "type": "back",
+      "title": "Six Bells",
+      "sub": "High Street, Alfriston",
+      "place": "01323 870811"
+     }
+    ]
+   }
   }
  }
 }

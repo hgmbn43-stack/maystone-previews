@@ -428,9 +428,29 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         for k in ("headline", "sub", "about", "about_alt", "stats", "story", "process", "alt"):
             if copy.get(k):
                 brand[k] = copy[k]
-    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title"):
+    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro"):
         if copy.get(k):
             t[k] = copy[k]
+    # The business's own photos (17 Nov 2026), e.g. from their Facebook with their permission: leads/<ID>/photos/*.jpg,
+    # copied to img/fb/. "photos" in the copy puts them in the signature hero and About; "gallery" lists [file, caption].
+    fb_gallery = []
+    fb_dir = lead_dir / "photos" if lead_dir else None
+    if fb_dir and fb_dir.is_dir():
+        (out_dir / "img" / "fb").mkdir(parents=True, exist_ok=True)
+        for f in fb_dir.iterdir():
+            if f.suffix.lower() in IMAGE_EXT:
+                shutil.copyfile(f, out_dir / "img" / "fb" / f.name)
+        ph = copy.get("photos") or {}
+        if brand and ph:
+            brand.update({k: "img/fb/" + v for k, v in ph.items() if k in ("wide", "tall")})
+            if ph.get("about"):
+                brand["about_img"] = "img/fb/" + ph["about"]
+            if ph.get("tiles"):
+                brand["tiles"], brand["tile_base"] = ["img/fb/" + x for x in ph["tiles"]], ""
+            brand["label"] = ""
+        fb_gallery = [{"src": "img/fb/" + g[0], "caption": g[1] if len(g) > 1 else ""} for g in (copy.get("gallery") or [])]
+    if copy.get("book"):
+        t["book"] = copy["book"]
     if t.get("venue"):
         if copy.get("menu"):
             t["menu"], t["menu_real"] = [dict(m) for m in copy["menu"]], True
@@ -458,7 +478,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         biz=biz, t=t, gallery=gallery, img=img, areas=areas, preview=preview, year=date.today().year,
         lead_id=lead_id, pay={"once": CONFIG.get("pay_once", ""), "monthly": CONFIG.get("pay_monthly", "")},
         track=CONFIG.get("track", ""), places_key=CONFIG.get("places_key", "") if preview else "", place_id=place_id, own=own, canonical=f"https://{domain}/" if domain else "", legal={"company": str(details.get("company") or "").strip()},
-        svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address, brand=brand,
+        svc_pages=svc_pages, area_pages=area_pages, badges=badges, address=address, brand=brand, fb_gallery=fb_gallery,
         help=(HELP.get(group) or []) if film and not t.get("venue") else [],
         hide_photos=[int(x) for x in re.findall(r"\d+", str(row.get("Hide photos") or ""))],
         schema_json=json.dumps(schema).replace("</", "<\\/"),
