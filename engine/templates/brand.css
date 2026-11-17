@@ -270,3 +270,7 @@ body.brand .chips span { border-radius: 2px; }
 body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }
 /* Pub and cafe menus: prices in a fixed column so the rows line up */
 @media (min-width: 900px) { .jobs.rows.food li { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1.2fr) 9rem 7.5rem; } .jobs.rows.food .price { margin-left: auto; } }
+
+/* The gold overlay stars must match the grey stars exactly (the .proof span label style was shrinking them) */
+body.brand .stars-bar span { font: inherit; letter-spacing: inherit; text-transform: none; color: var(--star); display: block; }
+body.brand .fm-sec > summary { font-weight: 500; }

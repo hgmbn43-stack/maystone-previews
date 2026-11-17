@@ -46,7 +46,7 @@
     {
      "title": "Not in the mood for pie?",
      "blurb": "Beer-battered cod and chips, homemade lasagne, or wholetail scampi.",
-     "price": "from £15.95"
+     "price": "£15.95–£16.95"
     },
     {
      "title": "Chips on the side",
@@ -95,7 +95,93 @@
     "Table for 2 to 6",
     "Something else"
    ],
-   "quote_intro": "Booking a table? Tell us the day, time and how many of you (up to six) and we'll confirm."
+   "quote_intro": "Booking a table? Tell us the day, time and how many of you (up to six) and we'll confirm.",
+   "full_menu_title": "Six Bells Pie & Ale House",
+   "full_menu": [
+    {
+     "section": "Homemade pies",
+     "note": "Made here in small batches. Served with mashed potato or chunky chips, fresh seasonal vegetables and gravy, or with salad, or half chips and half salad.",
+     "items": [
+      [
+       "Steak & Kidney",
+       "A British classic: diced beef and lamb's kidneys in a rich Guinness gravy.",
+       "£19.95"
+      ],
+      [
+       "Lamb & Minted Potato",
+       "Tender pieces of lamb with minted potato.",
+       "£19.95"
+      ],
+      [
+       "Steak, Ale & Mushroom",
+       "Diced steak, Harvey's Sussex Best bitter and a medley of mushrooms.",
+       "£19.95"
+      ],
+      [
+       "Cider Braised Pork & Bramley Apple",
+       "Cider-braised pork with Bramley apple and wholegrain mustard sauce.",
+       "£18.95"
+      ],
+      [
+       "Chicken, Ham & Leek",
+       "Diced chicken breast, home-cooked gammon ham and leeks in a creamy white wine sauce.",
+       "£19.95"
+      ],
+      [
+       "Chickpea, Sweet Potato & Spinach (V)",
+       "Chickpea, sweet potato and baby spinach in a creamy coconut and tomato curry sauce.",
+       "£17.95"
+      ],
+      [
+       "Steak & Black Pudding",
+       "Diced steak and black pudding in Guinness gravy, topped with a peppercorn sauce.",
+       "£19.95"
+      ],
+      [
+       "Steak & Stilton",
+       "Diced beef in a rich Guinness gravy, topped with mature blue Stilton.",
+       "£19.95"
+      ]
+     ]
+    },
+    {
+     "section": "Not in the mood for pie?",
+     "note": "",
+     "items": [
+      [
+       "Cod & Chips",
+       "Beer-battered cod with chips, garden peas and tartare sauce.",
+       "£16.95"
+      ],
+      [
+       "Lasagne",
+       "Homemade lasagne with chips, salad, or half chips and half salad.",
+       "£15.95"
+      ],
+      [
+       "Wholetail Scampi",
+       "Wholetail scampi with chips, garden peas and tartare sauce.",
+       "£15.95"
+      ]
+     ]
+    },
+    {
+     "section": "On the side",
+     "note": "",
+     "items": [
+      [
+       "Chips",
+       "",
+       "£4.50"
+      ],
+      [
+       "Cheesy chips",
+       "",
+       "£5.50"
+      ]
+     ]
+    }
+   ]
   }
  }
 }

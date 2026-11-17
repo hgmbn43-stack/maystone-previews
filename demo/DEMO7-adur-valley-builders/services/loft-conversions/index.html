@@ -317,6 +317,29 @@ textarea { min-height: 7rem; resize: vertical; }
 .chips input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--on-accent, #14100b); }
 .chips input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
 .visit-note b { color: var(--ink); }
+/* Full menu (pubs and cafes): opens under the menu highlights */
+.fullmenu { margin-top: 2rem; }
+.fullmenu > summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: .8rem; min-height: 48px; padding: .7rem 1.4rem; border-radius: 999px; background: var(--accent); color: var(--on-accent, #14100b); font-weight: 700; }
+.fullmenu > summary::-webkit-details-marker, .fm-sec > summary::-webkit-details-marker { display: none; }
+.fullmenu > summary i, .fm-sec > summary i { width: .6rem; height: .6rem; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform .3s ease; }
+.fullmenu[open] > summary i, .fm-sec[open] > summary i { transform: rotate(-135deg) translate(-2px, -1px); }
+.fullmenu .fm-close, .fullmenu[open] .fm-open { display: none; }
+.fullmenu[open] .fm-close { display: inline; }
+.fm-card { margin-top: 1.4rem; background: var(--card); border: 1px solid var(--line); padding: clamp(1.2rem, 4vw, 2.6rem); max-width: 54rem; animation: fmIn .45s ease both; }
+@keyframes fmIn { from { opacity: 0; transform: translateY(12px); } }
+.fm-title { text-align: center; font: 600 .72rem/1.4 var(--body); letter-spacing: .3em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 1rem; }
+.fm-sec { border-top: 1px solid var(--line); }
+.fm-sec:last-child { border-bottom: 1px solid var(--line); }
+.fm-sec > summary { list-style: none; cursor: pointer; display: flex; align-items: baseline; gap: .8rem; padding: 1.1rem 0; font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2rem); }
+.fm-sec > summary small { font: 600 .66rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
+.fm-sec > summary i { margin-left: auto; align-self: center; color: var(--accent-ink); }
+.fm-note { margin: 0 0 1rem; color: var(--ink-soft); font-size: .92rem; font-style: italic; }
+.fm-sec ul { list-style: none; margin: 0; padding: 0 0 1.2rem; display: grid; gap: 1.1rem; }
+.fm-line { display: flex; align-items: baseline; gap: .6rem; }
+.fm-line b { font-weight: 700; }
+.fm-dots { flex: 1; border-bottom: 1px dotted var(--line); transform: translateY(-.25em); min-width: 1rem; }
+.fm-price { font-weight: 700; color: var(--accent-ink); white-space: nowrap; }
+.fm-sec li p { margin: .2rem 0 0; color: var(--ink-soft); font-size: .9rem; line-height: 1.5; }
 .form-status { display: flex; gap: .75rem; align-items: flex-start; padding: 1rem; border-radius: 12px; border: 1.5px solid var(--ok); }
 .form-status strong { color: var(--ok); }
 .form-status svg { width: 1.6rem; height: 1.6rem; flex: none; color: var(--ok); }
@@ -684,6 +707,10 @@ body.brand .chips span { border-radius: 2px; }
 body.brand .visit legend { font: 500 1.35rem/1.2 var(--display); }
 /* Pub and cafe menus: prices in a fixed column so the rows line up */
 @media (min-width: 900px) { .jobs.rows.food li { grid-template-columns: 4rem minmax(0, 1.1fr) minmax(0, 1.2fr) 9rem 7.5rem; } .jobs.rows.food .price { margin-left: auto; } }
+
+/* The gold overlay stars must match the grey stars exactly (the .proof span label style was shrinking them) */
+body.brand .stars-bar span { font: inherit; letter-spacing: inherit; text-transform: none; color: var(--star); display: block; }
+body.brand .fm-sec > summary { font-weight: 500; }
 /* Sub-page bits */
 /* Phone menu (10 Nov 2026): every page in a drop-down, since the top links only fit on wide screens */
 .menu { position: relative; flex: none; }

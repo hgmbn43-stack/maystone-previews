@@ -428,7 +428,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         for k in ("headline", "sub", "about", "about_alt", "stats", "story", "process", "alt"):
             if copy.get(k):
                 brand[k] = copy[k]
-    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note"):
+    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title"):
         if copy.get(k):
             t[k] = copy[k]
     if t.get("venue"):
