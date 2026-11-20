@@ -465,6 +465,11 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         fb_gallery = [{"src": "img/fb/" + g[0], "caption": g[1] if len(g) > 1 else ""} for g in (copy.get("gallery") or [])]
     if copy.get("book"):
         t["book"] = copy["book"]
+    if copy.get("pipe_run"):   # a photo of pipework whose copper heats up as you scroll (20 Nov 2026)
+        pr = dict(copy["pipe_run"])
+        for k in ("img", "mask", "rad"):
+            pr[k] = "img/fb/" + pr[k]
+        t["pipe_run"] = pr
     if copy.get("job_story"):
         js = dict(copy["job_story"])
         js["steps"] = [dict(st, src="img/fb/" + st["photo"]) for st in js["steps"]]

@@ -630,7 +630,31 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
   {% if brand and show_film %}
   <div id="story">{{ stage_block() }}</div>
-  {% elif t.job_story %}
+  {% endif %}
+  {% if t.pipe_run %}
+  {% set pr = t.pipe_run %}
+  <section id="pipes" class="piperun" aria-label="{{ pr.title }} {{ pr.em }}">
+    <div class="pr-pin">
+      <div class="pr-text">
+        <p class="kicker">{{ pr.kicker }}</p>
+        <h2>{{ pr.title }} <em>{{ pr.em }}</em></h2>
+        <ol class="pr-steps">
+          {% for st in pr.steps %}<li class="pr-step{{ ' on' if loop.first }}"><span class="pr-no">0{{ loop.index }}</span><div><h3>{{ st[0] }}</h3><p>{{ st[1] }}</p></div></li>{% endfor %}
+        </ol>
+        <div class="pr-temp" aria-hidden="true"><b id="pr-deg">12</b><span>&deg;C in the living room</span></div>
+      </div>
+      <div class="pr-pic" style="--mask: url('{{ pr.mask }}'); --rad: url('{{ pr.rad }}')">
+        <img src="{{ pr.img }}" alt="{{ pr.alt }}" loading="lazy" decoding="async">
+        <div class="pr-glow"><img class="pr-hot" src="{{ pr.img }}" alt="" aria-hidden="true" decoding="async"></div>
+        <i class="pr-radh"></i>
+        <i class="pr-shimmer"></i>
+        {% if preview %}<span class="pr-tag">Illustration</span>{% endif %}
+      </div>
+    </div>
+    <div class="pr-track" aria-hidden="true"></div>
+  </section>
+  {% endif %}
+  {% if t.job_story and not show_film %}
   <section id="story" class="jstory" aria-label="{{ t.job_story.title }}">
     <div class="js-pin">
       <div class="js-imgs">
@@ -1235,6 +1259,29 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   new MutationObserver(ask).observe(document.getElementById("gallery") || document.body, { childList: true });
 })();
 </script>
+{% if t.pipe_run %}
+<script>
+/* Pipe run: heat travels down the copper as you scroll, then the radiator warms up. */
+(function () {
+  var sec = document.getElementById("pipes"); if (!sec) return;
+  var pic = sec.querySelector(".pr-pic"), steps = sec.querySelectorAll(".pr-step"), deg = document.getElementById("pr-deg"), n = steps.length, cur = -1;
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tick() {
+    var r = sec.getBoundingClientRect(), total = sec.offsetHeight - innerHeight;
+    var p = reduce ? 1 : Math.min(1, Math.max(0, -r.top / Math.max(1, total)));
+    var h = 30 + Math.min(1, p / .8) * 58;              /* heat front, as % of the photo's height */
+    var rad = Math.max(0, Math.min(1, (p - .72) / .22)); /* radiator warms at the end */
+    pic.style.setProperty("--h", h.toFixed(1) + "%");
+    pic.style.setProperty("--r", rad.toFixed(3));
+    pic.style.setProperty("--b", Math.min(1, p * 4).toFixed(3));
+    deg.textContent = Math.round(12 + 9 * Math.min(1, p / .95));
+    var i = Math.min(n - 1, Math.floor(p * n * .999));
+    if (i !== cur) { cur = i; steps.forEach(function (el, k) { el.classList.toggle("on", k === i); el.classList.toggle("done", k < i); }); }
+  }
+  addEventListener("scroll", tick, { passive: true }); addEventListener("resize", tick); tick();
+})();
+</script>
+{% endif %}
 {% if t.job_story %}
 <script>
 /* Real job story: the section pins while you scroll; each step swaps in the next real photo. */

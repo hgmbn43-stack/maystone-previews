@@ -228,7 +228,34 @@
     "Cold house?",
     "Not for long."
    ],
-   "story_kicker": "Watch the heating come on"
+   "story_kicker": "Watch the heating come on",
+   "pipe_run": {
+    "img": "pipes.jpg",
+    "mask": "pipes-mask.png",
+    "rad": "rad-mask.png",
+    "alt": "A new boiler with neat copper pipework running down to a radiator",
+    "kicker": "How your heating works",
+    "title": "From the boiler",
+    "em": "to every room.",
+    "steps": [
+     [
+      "Boiler fires up",
+      "A modern, efficient boiler, set up properly so it isn't wasting gas."
+     ],
+     [
+      "Hot water flows",
+      "Through neat, clipped copper and a magnetic filter that keeps sludge out."
+     ],
+     [
+      "Valves and balance",
+      "Each radiator balanced, so the far bedroom heats up as fast as the lounge."
+     ],
+     [
+      "Radiators warm",
+      "Heat where you want it, and a boiler that lasts."
+     ]
+    ]
+   }
   }
  }
 }

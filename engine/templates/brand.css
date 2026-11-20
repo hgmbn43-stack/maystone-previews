@@ -376,3 +376,51 @@ body.brand .fm-sec > summary { font-weight: 500; }
   .js-step h3 { font-size: 1.9rem; }
 }
 @media (prefers-reduced-motion: reduce) { .js-img, .js-img img, .js-step { transition: none; } }
+
+/* Pipe run (20 Nov 2026): a photo of a heating install. The copper is cut out with a mask so the heat
+   can run down the real pipes as you scroll, then the radiator glows. Pinned for 3 screens. */
+.piperun { position: relative; padding: 0 !important; background: #dcdad6; color: #16191c; }
+.pr-pin { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; overflow: hidden; padding: var(--head) 0 calc(5rem + env(safe-area-inset-bottom, 0px)); }
+.pr-track { height: 220svh; }
+.pr-pic { position: relative; flex: 1 1 auto; min-height: 0; aspect-ratio: 1128 / 2016; align-self: center; max-width: 100%; --h: 30%; --r: 0; }
+.pr-pic img, .pr-glow, .pr-radh { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pr-pic img { object-fit: cover; }
+.pr-glow { filter: drop-shadow(0 0 3px rgba(255, 130, 40, .75)) drop-shadow(0 0 10px rgba(255, 100, 20, .35)); }
+/* the same photo, pushed hot (brighter, more orange), shown only on the copper above the heat front */
+.pr-hot { filter: brightness(1.45) saturate(2.1) hue-rotate(-10deg) contrast(1.1);
+  -webkit-mask-image: var(--mask), linear-gradient(180deg, #000 0, #000 calc(var(--h) - 4%), rgba(0,0,0,.35) var(--h), transparent calc(var(--h) + 2%));
+  -webkit-mask-size: 100% 100%, 100% 100%; -webkit-mask-repeat: no-repeat; -webkit-mask-composite: source-in;
+  mask-image: var(--mask), linear-gradient(180deg, #000 0, #000 calc(var(--h) - 4%), rgba(0,0,0,.35) var(--h), transparent calc(var(--h) + 2%));
+  mask-size: 100% 100%, 100% 100%; mask-repeat: no-repeat; mask-composite: intersect; }
+.pr-radh { display: block; background: radial-gradient(ellipse at 50% 35%, #ffcf8a, #f59a4a); mix-blend-mode: multiply; opacity: calc(var(--r) * .38);
+  -webkit-mask-image: var(--rad); -webkit-mask-size: 100% 100%; mask-image: var(--rad); mask-size: 100% 100%; }
+.pr-shimmer { position: absolute; left: 22%; right: 22%; top: 64%; height: 10%; opacity: calc(var(--r) * .8);
+  background: radial-gradient(ellipse at 50% 100%, rgba(255,190,120,.4), transparent 70%); filter: blur(7px);
+  animation: prShim 2.4s ease-in-out infinite; }
+@keyframes prShim { 50% { transform: translateY(-8px) scaleX(1.06); } }
+.pr-tag { position: absolute; top: .8rem; right: .8rem; font: 600 .58rem/1 var(--body); letter-spacing: .14em; text-transform: uppercase; background: rgba(0,0,0,.55); color: #fff; padding: .4rem .6rem; border-radius: 2px; }
+.pr-text { flex: none; position: relative; padding: .9rem max(20px, env(safe-area-inset-left, 0px)) .8rem; }
+.pr-text .kicker { color: #8a6a2a; }
+.pr-text h2 { font: 500 clamp(1.7rem, 6.5vw, 3.6rem)/1.02 var(--display); margin: .35rem 0 .6rem; color: #16191c; max-width: none; }
+.pr-text h2 em { font-style: italic; color: #b5541c; }
+.pr-steps { list-style: none; margin: 0; padding: 0; display: grid; min-height: 4.2rem; }
+.pr-step { grid-area: 1 / 1; display: flex; gap: .8rem; align-items: flex-start; opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+.pr-step.on { opacity: 1; transform: none; }
+.pr-no { font: 500 2.2rem/.85 var(--display); color: transparent; -webkit-text-stroke: 1px #b5541c; }
+.pr-step h3 { font: 500 1.35rem/1.1 var(--display); margin: 0; }
+.pr-step p { margin: .2rem 0 0; color: #4c4a45; font-size: .88rem; line-height: 1.45; }
+.pr-temp { position: absolute; top: .7rem; right: max(20px, env(safe-area-inset-right, 0px)); display: flex; align-items: baseline; gap: .35rem; background: rgba(22,25,28,.85); color: #f4efe6; padding: .45rem .75rem; border-radius: 999px; }
+.pr-temp b { font: 500 1.5rem/1 var(--display); color: #ffb24a; min-width: 1.4em; text-align: right; }
+.pr-temp span { font: 600 .56rem/1.2 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+@media (min-width: 900px) {
+  .pr-pin { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 4rem; padding-top: 0; padding-left: max(5vw, calc((100vw - 1200px) / 2)); }
+  .pr-text { padding: 0; max-width: 30rem; }
+  .pr-steps { display: flex; flex-direction: column; gap: 1.1rem; min-height: 0; margin-top: 1rem; }
+  .pr-step { grid-area: auto; opacity: .3; transform: none; }
+  .pr-step.on, .pr-step.done { opacity: 1; }
+  .pr-step.done .pr-no { -webkit-text-stroke-color: #c9a25e; }
+  .pr-temp { position: static; display: inline-flex; margin-top: 2rem; }
+  .pr-pic { height: 100svh; flex: none; justify-self: end; margin-right: 6vw; }
+  .pr-tag { top: calc(var(--head) + 1rem); }
+}
+@media (max-width: 899px) { .pr-text .kicker { visibility: hidden; } }
