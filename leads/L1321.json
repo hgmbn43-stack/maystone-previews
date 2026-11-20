@@ -6,5 +6,256 @@
  "Phone": "07512 447000",
  "Google rating": "4.9",
  "Google reviews": "73",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ8UYO5HtxdkgRfF6tWCcag4M"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ8UYO5HtxdkgRfF6tWCcag4M",
+ "details": {
+  "copy": {
+   "headline": [
+    "Boilers fixed,",
+    "not replaced."
+   ],
+   "sub": "Boiler repairs, new boilers, servicing and gas safety certificates around Heathrow, Slough and West London. Rated 4.9 by 73 customers on Google.",
+   "kicker": "Heating & gas",
+   "stats": [
+    [
+     "Gas",
+     "safety certificates"
+    ],
+    [
+     "24/7",
+     "call-outs"
+    ]
+   ],
+   "photos": {
+    "wide": "cylinder-fit-wide.jpg",
+    "tall": "cylinder-fit.jpg",
+    "about": "meter-test.jpg",
+    "tiles": [
+     "cylinder-fit.jpg",
+     "new-boiler.jpg",
+     "meters.jpg",
+     "outside-meter.jpg",
+     "cylinder-cupboard.jpg",
+     "manifold.jpg"
+    ]
+   },
+   "about": [
+    "The engineer other",
+    "engineers send you to."
+   ],
+   "about_alt": "Sandeep testing a gas supply on a bank of meters",
+   "lede": "Sandeep has been fixing boilers that other engineers, British Gas included, said needed replacing. Customers call him back year after year for their service because he finds the real fault, explains it, and charges fairly.",
+   "services_title": "What we do",
+   "services_intro": "Boilers, gas and hot water.",
+   "services": [
+    {
+     "title": "Boiler repairs",
+     "blurb": "Breakdowns, no heating or hot water, pressure loss and error codes. Fixed, not replaced, where it can be.",
+     "low": 90,
+     "high": 250,
+     "intro": "Most boilers don't need replacing. We find the real fault first.",
+     "includes": [
+      "Fault finding",
+      "Parts fitted on the day where possible",
+      "Pressure and leak checks",
+      "Honest advice on repair or replace"
+     ]
+    },
+    {
+     "title": "Boiler installation",
+     "blurb": "New combi and system boilers, sized for your home, with neat copper pipework and a magnetic filter.",
+     "low": 2000,
+     "high": 4000,
+     "intro": "A tidy install with the pipework done properly, as you can see in our photos.",
+     "includes": [
+      "Combi and system boilers",
+      "Magnetic system filter",
+      "Smart thermostat",
+      "Old boiler removed"
+     ]
+    },
+    {
+     "title": "Servicing and maintenance",
+     "blurb": "A yearly service keeps your boiler safe, efficient and its warranty valid.",
+     "low": 80,
+     "high": 120,
+     "intro": "A full service with a written record, done in about an hour.",
+     "includes": [
+      "Full safety checks",
+      "Flue and combustion test",
+      "Clean and adjust",
+      "Written service record"
+     ]
+    },
+    {
+     "title": "Gas safety certificates",
+     "blurb": "CP12 landlord certificates, gas meter work and tightness testing for homes and businesses.",
+     "low": 60,
+     "high": 90,
+     "intro": "Landlord gas safety certificates done quickly, with the paperwork sent the same day.",
+     "includes": [
+      "Landlord CP12 certificates",
+      "Appliance checks",
+      "Tightness testing",
+      "Commercial meter banks"
+     ]
+    },
+    {
+     "title": "Hot water cylinders",
+     "blurb": "Unvented and vented cylinders fitted, serviced and repaired.",
+     "low": 250,
+     "high": 1800,
+     "intro": "From a faulty valve to a brand new unvented cylinder.",
+     "includes": [
+      "Unvented cylinder installs",
+      "Annual unvented checks",
+      "Immersions and valves",
+      "Loft and airing-cupboard tanks"
+     ]
+    },
+    {
+     "title": "Central and underfloor heating",
+     "blurb": "Radiators, manifolds, pumps, valves and controls for wet heating systems.",
+     "low": 200,
+     "high": 450,
+     "unit": "per radiator",
+     "intro": "Cold spots, noisy pumps or a new underfloor manifold, sorted.",
+     "includes": [
+      "Underfloor manifolds",
+      "Pumps and zone valves",
+      "New radiators",
+      "Controls and thermostats"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "Our work",
+    "title": "How a job",
+    "em": "gets done.",
+    "steps": [
+     {
+      "photo": "meters.jpg",
+      "title": "Find the real fault",
+      "text": "We test before we touch anything, so you only pay for what's actually wrong."
+     },
+     {
+      "photo": "outside-meter.jpg",
+      "title": "Test it safely",
+      "text": "Gas supply and pressure checked at the meter, every time."
+     },
+     {
+      "photo": "manifold.jpg",
+      "title": "Fit it properly",
+      "text": "Clean copper, clipped and labelled. Work you'd be happy to open the cupboard to."
+     },
+     {
+      "photo": "flue.jpg",
+      "title": "Flue and finish",
+      "text": "Flues fitted and sealed outside, and everything checked before we leave."
+     },
+     {
+      "photo": "new-boiler.jpg",
+      "title": "Heating back on",
+      "text": "Boiler commissioned, controls set up and the paperwork sent over."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "new-boiler.jpg",
+     "New boiler install"
+    ],
+    [
+     "cylinder-cupboard.jpg",
+     "Unvented cylinder and boiler"
+    ],
+    [
+     "loft-cylinder.jpg",
+     "Loft cylinder"
+    ],
+    [
+     "manifold.jpg",
+     "Underfloor heating manifold"
+    ],
+    [
+     "van-house.jpg",
+     "On the way to you"
+    ],
+    [
+     "meters.jpg",
+     "Commercial gas meters"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Recent jobs.",
+   "areas": [
+    "Slough",
+    "Colnbrook",
+    "Langley",
+    "West Drayton",
+    "Hayes",
+    "Hounslow",
+    "Staines",
+    "Windsor"
+   ],
+   "postcodes": {
+    "Heathrow": [
+     "TW6",
+     "SL3",
+     "UB7"
+    ],
+    "Slough": [
+     "SL1",
+     "SL2",
+     "SL3"
+    ],
+    "Colnbrook": [
+     "SL3"
+    ],
+    "Langley": [
+     "SL3"
+    ],
+    "West Drayton": [
+     "UB7"
+    ],
+    "Hayes": [
+     "UB3",
+     "UB4"
+    ],
+    "Hounslow": [
+     "TW3",
+     "TW4",
+     "TW5"
+    ],
+    "Staines": [
+     "TW18",
+     "TW19"
+    ],
+    "Windsor": [
+     "SL4"
+    ]
+   },
+   "faqs": [
+    [
+     "Can you repair my boiler instead of replacing it?",
+     "Usually, yes. We find the actual fault first, and only suggest a new boiler when a repair really isn't worth it."
+    ],
+    [
+     "Do you do landlord gas safety certificates?",
+     "Yes, CP12 certificates for houses, flats and commercial premises."
+    ],
+    [
+     "How quickly can you come out?",
+     "We take call-outs around the clock. Ring and we'll tell you when we can get to you."
+    ],
+    [
+     "Do you work on unvented cylinders?",
+     "Yes, installs, annual checks and repairs."
+    ],
+    [
+     "Which areas do you cover?",
+     "Heathrow, Slough, Colnbrook, Langley, West Drayton, Hayes, Hounslow, Staines and Windsor."
+    ]
+   ]
+  }
+ }
 }
