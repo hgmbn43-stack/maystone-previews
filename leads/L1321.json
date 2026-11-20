@@ -127,38 +127,6 @@
      ]
     }
    ],
-   "job_story": {
-    "kicker": "Our work",
-    "title": "How a job",
-    "em": "gets done.",
-    "steps": [
-     {
-      "photo": "meters.jpg",
-      "title": "Find the real fault",
-      "text": "We test before we touch anything, so you only pay for what's actually wrong."
-     },
-     {
-      "photo": "outside-meter.jpg",
-      "title": "Test it safely",
-      "text": "Gas supply and pressure checked at the meter, every time."
-     },
-     {
-      "photo": "manifold.jpg",
-      "title": "Fit it properly",
-      "text": "Clean copper, clipped and labelled. Work you'd be happy to open the cupboard to."
-     },
-     {
-      "photo": "flue.jpg",
-      "title": "Flue and finish",
-      "text": "Flues fitted and sealed outside, and everything checked before we leave."
-     },
-     {
-      "photo": "new-boiler.jpg",
-      "title": "Heating back on",
-      "text": "Boiler commissioned, controls set up and the paperwork sent over."
-     }
-    ]
-   },
    "gallery": [
     [
      "new-boiler.jpg",
@@ -255,7 +223,12 @@
      "Which areas do you cover?",
      "Heathrow, Slough, Colnbrook, Langley, West Drayton, Hayes, Hounslow, Staines and Windsor."
     ]
-   ]
+   ],
+   "story": [
+    "Cold house?",
+    "Not for long."
+   ],
+   "story_kicker": "Watch the heating come on"
   }
  }
 }

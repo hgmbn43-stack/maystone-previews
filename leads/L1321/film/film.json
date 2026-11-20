@@ -1,0 +1,21 @@
+{
+ "hook": "Cold house?",
+ "hook_sub": "Scroll to put the heating back on.",
+ "beats": [
+  [
+   "Step 1 \u00b7 Diagnose",
+   "We find the real fault, not the expensive guess."
+  ],
+  [
+   "Step 2 \u00b7 Fixed",
+   "Heating and hot water back on, same day where we can."
+  ]
+ ],
+ "alt": "A frosty, cold living room warming up as the radiator and lamp come on",
+ "accent": "#c6a15b",
+ "accent_ink": "#7d5f22",
+ "accent_dark": "#d9b878",
+ "ground": "#10161d",
+ "scene": "boiler",
+ "label": "Illustration"
+}

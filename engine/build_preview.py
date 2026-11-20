@@ -396,7 +396,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         base_film = dict(library[0] if library else {}, **meta)
         base_film.update(frames=len(list((own_film / "m").glob("*.webp"))), wide=(own_film / "d" / "0001.webp").exists())
         base_film.setdefault("alt", "One of our real jobs, from before to finished")
-        film = film_context(base_film, "film/", "Made from our real job photos")
+        film = film_context(base_film, "film/", meta.get("label") or "Made from our real job photos")
     elif library:
         chosen = next((f for f in library if f["id"] == film_id), library[0])
         if preview:
@@ -439,7 +439,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     # headings; the rest change the trade text. "menu": [{"title", "blurb", "price"}] is their real menu.
     copy = details.get("copy") if isinstance(details.get("copy"), dict) else {}
     if brand:
-        for k in ("headline", "sub", "about", "about_alt", "stats", "story", "process", "alt"):
+        for k in ("headline", "sub", "about", "about_alt", "stats", "story", "story_kicker", "process", "alt"):
             if copy.get(k):
                 brand[k] = copy[k]
     for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
