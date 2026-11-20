@@ -1,10 +1,227 @@
 {
  "Lead ID": "L1665",
  "Business": "Welfare Landscaping & Building Services",
- "Trade": "Landscaper",
- "Town": "",
+ "Trade": "Builder",
+ "Town": "Abbots Langley",
  "Phone": "07956 013892",
  "Google rating": "5",
  "Google reviews": "12",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ9TTxmyk6JqERKKTrEEgnoNE"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ9TTxmyk6JqERKKTrEEgnoNE",
+ "details": {
+  "copy": {
+   "headline": [
+    "Built properly,",
+    "inside and out."
+   ],
+   "sub": "Building work, brickwork, renovations and landscaping across Hertfordshire. Rated 5.0 on Google, with the groundwork done right so it lasts.",
+   "kicker": "Building & landscaping",
+   "stats": [
+    [
+     "Solid",
+     "groundwork, every job"
+    ],
+    [
+     "Free",
+     "quotes"
+    ]
+   ],
+   "photos": {
+    "about": "patio-night.jpg",
+    "tiles": [
+     "brick-walls.jpg",
+     "bathroom.jpg",
+     "firepit-patio.jpg",
+     "garden-night.jpg",
+     "pergola.jpg",
+     "paving.jpg"
+    ]
+   },
+   "about": [
+    "Lewis and the team",
+    "don't cut corners."
+   ],
+   "about_alt": "A finished patio, lawn and fencing lit up at night behind a brick house",
+   "lede": "From brick walls and renovations to full outdoor builds, Lewis and his team do the hard part properly: solid ground preparation, a proper sub-base and a neat finish. Customers say you can tell no corners were cut.",
+   "areas": [
+    "Kings Langley",
+    "Watford",
+    "Hemel Hempstead",
+    "St Albans",
+    "Rickmansworth",
+    "Bushey",
+    "Croxley Green",
+    "Radlett"
+   ],
+   "postcodes": {
+    "Abbots Langley": [
+     "WD5"
+    ],
+    "Kings Langley": [
+     "WD4"
+    ],
+    "Watford": [
+     "WD17",
+     "WD18",
+     "WD19",
+     "WD24",
+     "WD25"
+    ],
+    "Hemel Hempstead": [
+     "HP1",
+     "HP2",
+     "HP3"
+    ],
+    "St Albans": [
+     "AL1",
+     "AL2",
+     "AL3",
+     "AL4"
+    ],
+    "Rickmansworth": [
+     "WD3"
+    ],
+    "Bushey": [
+     "WD23"
+    ],
+    "Croxley Green": [
+     "WD3"
+    ],
+    "Radlett": [
+     "WD7"
+    ]
+   },
+   "services_title": "What we build",
+   "services_intro": "Building first, finished outside too.",
+   "services": [
+    {
+     "title": "Brickwork and walls",
+     "blurb": "Garden walls, block walls, piers and repointing, laid on proper footings.",
+     "low": 800,
+     "high": 4000,
+     "intro": "Walls built on proper footings so they stay straight for years.",
+     "includes": [
+      "Footings and foundations",
+      "Brick and block walls",
+      "Piers and pillars",
+      "Repointing"
+     ]
+    },
+    {
+     "title": "Renovations and interiors",
+     "blurb": "Bathrooms, room refits and general building work inside the house.",
+     "low": 4000,
+     "high": 12000,
+     "intro": "Inside work finished to the same standard as the outside.",
+     "includes": [
+      "Bathroom refits",
+      "Tiling",
+      "Stud walls and alterations",
+      "Making good"
+     ]
+    },
+    {
+     "title": "Patios and paving",
+     "blurb": "Sandstone and porcelain patios with full ground prep, a solid sub-base and neat pointing.",
+     "low": 2500,
+     "high": 8000,
+     "intro": "Every patio starts with the dig-out and sub-base, the part most people skip.",
+     "includes": [
+      "Excavation and sub-base",
+      "Sandstone and porcelain",
+      "Pointing",
+      "Drainage and edging"
+     ]
+    },
+    {
+     "title": "Groundworks and driveways",
+     "blurb": "Excavation, drainage, bases and driveways, prepared properly.",
+     "low": 3000,
+     "high": 10000,
+     "intro": "Get the ground right and everything on top of it lasts.",
+     "includes": [
+      "Excavation",
+      "Drainage",
+      "Concrete and MOT bases",
+      "Driveways and paths"
+     ]
+    },
+    {
+     "title": "Fencing and garden structures",
+     "blurb": "Slatted and close-board fencing, pergolas, sleeper beds and lighting.",
+     "low": 1000,
+     "high": 5000,
+     "intro": "Built to stand up to the weather, with posts set properly.",
+     "includes": [
+      "Slatted and close-board fencing",
+      "Pergolas",
+      "Sleeper raised beds",
+      "Outdoor lighting"
+     ]
+    },
+    {
+     "title": "Full garden builds",
+     "blurb": "Complete transformations: walls, patio, turf, fencing and lighting, start to finish.",
+     "low": 8000,
+     "high": 25000,
+     "intro": "One team for the whole job, from clearing the site to the last light.",
+     "includes": [
+      "Design help",
+      "Hard landscaping",
+      "Turf and planting",
+      "Lighting"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "garden-night.jpg",
+     "Full garden build, lit at night"
+    ],
+    [
+     "brick-walls.jpg",
+     "New brick walls going up"
+    ],
+    [
+     "bathroom.jpg",
+     "Bathroom refit"
+    ],
+    [
+     "firepit-patio.jpg",
+     "Patio and brick fire pit"
+    ],
+    [
+     "pergola.jpg",
+     "Pergola and porcelain patio"
+    ],
+    [
+     "path.jpg",
+     "Side path"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Recent jobs.",
+   "faqs": [
+    [
+     "Do you do building work as well as gardens?",
+     "Yes. Brickwork, walls, renovations and interior work, as well as patios, fencing and full garden builds."
+    ],
+    [
+     "Do you give free quotes?",
+     "Yes. Send a few photos and tell us about the job and we'll come back with a clear price."
+    ],
+    [
+     "Why does preparation matter?",
+     "Most problems with walls and patios come from poor groundwork. We dig out properly and lay a solid sub-base, so it doesn't sink or crack."
+    ],
+    [
+     "Which areas do you cover?",
+     "Abbots Langley, Kings Langley, Watford, Hemel Hempstead, St Albans, Rickmansworth and nearby."
+    ],
+    [
+     "Will you tidy up?",
+     "Yes, the site is left clean at the end of the job."
+    ]
+   ]
+  }
+ }
 }
