@@ -306,6 +306,15 @@ html.helmet #lens{opacity:1}
 
 .snd .w{opacity:.35;transition:opacity .3s}.snd[aria-pressed=true] .w{opacity:1}
 @media (max-width:767px){.navr{gap:6px}}
+
+.rgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.reel{margin:0}
+.rf{position:relative;aspect-ratio:9/16;border-radius:8px;overflow:hidden;border:1px solid var(--line);background:rgba(10,12,15,.7)}
+.rf iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:1;background:var(--ink)}
+.rfall{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--arc);text-decoration:none;z-index:0}
+.reel figcaption{margin-top:10px;display:grid;gap:2px}
+.reel figcaption .mono{color:var(--arc)}
+@media (max-width:767px){.rgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -5vw;padding:0 5vw 8px;scrollbar-width:none}.rgrid::-webkit-scrollbar{display:none}.reel{flex:0 0 72%;scroll-snap-align:start}}
 </style></head><body>
 <div id="load"><div class="mono" style="color:var(--mute);margin-bottom:2vw">AJG Welding · striking the arc</div><div class="n" id="ln">0</div><div class="bar" id="lb"></div></div>
 <nav id="nav"><a class="logo" href="#"><b>AJG</b><span class="mono">Coded pipe welder</span></a><div class="navr"><button class="helm snd" id="snd" aria-pressed="false" title="Sound"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path class="w" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg><span>Sound</span></button><button class="helm" id="helm" aria-pressed="false" title="Helmet mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v4.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z"/><rect x="7.5" y="11.5" width="9" height="4" rx="1"/></svg><span>Helmet</span></button><a class="btn" href="tel:+447525419938">Call for a quote</a></div></nav>
@@ -354,6 +363,12 @@ html.helmet #lens{opacity:1}
 </div></section>
 
 <!-- Past work section removed until real job photos are supplied -->
+
+<section class="reels"><div class="wrap">
+ <div class="shead"><div><span class="kick mono reveal">@ajg_welding</span><h3 class="t reveal">Watch the work.</h3></div><p class="swipe mono">Swipe →</p></div>
+ <div class="rgrid"><figure class="reel reveal"><div class="rf"><iframe src="https://www.instagram.com/reel/CdjPDJ9DfIW/embed/" loading="lazy" title="AJG Welding reel: Wolves never quit." allowtransparency="true" scrolling="no"></iframe><a class="rfall" href="https://www.instagram.com/reel/CdjPDJ9DfIW/" target="_blank" rel="noopener"><span class="mono">Watch on Instagram →</span></a></div><figcaption><span class="mono">5.9M views</span><b>Wolves never quit.</b></figcaption></figure><figure class="reel reveal"><div class="rf"><iframe src="https://www.instagram.com/reel/DaxtQqAMjL9/embed/" loading="lazy" title="AJG Welding reel: High-temperature hot water shutdown" allowtransparency="true" scrolling="no"></iframe><a class="rfall" href="https://www.instagram.com/reel/DaxtQqAMjL9/" target="_blank" rel="noopener"><span class="mono">Watch on Instagram →</span></a></div><figcaption><span class="mono">NHS site</span><b>High-temperature hot water shutdown</b></figcaption></figure><figure class="reel reveal"><div class="rf"><iframe src="https://www.instagram.com/reel/DXcu91UDMaV/embed/" loading="lazy" title="AJG Welding reel: Spool rebuilt from scratch" allowtransparency="true" scrolling="no"></iframe><a class="rfall" href="https://www.instagram.com/reel/DXcu91UDMaV/" target="_blank" rel="noopener"><span class="mono">Watch on Instagram →</span></a></div><figcaption><span class="mono">Before &amp; after</span><b>Spool rebuilt from scratch</b></figcaption></figure><figure class="reel reveal"><div class="rf"><iframe src="https://www.instagram.com/reel/CgTpk56j-Mn/embed/" loading="lazy" title="AJG Welding reel: Friday off" allowtransparency="true" scrolling="no"></iframe><a class="rfall" href="https://www.instagram.com/reel/CgTpk56j-Mn/" target="_blank" rel="noopener"><span class="mono">Watch on Instagram →</span></a></div><figcaption><span class="mono">693K views</span><b>Friday off</b></figcaption></figure></div>
+ <p style="margin-top:24px" class="reveal"><a class="btn g" href="https://www.instagram.com/ajg_welding/" target="_blank" rel="noopener">See all 1,000+ posts</a></p>
+</div></section>
 
 <section><div class="wrap reach">
  <div>
