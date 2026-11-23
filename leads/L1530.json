@@ -2,9 +2,168 @@
  "Lead ID": "L1530",
  "Business": "OC Plumbing & Gas Limited",
  "Trade": "Plumber",
- "Town": "",
+ "Town": "Welwyn Garden City",
  "Phone": "07775 670297",
  "Google rating": "5",
  "Google reviews": "9",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ05z3QnDbsygR4pR2F1nmO5U"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ05z3QnDbsygR4pR2F1nmO5U",
+ "details": {
+  "business": "OC Plumbing & Gas",
+  "copy": {
+   "headline": [
+    "Blocked, leaking",
+    "or no heat? Call OC."
+   ],
+   "sub": "Blocked drains, emergency leaks, boilers and showers across Welwyn and Hertfordshire. Open 24 hours, quick to respond and fair on price.",
+   "kicker": "Plumbing, drains & gas",
+   "stats": [
+    [
+     "24 hrs",
+     "open, every day"
+    ],
+    [
+     "Rapid",
+     "response"
+    ]
+   ],
+   "about": [
+    "One engineer,",
+    "start to finish."
+   ],
+   "about_alt": "OC Plumbing & Gas at work",
+   "lede": "Brett runs OC Plumbing & Gas, a local plumbing and heating engineer covering Welwyn and Hertfordshire. Customers have had him out for an emergency leak, a blocked drain, a new shower and a brand-new boiler, and they all say the same thing: quick to respond, tidy and fair on price.",
+   "areas": [
+    "Hatfield",
+    "Hertford",
+    "Hoddesdon",
+    "Cheshunt",
+    "Cuffley"
+   ],
+   "postcodes": {
+    "Welwyn Garden City": [
+     "AL6",
+     "AL7",
+     "AL8"
+    ],
+    "Hatfield": [
+     "AL9",
+     "AL10"
+    ],
+    "Hertford": [
+     "SG13",
+     "SG14"
+    ],
+    "Hoddesdon": [
+     "EN11"
+    ],
+    "Cheshunt": [
+     "EN7",
+     "EN8"
+    ],
+    "Cuffley": [
+     "EN6"
+    ]
+   },
+   "services_title": "What OC does",
+   "services_intro": "Drains, leaks, boilers and bathrooms. Big jobs and emergencies.",
+   "services": [
+    {
+     "title": "Blocked drains and blockages",
+     "blurb": "Blocked sinks, toilets, showers and internal drains cleared, and the cause found so it doesn't come back.",
+     "intro": "Water not going down? Brett clears the blockage and checks the pipework behind it.",
+     "includes": [
+      "Internal blockages",
+      "Blocked toilets and sinks",
+      "Showers and baths draining slowly",
+      "Waste pipes and traps"
+     ]
+    },
+    {
+     "title": "Emergency leaks",
+     "blurb": "Burst pipes, leaks and drips sorted fast, day or night.",
+     "low": 80,
+     "high": 250,
+     "intro": "Open 24 hours, so a leak gets stopped before it ruins a ceiling.",
+     "includes": [
+      "Burst and leaking pipes",
+      "Leaking tanks and cylinders",
+      "Isolating and making safe",
+      "Repairs done properly after"
+     ]
+    },
+    {
+     "title": "New boilers",
+     "blurb": "Old boilers removed and new ones fitted, with everything explained when it's done.",
+     "low": 2000,
+     "high": 4000,
+     "intro": "Fitted to a high standard, the site left tidy, and you shown how it all works.",
+     "includes": [
+      "Combi and system boilers",
+      "Old boiler taken away",
+      "Controls and thermostats",
+      "Explained when finished"
+     ]
+    },
+    {
+     "title": "Boiler and heating repairs",
+     "blurb": "No heating, no hot water, pressure loss and radiators that won't warm up.",
+     "low": 90,
+     "high": 250,
+     "intro": "The fault found and fixed, and you told what went wrong.",
+     "includes": [
+      "Breakdowns",
+      "Pressure loss",
+      "Radiators and valves",
+      "Pumps and controls"
+     ]
+    },
+    {
+     "title": "Showers and bathrooms",
+     "blurb": "New showers, toilets, basins and taps fitted with real attention to detail.",
+     "low": 90,
+     "high": 300,
+     "intro": "From a new shower to a whole bathroom, plumbed in neatly.",
+     "includes": [
+      "New shower installs",
+      "Toilets and basins",
+      "Taps and wastes",
+      "Full bathroom plumbing"
+     ]
+    },
+    {
+     "title": "Gas work",
+     "blurb": "Gas hobs and cookers connected or capped off, and gas pipework run or moved.",
+     "intro": "Gas jobs done safely and properly.",
+     "includes": [
+      "Hobs and cookers",
+      "Capping off old appliances",
+      "Gas pipework",
+      "Safety checks"
+     ]
+    }
+   ],
+   "faqs": [
+    [
+     "Do you clear blocked drains?",
+     "Yes. Internal blockages, blocked toilets, sinks and showers, plus the waste pipes behind them."
+    ],
+    [
+     "Are you open 24 hours?",
+     "Yes. For emergencies like a burst pipe or a bad leak, ring any time."
+    ],
+    [
+     "Which areas do you cover?",
+     "Welwyn, Welwyn Garden City and the surrounding Hertfordshire towns. Not sure if you're covered? Just ring."
+    ],
+    [
+     "Do you fit new boilers?",
+     "Yes. The old one comes out, the new one goes in, and everything is explained to you before Brett leaves."
+    ],
+    [
+     "How do I get a price?",
+     "Ring, or send a photo of the problem on WhatsApp and you'll get a price back."
+    ]
+   ]
+  }
+ }
 }
