@@ -2,9 +2,221 @@
  "Lead ID": "L1336",
  "Business": "Klodijan Plumbing and Heating GAS SAFETY",
  "Trade": "Plumber",
- "Town": "",
+ "Town": "Reading",
  "Phone": "07888 078713",
  "Google rating": "5",
  "Google reviews": "51",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ_bz9lNabdkgRoYG5zpXYUz8"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ_bz9lNabdkgRoYG5zpXYUz8",
+ "details": {
+  "copy": {
+   "palette": {
+    "accent": "#e8712a",
+    "accent_ink": "#f08a48",
+    "brand": "#e8712a",
+    "brand_text": "#f08a48",
+    "accent_deep": "#a5480f"
+   },
+   "headline": [
+    "Day or night,",
+    "Klodijan answers."
+   ],
+   "sub": "Boilers, leaks, radiators and bathrooms across Reading and nearby. Gas Safe registered, open 24/7, free estimates and all work guaranteed.",
+   "kicker": "Plumbing & heating",
+   "stats": [
+    [
+     "24/7",
+     "open, every day"
+    ],
+    [
+     "Free",
+     "estimates"
+    ]
+   ],
+   "photos": {
+    "about": "boiler-install.jpg",
+    "tiles": [
+     "old-boiler.jpg",
+     "boiler-install.jpg",
+     "copper-pipework.jpg",
+     "radiator-vertical.jpg",
+     "basin.jpg",
+     "cylinder.jpg"
+    ]
+   },
+   "about": [
+    "One engineer who",
+    "picks up the phone."
+   ],
+   "about_alt": "A new boiler Klodijan fitted in a cupboard, with fresh copper pipework",
+   "lede": "Klodijan Shalli is a Gas Safe registered plumbing and heating engineer based in Reading. He answers his own phone, explains what's wrong in plain English and fixes it properly. Customers have had him out on a Saturday afternoon, a Sunday and at half seven on a weeknight.",
+   "areas": [
+    "Tilehurst",
+    "Calcot",
+    "Theale",
+    "Pangbourne",
+    "Caversham",
+    "Sonning Common"
+   ],
+   "postcodes": {
+    "Reading": [
+     "RG1",
+     "RG2",
+     "RG4",
+     "RG30",
+     "RG31"
+    ],
+    "Tilehurst": [
+     "RG30",
+     "RG31"
+    ],
+    "Calcot": [
+     "RG31"
+    ],
+    "Theale": [
+     "RG7"
+    ],
+    "Pangbourne": [
+     "RG8"
+    ],
+    "Caversham": [
+     "RG4"
+    ],
+    "Sonning Common": [
+     "RG4"
+    ]
+   },
+   "services_title": "What he does",
+   "services_intro": "Plumbing and heating, big jobs and small.",
+   "services": [
+    {
+     "title": "Boiler repairs",
+     "blurb": "Breakdowns, leaks, pressure loss, no heating or hot water. Found fast and explained.",
+     "low": 90,
+     "high": 250,
+     "intro": "Most breakdowns are fixed on the first visit, and you get told what went wrong and why.",
+     "includes": [
+      "Gas and electric boilers",
+      "Leaks and pressure loss",
+      "Pumps and valves",
+      "Same-day where possible"
+     ]
+    },
+    {
+     "title": "New boilers",
+     "blurb": "Gas, electric and oil-fired boilers fitted, including awkward swaps that need the old pipework rerun.",
+     "low": 2000,
+     "high": 4000,
+     "intro": "Sized for your home, fitted neatly and left with everything working and explained.",
+     "includes": [
+      "Combi and system boilers",
+      "Electric and oil-fired boilers",
+      "Old pipework removed and rerun",
+      "Controls and programmers"
+     ]
+    },
+    {
+     "title": "Leaks and pipework",
+     "blurb": "Dripping taps, burst pipes, wastes and gas pipes capped or moved.",
+     "low": 80,
+     "high": 250,
+     "intro": "Leaks fixed before they cause damage, and new pipework run neatly.",
+     "includes": [
+      "Leaks and burst pipes",
+      "Copper pipework",
+      "Gas pipes capped or moved",
+      "Wastes and traps"
+     ]
+    },
+    {
+     "title": "Radiators and power flushing",
+     "blurb": "New radiators, valves, cold spots and sludge cleared out of the system.",
+     "low": 200,
+     "high": 450,
+     "unit": "per radiator",
+     "intro": "Cold radiators are usually sludge or air. Both get sorted.",
+     "includes": [
+      "New and designer radiators",
+      "Valves and thermostatic heads",
+      "Power flushing",
+      "Bleeding and balancing"
+     ]
+    },
+    {
+     "title": "Bathrooms, toilets and taps",
+     "blurb": "Full bathroom plumbing, toilets, basins, showers, sinks and taps.",
+     "low": 90,
+     "high": 300,
+     "intro": "From one dripping tap to a whole new bathroom, plumbed properly.",
+     "includes": [
+      "Bathroom installations",
+      "Toilets and basins",
+      "Electric and power showers",
+      "Kitchen sinks and taps"
+     ]
+    },
+    {
+     "title": "Hot water and underfloor heating",
+     "blurb": "Cylinders, immersion heaters, tanks and wet underfloor heating.",
+     "intro": "Hot water that lasts and floors that heat evenly.",
+     "includes": [
+      "Unvented cylinders",
+      "Immersion heaters and tanks",
+      "Wet underfloor heating",
+      "Pumps and manifolds"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "underfloor-heating.jpg",
+     "Wet underfloor heating laid"
+    ],
+    [
+     "ufh-pump.jpg",
+     "Underfloor heating pump and mixing valve"
+    ],
+    [
+     "pump-sludge.jpg",
+     "Sludge found inside a heating pump"
+    ],
+    [
+     "cloakroom-wc.jpg",
+     "New cloakroom toilet"
+    ],
+    [
+     "gas-meter.jpg",
+     "New gas supply from the meter"
+    ]
+   ],
+   "gallery_kicker": "His work",
+   "gallery_intro": "Real jobs from his own phone.",
+   "faqs": [
+    [
+     "Are you really open 24/7?",
+     "Yes. Call any time for leaks, breakdowns and no heating, and Klodijan will tell you how soon he can get there."
+    ],
+    [
+     "Are you Gas Safe registered?",
+     "Yes. Klodijan is a Gas Safe registered engineer, so boilers, gas fires, cookers and gas pipework are all covered."
+    ],
+    [
+     "Is the estimate free?",
+     "Yes. Tell him what's wrong, send a photo if you can, and you'll get a free estimate before any work starts."
+    ],
+    [
+     "Is the work guaranteed?",
+     "Yes, all work is guaranteed."
+    ],
+    [
+     "Which areas do you cover?",
+     "Reading and nearby, including Tilehurst, Calcot, Theale, Pangbourne, Caversham and Sonning Common."
+    ],
+    [
+     "Do you do commercial work?",
+     "Yes, domestic and commercial plumbing."
+    ]
+   ]
+  },
+  "business": "Klodijan Plumbing & Heating"
+ }
 }

@@ -442,6 +442,8 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         for k in ("headline", "sub", "about", "about_alt", "stats", "story", "story_kicker", "process", "alt"):
             if copy.get(k):
                 brand[k] = copy[k]
+        if copy.get("palette"):   # the business's own colours (23 Nov 2026), e.g. from their logo
+            brand["palette"] = {**brand["palette"], **copy["palette"]}
     for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
         if copy.get(k):
             t[k] = copy[k]
@@ -458,10 +460,11 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         if brand and ph:
             brand.update({k: "img/fb/" + v for k, v in ph.items() if k in ("wide", "tall")})
             if ph.get("about"):
-                brand["about_img"] = "img/fb/" + ph["about"]
+                brand["about_img"], brand["about_own"] = "img/fb/" + ph["about"], True
             if ph.get("tiles"):
                 brand["tiles"], brand["tile_base"] = ["img/fb/" + x for x in ph["tiles"]], ""
-            brand["label"] = ""
+            if ph.get("wide") or ph.get("tall"):   # stock hero kept = still marked "Example photo"
+                brand["label"] = ""
         fb_gallery = [{"src": "img/fb/" + g[0], "caption": g[1] if len(g) > 1 else ""} for g in (copy.get("gallery") or [])]
     if copy.get("book"):
         t["book"] = copy["book"]
