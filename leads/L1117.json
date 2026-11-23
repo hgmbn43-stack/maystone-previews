@@ -2,9 +2,246 @@
  "Lead ID": "L1117",
  "Business": "Your spec home improvements",
  "Trade": "Construction company",
- "Town": "",
+ "Town": "Folkestone",
  "Phone": "07386 856559",
  "Google rating": "5",
  "Google reviews": "2",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJgSpnNgs32wMRPLOWtOHNlgo"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJgSpnNgs32wMRPLOWtOHNlgo",
+ "details": {
+  "business": "Your Spec Home Improvements",
+  "copy": {
+   "headline": [
+    "Built your way,",
+    "to your spec."
+   ],
+   "sub": "Extensions, roofs, garden rooms, landscaping and kitchens across Folkestone and Kent. Clear, itemised quotes and a tidy site every day.",
+   "kicker": "Builder",
+   "stats": [
+    [
+     "Itemised",
+     "quotes"
+    ],
+    [
+     "Online",
+     "estimates"
+    ]
+   ],
+   "photos": {
+    "wide": "extension-roof.jpg",
+    "tall": "slating.jpg",
+    "about": "garden-room-frame.jpg",
+    "tiles": [
+     "steel-opening.jpg",
+     "slating-2.jpg",
+     "garden-room-clad.jpg",
+     "garden-after.jpg",
+     "patio-porcelain.jpg",
+     "patio-laying.jpg"
+    ]
+   },
+   "alt": "A finished single-storey extension roof with roof windows on a brick house",
+   "about": [
+    "One builder,",
+    "start to finish."
+   ],
+   "about_alt": "Sean on site with the frame of a garden building going up",
+   "lede": "Sean runs Your Spec Home Improvements, an all-round builder working across Kent. One customer in Folkestone had him clear and rebuild their garden, repair the chimney and fit a new kitchen in one summer, with clear itemised quotes and the site kept tidy throughout.",
+   "areas": [
+    "Hythe",
+    "Dover",
+    "Ashford",
+    "Canterbury",
+    "Deal"
+   ],
+   "postcodes": {
+    "Folkestone": [
+     "CT18",
+     "CT19",
+     "CT20"
+    ],
+    "Hythe": [
+     "CT21"
+    ],
+    "Dover": [
+     "CT15",
+     "CT16",
+     "CT17"
+    ],
+    "Ashford": [
+     "TN23",
+     "TN24",
+     "TN25"
+    ],
+    "Canterbury": [
+     "CT1",
+     "CT2",
+     "CT3",
+     "CT4"
+    ],
+    "Deal": [
+     "CT14"
+    ]
+   },
+   "services_title": "What we build",
+   "services_intro": "Inside, outside and up on the roof.",
+   "services": [
+    {
+     "title": "Extensions and alterations",
+     "blurb": "Extensions, knock-throughs with new steels, and alterations to make the house work for you.",
+     "intro": "Openings made, steels in, and the room built back up ready to finish.",
+     "includes": [
+      "Single-storey extensions",
+      "Knock-throughs and steels",
+      "Internal alterations",
+      "Making good"
+     ]
+    },
+    {
+     "title": "Roofing and chimneys",
+     "blurb": "Slating, extension roofs, chimney repairs, flaunching, repointing, lead work and cowls.",
+     "intro": "Roofs and chimneys put right before the weather gets in.",
+     "includes": [
+      "Slate and tile roofs",
+      "Chimney repairs and repointing",
+      "Lead work and flashing",
+      "Cowls and moss removal"
+     ]
+    },
+    {
+     "title": "Garden rooms",
+     "blurb": "Timber garden rooms and summer houses framed, roofed and clad on a solid base.",
+     "intro": "Extra space in the garden for an office, gym or somewhere to sit.",
+     "includes": [
+      "Bases and frames",
+      "Roof decks",
+      "Log-lap cladding",
+      "Doors and windows"
+     ]
+    },
+    {
+     "title": "Landscaping and turf",
+     "blurb": "Overgrown gardens cleared, sleeper retaining walls, topsoil and fresh turf or artificial grass.",
+     "intro": "A garden you can actually use, cleared and rebuilt from the ground up.",
+     "includes": [
+      "Clearing trees and greenery",
+      "Sleeper retaining walls",
+      "Topsoil and turf",
+      "Artificial grass"
+     ]
+    },
+    {
+     "title": "Patios and paths",
+     "blurb": "Porcelain and stone patios, steps and resin-bound paths.",
+     "intro": "Laid level, with proper falls so the water runs away.",
+     "includes": [
+      "Porcelain and stone patios",
+      "Steps and edging",
+      "Resin-bound paths",
+      "Drainage"
+     ]
+    },
+    {
+     "title": "Kitchens, fencing and gates",
+     "blurb": "Old kitchens out and new ones fitted with appliances, plus fences, walls and handmade gates.",
+     "intro": "The finishing jobs, done by the same builder, with the waste taken away.",
+     "includes": [
+      "Kitchen strip-out and fitting",
+      "Ovens, hobs and extractors",
+      "Fences and walls",
+      "Handmade gates"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From recent jobs",
+    "title": "Overgrown to",
+    "em": "outdoor living.",
+    "steps": [
+     {
+      "photo": "garden-before.jpg",
+      "title": "Cleared",
+      "text": "Overgrown trees and greenery out, old walls down, sleepers in to hold the levels."
+     },
+     {
+      "photo": "garden-after.jpg",
+      "title": "Turfed",
+      "text": "Fresh topsoil and new turf. The same garden as the first photo."
+     },
+     {
+      "photo": "garden-room-frame.jpg",
+      "title": "Framed",
+      "text": "A garden building going up on a solid base, every post plumb."
+     },
+     {
+      "photo": "roof-deck.jpg",
+      "title": "Roofed",
+      "text": "Roof boarded and weathertight before anything goes inside."
+     },
+     {
+      "photo": "garden-room-finished.jpg",
+      "title": "Finished",
+      "text": "Clad, glazed and set on a new patio with lawn either side."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "resin-path.jpg",
+     "Resin-bound path between new lawns"
+    ],
+    [
+     "patio-laying.jpg",
+     "Porcelain patio being laid and levelled"
+    ],
+    [
+     "slating.jpg",
+     "Slating a new roof"
+    ],
+    [
+     "garden-room-clad.jpg",
+     "Log-lap garden room going up"
+    ],
+    [
+     "scaffold-london.jpg",
+     "Scaffold up on a period building"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Real jobs, straight from site.",
+   "reviews": [
+    [
+     "I had a lot of work done by the guys on the front and back of my property very hard working and doing the work to a high standard would recomend then",
+     "Raymond Denham",
+     "Google"
+    ],
+    [
+     "Sean from Your Spec Home Improvements has done several jobs for us at our family home in Folkestone over the summer. First he transformed the back garden... He then repaired the chimney... Most recently he took out our old kitchen and fitted a new one. His quotes were clear and itemised, his prices were fair, and he did what he said he would. I'd happily recommend Sean to anyone in Kent looking for a reliable all-round builder.",
+     "Tek Simkhada",
+     "Google"
+    ]
+   ],
+   "faqs": [
+    [
+     "Do you give free estimates?",
+     "Yes. Send a few details and photos and you'll get a clear, itemised quote."
+    ],
+    [
+     "Which areas do you cover?",
+     "We're based in Kent and work across Folkestone, Hythe, Dover, Ashford, Canterbury and nearby."
+    ],
+    [
+     "Can you take on several jobs at once?",
+     "Yes. Garden, roof and kitchen can all be done by the same builder, one after another."
+    ],
+    [
+     "Do you take the waste away?",
+     "Yes, waste is cleared away and the site is kept tidy."
+    ],
+    [
+     "What time do you start?",
+     "We're on site from 7:30am."
+    ]
+   ]
+  }
+ }
 }
