@@ -30,7 +30,7 @@
     "One engineer,",
     "start to finish."
    ],
-   "about_alt": "OC Plumbing & Gas at work",
+   "about_alt": "A finished walk-in shower with a sliding glass door, fitted by OC Plumbing & Gas",
    "lede": "Brett runs OC Plumbing & Gas, a local plumbing and heating engineer covering Welwyn and Hertfordshire. Customers have had him out for an emergency leak, a blocked drain, a new shower and a brand-new boiler, and they all say the same thing: quick to respond, tidy and fair on price.",
    "areas": [
     "Hatfield",
@@ -190,7 +190,92 @@
      "charlie edwards",
      "Google"
     ]
-   ]
+   ],
+   "palette": {
+    "ground": "#0c0c0d",
+    "paper": "#131314",
+    "card": "#1b1b1c",
+    "ink": "#ece7df",
+    "ink_soft": "#a7a198",
+    "line": "#2e2e2f",
+    "accent": "#f0702e",
+    "accent_ink": "#f58a4f",
+    "brand": "#f0702e",
+    "brand_text": "#f58a4f",
+    "accent_deep": "#b04a12"
+   },
+   "keep_film": true,
+   "photos": {
+    "about": "glass-shower.jpg",
+    "tiles": [
+     "walk-in-build.jpg",
+     "ufh-manifold.jpg",
+     "boiler-after.jpg",
+     "boiler-commissioning.jpg",
+     "brass-shower.jpg",
+     "vaillant-flue.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "From a recent boiler swap",
+    "title": "Old boiler out,",
+    "em": "new one in.",
+    "steps": [
+     {
+      "photo": "boiler-before.jpg",
+      "title": "Before",
+      "text": "An old boiler hanging over the kitchen sink, with tired pipework underneath."
+     },
+     {
+      "photo": "boiler-after.jpg",
+      "title": "After",
+      "text": "New boiler on, pipework run neatly and a filter fitted to protect it. The same kitchen."
+     },
+     {
+      "photo": "boiler-commissioning.jpg",
+      "title": "Tested",
+      "text": "Gas pressures and combustion checked before it is handed over."
+     },
+     {
+      "photo": "vaillant-filter.jpg",
+      "title": "Protected",
+      "text": "A magnetic filter on the return keeps sludge out of the new boiler."
+     },
+     {
+      "photo": "worcester-cupboard.jpg",
+      "title": "Finished",
+      "text": "Tidy, boxed in and explained before Brett leaves."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "led-mirror-basin.jpg",
+     "Basin and LED mirror in a new bathroom"
+    ],
+    [
+     "brass-shower.jpg",
+     "Brushed brass shower over the bath"
+    ],
+    [
+     "walk-in-build.jpg",
+     "Walk-in shower, tiled and plumbed"
+    ],
+    [
+     "ufh-manifold.jpg",
+     "Underfloor heating manifold and pump"
+    ],
+    [
+     "kitchen.jpg",
+     "Kitchen plumbing"
+    ],
+    [
+     "vaillant-flue.jpg",
+     "New boiler and flue"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Brett's own jobs, straight from his phone."
   }
  }
 }

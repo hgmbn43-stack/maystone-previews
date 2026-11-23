@@ -424,3 +424,6 @@ body.brand .fm-sec > summary { font-weight: 500; }
   .pr-tag { top: calc(var(--head) + 1rem); }
 }
 @media (max-width: 899px) { .pr-text .kicker { visibility: hidden; } }
+
+/* A real logo already says the name: on phones show the logo alone (23 Nov 2026). */
+@media (max-width: 700px) { body.brand .mark:has(img) strong { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }

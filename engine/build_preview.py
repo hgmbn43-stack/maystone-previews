@@ -446,6 +446,8 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
                 brand[k] = copy[k]
         if copy.get("palette"):   # the business's own colours (23 Nov 2026), e.g. from their logo
             brand["palette"] = {**brand["palette"], **copy["palette"]}
+            if copy["palette"].get("accent_deep") and brand.get("light"):
+                brand["light"] = {**brand["light"], "accent_deep": copy["palette"]["accent_deep"]}
     for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
         if copy.get(k):
             t[k] = copy[k]
