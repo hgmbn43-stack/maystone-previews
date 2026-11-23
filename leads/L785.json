@@ -6,5 +6,262 @@
  "Phone": "07595 958668",
  "Google rating": "4.4",
  "Google reviews": "14",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJAyEFHd_ldUgR3WdMLsgBnUs"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJAyEFHd_ldUgR3WdMLsgBnUs",
+ "details": {
+  "copy": {
+   "headline": [
+    "From bare frame",
+    "to finished wall."
+   ],
+   "sub": "Skimming, rendering, drylining and pebble dash across Reigate and Surrey since 2007. Free estimates, and a tidy finish ready for decorating.",
+   "kicker": "Plastering & rendering",
+   "stats": [
+    [
+     "2007",
+     "in business since"
+    ],
+    [
+     "9.86",
+     "Checkatrade score"
+    ]
+   ],
+   "photos": {
+    "wide": "arch-wall-wide.jpg",
+    "tall": "skim-hoodie.jpg",
+    "about": "render-team.jpg",
+    "tiles": [
+     "ceiling-skim.jpg",
+     "boarding-chimney.jpg",
+     "render-level.jpg",
+     "pebble-dash.jpg",
+     "beams-finished.jpg",
+     "alcove-arch.jpg"
+    ]
+   },
+   "alt": "Two Affordable Plastering Services plasterers skimming an arched wall from a scaffold tower",
+   "about": [
+    "Jerry and a team",
+    "who take pride in it."
+   ],
+   "about_alt": "The Affordable Plastering Services team rendering the front of a house in Reigate",
+   "lede": "Jerry O'Sullivan set up Affordable Plastering Services in 2007. He and his team plaster, board and render homes across Reigate and Surrey, from patching a few ceiling holes to whole barn and loft conversions, and they've looked after one customer's portfolio of care homes for years.",
+   "areas": [
+    "Redhill",
+    "Dorking",
+    "Horley",
+    "Epsom",
+    "Banstead",
+    "East Grinstead",
+    "Esher"
+   ],
+   "postcodes": {
+    "Reigate": [
+     "RH2"
+    ],
+    "Redhill": [
+     "RH1"
+    ],
+    "Dorking": [
+     "RH4",
+     "RH5"
+    ],
+    "Horley": [
+     "RH6"
+    ],
+    "Epsom": [
+     "KT17",
+     "KT18",
+     "KT19"
+    ],
+    "Banstead": [
+     "SM7"
+    ],
+    "East Grinstead": [
+     "RH19"
+    ],
+    "Esher": [
+     "KT10"
+    ]
+   },
+   "services_title": "What we do",
+   "services_intro": "Inside and out, old houses and new builds.",
+   "services": [
+    {
+     "title": "Skimming and plastering",
+     "blurb": "Walls and ceilings skimmed smooth, or hacked off and re-plastered when the old stuff has blown.",
+     "low": 400,
+     "high": 800,
+     "unit": "per room",
+     "intro": "A fresh skim over sound walls, or a full re-plaster where the old plaster is loose or hollow.",
+     "includes": [
+      "Skimming walls and ceilings",
+      "Hacking off and re-plastering",
+      "Float and set",
+      "Making good after electricians and plumbers"
+     ]
+    },
+    {
+     "title": "Drylining and boarding",
+     "blurb": "Stud walls, loft and extension boarding, dot and dab and taped joints ready to skim.",
+     "low": 500,
+     "high": 1200,
+     "intro": "New rooms boarded straight and flat, with the joints taped so the skim goes on clean.",
+     "includes": [
+      "Plasterboarding stud walls and ceilings",
+      "Dot and dab on old walls",
+      "Loft and extension boarding",
+      "Insulated board"
+     ]
+    },
+    {
+     "title": "Rendering",
+     "blurb": "Sand and cement, K Rend and monocouche through-colour renders for fronts, extensions and garden rooms.",
+     "low": 3000,
+     "high": 7000,
+     "intro": "External walls rendered to keep the weather out and look sharp for years.",
+     "includes": [
+      "Sand and cement render",
+      "K Rend",
+      "Monocouche through-colour render",
+      "Waterproof render"
+     ]
+    },
+    {
+     "title": "Pebble dash",
+     "blurb": "Pebble dashing and rough casting, new or patched in to match what you have.",
+     "low": 3000,
+     "high": 7000,
+     "intro": "Tired or cracked dash repaired, or a whole wall done fresh.",
+     "includes": [
+      "Pebble dashing",
+      "Rough casting",
+      "Patch repairs matched in",
+      "Old dash removed"
+     ]
+    },
+    {
+     "title": "Ceilings, Artex and coving",
+     "blurb": "Artex covered, cracked ceilings flattened, coving fitted and holes made good.",
+     "low": 150,
+     "high": 500,
+     "intro": "Ceilings are where bad plastering shows. Ours go flat, smooth and ready to paint.",
+     "includes": [
+      "Skimming over Artex",
+      "Flat ceilings",
+      "Coving",
+      "Patching and making good"
+     ]
+    },
+    {
+     "title": "Lime, lath and polished plaster",
+     "blurb": "Lime and lath for older houses, plus Venetian, polished and magnetic plaster finishes.",
+     "intro": "Period houses need materials that breathe, and feature walls deserve a finish that stands out.",
+     "includes": [
+      "Lime plastering",
+      "Lath and plaster",
+      "Venetian and polished plaster",
+      "Magnetic plaster"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From a recent conversion",
+    "title": "Bare frame to",
+    "em": "finished room.",
+    "steps": [
+     {
+      "photo": "barn-shell.jpg",
+      "title": "The shell",
+      "text": "Insulation in, steels up, stud walls framed. Nothing to look at yet."
+     },
+     {
+      "photo": "loft-taped.jpg",
+      "title": "Boarded",
+      "text": "Every wall and slope boarded and the joints taped, so the skim goes on flat."
+     },
+     {
+      "photo": "dormer-skim.jpg",
+      "title": "Skimmed",
+      "text": "Fresh skim on the ceilings and walls, left pink to dry out properly."
+     },
+     {
+      "photo": "mezzanine-finished.jpg",
+      "title": "Dried out",
+      "text": "Smooth, even and ready for the decorators. Same room as the first photo."
+     },
+     {
+      "photo": "barn-gable-finished.jpg",
+      "title": "Ready to live in",
+      "text": "Big glass, high ceilings and clean lines that a good plaster finish makes possible."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "render-house.jpg",
+     "Smooth render going on over an old cracked wall"
+    ],
+    [
+     "bay-window.jpg",
+     "Bay window re-plastered"
+    ],
+    [
+     "conservatory.jpg",
+     "Opening and conservatory plastered"
+    ],
+    [
+     "vaulted-finished.jpg",
+     "Vaulted bedroom, finished and painted"
+    ],
+    [
+     "render-cladding.jpg",
+     "Rendered panel on a timber-clad extension"
+    ],
+    [
+     "loft-gable-finished.jpg",
+     "Loft room skimmed to the ridge"
+    ],
+    [
+     "extension-skim.jpg",
+     "Garden room boarded and being skimmed"
+    ],
+    [
+     "gable-window.jpg",
+     "Finished loft room with a gable window"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Real jobs, straight off the tools.",
+   "faqs": [
+    [
+     "Do you give free quotes?",
+     "Yes. Tell us about the job, send a photo or two if you can, and Jerry will come back with a free estimate."
+    ],
+    [
+     "Which areas do you cover?",
+     "We're based in Reigate and work across Surrey, including Redhill, Dorking, Horley, Epsom and Banstead."
+    ],
+    [
+     "Do you do commercial work?",
+     "Yes. We take on domestic and commercial jobs, big or small."
+    ],
+    [
+     "Are you insured?",
+     "Yes, we're fully insured."
+    ],
+    [
+     "Can I pay by card?",
+     "Yes, we accept card payments."
+    ],
+    [
+     "How long before I can paint new plaster?",
+     "Usually 3 to 7 days for a skim, longer for a full re-plaster. It goes from dark to light pink and even in colour when it's dry."
+    ],
+    [
+     "Can you plaster over Artex?",
+     "Yes. Most Artex can be skimmed over after preparation. Older Artex may need testing for asbestos first."
+    ]
+   ]
+  }
+ }
 }
