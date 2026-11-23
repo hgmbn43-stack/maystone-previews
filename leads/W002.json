@@ -1,0 +1,233 @@
+{
+ "Lead ID": "W002",
+ "Business": "Garrard Construction",
+ "Trade": "Construction company",
+ "Town": "Sompting",
+ "Phone": "07511 447537",
+ "Google rating": "",
+ "Google reviews": "0",
+ "Google Maps": "https://www.google.com/maps",
+ "details": {
+  "copy": {
+   "headline": [
+    "From concept",
+    "to creation."
+   ],
+   "sub": "Extensions, renovations and new builds across Sompting and Sussex. Father and son, over 20 years in the trade, and free no-obligation quotes.",
+   "kicker": "Builder",
+   "stats": [
+    [
+     "2014",
+     "founded"
+    ],
+    [
+     "20+",
+     "years in the trade"
+    ]
+   ],
+   "keep_film": true,
+   "photos": {
+    "wide": "new-build.jpg",
+    "tall": "staircase.jpg",
+    "about": "crittall-extension.jpg",
+    "tiles": [
+     "kitchen-extension.jpg",
+     "open-plan.jpg",
+     "roof-trusses.jpg",
+     "staircase.jpg",
+     "bathroom.jpg",
+     "decking.jpg"
+    ]
+   },
+   "alt": "A contemporary white-rendered new build with cedar cladding and a landscaped garden",
+   "about": [
+    "Father and son,",
+    "no job too small."
+   ],
+   "about_alt": "A rear extension with black steel-framed glazing, built by Garrard Construction",
+   "lede": "Garrard Construction Ltd was founded in 2014 by Ryan Garrard and his dad Robert, with over 20 years in the trade between them. They take on everything from a skirting board to a brand-new house, and every job is finished to the same standard.",
+   "areas": [
+    "Lancing",
+    "Worthing",
+    "Shoreham-by-Sea",
+    "Steyning",
+    "Findon"
+   ],
+   "services_title": "What we build",
+   "services_intro": "Home renovation to new build properties.",
+   "services": [
+    {
+     "title": "Extensions",
+     "blurb": "Single and double storey extensions, including steel-framed glazing and open-plan kitchens.",
+     "intro": "More room, more light, built to last.",
+     "includes": [
+      "Rear and side extensions",
+      "Steel-framed glazing",
+      "Open-plan kitchens",
+      "Planning to finish"
+     ]
+    },
+    {
+     "title": "New builds and renovations",
+     "blurb": "New build homes and whole-house renovations, from groundwork to the last coat of paint.",
+     "intro": "One team from concept to creation.",
+     "includes": [
+      "New build properties",
+      "Whole-house renovations",
+      "Loft rooms",
+      "Internal alterations"
+     ]
+    },
+    {
+     "title": "Roofing",
+     "blurb": "New roofs, trusses, flat roofs, eaves and rotten timber replaced.",
+     "intro": "Roofs built and repaired properly, so the weather stays out.",
+     "includes": [
+      "Roof structures and trusses",
+      "Flat roofs",
+      "Eaves and fascias",
+      "Rot repairs"
+     ]
+    },
+    {
+     "title": "Carpentry and joinery",
+     "blurb": "Oak staircases, walk-in wardrobes, shelving, skirting and architrave.",
+     "intro": "Nailing every job, because nobody likes a screw up.",
+     "includes": [
+      "Staircases and balustrades",
+      "Fitted wardrobes",
+      "Shelving",
+      "Skirting and architrave"
+     ]
+    },
+    {
+     "title": "Bathrooms, plumbing and electrics",
+     "blurb": "Bathrooms fitted with tiling and lit niches, plus plumbing, heating and electrical work.",
+     "intro": "The trades under one roof, so you are not chasing three firms.",
+     "includes": [
+      "Bathroom installations",
+      "Plumbing and heating",
+      "Electrical work",
+      "Tiling"
+     ]
+    },
+    {
+     "title": "Decking, patios and outdoor",
+     "blurb": "Decking, steps, patios, ramps and rendering outside the house.",
+     "intro": "Outside space you will actually use.",
+     "includes": [
+      "Decking and steps",
+      "Patios",
+      "Access ramps",
+      "Rendering"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From recent jobs",
+    "title": "Concept to",
+    "em": "creation.",
+    "steps": [
+     {
+      "photo": "roof-trusses.jpg",
+      "title": "Structure",
+      "text": "Walls up, trusses on, materials craned in and stacked ready."
+     },
+     {
+      "photo": "roof-deck.jpg",
+      "title": "Roofed",
+      "text": "The roof boarded and insulated before the weather can get in."
+     },
+     {
+      "photo": "new-build.jpg",
+      "title": "Built",
+      "text": "Rendered, clad and glazed, with patios and lawns laid outside."
+     },
+     {
+      "photo": "open-plan.jpg",
+      "title": "Finished inside",
+      "text": "Oak floors, glass balustrades and big glazing letting the light in."
+     },
+     {
+      "photo": "kitchen-oak.jpg",
+      "title": "Ready to move in",
+      "text": "Kitchen fitted, lights on, keys handed over."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "kitchen-mantle.jpg",
+     "Hand-built kitchen mantle"
+    ],
+    [
+     "loft-room.jpg",
+     "Loft room with roof windows and Juliet doors"
+    ],
+    [
+     "access-ramp.jpg",
+     "Timber access ramp"
+    ],
+    [
+     "crittall-extension.jpg",
+     "Steel-framed glazing on a rear extension"
+    ],
+    [
+     "bathroom.jpg",
+     "Bathroom with lit tiled niches"
+    ]
+   ],
+   "gallery_kicker": "Our work",
+   "gallery_intro": "Real jobs from Ryan and Robert.",
+   "reviews": [
+    [
+     "Thanks Ryan - love my patio looks so good! Really friendly guy and a really skilled worker would 100% recommend to anyone. Made my summer garden parties much more fun!",
+     "Eve",
+     "Facebook"
+    ],
+    [
+     "Ryan and his team were absolutely brilliant. I needed extensive replacement of rotten eaves, a flat roof and a ceiling. All of this was done to a high standard. They were always punctual, considerate and tidy and worked hard to get the job done to an excellent standard.",
+     "Customer",
+     "MyBuilder"
+    ],
+    [
+     "Ryan responded promptly with a visit and a very fair quote. Planning the job in, he was easy and clear to communicate with; turned up as promised, worked efficiently and did a good job; we are very pleased.",
+     "Customer",
+     "MyBuilder"
+    ],
+    [
+     "Such lovely people father and son. Prompt, efficient and super polite. What a pleasure. Thankyou both.",
+     "Customer",
+     "MyBuilder"
+    ],
+    [
+     "So happy with my wardrobe, love a walk in wardrobe that fits all my clothes. Dream come true thank you so much Ryan.",
+     "Amy",
+     "Facebook"
+    ]
+   ],
+   "faqs": [
+    [
+     "Are quotes free?",
+     "Yes. Free, no-obligation quotes."
+    ],
+    [
+     "Which areas do you cover?",
+     "We are based in Sompting and work across Sussex, including Lancing, Worthing, Shoreham-by-Sea and Steyning."
+    ],
+    [
+     "Do you take on small jobs?",
+     "Yes. We have a no job too small attitude, from skirting and shelving to full new builds."
+    ],
+    [
+     "Do you do plumbing and electrics too?",
+     "Yes. Plumbing and heating, carpentry and electrical work are all covered."
+    ],
+    [
+     "Who will I deal with?",
+     "Ryan and Robert Garrard, father and son, who run the business."
+    ]
+   ]
+  }
+ }
+}

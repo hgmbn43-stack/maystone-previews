@@ -809,7 +809,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   <section id="reviews">
     <div class="wrap reviews-grid">
       <div class="score">
-        <p class="kicker">{{ 'Facebook and Google' if t.static_reviews else 'Straight from Google' }}</p>
+        <p class="kicker">{{ (t.review_sources or 'Facebook and Google') if t.static_reviews else 'Straight from Google' }}</p>
         <h2>What customers say</h2>
         {% if biz.show_rating %}
         <span class="score-num">{{ biz.rating_str }}</span>
@@ -817,7 +817,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
         <p>From {{ biz.reviews }} Google review{{ 's' if biz.reviews != 1 }}</p>
         <a href="{{ biz.maps }}" rel="noopener" target="_blank">Read them on Google</a>
         {% else %}
-        <p>Reviews from your Google listing show here as customers leave them.</p>
+        <p>{{ 'Real reviews from our customers.' if t.static_reviews else 'Reviews from your Google listing show here as customers leave them.' }}</p>
         {% endif %}
       </div>
       {% if t.static_reviews %}
@@ -831,7 +831,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
           </figure>
           {% endfor %}
         </div>
-        <p class="reviews-note">From {{ 'your' if preview else 'our' }} Facebook and Google reviews.</p>
+        <p class="reviews-note">From {{ 'your' if preview else 'our' }} {{ t.review_sources or 'Facebook and Google' }} reviews.</p>
       </div>
       {% elif preview %}
       <div>

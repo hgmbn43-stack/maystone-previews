@@ -373,6 +373,8 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         biz["pc_example"] = (copy0["postcodes"].get(town) or [town])[0]
     if copy0.get("reviews"):
         t["static_reviews"] = copy0["reviews"]
+        srcs = list(dict.fromkeys(r[2] for r in copy0["reviews"] if len(r) > 2))
+        t["review_sources"] = " and ".join(srcs) if srcs else ""
     schema = {
         "@context": "https://schema.org", "@type": SCHEMA_TYPE.get(group, "HomeAndConstructionBusiness"),
         "name": name, "telephone": biz["tel"], "areaServed": areas,
