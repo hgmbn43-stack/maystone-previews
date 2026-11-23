@@ -655,7 +655,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   </section>
   {% endif %}
   {% if t.job_story and (not show_film or t.keep_film) %}
-  <section id="story" class="jstory" aria-label="{{ t.job_story.title }}">
+  <section id="{{ 'jobs' if show_film else 'story' }}" class="jstory" aria-label="{{ t.job_story.title }}">
     <div class="js-pin">
       <div class="js-imgs">
         {% for st in t.job_story.steps %}<figure class="js-img{{ ' on' if loop.first }}"><img src="{{ st.src }}" alt="{{ st.alt or st.title }}" {% if not loop.first %}loading="lazy" {% endif %}decoding="async"></figure>{% endfor %}
