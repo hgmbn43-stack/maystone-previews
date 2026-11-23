@@ -477,6 +477,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
         js = dict(copy["job_story"])
         js["steps"] = [dict(st, src="img/fb/" + st["photo"]) for st in js["steps"]]
         t["job_story"] = js
+        t["keep_film"] = bool(copy.get("keep_film"))   # show the example scroll film as well as the job story (23 Nov 2026)
     if t.get("venue"):
         if copy.get("menu"):
             t["menu"], t["menu_real"] = [dict(m) for m in copy["menu"]], True

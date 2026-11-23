@@ -27,8 +27,6 @@
     ]
    ],
    "photos": {
-    "wide": "extension-roof.jpg",
-    "tall": "slating.jpg",
     "about": "garden-room-frame.jpg",
     "tiles": [
      "steel-opening.jpg",
@@ -39,7 +37,6 @@
      "patio-laying.jpg"
     ]
    },
-   "alt": "A finished single-storey extension roof with roof windows on a brick house",
    "about": [
     "One builder,",
     "start to finish."
@@ -241,7 +238,8 @@
      "What time do you start?",
      "We're on site from 7:30am."
     ]
-   ]
+   ],
+   "keep_film": true
   }
  }
 }
