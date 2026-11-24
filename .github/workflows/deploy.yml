@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -32,7 +33,29 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
+      # GitHub can take a few seconds to list a just-uploaded artifact; deploying too soon fails with
+      # "No artifacts named github-pages were found" (24 Nov 2026). Wait until it is listed, then deploy,
+      # and try once more if the first deploy still misses it.
+      - name: Wait for the site upload to be listed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 30); do
+            n=$(gh api "repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" --jq '[.artifacts[] | select(.name=="github-pages")] | length' 2>/dev/null || echo 0)
+            if [ "$n" -ge 1 ]; then echo "Listed after $i checks"; break; fi
+            sleep 5
+          done
+          sleep 15
       - id: deployment
         uses: actions/deploy-pages@v4
+        continue-on-error: true
         with:
-          timeout: 1800000   # GitHub Pages has been slow to finish (10 Nov 2026); wait up to 30 min instead of 10
+          timeout: 600000
+      - name: Pause before a second try
+        if: steps.deployment.outcome == 'failure'
+        run: sleep 45
+      - name: Deploy (second try)
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+        with:
+          timeout: 600000
