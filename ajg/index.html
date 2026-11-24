@@ -473,15 +473,14 @@ html.helmet #lens{opacity:1}
  <span class="kick mono">Get a quote</span><h3 class="t">Got a job?<br>Let's weld it.</h3>
  <p class="lead">Ring me on 07525 419938 or WhatsApp a photo. If I don&rsquo;t pick up I&rsquo;m probably under a pipe, so I&rsquo;ll call you back.</p>
  <div class="row"><a class="btn" href="tel:+447525419938">Call now</a><a class="btn g" href="https://wa.me/447525419938?text=Hi%20Aidan%2C%20I%27d%20like%20a%20quote%20for%20some%20welding%20work">WhatsApp a photo</a></div>
- <form id="qf"><label>Name<input autocomplete="name" required></label><label>Phone<input type="tel" inputmode="tel" autocomplete="tel" required></label>
-  <label>Postcode<input autocomplete="postal-code" autocapitalize="characters" placeholder="e.g. BN43"></label>
-  <fieldset class="chips full"><legend>What's the job?</legend><label><input type="radio" name="job" checked><span>Pipework</span></label><label><input type="radio" name="job"><span>Shutdown</span></label><label><input type="radio" name="job"><span>Pre-fab</span></label><label><input type="radio" name="job"><span>Repair</span></label><label><input type="radio" name="job"><span>Other</span></label></fieldset>
-  <label class="full">Add photos (optional)<input type="file" accept="image/*" multiple></label>
-  <label class="full">Tell us about it<textarea rows="3" placeholder="Rough size, what's wrong, when you need it"></textarea></label>
-  <button class="btn full" type="submit">Send enquiry</button><p class="full next">I&rsquo;ll call or WhatsApp you back, usually same day.</p></form>
+ <form id="qf"><label>Name<input name="n" autocomplete="name" required></label><label>Phone<input name="p" type="tel" inputmode="tel" autocomplete="tel" required></label>
+  <label>Postcode<input name="pc" autocomplete="postal-code" autocapitalize="characters" placeholder="e.g. BN43"></label>
+  <fieldset class="chips full"><legend>What's the job?</legend><label><input type="radio" name="job" value="Pipework" checked><span>Pipework</span></label><label><input type="radio" name="job" value="Shutdown"><span>Shutdown</span></label><label><input type="radio" name="job" value="Pre-fab pipework"><span>Pre-fab</span></label><label><input type="radio" name="job" value="Repair"><span>Repair</span></label><label><input type="radio" name="job" value="Other"><span>Other</span></label></fieldset>
+  <label class="full">Tell me about it<textarea name="d" rows="3" placeholder="Rough size, what's wrong, when you need it"></textarea></label>
+  <button class="btn full" type="submit">Send on WhatsApp</button><p class="full next">Opens WhatsApp with your details filled in. Add photos there and hit send.</p></form>
 </div></section>
 
-<footer><div class="wrap"><div class="logo"><b>AJG</b><span class="mono">Welding · Aidan Gething</span></div><div>Coded welder · Stainless &amp; carbon pipework · Sussex, London &amp; Kent · <a href="tel:+447525419938">07525 419938</a> · <a href="https://www.instagram.com/ajg_welding/" target="_blank" rel="noopener">@ajg_welding</a></div><div>Ex Duris Gloria. Concept preview &middot; footage and photos from @ajg_welding.</div></div></footer>
+<footer><div class="wrap"><div class="logo"><b>AJG</b><span class="mono">Welding · Aidan Gething</span></div><div>Coded welder · Stainless &amp; carbon pipework · Sussex, London &amp; Kent · <a href="tel:+447525419938">07525 419938</a> · <a href="https://www.instagram.com/ajg_welding/" target="_blank" rel="noopener">@ajg_welding</a></div><div>Ex Duris Gloria &middot; AJG Welding &middot; footage and photos from @ajg_welding.</div></div></footer>
 </main>
 <canvas id="trail" aria-hidden="true"></canvas>
 <div class="mbar" id="mbar"><a href="tel:+447525419938">Call</a><a href="https://wa.me/447525419938?text=Hi%20Aidan%2C%20I%27d%20like%20a%20quote%20for%20some%20welding%20work">WhatsApp</a><a href="#quote">Quote</a></div>
@@ -631,7 +630,9 @@ stage.addEventListener('pointerdown',function(e){if(e.target.closest('a'))return
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('is-in');io.unobserve(e.target);
  var n=e.target.querySelector('[data-count]');if(n){var to=+n.dataset.count,s0=performance.now();(function tick(t){var q=Math.min(1,(t-s0)/1400);n.firstChild.nodeValue=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(tick);})(s0);}});},{threshold:.15});
 document.querySelectorAll('.reveal').forEach(function(e){io.observe(e);});
-$('qf').addEventListener('submit',function(e){e.preventDefault();this.innerHTML='<p class="full" style="text-align:center;font-size:18px">Thanks, that’s come through. (Mock-up: nothing was sent.)</p>';});
+$('qf').addEventListener('submit',function(e){e.preventDefault();var f=this,g=function(n){var el=f.elements[n];return el?(el.value||'').trim():'';};
+ var m='Hi Aidan, quote request from your website.\n\nName: '+g('n')+'\nPhone: '+g('p')+(g('pc')?'\nPostcode: '+g('pc'):'')+'\nJob: '+g('job')+(g('d')?'\n\n'+g('d'):'');
+ window.open('https://wa.me/447525419938?text='+encodeURIComponent(m),'_blank');});
 })();
 /* ---------- sparks that follow you down the page ---------- */
 (function(){
