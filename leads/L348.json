@@ -6,5 +6,14 @@
  "Phone": "01403 272502",
  "Google rating": "5",
  "Google reviews": "6",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJl72s76vrdUgR26h-8NA_nfo"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJl72s76vrdUgR26h-8NA_nfo",
+ "details": {
+  "copy": {
+   "lede": "Richard Capewell and the team at Capewell Plumbing service, repair and replace boilers around Horsham, including LPG work. Customers mention a Potterton swapped for a combi in under a day, emergency repairs and a neat, tidy job with no mess.",
+   "about": [
+    "Richard looks after",
+    "his customers."
+   ]
+  }
+ }
 }

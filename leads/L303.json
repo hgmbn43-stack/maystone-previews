@@ -6,5 +6,58 @@
  "Phone": "07359 449367",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ15rbfXdNdEgR_gEYpNNbmqg"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ15rbfXdNdEgR_gEYpNNbmqg",
+ "details": {
+  "copy": {
+   "palette": {
+    "accent": "#c9a24a",
+    "accent_ink": "#dcb763",
+    "brand": "#c9a24a",
+    "brand_text": "#dcb763",
+    "accent_deep": "#7a5e1c"
+   },
+   "lede": "Jack Harte paints and decorates homes around Chichester, inside and out. Customers mention a garden cabin oiled, primed and top-coated, a garage and front door sealed and painted, and a great finish with filled holes the electrician left behind.",
+   "about": [
+    "Jack turns up",
+    "and it shows."
+   ],
+   "about_alt": "An open-plan kitchen and living space decorated by J Harte Decorating",
+   "photos": {
+    "about": "open-plan.jpg",
+    "tiles": [
+     "vaulted-kitchen.jpg",
+     "garden-cabin.jpg",
+     "kitchen-island.jpg",
+     "garage-doors.jpg",
+     "dining-kitchen.jpg",
+     "pergola.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "vaulted-kitchen.jpg",
+     "Vaulted kitchen"
+    ],
+    [
+     "garden-cabin.jpg",
+     "Garden cabin painted inside and out"
+    ],
+    [
+     "garage-doors.jpg",
+     "Garage doors stained"
+    ],
+    [
+     "pergola.jpg",
+     "Pergola and deck treated"
+    ],
+    [
+     "kitchen-island.jpg",
+     "Kitchen with island"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Chichester.",
+   "keep_film": true
+  }
+ }
 }
