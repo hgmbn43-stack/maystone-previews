@@ -6,5 +6,141 @@
  "Phone": "07989 145274",
  "Google rating": "5",
  "Google reviews": "2",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJTdYgYtejdUgRl4yKHLuoRn8"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJTdYgYtejdUgRl4yKHLuoRn8",
+ "details": {
+  "copy": {
+   "lede": "Matt Grainger refurbishes bathrooms, wet rooms, kitchens and floors around Worthing. Customers say he's neat, tidy and efficient, talks them through any complications and keeps them updated on progress.",
+   "about": [
+    "Matt keeps it tidy",
+    "and keeps you posted."
+   ],
+   "about_alt": "A dark tiled bathroom with a freestanding bath, refurbished by Matt Grainger",
+   "photos": {
+    "about": "dark-bathroom.jpg",
+    "tiles": [
+     "navy-kitchen.jpg",
+     "white-bathroom.jpg",
+     "stone-floor.jpg",
+     "garden-room-floor.jpg",
+     "walk-in-shower.jpg",
+     "vanity-wall.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Bathrooms",
+     "blurb": "Full bathroom refurbishments, from strip-out to finish.",
+     "intro": "One person managing the whole job.",
+     "includes": [
+      "Strip-out",
+      "Plumbing",
+      "Tiling",
+      "Fitting"
+     ]
+    },
+    {
+     "title": "Wet rooms and showers",
+     "blurb": "Walk-in showers and wet rooms with linear drains.",
+     "intro": "Level access, properly tanked.",
+     "includes": [
+      "Wet rooms",
+      "Linear drains",
+      "Shower enclosures",
+      "Glass screens"
+     ]
+    },
+    {
+     "title": "Kitchens",
+     "blurb": "Kitchens fitted with tiling and appliances.",
+     "intro": "Units, worktops and splashbacks done together.",
+     "includes": [
+      "Units",
+      "Worktops",
+      "Splashbacks",
+      "Appliances"
+     ]
+    },
+    {
+     "title": "Cloakrooms",
+     "blurb": "Small rooms refurbished with smart finishes.",
+     "intro": "Big impact in a small space.",
+     "includes": [
+      "Vanity units",
+      "Wall-hung toilets",
+      "Patterned floors",
+      "Radiators"
+     ]
+    },
+    {
+     "title": "Flooring",
+     "blurb": "Stone, tile and wood-effect floors.",
+     "intro": "Laid flat, set out properly.",
+     "includes": [
+      "Natural stone",
+      "Porcelain",
+      "Wood-effect",
+      "Garden rooms"
+     ]
+    },
+    {
+     "title": "Refurbishments",
+     "blurb": "Rooms stripped back and rebuilt.",
+     "intro": "Back to bare and built back up.",
+     "includes": [
+      "Strip-outs",
+      "Making good",
+      "Boxing in",
+      "Finishing"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "A room refurbished",
+    "title": "Back to bare,",
+    "em": "then rebuilt.",
+    "steps": [
+     {
+      "photo": "room-stripped.jpg",
+      "title": "Stripped",
+      "text": "Old finishes off, walls and floor back to bare."
+     },
+     {
+      "photo": "walk-in-shower.jpg",
+      "title": "Built",
+      "text": "Floor laid to fall, linear drain in, walls tiled."
+     },
+     {
+      "photo": "wetroom-basins.jpg",
+      "title": "Finished",
+      "text": "Double basin, mirrors and glass screen. A full wet room."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "navy-cloakroom.jpg",
+     "Navy cloakroom with patterned floor"
+    ],
+    [
+     "shower-room.jpg",
+     "Shower room"
+    ],
+    [
+     "stone-floor.jpg",
+     "Natural stone floor"
+    ],
+    [
+     "garden-room-floor.jpg",
+     "Garden room floor"
+    ],
+    [
+     "white-bathroom.jpg",
+     "White bathroom"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Worthing.",
+   "keep_film": true
+  }
+ }
 }
