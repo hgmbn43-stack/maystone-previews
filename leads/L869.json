@@ -2,9 +2,119 @@
  "Lead ID": "L869",
  "Business": "Watt Electrical",
  "Trade": "Electrician",
- "Town": "",
+ "Town": "Heathfield",
  "Phone": "07950 607828",
  "Google rating": "5",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJa3pjDyY50icRC1ZZGzauTBs"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJa3pjDyY50icRC1ZZGzauTBs",
+ "details": {
+  "copy": {
+   "lede": "Watt Electrical handle fault finding, new consumer units, sockets, garden room and sauna supplies, outside lighting and commercial fit-outs. Customers say they come at short notice, explain the fault clearly and leave everything tidy.",
+   "about": [
+    "Faults found,",
+    "explained, fixed."
+   ],
+   "about_alt": "A new consumer unit with labelled circuits, fitted by Watt Electrical",
+   "photos": {
+    "about": "consumer-unit.jpg",
+    "tiles": [
+     "socket.jpg",
+     "consumer-unit.jpg",
+     "sauna-board.jpg",
+     "commercial-unit.jpg",
+     "wall-lights.jpg",
+     "garden-room-wiring.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Fault finding",
+     "blurb": "Tripping circuits and dead sockets traced and fixed.",
+     "intro": "Often same day, explained in plain English.",
+     "includes": [
+      "Tripping RCDs",
+      "Dead sockets",
+      "Lighting faults",
+      "Short-notice call-outs"
+     ]
+    },
+    {
+     "title": "Consumer units",
+     "blurb": "New consumer units with surge protection, neatly labelled.",
+     "intro": "Safer boards, clearly marked.",
+     "includes": [
+      "Board upgrades",
+      "Surge protection",
+      "RCBOs",
+      "Labelling"
+     ]
+    },
+    {
+     "title": "Garden rooms and saunas",
+     "blurb": "Supplies for garden rooms, saunas and outbuildings.",
+     "intro": "Power where you want it.",
+     "includes": [
+      "Sub-mains",
+      "Sauna isolators",
+      "Garden room wiring",
+      "Outbuildings"
+     ]
+    },
+    {
+     "title": "Commercial work",
+     "blurb": "Lighting and power for industrial units and businesses.",
+     "intro": "Planned around your working day.",
+     "includes": [
+      "Unit fit-outs",
+      "LED lighting",
+      "Power",
+      "Testing"
+     ]
+    },
+    {
+     "title": "Outside lighting",
+     "blurb": "Wall lights, pillar lights and outside sockets.",
+     "intro": "Lighting that looks right after dark.",
+     "includes": [
+      "Wall lights",
+      "Pillar lights",
+      "Outside sockets",
+      "Timers and sensors"
+     ]
+    },
+    {
+     "title": "Sockets and lighting",
+     "blurb": "Extra sockets, switches and new lighting.",
+     "intro": "Tidy finishes, no mess left behind.",
+     "includes": [
+      "New sockets",
+      "Brushed steel fittings",
+      "Downlights",
+      "Switches"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "wall-lights.jpg",
+     "Outside lights on a new boundary wall"
+    ],
+    [
+     "sauna-board.jpg",
+     "Consumer unit and sauna isolator"
+    ],
+    [
+     "commercial-unit.jpg",
+     "Commercial unit lighting"
+    ],
+    [
+     "socket.jpg",
+     "Brushed steel double socket"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Heathfield.",
+   "keep_film": true
+  }
+ }
 }
