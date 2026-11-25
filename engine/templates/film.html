@@ -743,7 +743,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       <ul class="jobs{{ ' rows' if brand and (brand.tiles or brand.icons) }}">
         {% for sv in t.services_full %}
         <li>
-          {% if brand and brand.icons %}<a class="tile-img tile-ico" href="{{ svc_pages[loop.index0].path if svc_pages else '#quote' }}" tabindex="-1" aria-hidden="true">{{ brand.icons[loop.index0]|safe }}</a>{% elif brand and brand.tiles %}<a class="tile-img" href="{{ svc_pages[loop.index0].path if svc_pages else '#quote' }}" tabindex="-1" aria-hidden="true"><img src="{{ brand.tile_base }}{{ brand.tiles[loop.index0 % brand.tiles|length] }}" alt="" loading="lazy" decoding="async">{% if preview %}<span class="ph-tag">Example photo</span>{% endif %}</a>{% endif %}
+          {% if brand and brand.icons %}<a class="tile-img tile-ico" href="{{ svc_pages[loop.index0].path if svc_pages else '#quote' }}" tabindex="-1" aria-hidden="true">{{ brand.icons[loop.index0]|safe }}</a>{% elif brand and brand.tiles %}<a class="tile-img" href="{{ svc_pages[loop.index0].path if svc_pages else '#quote' }}" tabindex="-1" aria-hidden="true"><img src="{{ brand.tile_base }}{{ brand.tiles[loop.index0 % brand.tiles|length] }}" alt="" loading="lazy" decoding="async">{% if preview and not brand.own_tiles %}<span class="ph-tag">Example photo</span>{% endif %}</a>{% endif %}
           <div><h3>{% if svc_pages %}<a class="svc-link" href="{{ svc_pages[loop.index0].path }}">{{ sv.title }}</a>{% else %}{{ sv.title }}{% endif %}</h3><p>{{ sv.blurb }}</p></div>
           <div class="job-side">
             {% if sv.low is not none %}<span class="price"><small>Guide price</small>&pound;{{ "{:,}".format(sv.low) }}&ndash;&pound;{{ "{:,}".format(sv.high) }}{% if sv.unit %}<small>{{ sv.unit }}</small>{% endif %}</span>{% endif %}
@@ -1527,6 +1527,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     var work = document.getElementById("work"), box = document.getElementById("gallery");
     if (!own.length) done();
     if (!own.length || !work || !box) return;
+    if (box.querySelector("figure")) return;   // their photos are already built into the page
     // Their logo from Google goes in the header and on the film's end card: cropped to the artwork,
     // on a chip of its own background colour so it reads on any page colour. First one found wins.
     function useLogo(img) {

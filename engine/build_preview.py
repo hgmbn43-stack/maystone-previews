@@ -525,6 +525,15 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             brand["about_img"] = ph_web["about"]
         if tiles_web:
             brand["tiles"], brand["tile_base"] = tiles_web, ""
+        # copy.photos.own = true (25 Nov 2026): the links are the business's OWN photos (e.g. from their Google
+        # listing), so no "Example photo" tag. Lets their real work show even when Google's daily limit is hit.
+        if (copy.get("photos") or {}).get("own") is True:
+            brand["label"], brand["own_tiles"] = "", bool(tiles_web)
+            if ph_web.get("about"):
+                brand["about_own"] = True
+    if not fb_gallery and copy.get("gallery"):   # gallery of linked own photos: [url, caption]
+        fb_gallery = [{"src": g[0], "caption": g[1] if len(g) > 1 else ""} for g in copy["gallery"]
+                      if isinstance(g, list) and g and str(g[0]).startswith("https://")]
     clean_look.apply(brand, services, copy, preview, group)   # 25 Nov 2026: own photo up top, icons, one colour grade
     if copy.get("book"):
         t["book"] = copy["book"]
