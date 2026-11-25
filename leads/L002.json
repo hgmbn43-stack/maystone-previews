@@ -6,5 +6,51 @@
  "Phone": "07463 768391",
  "Google rating": "5",
  "Google reviews": "42",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ-YIRhvWjdUgR7PiQ0rmKMAU"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ-YIRhvWjdUgR7PiQ0rmKMAU",
+ "details": {
+  "copy": {
+   "lede": "Ed Green Plumbing and Heating fit boilers, cylinders and full bathrooms around Worthing, from neat copper plant rooms to bold green and blue bathrooms with brushed brass fittings.",
+   "about": [
+    "Neat pipework,",
+    "bold bathrooms."
+   ],
+   "about_alt": "A green-tiled bathroom with a freestanding bath and brass fittings, by Ed Green Plumbing and Heating",
+   "photos": {
+    "about": "green-bathroom.jpg",
+    "tiles": [
+     "boiler-pipework.jpg",
+     "boiler-cupboard.jpg",
+     "plant-room.jpg",
+     "boiler-pipework.jpg",
+     "plant-room.jpg",
+     "blue-shower-room.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "blue-shower-room.jpg",
+     "Blue herringbone shower room with brass fittings"
+    ],
+    [
+     "grey-shower-room.jpg",
+     "Walk-in shower and vanity"
+    ],
+    [
+     "plant-room.jpg",
+     "Boiler and unvented cylinder"
+    ],
+    [
+     "shower-valve.jpg",
+     "Concealed shower valve"
+    ],
+    [
+     "boiler-cupboard.jpg",
+     "New boiler in a cupboard"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Worthing.",
+   "keep_film": true
+  }
+ }
 }
