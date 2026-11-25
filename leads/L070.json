@@ -6,5 +6,12 @@
  "Phone": "07437 358368",
  "Google rating": "",
  "Google reviews": "0",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJd5cgkjqFdUgRCDfdBPHzfF8"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJd5cgkjqFdUgRCDfdBPHzfF8",
+ "details": {
+  "copy": {
+   "look": "clean",
+   "hero": "type",
+   "short_name": "Burns"
+  }
+ }
 }

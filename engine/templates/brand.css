@@ -519,3 +519,17 @@ body.brand.lay-c .bhero { background: {{ brand.palette.ground }}; }
 .g-hero-credit { position: absolute; right: 1rem; bottom: 1rem; z-index: 2; background: rgba(12,14,16,.7); color: #f4efe6; font: 600 .6rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; padding: .55rem .8rem; }
 .about-img .g-hero-credit { left: 0; right: auto; bottom: 0; }
 {% endif %}
+{% if brand.type_hero %}
+/* Type front page (25 Nov 2026): no photo at all. Their name, big, in their colours, so nothing can look stock. */
+body.brand .bhero.type { min-height: 100svh; grid-template-rows: 1fr auto; background: {{ brand.palette.ground }}; }
+body.brand .bhero.type .bh-in, body.brand .bhero.type .bh-stats { grid-row: auto; padding-right: 0; }
+body.brand .bhero.type .bh-in { padding-top: 7rem; }
+.bh-glow { position: absolute; inset: -20%; z-index: -1; background: radial-gradient(40% 35% at 78% 28%, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%), radial-gradient(35% 30% at 12% 85%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%); animation: bhDrift 18s ease-in-out infinite alternate; }
+@keyframes bhDrift { to { transform: translate(-6%, 4%) scale(1.08); } }
+.bh-mono { position: absolute; z-index: -1; right: -.06em; top: 50%; transform: translateY(-58%); font: 700 clamp(14rem, 62vw, 40rem)/.8 var(--display); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--accent) 38%, transparent); opacity: .7; pointer-events: none; user-select: none; animation: bhUp 1.4s .1s cubic-bezier(.2,.7,.2,1) both; }
+body.brand .bhero.type .bh-biz { max-width: 11ch; font-size: clamp(3.2rem, 14vw, 9rem); line-height: .92; overflow-wrap: anywhere; }
+.bh-tag { margin: 1.1rem 0 0; font: 500 clamp(1.5rem, 5vw, 2.6rem)/1.15 var(--display); color: rgba(244,239,230,.92); animation: bhUp 1s .18s cubic-bezier(.2,.7,.2,1) both; }
+.bh-tag em { color: var(--accent-ink); }
+body.brand .bhero.type::before { content: ""; position: absolute; inset: 0; z-index: -1; background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 56px 56px; mask-image: radial-gradient(ellipse at 70% 30%, #000 20%, transparent 75%); -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 20%, transparent 75%); }
+@media (prefers-reduced-motion: reduce) { .bh-glow { animation: none; } }
+{% endif %}

@@ -102,6 +102,8 @@ def apply(brand, services, copy, preview, group=None):
         return
     brand["clean"] = True
     set_by_hand = (copy.get("photos") or {})
+    if copy.get("hero") == "type":   # no photo up top at all: their name, big, in their colours
+        brand["type_hero"], brand["label"] = True, ""
     if group in CLEAN:
         hero, about = CLEAN[group]
         if not set_by_hand.get("wide"):

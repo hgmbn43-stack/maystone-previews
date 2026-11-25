@@ -572,16 +572,23 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
 <main id="top">
   {% if brand %}
-  <section class="bhero{{ ' stock' if brand.clean and brand.hero_stock }}{{ ' g-wait' if brand.clean and brand.hero_stock and places_key and place_id }}" aria-label="{{ biz.name }}">
+  <section class="bhero{{ ' type' if brand.type_hero }}{{ ' stock' if brand.clean and brand.hero_stock }}{{ ' g-wait' if brand.clean and brand.hero_stock and places_key and place_id }}" aria-label="{{ biz.name }}">
+    {% if brand.type_hero %}
+    <span class="bh-mono" aria-hidden="true">{{ biz.initials }}</span>
+    <span class="bh-glow" aria-hidden="true"></span>
+    {% else %}
     <picture>
       <source media="(min-aspect-ratio: 1/1)" srcset="{{ brand.wide }}">
       <img src="{{ brand.tall }}" alt="{{ brand.alt }}" fetchpriority="high" decoding="async">
     </picture>
     <div class="bh-shade"></div>
     {% if brand.label %}<span class="ph-tag film-tag">{{ brand.label }}</span>{% endif %}
+    {% endif %}
     <div class="wrap bh-in">
       <h1 class="bh-name"><i></i>{{ t.kicker }} in {{ biz.town }}</h1>
-      <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>
+      {% if brand.type_hero %}<p class="bh-h bh-biz">{{ biz.name }}</p>
+      <p class="bh-tag">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>{% else %}
+      <p class="bh-h">{{ brand.headline[0] }} <em>{{ brand.headline[1] }}</em></p>{% endif %}
       <p class="bh-sub">{{ brand.sub }}</p>
       <div class="bh-acts">
         <a class="btn btn-accent js-quote" href="#quote">{{ 'Book a table' if t.venue else 'Book a free quote' }} <span aria-hidden="true">&rarr;</span></a>
