@@ -440,3 +440,66 @@ html, body { overflow-x: clip; }
 /* Film captions stay readable over the footage */
 body.brand .beat .in { text-shadow: 0 2px 18px rgba(0,0,0,.55); }
 body.brand .beat::before { content: ""; position: absolute; inset: -40% 0; background: radial-gradient(ellipse at 25% 50%, rgba(0,0,0,.5), transparent 65%); z-index: -1; pointer-events: none; }
+
+/* ===== Three looks (25 Nov 2026): lay-a signature serif, lay-b bold condensed, lay-c light editorial ===== */
+body.brand.lay-b main, body.brand.lay-c main { display: flex; flex-direction: column; }
+body.brand.lay-b main > *, body.brand.lay-c main > * { order: 5; }
+body.brand main > .bhero, body.brand main > .bmarquee { order: 0 !important; }
+
+/* --- B: bold condensed sans, square edges, proof first --- */
+@font-face { font-family: "Archivo"; font-style: normal; font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; src: url("assets/archivo.woff2") format("woff2"); }
+body.brand.lay-b { --display: "Archivo", "Arial Narrow", Arial, sans-serif; --radius: 0px; }
+body.brand.lay-b main > #about { order: 1; }
+body.brand.lay-b main > #reviews { order: 2; }
+body.brand.lay-b :is(h1, h2, h3, .bh-h, .bh-stats b, .jobs.rows h3, .quote-band .phone, .top .mark strong) { font-family: var(--display); font-weight: 800; font-stretch: 78%; text-transform: uppercase; letter-spacing: -.01em; }
+body.brand.lay-b h2 { font-size: clamp(2.3rem, 7.4vw, 4.4rem); line-height: .94; }
+body.brand.lay-b .bh-h { font-size: clamp(3.3rem, 15vw, 8.6rem); line-height: .88; max-width: 10ch; }
+body.brand.lay-b :is(h2, .bh-h, .hook) em { font-style: normal; color: var(--accent-ink); }
+body.brand.lay-b .jobs.rows h3 { font-size: clamp(1.4rem, 4.4vw, 2rem); }
+body.brand.lay-b .top .mark strong { letter-spacing: .02em; font-size: 1.15rem; }
+body.brand.lay-b :is(.btn, .chips span, .ph-tag, input, select, textarea, .tile-img, .review-card, .cred) { border-radius: 0 !important; }
+body.brand.lay-b .bh-name i { height: 4px; width: 2rem; }
+body.brand.lay-b .bhero::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; background: var(--accent); }
+body.brand.lay-b .bh-stats b { font-size: clamp(1.6rem, 5.4vw, 2.3rem); }
+body.brand.lay-b .kicker::before { height: 4px; width: 1.6rem; }
+
+/* --- C: light editorial serif, split hero, rounded photos, services first --- */
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 100 900; font-display: swap; src: url("assets/fraunces.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-style: italic; font-weight: 100 900; font-display: swap; src: url("assets/fraunces-i.woff2") format("woff2"); }
+body.brand.lay-c { --display: "Fraunces", Georgia, serif; --radius: 14px; }
+body.brand.lay-c main > #services { order: 1; }
+body.brand.lay-c :is(h1, h2, h3, .bh-h, .bh-stats b, .jobs.rows h3, .quote-band .phone) { font-family: var(--display); font-weight: 560; letter-spacing: -.025em; }
+body.brand.lay-c h2 { font-size: clamp(2.3rem, 6.6vw, 4.2rem); line-height: 1.04; }
+body.brand.lay-c :is(h2, .bh-h) em { font-weight: 400; }
+body.brand.lay-c .top .mark strong { font-family: var(--display); font-weight: 600; text-transform: none; letter-spacing: -.01em; font-size: 1.3rem; }
+body.brand.lay-c #services, body.brand.lay-c #reviews, body.brand.lay-c #work {
+  --ground: {{ brand.palette.bone }}; --paper: {{ brand.palette.bone_2 }}; --card: {{ brand.palette.bone_card }};
+  --ink: {{ brand.palette.bone_ink }}; --ink-soft: {{ brand.palette.bone_soft }}; --line: {{ brand.palette.bone_line }};
+  --accent-ink: {{ brand.palette.accent_deep }}; --brand-text: {{ brand.palette.accent_deep }};
+  background: var(--ground); color: var(--ink); color-scheme: light;
+}
+body.brand.lay-c #reviews { background: var(--paper); }
+body.brand.lay-c #about { --ground: {{ brand.palette.ground }}; --paper: {{ brand.palette.paper }}; --card: {{ brand.palette.card }};
+  --ink: {{ brand.palette.ink }}; --ink-soft: {{ brand.palette.ink_soft }}; --line: {{ brand.palette.line }};
+  --accent-ink: {{ brand.palette.accent_ink }}; --brand-text: {{ brand.palette.accent_ink }}; color-scheme: dark; }
+body.brand.lay-c :is(.tile-img, .review-card, .jstory img, #about img, .gal img, .work img) { border-radius: var(--radius); overflow: hidden; }
+body.brand.lay-c .bhero { background: {{ brand.palette.ground }}; }
+@media (max-width: 899px) {
+  body.brand.lay-c .bhero { min-height: 0; grid-template-rows: 54svh auto auto; }
+  body.brand.lay-c .bhero picture { position: relative; grid-row: 1; inset: auto; height: 54svh; }
+  body.brand.lay-c .bhero picture img { position: absolute; border-radius: 0 0 22px 22px; }
+  body.brand.lay-c .bh-shade { background: linear-gradient(180deg, rgba(12,14,16,.55), transparent 30%); height: 54svh; }
+  body.brand.lay-c .bh-in { grid-row: 2; padding-top: 1.8rem; }
+  body.brand.lay-c .bh-stats { grid-row: 3; }
+  body.brand.lay-c .bh-h { font-size: clamp(2.8rem, 12vw, 4.4rem); }
+  body.brand.lay-c .bhero .film-tag { top: auto; bottom: auto; top: calc(54svh - 2.2rem); }
+}
+@media (min-width: 900px) {
+  body.brand.lay-c .bhero picture { left: 46%; width: auto; }
+  body.brand.lay-c .bhero img { border-radius: 0 0 0 28px; }
+  body.brand.lay-c .bh-shade { background: linear-gradient(90deg, {{ brand.palette.ground }} 46%, transparent 46%); }
+  body.brand.lay-c .bh-in, body.brand.lay-c .bh-stats { padding-right: 56%; }
+  body.brand.lay-c .bh-h { font-size: clamp(3.2rem, 6.4vw, 6.2rem); }
+  body.brand.lay-c .bh-scroll { display: none; }
+}
+@media (max-width: 700px) { body.brand.lay-b .top .mark strong { font-size: .98rem; max-width: 50vw; } }

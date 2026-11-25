@@ -80,6 +80,23 @@ def tidy_name(name):
     return name
 
 
+LAYOUTS = ("a", "b", "c")
+KEEP_A = {"L1117", "L1530", "W002"}   # looks Harvey has already approved (23 Nov 2026)
+
+
+def layout_for(lead_id, details):
+    """Three looks so owners comparing notes see different sites (25 Nov 2026):
+    a = signature serif (Garrard), b = bold condensed sans, c = light editorial serif.
+    details.copy.layout overrides; otherwise a stable pick from the lead ID."""
+    c = (details or {}).get("copy") if isinstance((details or {}).get("copy"), dict) else {}
+    if c.get("layout") in LAYOUTS:
+        return c["layout"]
+    if lead_id in KEEP_A:
+        return "a"
+    n = int(re.sub(r"\D", "", lead_id) or 0)
+    return LAYOUTS[n % 3]
+
+
 def short_name(name):
     """The name as it fits a phone header: 'MosaicMe Tiling and Refurbishment' -> 'MosaicMe'."""
     if len(name) <= 20:
@@ -356,7 +373,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     logo = next((p for p in own_files if p.stem.lower() == "logo"), None)
 
     biz = {
-        "name": name, "short": ((details.get("copy") or {}).get("short_name") if isinstance(details.get("copy"), dict) else None) or short_name(name), "initials": initials(name), "town": town, "town_longest": max(len(w) for w in re.split(r"[-\s]", town)), "phone": phone, "tel": tel_link(phone),
+        "layout": layout_for(lead_id, details), "name": name, "short": ((details.get("copy") or {}).get("short_name") if isinstance(details.get("copy"), dict) else None) or short_name(name), "initials": initials(name), "town": town, "town_longest": max(len(w) for w in re.split(r"[-\s]", town)), "phone": phone, "tel": tel_link(phone),
         "whatsapp": whatsapp_link(phone), "reviews": reviews,
         "rating_str": f"{rating:.1f}" if rating is not None else "",
         "rating_pct": round(rating / 5 * 100) if rating is not None else 0,
