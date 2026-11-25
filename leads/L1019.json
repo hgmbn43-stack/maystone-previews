@@ -6,5 +6,116 @@
  "Phone": "07425 998631",
  "Google rating": "5",
  "Google reviews": "3",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJaYNvdrZz30cRmX52DMBplM8"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJaYNvdrZz30cRmX52DMBplM8",
+ "details": {
+  "copy": {
+   "lede": "Bourne Roofing and General Maintenance take on cedar shingle roofs, flat roofs, decorating and general maintenance around Eastbourne, from a single roof repair to a whole townhouse.",
+   "about": [
+    "Roofs done right,",
+    "the rest sorted too."
+   ],
+   "about_alt": "A new cedar shingle roof with a hand-cut ridge, by Bourne Roofing",
+   "photos": {
+    "about": "cedar-shingles.jpg",
+    "tiles": [
+     "cedar-ridge.jpg",
+     "flat-roof-deck.jpg",
+     "flat-roof-boarded.jpg",
+     "cedar-shingles.jpg",
+     "decorating.jpg",
+     "townhouse.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Roof repairs",
+     "blurb": "Leaks, slipped tiles and damaged roofs repaired.",
+     "intro": "Found, fixed and weathertight.",
+     "includes": [
+      "Leaks",
+      "Slipped tiles",
+      "Ridges",
+      "Flashing"
+     ]
+    },
+    {
+     "title": "Flat roofs",
+     "blurb": "Flat roofs stripped, re-decked and covered.",
+     "intro": "New decks on sound timbers.",
+     "includes": [
+      "Strip-out",
+      "New decking",
+      "Felt and membranes",
+      "Edging"
+     ]
+    },
+    {
+     "title": "Garage and extension roofs",
+     "blurb": "Small flat roofs on garages and extensions.",
+     "intro": "Quick jobs done properly.",
+     "includes": [
+      "Garage roofs",
+      "Extensions",
+      "Porches",
+      "Fascias"
+     ]
+    },
+    {
+     "title": "Cedar shingles",
+     "blurb": "Cedar shingle roofs laid and ridged by hand.",
+     "intro": "A roof that looks as good as it works.",
+     "includes": [
+      "Cedar shingles",
+      "Hand-cut ridges",
+      "Battens",
+      "Membranes"
+     ]
+    },
+    {
+     "title": "Decorating",
+     "blurb": "Inside painting and decorating.",
+     "intro": "Fresh, tidy rooms.",
+     "includes": [
+      "Walls and ceilings",
+      "Feature walls",
+      "Woodwork",
+      "Prep"
+     ]
+    },
+    {
+     "title": "General maintenance",
+     "blurb": "Ongoing maintenance for houses and flats.",
+     "intro": "One call for the jobs that build up.",
+     "includes": [
+      "Repairs",
+      "Exteriors",
+      "Landlord jobs",
+      "Odd jobs"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "cedar-shingles.jpg",
+     "Cedar shingle roof"
+    ],
+    [
+     "flat-roof-deck.jpg",
+     "Flat roof being re-decked"
+    ],
+    [
+     "cedar-ridge.jpg",
+     "Hand-cut cedar ridge"
+    ],
+    [
+     "decorating.jpg",
+     "Room being decorated"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Eastbourne.",
+   "keep_film": true
+  },
+  "business": "Bourne Roofing and General Maintenance"
+ }
 }
