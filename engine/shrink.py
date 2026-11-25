@@ -5,7 +5,8 @@ Pages look exactly the same; only where files are stored changes:
   1. Fonts and photos that every preview carried its own copy of are stored once in p/_shared/f/<hash>.<ext>.
   2. Each page's inline styling is moved into p/_shared/css/<hash>.css files. The part every preview shares is
      stored once; the few lines that differ per preview (colours, film) go in their own small file.
-  3. Files no page refers to (library photos the template doesn't use) are dropped.
+  3. Files in assets/ or img/ that no page refers to (library photos the template doesn't use) are dropped.
+     Every other file (e.g. a preview's own film/ frames, loaded by script) is left exactly where it is.
 Files are named by their content, so a shared file is never edited: a change makes a new file.
 Writes p/_index.json (every preview folder) for the live checks.
 
@@ -88,7 +89,9 @@ def main():
                 if f.endswith(".html"):
                     pages.append(full)
                 else:
-                    files[posixpath.relpath(full, pdir).replace(os.sep, "/")] = full
+                    rel = posixpath.relpath(full, pdir).replace(os.sep, "/")
+                    if rel.startswith(("assets/", "img/")):   # anything else (e.g. a preview's own film/ frames) is left exactly where it is
+                        files[rel] = full
 
         def shared(rel):
             with open(files[rel], "rb") as fh:
@@ -126,6 +129,15 @@ def main():
                 return "<!--MS-CSS:%s-->" % k
 
             s = STYLE.sub(css_out, s)
+
+            # A CSS variable holding a photo in a style="" attribute (e.g. --qb-img: url('img/fb/x.jpg')) is read by the
+            # shared stylesheet, and browsers resolve it from there, so point it at the photo from _shared/css/.
+            def var_url(mm):
+                ref = mm.group(3)
+                if not re.match(r"(?:\.\./)*(?:assets|img)/", ref) or target(ref) not in files:
+                    return mm.group(0)
+                return mm.group(1) + mm.group(2) + posixpath.relpath(shared(target(ref)), "_shared/css") + mm.group(2) + ")"
+            s = re.sub(r'''(--[\w-]+\s*:\s*url\()(['"]?)([^'")]+)\2\)''', var_url, s)
             s = REF.sub(lambda mm: posixpath.relpath(shared(target(mm.group(1))), page_dir)
                         if target(mm.group(1)) in files else mm.group(1), s)
             with open(page, "w", encoding="utf-8") as fh:

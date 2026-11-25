@@ -26,6 +26,12 @@ def shot(browser, url):
     page.route("**/*", lambda r: r.continue_() if r.request.url.startswith("http://localhost:8765/") else r.abort())
     page.add_init_script(FREEZE)
     page.goto(url, wait_until="networkidle")
+    # Scroll through like a visitor so scroll-triggered photos load the same way on both versions.
+    h = page.evaluate("document.documentElement.scrollHeight")
+    for y in range(0, h, 400):
+        page.mouse.wheel(0, 400)
+        page.wait_for_timeout(60)
+    page.evaluate("window.scrollTo(0, 0)")
     page.evaluate("document.querySelectorAll('img[loading=\"lazy\"]').forEach(i=>{i.loading='eager'})")
     page.evaluate("Promise.race([new Promise(r=>setTimeout(r,6000)),Promise.all([...document.images].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r})))])")
     page.wait_for_timeout(2000)
