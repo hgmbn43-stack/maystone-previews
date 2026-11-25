@@ -6,5 +6,119 @@
  "Phone": "07984 741296",
  "Google rating": "5",
  "Google reviews": "3",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJT7lckIp630cRTGqr5i0lTXQ"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJT7lckIp630cRTGqr5i0lTXQ",
+ "details": {
+  "copy": {
+   "lede": "Simon and the team at SPM Landscapes build patios, brick walls and steps, fencing and gates, pergolas and oak-framed buildings around Polegate and Eastbourne. Customers call Simon reliable, hardworking and very experienced.",
+   "about": [
+    "Built by hand,",
+    "made to last."
+   ],
+   "about_alt": "Oak garages with ledged doors and waney-edge cladding, built by SPM Landscapes",
+   "photos": {
+    "about": "oak-garage.jpg",
+    "tiles": [
+     "sandstone-patio.jpg",
+     "gate-and-setts.jpg",
+     "brick-terrace.jpg",
+     "brick-steps.jpg",
+     "pergola-sleepers.jpg",
+     "oak-garage.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Patios and paving",
+     "blurb": "Sandstone patios, block paving and granite setts.",
+     "intro": "Laid on proper bases with the right falls.",
+     "includes": [
+      "Indian sandstone",
+      "Block paving",
+      "Granite setts",
+      "Gravel"
+     ]
+    },
+    {
+     "title": "Fencing and gates",
+     "blurb": "Close-board fencing, hazel hurdles and five-bar gates.",
+     "intro": "Straight lines and solid posts.",
+     "includes": [
+      "Close-board fencing",
+      "Hazel hurdles",
+      "Five-bar gates",
+      "Back gates"
+     ]
+    },
+    {
+     "title": "Brickwork and walls",
+     "blurb": "Garden walls, terraces and repointing.",
+     "intro": "Traditional brickwork, neatly pointed.",
+     "includes": [
+      "Garden walls",
+      "Raised terraces",
+      "Repointing",
+      "Copings"
+     ]
+    },
+    {
+     "title": "Steps",
+     "blurb": "Brick and stone steps on sloping gardens.",
+     "intro": "Safe, solid steps that suit the garden.",
+     "includes": [
+      "Brick steps",
+      "Stone steps",
+      "Edging",
+      "Planting pockets"
+     ]
+    },
+    {
+     "title": "Pergolas and raised beds",
+     "blurb": "Timber pergolas, decks and sleeper raised beds.",
+     "intro": "Structure and somewhere to sit.",
+     "includes": [
+      "Pergolas",
+      "Decking",
+      "Sleeper beds",
+      "Turf"
+     ]
+    },
+    {
+     "title": "Oak buildings",
+     "blurb": "Oak-framed garages and outbuildings with ledged doors.",
+     "intro": "Built the traditional way.",
+     "includes": [
+      "Oak garages",
+      "Ledged doors",
+      "Waney-edge cladding",
+      "Outbuildings"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "hazel-hurdles.jpg",
+     "Hazel hurdle screens on brick"
+    ],
+    [
+     "brick-terrace.jpg",
+     "Brick terrace and walls"
+    ],
+    [
+     "brick-steps.jpg",
+     "Brick steps up a bank"
+    ],
+    [
+     "gate-and-setts.jpg",
+     "Five-bar gate and setts"
+    ],
+    [
+     "pergola-sleepers.jpg",
+     "Pergola, deck and sleeper beds"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Polegate.",
+   "keep_film": true
+  }
+ }
 }
