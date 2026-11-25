@@ -6,5 +6,51 @@
  "Phone": "07516 470417",
  "Google rating": "5",
  "Google reviews": "6",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJawY1-iPK2AMRr33Qt0QWVUc"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJawY1-iPK2AMRr33Qt0QWVUc",
+ "details": {
+  "copy": {
+   "lede": "Rowan runs Enpulse Electrical around Horsham, from fuse board upgrades and EV chargers to kitchen lighting, garage supplies, EICRs and even a community defibrillator. Customers say he's courteous, knowledgeable and they keep coming back.",
+   "about": [
+    "Rowan takes care",
+    "over every job."
+   ],
+   "about_alt": "The Enpulse Electrical van",
+   "photos": {
+    "about": "kitchen-lighting.jpg",
+    "tiles": [
+     "garage-sockets.jpg",
+     "before-after.jpg",
+     "workshop-board.jpg",
+     "garage-board.jpg",
+     "kitchen-lighting.jpg",
+     "ev-charger.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "before-after.jpg",
+     "Old fuse board swapped for a new consumer unit"
+    ],
+    [
+     "ev-charger.jpg",
+     "EV charger by the front door"
+    ],
+    [
+     "defibrillator.jpg",
+     "Community defibrillator cabinet"
+    ],
+    [
+     "garage-board.jpg",
+     "Garage supply and sockets"
+    ],
+    [
+     "van.jpg",
+     "The Enpulse van"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Horsham.",
+   "keep_film": true
+  }
+ }
 }

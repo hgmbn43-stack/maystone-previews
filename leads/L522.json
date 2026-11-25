@@ -6,5 +6,14 @@
  "Phone": "07973 164062",
  "Google rating": "4",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJicYPiV-MdUgR-PDxIg-DQGU"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJicYPiV-MdUgR-PDxIg-DQGU",
+ "details": {
+  "copy": {
+   "lede": "Pete at Gasson Gas Ltd is a gas engineer and plumber around Burgess Hill with years in the trade. Customers mention new combi boilers fitted to a high standard, practical advice and issues sorted quickly.",
+   "about": [
+    "Pete knows boilers",
+    "inside out."
+   ]
+  }
+ }
 }

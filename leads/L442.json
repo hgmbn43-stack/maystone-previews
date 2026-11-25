@@ -6,5 +6,15 @@
  "Phone": "07722 511478",
  "Google rating": "5",
  "Google reviews": "8",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ40gLu_vxdUgRsyFO0yVM2fM"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ40gLu_vxdUgRsyFO0yVM2fM",
+ "details": {
+  "copy": {
+   "lede": "Lee Petticrew is a plasterer around Crawley who takes real pride in his work. Customers have had whole houses of ceilings skimmed and walls re-plastered, and say he's quick to quote, reliable, friendly and leaves everything clean.",
+   "about": [
+    "Lee's walls",
+    "speak for themselves."
+   ]
+  },
+  "business": "Petticrew Plastering"
+ }
 }
