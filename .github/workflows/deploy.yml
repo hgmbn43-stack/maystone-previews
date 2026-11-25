@@ -3,9 +3,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      ref:
+        description: "Undo: put back this version (e.g. last-good). Leave empty for a normal build."
+        required: false
+        default: ""
 permissions:
-  contents: read
-  actions: read
+  contents: write   # to move the "last-good" tag after a deploy passes its live check
+  actions: write    # to start the automatic undo
+
   pages: write
   id-token: write
 concurrency:
@@ -19,15 +25,45 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install jinja2
+      - run: pip install jinja2 pillow playwright
       - run: python engine/build_all.py
       - name: Publish customers' own-domain sites
         run: python engine/publish_clients.py
         env:
           CLIENT_TOKEN: ${{ secrets.CLIENT_SITES_TOKEN }}
+      # 25 Nov 2026: previews share their fonts, photos and styling (engine/shrink.py) so ~3,000 fit under
+      # GitHub's 1 GB cap. Three checks run before anything goes live; if one fails, nothing is deployed and
+      # the current site stays up.
+      - name: Shrink previews
+        run: cp -r p p_orig && python engine/shrink.py p
+      - name: "Safety check 1: every page finds every shared file"
+        run: python engine/check_site.py p
+      - name: "Safety check 2: shrunk previews look the same as the originals"
+        run: |
+          python -m playwright install --with-deps chromium > /dev/null
+          (python -m http.server 8765 > /dev/null 2>&1 &)
+          sleep 2
+          python engine/visual_check.py 5
+      - name: "Safety check 3: size alarm (GitHub's cap is 1 GB)"
+        id: size
+        run: |
+          rm -rf p_orig
+          mb=$(du -sm --exclude=.git --exclude=.github . | cut -f1)
+          echo "Site size: ${mb} MB"
+          echo "mb=$mb" >> "$GITHUB_OUTPUT"
+          if [ "$mb" -gt 950 ]; then echo "::error::Site is ${mb} MB, too close to GitHub's 1 GB cap. Not deploying."; exit 1; fi
+          if [ "$mb" -gt 800 ]; then echo "::warning::Site is ${mb} MB (alarm at 800 MB). Time to plan bigger hosting."; fi
+      - name: Note which leads changed (checked first on the live site)
+        id: changed
+        run: |
+          ids=$( (git diff --name-only HEAD~1 HEAD -- leads 2>/dev/null || true) | sed -n 's#^leads/\([^/.]*\).*#\1#p' | sort -u | head -40 | paste -sd, - || true)
+          echo "ids=$ids" >> "$GITHUB_OUTPUT"
       - run: rm -rf .git .github
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
@@ -59,3 +95,27 @@ jobs:
         uses: actions/deploy-pages@v4
         with:
           timeout: 600000
+      # Safety check 4 (after going live): open previews on the real site and check every shared file loads.
+      # Pass -> this version is marked "last-good". Fail -> the site is put back to the last good version
+      # automatically and this run fails, so GitHub emails the failure.
+      - uses: actions/checkout@v4
+        if: always()
+        with:
+          path: repo
+          fetch-depth: 1
+      - name: "Safety check 4: live check"
+        id: live
+        run: sleep 30 && python repo/engine/check_site.py --live "https://hgmbn43-stack.github.io/maystone-previews/" 15 "${{ steps.changed.outputs.ids }}"
+      - name: Mark this version as last good
+        if: success() && inputs.ref == ''
+        run: cd repo && git tag -f last-good ${{ github.sha }} && git push -f origin last-good
+      - name: Undo automatically (put back the last good version)
+        if: failure() && steps.live.outcome == 'failure' && inputs.ref == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo "::error::Live check failed after this deploy. Putting the last good version back."
+          gh workflow run deploy.yml -R ${{ github.repository }} --ref main -f ref=last-good
+      - name: "Size alarm: over 800 MB"
+        if: success() && steps.size.outputs.mb > 800
+        run: echo "::error::Site is ${{ steps.size.outputs.mb }} MB. Plan bigger hosting before 1 GB." && exit 1
