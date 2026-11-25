@@ -1236,6 +1236,8 @@ def _light(accent_deep):
     return {"bone": "#f0ebe2", "bone_2": "#e8e2d6", "bone_card": "#f8f5ef", "bone_ink": "#16191c",
             "bone_soft": "#5b5850", "bone_line": "#d3ccbd", "accent_deep": accent_deep}
 
+ST = "https://hgmbn43-stack.github.io/maystone-previews/stock/"   # our own example photos
+
 BRAND = {
     "roofing": {
         "hero": "roofing/slate-01",
@@ -1328,15 +1330,15 @@ BRAND = {
         "process": ('Three steps to', 'more space.'),
     },
     "plastering": {
-        "alt": "A plasterer working on a ceiling",
+        "alt": "A plasterer skimming a wall in a Victorian terrace",
         "headline": ('Walls as smooth as', 'glass.'),
         "sub": "Skimming, re-plastering, rendering and ceilings across {town} and nearby. A clear price before we start, and a tidy job when we're done.",
         # Charcoal and plaster pink
         "palette": _pal("#1a1918", "#d39a86", "#e2b2a1"),
         "light": _light("#94513a"),
-        "photos": { "wide": X + "6473982/pexels-photo-6473982.jpeg" + PX_WIDE, "tall": X + "6473982/pexels-photo-6473982.jpeg" + PX_TALL, "about": X + "6474308/pexels-photo-6474308.jpeg" + PX_ABOUT,
-                   "tiles": [X + "5691622/pexels-photo-5691622.jpeg" + PX_SQ, X + "5691672/pexels-photo-5691672.jpeg" + PX_SQ, X + "10383588/pexels-photo-10383588.jpeg" + PX_SQ,
-                             X + "5493673/pexels-photo-5493673.jpeg" + PX_SQ, X + "6474343/pexels-photo-6474343.jpeg" + PX_SQ, U + "1543060747-53cb56d6b105" + SQ]},
+        "photos": {   # British example set (25 Nov 2026), hosted in this repo; still labelled "Example photo"
+            "wide": ST + "plastering/wide.webp", "tall": ST + "plastering/tall.webp", "about": ST + "plastering/about.webp",
+            "tiles": [ST + "plastering/" + x + ".webp" for x in ("skim", "replaster", "render", "board", "ceiling", "coving")]},
         "story_kicker": "Start to finish",
         "story": ('Watch a tired room', 'turn smooth.'),
         "about": ('A local plasterer who', 'leaves it clean.'),
