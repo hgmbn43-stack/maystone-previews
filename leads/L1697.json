@@ -1,10 +1,282 @@
 {
  "Lead ID": "L1697",
  "Business": "Tring Handyman & General Trade",
- "Trade": "Plumber",
+ "Trade": "Handyman",
  "Town": "Tring",
  "Phone": "07521 971688",
  "Google rating": "5",
  "Google reviews": "6",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJi8--jNNbdkgR5-hqX0VBhuc"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJi8--jNNbdkgR5-hqX0VBhuc",
+ "details": {
+  "business": "Tring Handyman & General Trade",
+  "copy": {
+   "headline": [
+    "One call,",
+    "every trade sorted."
+   ],
+   "sub": "Plumbing, electrics, plastering and decorating across Tring and nearby. Over 40 years in the trade, and no job too small.",
+   "kicker": "Handyman & general trade",
+   "stats": [
+    [
+     "40+ yrs",
+     "in the trade"
+    ],
+    [
+     "4 trades",
+     "one man"
+    ]
+   ],
+   "about": [
+    "Plumber, plasterer,",
+    "electrician, decorator."
+   ],
+   "about_alt": "A finished lounge with new downlights and a staircase, decorated by Tring Handyman & General Trade",
+   "lede": "Tracey runs T.P.B, Tring Handyman & General Trade, and has been in the trade for over 40 years. He's a plumber, plasterer, electrician and decorator in one, so a bathroom, a new wall or a list of small jobs gets done by the same person from start to finish. Some customers have used him for around fifteen years, and they say the same thing: reliable, on time, a competitive price and a high standard.",
+   "areas": [
+    "Berkhamsted",
+    "Aston Clinton",
+    "Wendover",
+    "Aylesbury",
+    "Hemel Hempstead"
+   ],
+   "postcodes": {
+    "Tring": [
+     "HP23"
+    ],
+    "Berkhamsted": [
+     "HP4"
+    ],
+    "Aston Clinton": [
+     "HP22"
+    ],
+    "Wendover": [
+     "HP22"
+    ],
+    "Aylesbury": [
+     "HP19",
+     "HP20",
+     "HP21"
+    ],
+    "Hemel Hempstead": [
+     "HP1",
+     "HP2",
+     "HP3"
+    ]
+   },
+   "services_title": "What Tracey does",
+   "services_intro": "Four trades under one roof. Big jobs, small jobs and everything in between.",
+   "services": [
+    {
+     "title": "Bathroom refits",
+     "blurb": "Old bathrooms stripped out and new ones fitted: suite, shower, boarding, plastering and decorating.",
+     "low": 4000,
+     "high": 9000,
+     "intro": "One tradesman does the plumbing, walls, electrics and finish, so nobody is waiting on anyone else.",
+     "includes": [
+      "Strip-out and first fix",
+      "Baths, showers, toilets and basins",
+      "Shower wall panels",
+      "Plastering and decorating to finish"
+     ]
+    },
+    {
+     "title": "Plumbing",
+     "blurb": "Leaks, taps, toilets, basins and pipework, fixed or fitted properly.",
+     "low": 60,
+     "high": 250,
+     "intro": "From a dripping tap to new pipework for a whole room.",
+     "includes": [
+      "Leaks and drips",
+      "Taps, toilets and basins",
+      "New pipework",
+      "Concealed cisterns and vanity units"
+     ]
+    },
+    {
+     "title": "Plastering and rendering",
+     "blurb": "Skimming, patching, new walls plastered and outside walls rendered.",
+     "low": 250,
+     "high": 900,
+     "intro": "TPB started out as plasterers, so the walls are the speciality.",
+     "includes": [
+      "Skimming walls and ceilings",
+      "Patch and damp-damage repairs",
+      "Plastering new walls and openings",
+      "External rendering"
+     ]
+    },
+    {
+     "title": "Electrics and PAT testing",
+     "blurb": "Sockets, switches, lights and ceiling fans fitted, plus PAT testing.",
+     "low": 80,
+     "high": 300,
+     "intro": "Small electrical jobs done neatly, alongside the rest of the work.",
+     "includes": [
+      "Sockets and switches",
+      "Downlights and ceiling lights",
+      "Ceiling fans and extractors",
+      "PAT testing"
+     ]
+    },
+    {
+     "title": "Stud walls and alterations",
+     "blurb": "New stud walls, openings and partitions, framed, boarded and plastered.",
+     "low": 600,
+     "high": 2000,
+     "intro": "Split a room, close off a space or open one up.",
+     "includes": [
+      "Timber stud walls",
+      "Boarding and plastering",
+      "Openings and partitions",
+      "Cables run in as it goes up"
+     ]
+    },
+    {
+     "title": "Painting and decorating",
+     "blurb": "Rooms painted top to bottom with clean lines and a tidy finish.",
+     "low": 200,
+     "high": 600,
+     "unit": "a room",
+     "intro": "The finishing touch on his own work, or a fresh coat on its own.",
+     "includes": [
+      "Walls and ceilings",
+      "Woodwork and skirting",
+      "Prep and filling",
+      "Single rooms or whole houses"
+     ]
+    }
+   ],
+   "faqs": [
+    [
+     "What trades do you cover?",
+     "Plumbing, electrics, plastering and decorating, plus general jobs like stud walls. One person for the whole job."
+    ],
+    [
+     "Is no job really too small?",
+     "No job too small. A dripping tap, one socket or a list of odd jobs is fine."
+    ],
+    [
+     "Can you do a whole bathroom?",
+     "Yes. Strip-out, plumbing, boarding, plastering, electrics and decorating, all by the same person."
+    ],
+    [
+     "Do you do PAT testing?",
+     "Yes. Call to arrange a visit."
+    ],
+    [
+     "Do you charge by the hour or by the job?",
+     "Small jobs are often charged by the hour or half day. Bigger jobs get a price for the whole thing before work starts."
+    ],
+    [
+     "Where do you cover?",
+     "Tring and the towns around it. Call to check if you're further out."
+    ]
+   ],
+   "reviews": [
+    [
+     "I found Tracey to be experienced and deeply knowledgeable across plumbing and electrics. He's responsive, on time, and really personable and wants to genuinely sort a problem properly. I think in today's world where many contractors don't even respond, aren't communicative, late or tricky, people like Tracey are a real rarity! Thank you so much.",
+     "B Gordon",
+     "Google"
+    ],
+    [
+     "I've been using Tracey regularly for probably around fifteen years. He is reliable and always offers a competitive price and works to a high standard. I wholeheartedly recommend him",
+     "Peter Richards",
+     "Google"
+    ],
+    [
+     "Have used TPB plasterer for many years. Really reliable and good quality workmanship",
+     "Paul Hammersley",
+     "Google"
+    ]
+   ],
+   "palette": {
+    "ground": "#10162e",
+    "paper": "#141b36",
+    "card": "#1b2342",
+    "ink": "#ece7df",
+    "ink_soft": "#a3a8bd",
+    "line": "#2a3354",
+    "accent": "#4fc3a1",
+    "accent_ink": "#6fd6b5",
+    "brand": "#4fc3a1",
+    "brand_text": "#6fd6b5",
+    "accent_deep": "#1b6b55"
+   },
+   "keep_film": true,
+   "photos": {
+    "about": "stairs-lounge.jpg",
+    "tiles": [
+     "marble-shower.jpg",
+     "basin.jpg",
+     "rendered-steps.jpg",
+     "ceiling-fan-light.jpg",
+     "stud-wall.jpg",
+     "decorated-bedroom.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "How a bathroom comes together",
+    "title": "Stripped back,",
+    "em": "built back better.",
+    "steps": [
+     {
+      "photo": "bathroom-before.jpg",
+      "title": "Before",
+      "text": "Old tiles, old pipework and floorboards up. Everything comes out."
+     },
+     {
+      "photo": "first-fix.jpg",
+      "title": "First fix",
+      "text": "New studwork and copper run for the taps, before the walls are boarded."
+     },
+     {
+      "photo": "bath-fitted.jpg",
+      "title": "Bath in",
+      "text": "Bath fitted, taps on and boarding going up around it."
+     },
+     {
+      "photo": "bathroom-after.jpg",
+      "title": "Finished",
+      "text": "New suite, fresh walls and a new floor. Same person did the lot."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "fresh-plaster.jpg",
+     "Wall opened up and freshly plastered"
+    ],
+    [
+     "sockets-plaster.jpg",
+     "New sockets on fresh plaster"
+    ],
+    [
+     "vanity-unit.jpg",
+     "Vanity unit fitted"
+    ],
+    [
+     "new-toilet.jpg",
+     "New close-coupled toilet"
+    ],
+    [
+     "concealed-cistern.jpg",
+     "Concealed cistern with a granite top"
+    ],
+    [
+     "shower-room-lights.jpg",
+     "Shower room with downlights and extractor"
+    ],
+    [
+     "painted-lounge.jpg",
+     "Lounge freshly painted"
+    ],
+    [
+     "marble-shower.jpg",
+     "Marble-effect shower panels"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Real jobs by Tracey around Tring."
+  }
+ }
 }
