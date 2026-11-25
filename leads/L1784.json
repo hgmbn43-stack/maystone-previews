@@ -2,9 +2,55 @@
  "Lead ID": "L1784",
  "Business": "ML Garden Design",
  "Trade": "Gardener",
- "Town": "",
+ "Town": "Radlett",
  "Phone": "07949 432843",
  "Google rating": "5",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJEfIeKB0rS4QRjTYQ54k9wmo"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJEfIeKB0rS4QRjTYQ54k9wmo",
+ "details": {
+  "copy": {
+   "lede": "Maggie runs ML Garden Design, designing new gardens and keeping existing ones looking their best. Customers mention her plant knowledge, her eye for detail and that she always leaves the garden neat and tidy.",
+   "about": [
+    "Designed with care,",
+    "kept beautifully."
+   ],
+   "about_alt": "A new garden with steel arches, white gravel and fresh lawn, designed by ML Garden Design",
+   "photos": {
+    "about": "steel-arches.jpg",
+    "tiles": [
+     "new-garden.jpg",
+     "feature-stone.jpg",
+     "front-lawn.jpg",
+     "topiary.jpg",
+     "lavender-stones.jpg",
+     "hedge.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "new-garden.jpg",
+     "New planting, gravel and feature stones"
+    ],
+    [
+     "steel-arches.jpg",
+     "Garden arches over a gravel path"
+    ],
+    [
+     "lavender-stones.jpg",
+     "Lavender and heuchera around a stone feature"
+    ],
+    [
+     "topiary.jpg",
+     "Topiary trimmed back into shape"
+    ],
+    [
+     "hedge.jpg",
+     "Hedge cut and shaped"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Gardens Maggie has designed and looks after.",
+   "keep_film": true
+  }
+ }
 }

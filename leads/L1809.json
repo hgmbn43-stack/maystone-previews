@@ -6,5 +6,69 @@
  "Phone": "07345 020532",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJmW99sU9xdkgRA4-dx68YnMU"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJmW99sU9xdkgRA4-dx68YnMU",
+ "details": {
+  "copy": {
+   "lede": "Desmond and his team at PeakGuard sort leaking roofs, flat roofs, fascias and guttering around Slough. Customers say it's no messing about: straight to the problem, fixed properly, at a fair price.",
+   "about": [
+    "Desmond and a team",
+    "who get it fixed."
+   ],
+   "about_alt": "A PeakGuard roofer working on a slate roof beside a dormer window",
+   "photos": {
+    "about": "on-the-roof.jpg",
+    "tiles": [
+     "slate-repair.jpg",
+     "new-membrane.jpg",
+     "flat-roof.jpg",
+     "strip-out.jpg",
+     "fascia-gutter.jpg",
+     "soffit.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "flat-roof-edge.jpg",
+     "Flat roof recoated and sealed at the edge"
+    ],
+    [
+     "slate-repair.jpg",
+     "Slate repair around a leaking valley"
+    ],
+    [
+     "strip-out.jpg",
+     "Old tiles stripped back to the rafters"
+    ],
+    [
+     "new-membrane.jpg",
+     "New breathable membrane and battens going on"
+    ],
+    [
+     "soffit.jpg",
+     "New soffit and fascia"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Slough.",
+   "reviews": [
+    [
+     "There's no other better way to define professionalism than this. No messing around straight to the point roof rectification of my long lasting leakage and moving pieces. Considerable price also. Will recommend to anyone looking for a true roofer Desmond and he’s team are fantastic cheers guys",
+     "Charles Ward",
+     "Google"
+    ],
+    [
+     "Top company to use from start to finish can only highly recommend and will use again👌",
+     "kevin kurz",
+     "Google"
+    ],
+    [
+     "Highly recommend very professional",
+     "Dermot Barrett",
+     "Google"
+    ]
+   ],
+   "keep_film": true
+  },
+  "business": "PeakGuard Roofing & Guttering"
+ }
 }

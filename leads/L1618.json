@@ -2,9 +2,82 @@
  "Lead ID": "L1618",
  "Business": "Laurens Paint & Decor",
  "Trade": "Painter",
- "Town": "",
+ "Town": "Sherborne",
  "Phone": "07808 710982",
  "Google rating": "5",
  "Google reviews": "7",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ3dfiSp9BckgRNANhguWwdP0"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ3dfiSp9BckgRNANhguWwdP0",
+ "details": {
+  "copy": {
+   "lede": "Lauren is a painter and decorator around Sherborne. Customers talk about her eye for detail, slick clean lines and help choosing colours, and plenty of them have her back for the next room.",
+   "about": [
+    "Sharp lines and",
+    "a tidy finish."
+   ],
+   "about_alt": "A cottage sitting room with an inglenook fireplace, decorated by Lauren",
+   "photos": {
+    "about": "inglenook.jpg",
+    "tiles": [
+     "loft-lounge.jpg",
+     "cottage-bedroom.jpg",
+     "after-green.jpg",
+     "beamed-bedroom.jpg",
+     "kitchen-grey.jpg",
+     "before-bedroom.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "Before and after",
+    "title": "Tired rooms,",
+    "em": "made fresh.",
+    "steps": [
+     {
+      "photo": "before-bedroom.jpg",
+      "title": "Before",
+      "text": "Patchy, stained walls and old paper half off."
+     },
+     {
+      "photo": "after-bedroom.jpg",
+      "title": "After",
+      "text": "Prepped, filled and painted. The same bedroom."
+     },
+     {
+      "photo": "before-green.jpg",
+      "title": "Before",
+      "text": "Old wallpaper stripped back to patchy walls."
+     },
+     {
+      "photo": "after-green.jpg",
+      "title": "After",
+      "text": "Walls made good and finished in a deep green. Same room again."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "loft-lounge.jpg",
+     "Loft lounge in soft grey"
+    ],
+    [
+     "inglenook.jpg",
+     "Cottage sitting room"
+    ],
+    [
+     "kitchen-pine.jpg",
+     "Kitchen and back hall"
+    ],
+    [
+     "kitchen-grey.jpg",
+     "Grey kitchen walls"
+    ],
+    [
+     "cottage-bedroom.jpg",
+     "Cottage bedroom"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Sherborne.",
+   "keep_film": true
+  }
+ }
 }

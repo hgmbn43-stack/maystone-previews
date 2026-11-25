@@ -6,5 +6,74 @@
  "Phone": "07799 326115",
  "Google rating": "5",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJVSoQi4wXdkgR8DWs_SjPwG4"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJVSoQi4wXdkgR8DWs_SjPwG4",
+ "details": {
+  "copy": {
+   "lede": "Adi and the team at AF Outdoor Works lay driveways, patios and paving, and put up fencing. Customers say they're professional, reliable and finish to a very high standard, with real attention to detail.",
+   "about": [
+    "Driveways and patios",
+    "laid to last."
+   ],
+   "about_alt": "A new porcelain patio and fresh lawn laid by AF Outdoor Works",
+   "photos": {
+    "about": "porcelain-patio.jpg",
+    "tiles": [
+     "block-driveway.jpg",
+     "herringbone.jpg",
+     "porcelain-patio.jpg",
+     "undercroft-paving.jpg",
+     "laying-blocks.jpg",
+     "sub-base.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "From a recent driveway",
+    "title": "Bare ground to",
+    "em": "block paving.",
+    "steps": [
+     {
+      "photo": "dig-out.jpg",
+      "title": "Dug out",
+      "text": "Old ground taken out and the base compacted with the plate."
+     },
+     {
+      "photo": "sub-base.jpg",
+      "title": "Sub-base and edging",
+      "text": "Kerbs set, membrane down and the sub-base laid to the right levels."
+     },
+     {
+      "photo": "laying-blocks.jpg",
+      "title": "Laying",
+      "text": "Blocks laid in herringbone on a screeded sand bed."
+     },
+     {
+      "photo": "block-driveway.jpg",
+      "title": "Finished",
+      "text": "Cut in, sanded and compacted. Same site as the first photo."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "porcelain-patio.jpg",
+     "Porcelain patio and new turf"
+    ],
+    [
+     "herringbone.jpg",
+     "Herringbone block paving going down"
+    ],
+    [
+     "undercroft-paving.jpg",
+     "Block paving under a new building"
+    ],
+    [
+     "block-driveway.jpg",
+     "Finished block-paved driveway"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Borehamwood.",
+   "keep_film": true
+  }
+ }
 }
