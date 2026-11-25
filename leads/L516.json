@@ -6,5 +6,136 @@
  "Phone": "07447 045428",
  "Google rating": "5",
  "Google reviews": "18",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJU5peWrlO9IYRpUeCfk-Yqzk"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJU5peWrlO9IYRpUeCfk-Yqzk",
+ "details": {
+  "copy": {
+   "lede": "BTCeramics tile bathrooms, shower rooms, wet rooms, cloakrooms and floors around Burgess Hill, from bold emerald and teal walls to herringbone wood-effect floors.",
+   "about": [
+    "Tiles set straight,",
+    "lines that line up."
+   ],
+   "about_alt": "A bathroom with a round mirror, fluted vanity and marble-effect tiles, tiled by BTCeramics",
+   "photos": {
+    "about": "brass-bathroom.jpg",
+    "tiles": [
+     "stone-bathroom.jpg",
+     "teal-wetroom.jpg",
+     "emerald-bath.jpg",
+     "herringbone-floor.jpg",
+     "green-cloakroom.jpg",
+     "lit-shelf.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Bathroom tiling",
+     "blurb": "Full bathrooms tiled floor to ceiling.",
+     "intro": "Straight lines, tight joints, clean silicone.",
+     "includes": [
+      "Wall tiling",
+      "Floor tiling",
+      "Bath panels",
+      "Niches"
+     ]
+    },
+    {
+     "title": "Wet rooms and showers",
+     "blurb": "Wet rooms and shower enclosures tiled and tanked.",
+     "intro": "Watertight underneath, sharp on top.",
+     "includes": [
+      "Tanking",
+      "Wet room floors",
+      "Shower walls",
+      "Patterned floors"
+     ]
+    },
+    {
+     "title": "Statement tiles",
+     "blurb": "Bold zellige-style, metro and coloured tiles.",
+     "intro": "The tiles people notice.",
+     "includes": [
+      "Handmade-look tiles",
+      "Metro tiles",
+      "Colour schemes",
+      "Feature walls"
+     ]
+    },
+    {
+     "title": "Floor tiling",
+     "blurb": "Herringbone, hexagon and large-format floors.",
+     "intro": "Floors laid flat and set out properly.",
+     "includes": [
+      "Herringbone",
+      "Hexagon",
+      "Large format",
+      "Levelling"
+     ]
+    },
+    {
+     "title": "Cloakrooms",
+     "blurb": "Small rooms finished with half-height tiling.",
+     "intro": "Small rooms, big finish.",
+     "includes": [
+      "Half-height tiling",
+      "Floors",
+      "Splashbacks",
+      "Boxing in"
+     ]
+    },
+    {
+     "title": "Niches and details",
+     "blurb": "Lit niches, shelves and neat trims.",
+     "intro": "The details that make it look finished.",
+     "includes": [
+      "Shower niches",
+      "LED shelves",
+      "Trims",
+      "Mitred corners"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From a recent floor",
+    "title": "Set out,",
+    "em": "then laid.",
+    "steps": [
+     {
+      "photo": "herringbone-laying.jpg",
+      "title": "Laying",
+      "text": "Wood-effect tiles set out and laid in herringbone across the room."
+     },
+     {
+      "photo": "herringbone-floor.jpg",
+      "title": "Finished",
+      "text": "Grouted, cleaned and ready to walk on."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "teal-wetroom.jpg",
+     "Teal wet room with a patterned floor"
+    ],
+    [
+     "emerald-bath.jpg",
+     "Emerald metro tiles around a bath"
+    ],
+    [
+     "green-cloakroom.jpg",
+     "Green cloakroom"
+    ],
+    [
+     "pink-tiles.jpg",
+     "Pink tiles around a bath"
+    ],
+    [
+     "hex-floor.jpg",
+     "Hexagon floor tiles"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Burgess Hill.",
+   "keep_film": true
+  }
+ }
 }
