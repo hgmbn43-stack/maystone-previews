@@ -6,5 +6,142 @@
  "Phone": "07891 450063",
  "Google rating": "5",
  "Google reviews": "27",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJr_9ek62v2EcRprhRkYwNLUk"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJr_9ek62v2EcRprhRkYwNLUk",
+ "details": {
+  "copy": {
+   "lede": "Jordan at Beadle's Electrical Contractors handles rewires, consumer units, lighting and garage power around Maidstone. Customers mention him putting right electrics a builder left in a state, and coming back again and again over the years.",
+   "about": [
+    "Jordan takes pride",
+    "in the bits you can't see."
+   ],
+   "about_alt": "A new consumer unit with neat, dressed wiring, fitted by Beadle's Electrical Contractors",
+   "photos": {
+    "about": "new-board.jpg",
+    "tiles": [
+     "new-board.jpg",
+     "old-board.jpg",
+     "testing.jpg",
+     "meter-tails.jpg",
+     "kitchen-spots.jpg",
+     "garage-power.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Consumer units",
+     "blurb": "Old fuse boards swapped for modern consumer units.",
+     "intro": "Neatly dressed, labelled and tested.",
+     "includes": [
+      "Board upgrades",
+      "RCBOs",
+      "Surge protection",
+      "Labelling"
+     ]
+    },
+    {
+     "title": "Rewires",
+     "blurb": "Full and partial rewires, including fixing others' work.",
+     "intro": "Put right properly, not patched.",
+     "includes": [
+      "Full rewires",
+      "Partial rewires",
+      "Remedial work",
+      "Making safe"
+     ]
+    },
+    {
+     "title": "Testing and certificates",
+     "blurb": "Testing and inspection with the right paperwork.",
+     "intro": "Clear results, explained.",
+     "includes": [
+      "EICRs",
+      "Installation certificates",
+      "Fault testing",
+      "Landlord checks"
+     ]
+    },
+    {
+     "title": "Lighting",
+     "blurb": "Spotlights, under-cabinet lights and hallway lighting.",
+     "intro": "Bright, even light where you need it.",
+     "includes": [
+      "Downlights",
+      "Under-cabinet lights",
+      "Hallways",
+      "Dimmers"
+     ]
+    },
+    {
+     "title": "Garages and outbuildings",
+     "blurb": "Power and lighting to garages and outbuildings.",
+     "intro": "Run neatly in conduit.",
+     "includes": [
+      "Garage power",
+      "Sockets",
+      "Lighting",
+      "Supplies"
+     ]
+    },
+    {
+     "title": "Meters and supplies",
+     "blurb": "Meter tails, isolators and supply upgrades.",
+     "intro": "Tidy, safe supplies.",
+     "includes": [
+      "Meter tails",
+      "Isolators",
+      "Earthing",
+      "Bonding"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "Old boards out",
+    "title": "From a tangle to",
+    "em": "a tidy board.",
+    "steps": [
+     {
+      "photo": "old-supply.jpg",
+      "title": "Before",
+      "text": "An old supply under the stairs, years of add-ons."
+     },
+     {
+      "photo": "old-board.jpg",
+      "title": "Before",
+      "text": "Another old board on a crumbling wall."
+     },
+     {
+      "photo": "new-board.jpg",
+      "title": "After",
+      "text": "A new consumer unit, wiring dressed and every circuit labelled."
+     },
+     {
+      "photo": "testing.jpg",
+      "title": "Tested",
+      "text": "Every circuit tested before it's signed off."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "kitchen-spots.jpg",
+     "Kitchen spotlights and under-cabinet lights"
+    ],
+    [
+     "hall-lighting.jpg",
+     "Hallway lighting"
+    ],
+    [
+     "garage-power.jpg",
+     "Garage power in conduit"
+    ],
+    [
+     "new-board.jpg",
+     "New consumer unit"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Maidstone.",
+   "keep_film": true
+  }
+ }
 }
