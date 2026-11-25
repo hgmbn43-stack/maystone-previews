@@ -6,5 +6,52 @@
  "Phone": "07753 383582",
  "Google rating": "5",
  "Google reviews": "7",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJVfMMUCaBdkgRBf-lRwm9AjI"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJVfMMUCaBdkgRBf-lRwm9AjI",
+ "details": {
+  "copy": {
+   "lede": "Richard Hemley is a carpenter around Wokingham. Customers have had him build porches, a garden sauna and gym, bespoke cabinets and window seats, and one has used him as their go-to carpenter for five years.",
+   "about": [
+    "Rich builds it",
+    "properly, first time."
+   ],
+   "about_alt": "A built-in window seat with shelving either side, made by R A Hemley Carpentry",
+   "photos": {
+    "about": "window-seat.jpg",
+    "tiles": [
+     "utility-units.jpg",
+     "pantry.jpg",
+     "under-stairs.jpg",
+     "outdoor-enclosure.jpg",
+     "shelving.jpg",
+     "kitchen-shelving.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "window-seat.jpg",
+     "Built-in window seat"
+    ],
+    [
+     "utility-units.jpg",
+     "Utility units with an oak worktop"
+    ],
+    [
+     "pantry.jpg",
+     "Pantry fitted under a sloping ceiling"
+    ],
+    [
+     "shelving.jpg",
+     "Built-in shelving and a ledged door"
+    ],
+    [
+     "under-stairs.jpg",
+     "Under-stairs storage"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Wokingham.",
+   "keep_film": true
+  },
+  "business": "R A Hemley Carpentry"
+ }
 }

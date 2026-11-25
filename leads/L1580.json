@@ -6,5 +6,69 @@
  "Phone": "07972 360771",
  "Google rating": "5",
  "Google reviews": "12",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJV5qg8457dkgRKU2yLd1qKgw"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJV5qg8457dkgRKU2yLd1qKgw",
+ "details": {
+  "copy": {
+   "lede": "Gary, Jean and the team at Windsor & Eton Renovations take on kitchens, bathrooms, brickwork, damp and flooring around Windsor. Customers describe full back-to-brick renovations and quick help when a plumbing problem stalls a bathroom.",
+   "about": [
+    "Renovations run",
+    "start to finish."
+   ],
+   "about_alt": "A navy shaker kitchen with white metro tiles, fitted by Windsor & Eton Renovations",
+   "photos": {
+    "about": "navy-kitchen.jpg",
+    "tiles": [
+     "living-room.jpg",
+     "stripped-back.jpg",
+     "navy-kitchen.jpg",
+     "bedroom.jpg",
+     "shower-room.jpg",
+     "kitchen-fitting.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "How a kitchen goes in",
+    "title": "Back to the walls,",
+    "em": "then built up.",
+    "steps": [
+     {
+      "photo": "stripped-back.jpg",
+      "title": "Stripped back",
+      "text": "Old kitchen out, walls back to plaster, services moved where they need to be."
+     },
+     {
+      "photo": "kitchen-fitting.jpg",
+      "title": "Fitted",
+      "text": "Units in and worktops templated and fitted."
+     },
+     {
+      "photo": "navy-kitchen.jpg",
+      "title": "Finished",
+      "text": "Tiled, lit and handed over ready to cook in."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "shower-room.jpg",
+     "Shower room with metro tiles and a patterned floor"
+    ],
+    [
+     "bathroom.jpg",
+     "Bathroom with a shower over the bath"
+    ],
+    [
+     "navy-kitchen.jpg",
+     "Navy shaker kitchen"
+    ],
+    [
+     "living-room.jpg",
+     "Refurbished living room"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Windsor.",
+   "keep_film": true
+  }
+ }
 }
