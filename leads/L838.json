@@ -2,9 +2,123 @@
  "Lead ID": "L838",
  "Business": "Freeland Fencing",
  "Trade": "Fence contractor",
- "Town": "",
+ "Town": "Eastleigh",
  "Phone": "07976 175697",
  "Google rating": "5",
  "Google reviews": "6",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ1ecqbFIU-gwRQATtkhRuLVc"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ1ecqbFIU-gwRQATtkhRuLVc",
+ "details": {
+  "copy": {
+   "lede": "Dan and the team at Freeland Fencing put up new fences and gates, repair storm damage, and lay decking and artificial grass. Customers say they fit jobs in fast, price fairly and leave the garden tidy.",
+   "about": [
+    "Fences that",
+    "stay standing."
+   ],
+   "about_alt": "A new hit-and-miss fence, built by Freeland Fencing",
+   "photos": {
+    "about": "hit-and-miss.jpg",
+    "tiles": [
+     "lap-panels.jpg",
+     "gate.jpg",
+     "hit-and-miss.jpg",
+     "decking.jpg",
+     "picket-fence.jpg",
+     "bark-border.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Panel fencing",
+     "blurb": "Lap and close-board panels on solid posts.",
+     "intro": "Straight, solid and built to last.",
+     "includes": [
+      "Lap panels",
+      "Close-board",
+      "Concrete or timber posts",
+      "Gravel boards"
+     ]
+    },
+    {
+     "title": "Gates",
+     "blurb": "Side and garden gates, including ones made to match.",
+     "intro": "Gates that close properly.",
+     "includes": [
+      "Side gates",
+      "Garden gates",
+      "Matching gates",
+      "Locks and latches"
+     ]
+    },
+    {
+     "title": "Hit-and-miss fencing",
+     "blurb": "Hit-and-miss boarding that looks good both sides.",
+     "intro": "Privacy with airflow.",
+     "includes": [
+      "Hit-and-miss",
+      "Screening",
+      "Bin stores",
+      "Plant screens"
+     ]
+    },
+    {
+     "title": "Fence repairs",
+     "blurb": "Fallen or storm-damaged fences put right fast.",
+     "intro": "Fitted in around a busy schedule.",
+     "includes": [
+      "Storm damage",
+      "Snapped posts",
+      "Leaning fences",
+      "Panel swaps"
+     ]
+    },
+    {
+     "title": "Decking",
+     "blurb": "Timber decks laid level on solid frames.",
+     "intro": "Somewhere to sit in the sun.",
+     "includes": [
+      "Timber decking",
+      "Frames",
+      "Steps",
+      "Edging"
+     ]
+    },
+    {
+     "title": "Picket fences and gardens",
+     "blurb": "Picket fences, artificial grass and tidy borders.",
+     "intro": "The finishing touches.",
+     "includes": [
+      "Picket fencing",
+      "Artificial grass",
+      "Bark borders",
+      "Tidy-up"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "decking.jpg",
+     "New deck in the garden"
+    ],
+    [
+     "gate.jpg",
+     "Matching side gate"
+    ],
+    [
+     "lap-panels.jpg",
+     "Lap panel fence"
+    ],
+    [
+     "picket-fence.jpg",
+     "Front picket fence"
+    ],
+    [
+     "fence-and-gate.jpg",
+     "Fence and gate"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Eastleigh.",
+   "keep_film": true
+  }
+ }
 }
