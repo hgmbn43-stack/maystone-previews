@@ -6,5 +6,14 @@
  "Phone": "07979 338643",
  "Google rating": "5",
  "Google reviews": "8",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJqx05Am17VY4RKcQcerMrh-Y"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJqx05Am17VY4RKcQcerMrh-Y",
+ "details": {
+  "copy": {
+   "lede": "Fabio and Rayme at Fab'ulous Window Cleaning clean windows and doors around Crawley. Customers say they're organised from the first booking, come the next day and leave windows looking fresh.",
+   "about": [
+    "Windows that",
+    "actually sparkle."
+   ]
+  }
+ }
 }

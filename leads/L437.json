@@ -6,5 +6,42 @@
  "Phone": "01293 528133",
  "Google rating": "4.3",
  "Google reviews": "395",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJz72PqPjxdUgRsTI9VBeTRdI"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJz72PqPjxdUgRsTI9VBeTRdI",
+ "details": {
+  "copy": {
+   "lede": "The Walled Garden Community Cafe sits beside a walled garden and lake near Crawley, with a sunny terrace, a counter full of homemade cakes and traybakes, and proper sandwiches and chips.",
+   "about_alt": "The cafe terrace with tables and parasols",
+   "photos": {
+    "about": "terrace.jpg",
+    "tiles": [
+     "sandwich-chips.jpg",
+     "sausage-sandwich.jpg",
+     "cake-counter.jpg",
+     "terrace.jpg",
+     "walled-garden.jpg",
+     "lake.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "walled-garden.jpg",
+     "The walled garden and gazebo"
+    ],
+    [
+     "cake-counter.jpg",
+     "Homemade cakes and traybakes"
+    ],
+    [
+     "lake.jpg",
+     "The lake nearby"
+    ],
+    [
+     "cafe-front.jpg",
+     "The cafe"
+    ]
+   ],
+   "gallery_kicker": "The cafe",
+   "gallery_intro": "Photos from the cafe and garden."
+  }
+ }
 }
