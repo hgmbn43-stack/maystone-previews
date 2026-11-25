@@ -6,5 +6,51 @@
  "Phone": "07538 337011",
  "Google rating": "5",
  "Google reviews": "63",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJuT4IzVbXWEgRB2x9EpJD_f0"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJuT4IzVbXWEgRB2x9EpJD_f0",
+ "details": {
+  "copy": {
+   "lede": "CurrentCo Electrical fit EV chargers, new consumer units and kitchen lighting around Letchworth, from a charger on the side of the house to the lighting in a whole kitchen extension.",
+   "about": [
+    "Neat work you",
+    "can actually see."
+   ],
+   "about_alt": "A new consumer unit with tidy, labelled wiring, fitted by CurrentCo Electrical",
+   "photos": {
+    "about": "consumer-unit.jpg",
+    "tiles": [
+     "loft-ducting.jpg",
+     "consumer-unit.jpg",
+     "kitchen-under-cabinet.jpg",
+     "kitchen-lighting.jpg",
+     "kitchen-spots.jpg",
+     "ev-charger.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "ev-night.jpg",
+     "EV charger, lit up at night"
+    ],
+    [
+     "kitchen-lighting.jpg",
+     "Kitchen extension lighting"
+    ],
+    [
+     "consumer-unit.jpg",
+     "New consumer unit"
+    ],
+    [
+     "kitchen-spots.jpg",
+     "Spotlights and under-cabinet lights"
+    ],
+    [
+     "ev-charger.jpg",
+     "EV charger on a brick wall"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Letchworth.",
+   "keep_film": true
+  }
+ }
 }
