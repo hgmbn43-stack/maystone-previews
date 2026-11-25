@@ -6,5 +6,119 @@
  "Phone": "07772 924668",
  "Google rating": "5",
  "Google reviews": "9",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ593Hs697dkgR9yZXggDMeBs"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ593Hs697dkgR9yZXggDMeBs",
+ "details": {
+  "copy": {
+   "lede": "Joe at Athers Bespoke Woodwork designs and makes wardrobes, shelving, desks and one-off furniture around Slough. Customers mention tricky loft wardrobes, under-stairs cupboards and attention to detail even on intricate pieces.",
+   "about": [
+    "Made by hand,",
+    "made to fit."
+   ],
+   "about_alt": "Floor-to-ceiling blue shelving with a space for a piano, made by Athers Bespoke Woodwork",
+   "photos": {
+    "about": "blue-shelving.jpg",
+    "tiles": [
+     "green-wardrobes.jpg",
+     "shaker-kitchen.jpg",
+     "blue-shelving.jpg",
+     "garden-office.jpg",
+     "front-door.jpg",
+     "console-table.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Fitted wardrobes",
+     "blurb": "Wardrobes built into alcoves, lofts and awkward angles.",
+     "intro": "Tricky spaces are where bespoke pays off.",
+     "includes": [
+      "Loft wardrobes",
+      "Alcove wardrobes",
+      "Painted shaker doors",
+      "Interiors to suit"
+     ]
+    },
+    {
+     "title": "Kitchens",
+     "blurb": "Kitchens and islands made and fitted.",
+     "intro": "Built to the room, finished by hand.",
+     "includes": [
+      "Shaker kitchens",
+      "Islands",
+      "Larder units",
+      "Fitting"
+     ]
+    },
+    {
+     "title": "Shelving and libraries",
+     "blurb": "Floor-to-ceiling shelving and media walls.",
+     "intro": "Storage that becomes the feature of the room.",
+     "includes": [
+      "Bookcases",
+      "Alcove shelving",
+      "Media units",
+      "Pantry shelving"
+     ]
+    },
+    {
+     "title": "Desks and garden offices",
+     "blurb": "Built-in desks and fitted-out garden offices.",
+     "intro": "A proper place to work.",
+     "includes": [
+      "Built-in desks",
+      "Drawers",
+      "Shelving",
+      "Plywood interiors"
+     ]
+    },
+    {
+     "title": "Doors and steps",
+     "blurb": "Doors, steps and finishing joinery.",
+     "intro": "The details that finish a house.",
+     "includes": [
+      "Doors",
+      "Oak steps",
+      "Skirting",
+      "Architrave"
+     ]
+    },
+    {
+     "title": "Bespoke furniture",
+     "blurb": "One-off pieces like live-edge console tables.",
+     "intro": "Made once, for you.",
+     "includes": [
+      "Console tables",
+      "Live-edge pieces",
+      "Cabinets",
+      "Under-stairs cupboards"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "green-wardrobes.jpg",
+     "Painted fitted wardrobes"
+    ],
+    [
+     "garden-office.jpg",
+     "Garden office desk and shelving"
+    ],
+    [
+     "console-table.jpg",
+     "Live-edge console table"
+    ],
+    [
+     "pantry-shelves.jpg",
+     "Pantry shelving"
+    ],
+    [
+     "oak-step.jpg",
+     "Oak step"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Slough.",
+   "keep_film": true
+  }
+ }
 }

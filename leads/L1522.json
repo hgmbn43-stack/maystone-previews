@@ -2,9 +2,157 @@
  "Lead ID": "L1522",
  "Business": "J Curtis & Sons Contractors",
  "Trade": "Landscape designer",
- "Town": "",
+ "Town": "Benfleet",
  "Phone": "07938 904577",
  "Google rating": "5",
  "Google reviews": "9",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJX-caX0ZAxEkRQ-5-f1LVj6c"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJX-caX0ZAxEkRQ-5-f1LVj6c",
+ "details": {
+  "copy": {
+   "palette": {
+    "accent": "#c9a24a",
+    "accent_ink": "#dcb763",
+    "brand": "#c9a24a",
+    "brand_text": "#dcb763",
+    "accent_deep": "#7a5e1c"
+   },
+   "lede": "James and the team at J Curtis & Sons build patios, driveways, paths, fencing and whole new gardens. Customers talk about dream gardens finished start to finish, a 33 square metre path done quickly and tidily, and James being organised throughout.",
+   "about": [
+    "Whole gardens,",
+    "built properly."
+   ],
+   "about_alt": "A new Indian sandstone patio with curved edging, laid by J Curtis & Sons",
+   "photos": {
+    "about": "patio-wide.jpg",
+    "tiles": [
+     "indian-sandstone.jpg",
+     "patio-laid.jpg",
+     "lawn-after.jpg",
+     "lit-garden.jpg",
+     "raised-bed.jpg",
+     "gravel-bed.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Patios",
+     "blurb": "Indian sandstone and porcelain patios with proper bases.",
+     "intro": "Laid level with the right falls.",
+     "includes": [
+      "Indian sandstone",
+      "Porcelain",
+      "Curved edging",
+      "Pointing"
+     ]
+    },
+    {
+     "title": "Driveways and paths",
+     "blurb": "Driveways and paths laid, repaired and maintained.",
+     "intro": "Built to take the weight.",
+     "includes": [
+      "Driveways",
+      "Paths",
+      "Edging",
+      "Repairs"
+     ]
+    },
+    {
+     "title": "Lawns and artificial grass",
+     "blurb": "Fresh turf or artificial grass on prepared ground.",
+     "intro": "Lawns that stay flat and green.",
+     "includes": [
+      "Turf",
+      "Artificial grass",
+      "Ground prep",
+      "Edging"
+     ]
+    },
+    {
+     "title": "Garden design and lighting",
+     "blurb": "Whole gardens designed and built, with lighting.",
+     "intro": "From the first sketch to the last light.",
+     "includes": [
+      "Design",
+      "Deck and step lights",
+      "Layouts",
+      "Planting"
+     ]
+    },
+    {
+     "title": "Raised beds and walls",
+     "blurb": "Sleeper and stone raised beds and low walls.",
+     "intro": "Structure that frames the garden.",
+     "includes": [
+      "Sleeper beds",
+      "Stone walling",
+      "Membrane",
+      "Planting"
+     ]
+    },
+    {
+     "title": "Fencing and gravel",
+     "blurb": "Fences, gravel beds and low-maintenance borders.",
+     "intro": "Tidy, low-maintenance finishes.",
+     "includes": [
+      "Fencing",
+      "Gravel beds",
+      "Slate chippings",
+      "Excavation"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "Before and after",
+    "title": "Tired grass to",
+    "em": "a garden to use.",
+    "steps": [
+     {
+      "photo": "lawn-before.jpg",
+      "title": "Before",
+      "text": "Dry, patchy grass and nothing else."
+     },
+     {
+      "photo": "lawn-after.jpg",
+      "title": "After",
+      "text": "Artificial lawn, sleeper raised beds and fresh planting."
+     },
+     {
+      "photo": "patio-laid.jpg",
+      "title": "Another garden",
+      "text": "Sandstone patio laid with curved edges, beds ready for turf."
+     },
+     {
+      "photo": "lit-garden.jpg",
+      "title": "Lit at night",
+      "text": "Porcelain, artificial grass and step lights for the evenings."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "lit-garden.jpg",
+     "Porcelain patio with step lights"
+    ],
+    [
+     "indian-sandstone.jpg",
+     "Indian sandstone patio"
+    ],
+    [
+     "gravel-bed.jpg",
+     "Gravel bed and palm"
+    ],
+    [
+     "raised-bed.jpg",
+     "Stone-capped raised bed"
+    ],
+    [
+     "patio-wide.jpg",
+     "New patio with curved edging"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Benfleet.",
+   "keep_film": true
+  }
+ }
 }
