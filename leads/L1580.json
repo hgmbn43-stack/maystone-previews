@@ -18,12 +18,12 @@
    "photos": {
     "about": "navy-kitchen.jpg",
     "tiles": [
+     "navy-kitchen.jpg",
+     "shower-room.jpg",
      "living-room.jpg",
      "stripped-back.jpg",
-     "navy-kitchen.jpg",
-     "bedroom.jpg",
-     "shower-room.jpg",
-     "kitchen-fitting.jpg"
+     "kitchen-fitting.jpg",
+     "bedroom.jpg"
     ]
    },
    "job_story": {
@@ -68,7 +68,75 @@
    ],
    "gallery_kicker": "Recent work",
    "gallery_intro": "Recent jobs around Windsor.",
-   "keep_film": true
+   "keep_film": true,
+   "services": [
+    {
+     "title": "Kitchen renovations",
+     "blurb": "Kitchens stripped out and refitted, back to brick if needed.",
+     "intro": "Planned so you are without a kitchen for as little time as possible.",
+     "includes": [
+      "Strip-out",
+      "Units and worktops",
+      "Tiling",
+      "Making good"
+     ]
+    },
+    {
+     "title": "Bathroom renovations",
+     "blurb": "Bathrooms and shower rooms renovated.",
+     "intro": "Plumbing problems sorted along the way.",
+     "includes": [
+      "Showers",
+      "Tiling",
+      "Suites",
+      "Lighting"
+     ]
+    },
+    {
+     "title": "Full refurbishments",
+     "blurb": "Whole flats and houses renovated room by room.",
+     "intro": "One team from start to finish.",
+     "includes": [
+      "Kitchens and bathrooms",
+      "Decorating",
+      "Flooring",
+      "Snagging"
+     ]
+    },
+    {
+     "title": "Brickwork and damp",
+     "blurb": "Garden walls, gate posts and damp problems repaired.",
+     "intro": "Fixed at the cause.",
+     "includes": [
+      "Brick repairs",
+      "Repointing",
+      "Damp",
+      "Gate posts"
+     ]
+    },
+    {
+     "title": "Flooring",
+     "blurb": "Laminate and other floors replaced, including after leaks.",
+     "intro": "Floors put back right.",
+     "includes": [
+      "Laminate",
+      "Vinyl",
+      "Tiles",
+      "Leak damage"
+     ]
+    },
+    {
+     "title": "Decorating",
+     "blurb": "Painting and finishing to complete the job.",
+     "intro": "Ready to move straight in.",
+     "includes": [
+      "Painting",
+      "Woodwork",
+      "Ceilings",
+      "Prep"
+     ]
+    }
+   ]
   }
  }
 }

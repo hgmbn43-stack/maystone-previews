@@ -400,6 +400,7 @@ NEARBY = {
     "Wickford": ["Billericay", "Basildon", "Rayleigh", "Runwell", "Shotgate"],
     "Bridport": ["West Bay", "Lyme Regis", "Charmouth", "Beaminster", "Dorchester"],
     "Radlett": ["Shenley", "Borehamwood", "London Colney", "Elstree", "St Albans"],
+    "Dorchester": ["Puddletown", "Charminster", "Poundbury", "Crossways", "Weymouth"],
     "Sherborne": ["Yeovil", "Milborne Port", "Bradford Abbas", "Yetminster", "Castle Cary"],
     "Addlestone": ["Weybridge", "Chertsey", "New Haw", "Byfleet", "Woking"],
 }
@@ -476,7 +477,7 @@ POSTCODES = {
     "Lyme Regis": ["DT7"], "Charmouth": ["DT6"], "Beaminster": ["DT8"], "Dorchester": ["DT1", "DT2"],
     "Addlestone": ["KT15"], "Weybridge": ["KT13"], "Chertsey": ["KT16"], "New Haw": ["KT15"], "Byfleet": ["KT14"],
     "Woking": ["GU21", "GU22"], "Sherborne": ["DT9"], "Yeovil": ["BA20", "BA21", "BA22"], "Milborne Port": ["DT9"],
-    "Bradford Abbas": ["DT9"], "Yetminster": ["DT9"], "Castle Cary": ["BA7"], "Radlett": ["WD7"], "Shenley": ["WD7"], "London Colney": ["AL2"], "St Albans": ["AL1", "AL3", "AL4"],
+    "Bradford Abbas": ["DT9"], "Yetminster": ["DT9"], "Castle Cary": ["BA7"], "Puddletown": ["DT2"], "Charminster": ["DT2"], "Poundbury": ["DT1"], "Crossways": ["DT2"], "Weymouth": ["DT3", "DT4"], "Radlett": ["WD7"], "Shenley": ["WD7"], "London Colney": ["AL2"], "St Albans": ["AL1", "AL3", "AL4"],
 }
 
 

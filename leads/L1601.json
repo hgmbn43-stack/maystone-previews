@@ -18,12 +18,12 @@
    "photos": {
     "about": "sage-kitchen.jpg",
     "tiles": [
-     "island-kitchen.jpg",
+     "sage-kitchen.jpg",
      "fitted-wardrobes.jpg",
+     "sliding-wardrobe.jpg",
      "walk-in-wardrobe.jpg",
      "media-wall.jpg",
-     "sliding-wardrobe.jpg",
-     "alcove-units.jpg"
+     "bedroom-storage.jpg"
     ]
    },
    "gallery": [
@@ -50,7 +50,75 @@
    ],
    "gallery_kicker": "Recent work",
    "gallery_intro": "Recent jobs around Slough.",
-   "keep_film": true
+   "keep_film": true,
+   "services": [
+    {
+     "title": "Kitchens",
+     "blurb": "Kitchens designed, built and fitted, islands included.",
+     "intro": "Shown examples first, then made to fit.",
+     "includes": [
+      "Shaker and handleless",
+      "Islands",
+      "Worktops",
+      "Appliances fitted"
+     ]
+    },
+    {
+     "title": "Fitted wardrobes",
+     "blurb": "Floor-to-ceiling wardrobes built to the room.",
+     "intro": "Every bit of the wall used.",
+     "includes": [
+      "Hinged doors",
+      "Drawers and shelving",
+      "Dressing areas",
+      "Lighting"
+     ]
+    },
+    {
+     "title": "Sliding wardrobes",
+     "blurb": "Sliding door wardrobes with glass or mirror panels.",
+     "intro": "Great for tighter rooms.",
+     "includes": [
+      "Glass and mirror doors",
+      "Interiors to suit",
+      "Soft-close",
+      "Drawer units"
+     ]
+    },
+    {
+     "title": "Walk-in wardrobes",
+     "blurb": "Walk-in wardrobes with hanging, drawers and shelves.",
+     "intro": "A proper dressing room.",
+     "includes": [
+      "Hanging space",
+      "Drawers",
+      "Shoe storage",
+      "Lighting"
+     ]
+    },
+    {
+     "title": "Media walls",
+     "blurb": "Media walls with slatted panels, fires and lit shelving.",
+     "intro": "The focal point of the room.",
+     "includes": [
+      "TV walls",
+      "Electric fires",
+      "Slatted panels",
+      "Hidden doors"
+     ]
+    },
+    {
+     "title": "Bedroom storage",
+     "blurb": "Built-in units around beds and in alcoves.",
+     "intro": "Storage that looks built in, because it is.",
+     "includes": [
+      "Overhead units",
+      "Alcove units",
+      "Storage beds",
+      "Bespoke pieces"
+     ]
+    }
+   ]
   }
  }
 }

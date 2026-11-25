@@ -18,11 +18,11 @@
    "photos": {
     "about": "window-seat.jpg",
     "tiles": [
+     "window-seat.jpg",
      "utility-units.jpg",
-     "pantry.jpg",
-     "under-stairs.jpg",
-     "outdoor-enclosure.jpg",
      "shelving.jpg",
+     "pantry.jpg",
+     "outdoor-enclosure.jpg",
      "kitchen-shelving.jpg"
     ]
    },
@@ -50,7 +50,75 @@
    ],
    "gallery_kicker": "Recent work",
    "gallery_intro": "Recent jobs around Wokingham.",
-   "keep_film": true
+   "keep_film": true,
+   "services": [
+    {
+     "title": "Bespoke joinery",
+     "blurb": "Window seats, cabinets and built-ins made to measure.",
+     "intro": "Made for the space, not off the shelf.",
+     "includes": [
+      "Window seats",
+      "Meter cabinets",
+      "Built-in units",
+      "Alcoves"
+     ]
+    },
+    {
+     "title": "Kitchens and utility rooms",
+     "blurb": "Units, worktops and utility rooms fitted.",
+     "intro": "Neat fitting and solid worktops.",
+     "includes": [
+      "Utility units",
+      "Oak worktops",
+      "Pantries",
+      "Shelving"
+     ]
+    },
+    {
+     "title": "Shelving and storage",
+     "blurb": "Built-in shelving, pantries and under-stairs storage.",
+     "intro": "Space you did not know you had.",
+     "includes": [
+      "Shelving",
+      "Pantries",
+      "Under-stairs",
+      "Ledged doors"
+     ]
+    },
+    {
+     "title": "Porches",
+     "blurb": "Porches built from quote to finish.",
+     "intro": "Delivered on time and on budget.",
+     "includes": [
+      "Design",
+      "Build",
+      "Doors",
+      "Finishing"
+     ]
+    },
+    {
+     "title": "Garden buildings",
+     "blurb": "Custom outdoor buildings, from saunas to gyms.",
+     "intro": "Built to the brief, not off the shelf.",
+     "includes": [
+      "Sauna and gym rooms",
+      "Enclosures",
+      "Sheds",
+      "Cladding"
+     ]
+    },
+    {
+     "title": "Repairs and fencing",
+     "blurb": "Fence panels, window surrounds and general carpentry repairs.",
+     "intro": "The jobs that build up, sorted in one visit.",
+     "includes": [
+      "Fence panels",
+      "Window surrounds",
+      "Doors",
+      "Skirting"
+     ]
+    }
+   ]
   },
   "business": "R A Hemley Carpentry"
  }

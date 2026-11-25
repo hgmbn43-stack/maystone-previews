@@ -2,9 +2,123 @@
  "Lead ID": "L1474",
  "Business": "XTRA Plumbing Services",
  "Trade": "Plumber",
- "Town": "",
+ "Town": "Dorchester",
  "Phone": "07982 846018",
  "Google rating": "5",
  "Google reviews": "16",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJB-TPWRpunqERY7FNRZ3PLpw"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJB-TPWRpunqERY7FNRZ3PLpw",
+ "details": {
+  "copy": {
+   "lede": "Dan runs XTRA Plumbing Services, fixing leaks, valves and cisterns and fitting bathrooms, showers and water heaters for homes and businesses. Customers say he comes at short notice, explains the problem and leaves everything as tidy as he found it.",
+   "about": [
+    "Dan fixes it,",
+    "then tidies up."
+   ],
+   "about_alt": "A new bath with a shower screen and tiled walls, fitted by XTRA Plumbing Services",
+   "photos": {
+    "about": "bath-shower.jpg",
+    "tiles": [
+     "cistern.jpg",
+     "shower-room.jpg",
+     "shower-rail.jpg",
+     "water-heater.jpg",
+     "kitchen-sink.jpg",
+     "commercial-washroom.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "shower-room.jpg",
+     "Shower room with an LED mirror"
+    ],
+    [
+     "commercial-washroom.jpg",
+     "Commercial washroom"
+    ],
+    [
+     "kitchen-sink.jpg",
+     "New kitchen sink and tap"
+    ],
+    [
+     "shower-rail.jpg",
+     "Thermostatic shower and grab rail"
+    ],
+    [
+     "water-heater.jpg",
+     "Under-sink water heater"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Dorchester.",
+   "keep_film": true,
+   "services": [
+    {
+     "title": "Leaks and repairs",
+     "blurb": "Leaking valves, cisterns, taps and pipes, found and fixed.",
+     "intro": "Most leaks are sorted on the first visit.",
+     "includes": [
+      "Leaking valves",
+      "Cisterns and toilets",
+      "Burst and dripping pipes",
+      "Short-notice call-outs"
+     ]
+    },
+    {
+     "title": "Bathrooms",
+     "blurb": "New bathrooms and shower rooms, plumbed and finished.",
+     "intro": "From one suite to a full refit.",
+     "includes": [
+      "Bath and shower installs",
+      "Basins and toilets",
+      "Towel rails",
+      "Wet wall panels"
+     ]
+    },
+    {
+     "title": "Showers",
+     "blurb": "Thermostatic and electric showers, plus grab rails for easier access.",
+     "intro": "Showers fitted and set up properly.",
+     "includes": [
+      "Thermostatic showers",
+      "Electric showers",
+      "Shower screens",
+      "Grab rails"
+     ]
+    },
+    {
+     "title": "Hot water",
+     "blurb": "Under-sink and unvented water heaters and cylinders.",
+     "intro": "Hot water where you need it.",
+     "includes": [
+      "Under-sink heaters",
+      "Cylinders",
+      "Immersions",
+      "Expansion vessels"
+     ]
+    },
+    {
+     "title": "Taps and sinks",
+     "blurb": "Kitchen sinks, taps and wastes swapped or fitted.",
+     "intro": "Quick swaps done neatly.",
+     "includes": [
+      "Kitchen sinks",
+      "Mixer taps",
+      "Wastes and traps",
+      "Appliance plumbing"
+     ]
+    },
+    {
+     "title": "Commercial plumbing",
+     "blurb": "Washrooms, urinals and maintenance for businesses.",
+     "intro": "Work planned around your opening hours.",
+     "includes": [
+      "Washrooms",
+      "Urinals and cisterns",
+      "Planned maintenance",
+      "Repairs"
+     ]
+    }
+   ]
+  }
+ }
 }

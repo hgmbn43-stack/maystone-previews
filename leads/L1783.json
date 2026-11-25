@@ -19,11 +19,11 @@
     "about": "porcelain-patio.jpg",
     "tiles": [
      "block-driveway.jpg",
-     "herringbone.jpg",
      "porcelain-patio.jpg",
-     "undercroft-paving.jpg",
-     "laying-blocks.jpg",
-     "sub-base.jpg"
+     "sub-base.jpg",
+     "porcelain-patio.jpg",
+     "dig-out.jpg",
+     "undercroft-paving.jpg"
     ]
    },
    "job_story": {
@@ -73,7 +73,75 @@
    ],
    "gallery_kicker": "Recent work",
    "gallery_intro": "Recent jobs around Borehamwood.",
-   "keep_film": true
+   "keep_film": true,
+   "services": [
+    {
+     "title": "Block paving driveways",
+     "blurb": "Driveways dug out, based properly and block paved.",
+     "intro": "Built on a proper sub-base so they stay level.",
+     "includes": [
+      "Dig-out and sub-base",
+      "Edging and kerbs",
+      "Herringbone and other patterns",
+      "Drainage"
+     ]
+    },
+    {
+     "title": "Patios",
+     "blurb": "Porcelain and stone patios laid level with the right falls.",
+     "intro": "Outdoor space you can use all year.",
+     "includes": [
+      "Porcelain patios",
+      "Natural stone",
+      "Steps",
+      "Pointing"
+     ]
+    },
+    {
+     "title": "Fencing",
+     "blurb": "Fences put up and old fencing taken away.",
+     "intro": "Straight, solid fences that last.",
+     "includes": [
+      "Panel fencing",
+      "Posts and gravel boards",
+      "Gates",
+      "Old fencing removed"
+     ]
+    },
+    {
+     "title": "Turf and lawns",
+     "blurb": "New turf laid on prepared ground.",
+     "intro": "Lawns that root in and stay flat.",
+     "includes": [
+      "Ground prep",
+      "New turf",
+      "Edging",
+      "Artificial grass"
+     ]
+    },
+    {
+     "title": "Groundworks",
+     "blurb": "Digging out, levelling and sub-bases for paving and buildings.",
+     "intro": "The part nobody sees, done right.",
+     "includes": [
+      "Excavation",
+      "Compaction",
+      "Sub-bases",
+      "Membranes"
+     ]
+    },
+    {
+     "title": "Commercial paving",
+     "blurb": "Paving for car parks and new buildings.",
+     "intro": "Larger areas laid to spec.",
+     "includes": [
+      "Car parks",
+      "Undercrofts",
+      "Footpaths",
+      "Kerbing"
+     ]
+    }
+   ]
   }
  }
 }
