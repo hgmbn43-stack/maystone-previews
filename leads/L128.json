@@ -6,5 +6,15 @@
  "Phone": "07539 083778",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJyUoDR3GbdUgR2brVOrjxU_g"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJyUoDR3GbdUgR2brVOrjxU_g",
+ "details": {
+  "copy": {
+   "lede": "James and his team at Stokley 51 and Son take on carpentry and building around Brighton: kitchens fitted, lofts cleared and boarded, fencing and gates, skirting and doors, and full flat renovations. One customer had James check back a week later to make sure everything was OK.",
+   "about": [
+    "James and the team,",
+    "finishing properly."
+   ]
+  },
+  "business": "Stokley 51 and Son"
+ }
 }

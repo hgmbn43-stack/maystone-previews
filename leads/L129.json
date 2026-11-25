@@ -6,5 +6,51 @@
  "Phone": "01903 377087",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJPd9EKQWadUgRh5sXZzqjDzk"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJPd9EKQWadUgRh5sXZzqjDzk",
+ "details": {
+  "copy": {
+   "lede": "Tim Fosberry is an electrician around Shoreham-by-Sea who tracks down the faults others can't. Customers mention a three-week tripping problem finally solved, Tim arriving within 30 minutes, and fair prices. His own jobs include full barn conversions, kitchen lighting and outdoor supplies.",
+   "about": [
+    "Tim finds the fault",
+    "others missed."
+   ],
+   "about_alt": "A flint barn conversion wired by Tim Fosberry Electrical",
+   "photos": {
+    "about": "barn-conversion.jpg",
+    "tiles": [
+     "outdoor-supply.jpg",
+     "kitchen-downlights.jpg",
+     "barn-front.jpg",
+     "barn-lounge.jpg",
+     "kitchen-lighting.jpg",
+     "outdoor-supply.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "barn-lounge.jpg",
+     "Barn conversion lighting"
+    ],
+    [
+     "beam-chandelier.jpg",
+     "Chandelier between old beams"
+    ],
+    [
+     "stairwell-light.jpg",
+     "Stairwell pendant"
+    ],
+    [
+     "kitchen-lighting.jpg",
+     "Kitchen with under-cabinet lighting"
+    ],
+    [
+     "outdoor-supply.jpg",
+     "Outdoor power supply"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Shoreham-by-Sea.",
+   "keep_film": true
+  }
+ }
 }
