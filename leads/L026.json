@@ -6,5 +6,41 @@
  "Phone": "01903 377085",
  "Google rating": "5",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJC-FVHHijdUgRTK4MPQks-3g"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJC-FVHHijdUgRTK4MPQks-3g",
+ "details": {
+  "copy": {
+   "lede": "D Scales Electrical take on all domestic electrical work around Worthing, from minor works to part and full rewires, with a free 15-minute visual inspection. Customers call them honest, efficient and tidy, and say everything's explained clearly before work starts.",
+   "about": [
+    "Explained first,",
+    "then done properly."
+   ],
+   "photos": {
+    "tiles": [
+     "junction-box.jpg",
+     "board-wiring.jpg",
+     "board-cover.jpg",
+     "junction-box.jpg",
+     "new-board-supply.jpg",
+     "board-wiring.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "new-board-supply.jpg",
+     "New consumer unit and supply"
+    ],
+    [
+     "board-wiring.jpg",
+     "Consumer unit wiring"
+    ],
+    [
+     "junction-box.jpg",
+     "Junction box connections"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Worthing.",
+   "keep_film": true
+  }
+ }
 }
