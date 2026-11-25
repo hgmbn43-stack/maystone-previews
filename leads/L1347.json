@@ -6,5 +6,150 @@
  "Phone": "07928 093406",
  "Google rating": "4.8",
  "Google reviews": "43",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN1T3ag__cqcRsaomWQGrxUM"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN1T3ag__cqcRsaomWQGrxUM",
+ "details": {
+  "copy": {
+   "headline": [
+    "Wired right,",
+    "left tidy."
+   ],
+   "sub": "EV chargers, rewires, extensions, outdoor lighting and safety-report fixes across Newbury and West Berkshire. Neat work, a fair price and no mess left behind.",
+   "kicker": "Electrician in Newbury",
+   "stats": [
+    [
+     "EV",
+     "charger installs"
+    ],
+    [
+     "EICR",
+     "fixes for landlords"
+    ]
+   ],
+   "about": [
+    "One electrician who",
+    "sweats the detail."
+   ],
+   "lede": "BT Electrical & Lighting is Ben, a local electrician based just outside Newbury. Customers say the same things: he turns up on time, prices fairly, explains what he's doing and leaves the place tidy. From a single socket to a full rewire or an EV charger, it gets the same care.",
+   "areas": [
+    "Thatcham",
+    "Greenham",
+    "Speen",
+    "Hungerford",
+    "Kingsclere",
+    "Burghclere"
+   ],
+   "postcodes": {
+    "Newbury": [
+     "RG14",
+     "RG20"
+    ],
+    "Thatcham": [
+     "RG18",
+     "RG19"
+    ],
+    "Greenham": [
+     "RG19"
+    ],
+    "Speen": [
+     "RG14"
+    ],
+    "Hungerford": [
+     "RG17"
+    ],
+    "Kingsclere": [
+     "RG20"
+    ],
+    "Burghclere": [
+     "RG20"
+    ]
+   },
+   "services_title": "What Ben does",
+   "services_intro": "Big jobs and small ones, done properly.",
+   "services": [
+    {
+     "title": "EV charger installation",
+     "blurb": "Home EV chargers fitted neatly, including tricky earthing set-ups.",
+     "intro": "A tidy install, cables run properly and everything explained before he leaves.",
+     "includes": [
+      "Home charge points",
+      "Earthing sorted properly",
+      "Neat cable runs",
+      "Advice on the right charger"
+     ]
+    },
+    {
+     "title": "Rewires",
+     "blurb": "Full and partial rewires planned around your home to keep the mess down.",
+     "intro": "Old wiring brought up to date, with sockets and lights where you actually need them.",
+     "includes": [
+      "Full and partial rewires",
+      "New sockets and switches",
+      "Consumer unit upgrades",
+      "Tidy finish"
+     ]
+    },
+    {
+     "title": "EICR remedial work",
+     "blurb": "Failed electrical safety report? Ben puts it right and gets you compliant.",
+     "intro": "Ideal for landlords: an independent look at the report, the fixes done and everything left safe.",
+     "includes": [
+      "Review of your EICR",
+      "Remedial work done",
+      "Clear explanation of what was wrong",
+      "Landlords welcome"
+     ]
+    },
+    {
+     "title": "Extension wiring",
+     "blurb": "New circuits, lighting and sockets for extensions and conversions.",
+     "intro": "Worked in with your builder so the electrics are right first time.",
+     "includes": [
+      "New circuits",
+      "Lighting and sockets",
+      "Works with your builder"
+     ]
+    },
+    {
+     "title": "Outdoor lighting",
+     "blurb": "Garden, driveway and security lights fitted safely outside.",
+     "intro": "Lights that look good and are wired safely for the weather.",
+     "includes": [
+      "Garden and path lights",
+      "Security lighting",
+      "Outdoor sockets"
+     ]
+    },
+    {
+     "title": "Small jobs",
+     "blurb": "Sockets, lights, switches, faults. No job too small.",
+     "intro": "The small jobs other electricians don't call back about.",
+     "includes": [
+      "Extra sockets",
+      "Light fittings",
+      "Fault finding",
+      "Quick turnaround"
+     ]
+    }
+   ],
+   "faqs": [
+    [
+     "Do you do small jobs?",
+     "Yes. Plenty of Ben's customers started with a socket or a light fitting. No job too small."
+    ],
+    [
+     "Can you fix the problems on my EICR?",
+     "Yes. Ben will look at the report independently, carry out the remedial work and make sure everything's safe."
+    ],
+    [
+     "Do you install EV chargers?",
+     "Yes. Ben fits home EV charge points and sorts out any earthing issues along the way."
+    ],
+    [
+     "What areas do you cover?",
+     "Newbury and the villages around it, including Thatcham, Greenham and Hungerford. Call to check if you're further out."
+    ]
+   ],
+   "quote_intro": "Tell Ben what you need doing and he'll come back to you with a price."
+  }
+ }
 }
