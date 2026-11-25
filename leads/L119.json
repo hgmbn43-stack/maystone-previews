@@ -6,5 +6,75 @@
  "Phone": "07980 850279",
  "Google rating": "5",
  "Google reviews": "6",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJRYGGwtCbdUgRaOpT4UuqE6w"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJRYGGwtCbdUgRaOpT4UuqE6w",
+ "details": {
+  "copy": {
+   "lede": "Dave the Handyman takes on everything from putting up a basketball hoop that's been waiting a year to fixing wobbly fence posts and refreshing tired bathrooms and kitchens around Shoreham-by-Sea. Customers say he's prompt, precise, tidy and reasonably priced.",
+   "about": [
+    "Dave sorts the job",
+    "you've been putting off."
+   ],
+   "about_alt": "A refreshed bathroom with grey tiles and a new shower screen, by Dave the Handyman",
+   "photos": {
+    "about": "after-bathroom.jpg",
+    "tiles": [
+     "after-utility.jpg",
+     "after-shower.jpg",
+     "after-kitchen.jpg",
+     "after-bathroom.jpg",
+     "before-basin.jpg",
+     "after-utility.jpg"
+    ]
+   },
+   "job_story": {
+    "kicker": "A flat refresh",
+    "title": "Tired and damp to",
+    "em": "clean and fresh.",
+    "steps": [
+     {
+      "photo": "before-floor.jpg",
+      "title": "Before",
+      "text": "Damp, stained flooring and boxing round the toilet."
+     },
+     {
+      "photo": "before-bath.jpg",
+      "title": "Before",
+      "text": "A rotten bath panel and mould behind it."
+     },
+     {
+      "photo": "after-bathroom.jpg",
+      "title": "After",
+      "text": "New bath, tiling, basin and flooring. Clean and dry."
+     },
+     {
+      "photo": "after-shower.jpg",
+      "title": "After",
+      "text": "Shower and screen fitted, grey feature tiles."
+     },
+     {
+      "photo": "after-kitchen.jpg",
+      "title": "Kitchen too",
+      "text": "Kitchen refreshed with new units and worktops."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "after-utility.jpg",
+     "Utility units fitted"
+    ],
+    [
+     "after-shower.jpg",
+     "Shower over the bath"
+    ],
+    [
+     "after-kitchen.jpg",
+     "Kitchen refresh"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Shoreham-by-Sea.",
+   "keep_film": true
+  }
+ }
 }

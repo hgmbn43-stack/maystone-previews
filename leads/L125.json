@@ -6,5 +6,14 @@
  "Phone": "07845 526562",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN4qpeC23lq8Rd4dn8wCw9l4"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN4qpeC23lq8Rd4dn8wCw9l4",
+ "details": {
+  "copy": {
+   "lede": "Duncan at Peregrine Woodcraft is a cabinetmaker and carpenter around Shoreham-by-Sea, from feature walls and fitted pieces to extensions and renovations. Customers call him practical, hardworking and, most of all, trustworthy.",
+   "about": [
+    "Duncan builds it",
+    "like it's his own."
+   ]
+  }
+ }
 }
