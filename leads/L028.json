@@ -6,5 +6,55 @@
  "Phone": "07398 944240",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ8W4eV1aFdUgRVqF5SwayETo"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ8W4eV1aFdUgRVqF5SwayETo",
+ "details": {
+  "copy": {
+   "short_name": "CCS",
+   "palette": {
+    "accent": "#c9a24a",
+    "accent_ink": "#dcb763",
+    "brand": "#c9a24a",
+    "brand_text": "#dcb763",
+    "accent_deep": "#7a5e1c"
+   },
+   "lede": "Phillip Kelly and the team at Carpentry & Construction Services take on kitchens, bathrooms, flat conversions, shop fit-outs, soffits and gutters, and garden buildings around Hove. Customers say Phil listens, keeps to his word and hits deadlines.",
+   "about": [
+    "Phil listens,",
+    "then builds it right."
+   ],
+   "about_alt": "A dark kitchen with a long island and oak floor, by Carpentry & Construction Services",
+   "photos": {
+    "about": "island-kitchen.jpg",
+    "tiles": [
+     "timber-shed.jpg",
+     "island-kitchen.jpg",
+     "lit-ceiling.jpg",
+     "cloakroom.jpg",
+     "cream-kitchen.jpg",
+     "island-kitchen.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "lit-ceiling.jpg",
+     "Recessed ceiling with downlights"
+    ],
+    [
+     "cloakroom.jpg",
+     "Cloakroom with boxed-in cistern"
+    ],
+    [
+     "timber-shed.jpg",
+     "Timber-clad garden building"
+    ],
+    [
+     "cream-kitchen.jpg",
+     "Cream shaker kitchen"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Hove.",
+   "keep_film": true
+  }
+ }
 }
