@@ -10,6 +10,8 @@ copy.look = "clean":
 """
 import re
 
+from trades import CLEAN
+
 _S = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>'
 ICONS = {
     "flame": '<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2.4 1.2-3.8 2.3-5 .3 1.6 1.2 2.6 2.2 2.6C11.3 8.3 11 5.6 12 3z"/>',
@@ -90,11 +92,22 @@ def icon_for(title):
     return icons_for([title])[0]
 
 
-def apply(brand, services, copy, preview):
+def _u(pid, w, h=None):
+    return f"https://images.unsplash.com/{pid}?w={w}" + (f"&h={h}" if h else "") + "&q=78&auto=format&fit=crop"
+
+
+def apply(brand, services, copy, preview, group=None):
     """Turn the clean look on for one lead's brand dict. services: list of dicts with "title"."""
     if not brand or copy.get("look") != "clean":
         return
     brand["clean"] = True
+    set_by_hand = (copy.get("photos") or {})
+    if group in CLEAN:
+        hero, about = CLEAN[group]
+        if not set_by_hand.get("wide"):
+            brand["wide"], brand["tall"] = _u(hero, 1920), _u(hero, 900, 1600)
+        if not set_by_hand.get("about") and not brand.get("about_own"):
+            brand["about_img"] = _u(about, 900, 1125)
     own_tiles = all(str(x).startswith("img/fb/") for x in (brand.get("tiles") or [])) and brand.get("tiles")
     if not own_tiles:
         brand["icons"] = icons_for([sv.get("title") if isinstance(sv, dict) else sv[0] for sv in services])

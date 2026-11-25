@@ -37,9 +37,11 @@ def main():
     # Every lead gets a scroll film nobody else in their area has (see build_preview.assign_films).
     # Test copies (IDs starting "T", with "test_of") borrow the real lead's film and never change anyone's films.
     films = assign_films([row for _, d, row in leads if not d.get("test_of")])
+    # A test copy of a lead that has no preview of its own gets a film picked after every real lead.
+    later = assign_films([row for _, d, row in leads])
     for _, d, row in leads:
         if d.get("test_of"):
-            films[row.get("Lead ID")] = films.get(d["test_of"])
+            films[row.get("Lead ID")] = films.get(d["test_of"]) or later.get(row.get("Lead ID"))
     for f, data, row in leads:
         live = bool(data.get("live"))
         details = data.get("details") if isinstance(data.get("details"), dict) else {}

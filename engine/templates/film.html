@@ -572,7 +572,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 
 <main id="top">
   {% if brand %}
-  <section class="bhero{{ ' stock' if brand.clean and brand.hero_stock }}" aria-label="{{ biz.name }}">
+  <section class="bhero{{ ' stock' if brand.clean and brand.hero_stock }}{{ ' g-wait' if brand.clean and brand.hero_stock and places_key and place_id }}" aria-label="{{ biz.name }}">
     <picture>
       <source media="(min-aspect-ratio: 1/1)" srcset="{{ brand.wide }}">
       <img src="{{ brand.tall }}" alt="{{ brand.alt }}" fetchpriority="high" decoding="async">
@@ -596,6 +596,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     </ul>
     <span class="bh-scroll" aria-hidden="true">Scroll</span>
   </section>
+  {% if brand.clean and brand.hero_stock and places_key and place_id %}<script>setTimeout(function(){var h=document.querySelector(".bhero.g-wait");if(h)h.classList.remove("g-wait");},2600);</script>{% endif %}
   <div class="bmarquee" aria-hidden="true"><div>
     {% for k in range(2) %}{% for sv in t.services %}<span>{{ sv[0] }}</span><i>&#10022;</i>{% endfor %}{% endfor %}
   </div></div>
@@ -1433,7 +1434,81 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
   var REF = "no-referrer-when-downgrade";
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
   function norm(s) { return String(s || "").toLowerCase().replace(/&/g, " and ").replace(/\b(ltd|limited|and|the)\b/g, "").replace(/[^a-z0-9]/g, ""); }
+  {% if brand and brand.clean %}
+  /* Clean look (25 Nov 2026): their own Google photo goes at the top when it passes the checks a computer can do:
+     landscape, at least 1000px wide, not a logo or screenshot, not too dark or washed out, and sharp. A good
+     second photo (any shape, 800px+) replaces a stock About photo. Loaded live, never stored (Google's terms). */
+  var CLEAN = {{ 'true' if brand and brand.clean and brand.hero_stock else 'false' }}, ABOUT_STOCK = {{ 'true' if brand and brand.clean and brand.about_stock else 'false' }};
+  window.__gq = []; var _graphic = function () { return false; };
+  function done() { var h = document.querySelector(".bhero.g-wait"); if (h) h.classList.remove("g-wait"); }
+  function quality(img) {
+    var W = 320, H = Math.max(1, Math.round(W * img.naturalHeight / img.naturalWidth));
+    var c = document.createElement("canvas"); c.width = W; c.height = H;
+    var x = c.getContext("2d"); x.drawImage(img, 0, 0, W, H);
+    var d = x.getImageData(0, 0, W, H).data, g = new Float32Array(W * H), sum = 0, i;
+    for (i = 0; i < W * H; i++) { g[i] = 0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]; sum += g[i]; }
+    var mean = sum / (W * H), n = 0, m = 0, m2 = 0;
+    for (var yy = 1; yy < H - 1; yy++) for (var xx = 1; xx < W - 1; xx++) {
+      var k = yy * W + xx, lap = 4 * g[k] - g[k - 1] - g[k + 1] - g[k - W] - g[k + W];
+      n++; m += lap; m2 += lap * lap;
+    }
+    var sharp = m2 / n - (m / n) * (m / n);
+    return { mean: Math.round(mean), sharp: Math.round(sharp), ok: mean > 55 && mean < 205 && sharp > 60 };
+  }
+  function credit(holder, photo) {
+    var a = (photo.authorAttributions || [])[0] || {}, c = el("span", "g-credit g-hero-credit");
+    c.textContent = "Photo: " + (a.displayName || NAME) + " on Google";
+    holder.append(c);
+  }
+  function pickHero(list) {
+    var hero = list.filter(function (p) { var r = (p.widthPx || 0) / (p.heightPx || 1); return p.widthPx >= 1000 && r >= 1.2 && r <= 2.1; })
+                   .sort(function (a, b) { return b.widthPx - a.widthPx; }).slice(0, 4);
+    var aboutC = list.filter(function (p) { return Math.min(p.widthPx || 0, p.heightPx || 0) >= 800; }).slice(0, 6);
+    var gotHero = false, gotAbout = !ABOUT_STOCK, used = {};
+    function test(photo, cb) {
+      var img = new Image(); img.crossOrigin = "anonymous"; img.referrerPolicy = REF;
+      img.onload = function () {
+        var kind = _graphic(img), q = kind ? { ok: false } : quality(img);
+        window.__gq.push([photo.widthPx + "x" + photo.heightPx, kind || "", q.mean, q.sharp, q.ok]);
+        cb(!kind && q.ok ? img : null);
+      };
+      img.onerror = function () { cb(null); };
+      img.src = "https://places.googleapis.com/v1/" + photo.name + "/media?maxWidthPx=1600&key=" + encodeURIComponent(KEY);
+    }
+    (function nextHero(i) {
+      if (i >= hero.length) { done(); return nextAbout(0); }
+      test(hero[i], function (img) {
+        if (!img) return nextHero(i + 1);
+        var sec = document.querySelector(".bhero"), pic = sec && sec.querySelector("picture");
+        if (pic) {
+          pic.querySelectorAll("source").forEach(function (s) { s.srcset = img.src; });
+          var hi = pic.querySelector("img"); hi.src = img.src; hi.alt = NAME + ": photo from their Google listing";
+          sec.classList.remove("stock"); var tag = sec.querySelector(".film-tag"); if (tag) tag.remove();
+          credit(sec, hero[i]);
+          var qb = document.querySelector(".quote-band"); if (qb) { qb.style.setProperty("--qb-img", "url('" + img.src + "')"); qb.classList.remove("stock"); }
+          gotHero = true; used[hero[i].name] = 1; report("top photo: their own (" + hero[i].widthPx + "px)");
+        }
+        done(); nextAbout(0);
+      });
+    })(0);
+    function nextAbout(j) {
+      if (gotAbout) return;
+      var cand = aboutC.filter(function (p) { return !used[p.name]; });
+      if (j >= cand.length || j >= 3) return;
+      test(cand[j], function (img) {
+        if (!img) return nextAbout(j + 1);
+        var fig = document.querySelector(".about-img"); if (!fig) return;
+        var ai = fig.querySelector("img"); ai.src = img.src; ai.alt = NAME + ": photo from their Google listing";
+        fig.classList.remove("stock"); var cap = fig.querySelector("figcaption"); if (cap) cap.remove();
+        credit(fig, cand[j]); gotAbout = true;
+      });
+    }
+  }
+  {% else %}
+  var CLEAN = false, _graphic; function done() {} function pickHero() {}
+  {% endif %}
   function photos(list, gname) {
+    _graphic = graphic;
     var me = [norm(NAME), norm(gname)].filter(Boolean), logoDone = false;
     var own = list.filter(function (p) {
       return (p.authorAttributions || []).some(function (a) { var n = norm(a.displayName); return n && me.some(function (m) { return n === m || n.indexOf(m) === 0 || m.indexOf(n) === 0; }); });
@@ -1446,8 +1521,11 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       bi.onload = function () { if (graphic(bi) === "logo") useLogo(bi); };
       bi.src = "https://places.googleapis.com/v1/" + banner.name + "/media?maxWidthPx=800&key=" + encodeURIComponent(KEY);
     }
-    own = own.filter(function (p) { return !odd(p); }).slice(0, 5);
+    own = own.filter(function (p) { return !odd(p); });
+    if (CLEAN) { try { pickHero(own); } catch (e) { done(); } }
+    own = own.slice(0, 5);
     var work = document.getElementById("work"), box = document.getElementById("gallery");
+    if (!own.length) done();
     if (!own.length || !work || !box) return;
     // Their logo from Google goes in the header and on the film's end card: cropped to the artwork,
     // on a chip of its own background colour so it reads on any page colour. First one found wins.
@@ -1610,7 +1688,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       r.text().then(function (t) { report("refused (" + r.status + ") " + t.replace(/\s+/g, " ").slice(0, 220)); }).catch(function () {});
       return null;
     }).then(function (p) {
-      if (!p) return;
+      if (!p) { done(); return; }
       report("loaded " + (p.reviews || []).length + " reviews and " + (p.photos || []).length + " photos");
       try { reviews(p.reviews || []); } catch (e) { report("reviews error: " + e.message); }
       try { photos(p.photos || [], p.displayName && p.displayName.text); } catch (e) { report("photos error: " + e.message); }

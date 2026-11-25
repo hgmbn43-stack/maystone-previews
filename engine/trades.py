@@ -363,7 +363,9 @@ CATEGORY_RULES = [
 
 def group_for(trade, business=""):
     """Pick a trade group from the Google category, falling back to the business name."""
-    for text in (trade or "", business or ""):
+    # A bare Google category like "Contractor" says nothing; then the business name decides (25 Nov 2026).
+    generic = re.match(r"^\s*(contractor|general contractor|service|services|company|business)\s*$", trade or "", re.I)
+    for text in ((business or "", trade or "") if generic else (trade or "", business or "")):
         for group, pattern in CATEGORY_RULES:
             if re.search(pattern, text, re.I):
                 return group
@@ -1462,4 +1464,15 @@ BRAND["pub"] = {
     "story_kicker": "", "story": ("", ""), "process": ("", ""),
     "about": ("Everyone's", "welcome here."),
     "stats": [("Cooked", "here, every day"), ("Dogs", "welcome")],
+}
+
+
+# Clean look fallback (25 Nov 2026): when a business has no good photo of its own, the top and About photos show the
+# result of the work (a warm home, a finished room, a garden), never a stock tradesman. Unsplash IDs; marked Example photo.
+CLEAN = {
+    "plumbing": ("photo-1671966550483-bed07f4c93b4", "photo-1628528132630-f50513dc2743"),
+    "electrical": ("photo-1609280070598-e1770c80b75c", "photo-1646775814418-4360e97f2ae7"),
+    "gardens": ("photo-1782116987482-df05274c10f1", "photo-1789656435473-e1cdac52a7fb"),
+    "carpentry": ("photo-1722349674028-a148f4364e43", "photo-1755988160715-e19995ce242d"),
+    "decorating": ("photo-1758279745605-1e03b0d62613", "photo-1770677350521-d5fdcbd74367"),
 }
