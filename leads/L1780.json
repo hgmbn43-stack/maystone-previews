@@ -6,5 +6,51 @@
  "Phone": "07771 772977",
  "Google rating": "5",
  "Google reviews": "5",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ6UfWSa3D2EcRfiRq6r5PHL4"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ6UfWSa3D2EcRfiRq6r5PHL4",
+ "details": {
+  "copy": {
+   "lede": "Paul Wood is a plumbing, heating and gas engineer around Wickford. Customers say he gets back to them straight away, turns up when he says he will and talks them through the job, from a leaking valve fixed within the hour to full bathrooms.",
+   "about": [
+    "Paul answers,",
+    "Paul turns up."
+   ],
+   "about_alt": "Paul Wood's van, Plumbing Heating and Gas Services",
+   "photos": {
+    "about": "van.jpg",
+    "tiles": [
+     "cylinder.jpg",
+     "vaillant.jpg",
+     "van.jpg",
+     "shower-bath.jpg",
+     "underfloor.jpg",
+     "bathroom.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "bathroom.jpg",
+     "New bathroom with patterned floor tiles"
+    ],
+    [
+     "underfloor.jpg",
+     "Underfloor heating laid in an extension"
+    ],
+    [
+     "vaillant.jpg",
+     "New boiler and copper pipework"
+    ],
+    [
+     "cylinder.jpg",
+     "Unvented cylinder and plant room"
+    ],
+    [
+     "shower-bath.jpg",
+     "Shower over the bath"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Wickford.",
+   "keep_film": true
+  }
+ }
 }

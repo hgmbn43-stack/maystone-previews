@@ -6,5 +6,51 @@
  "Phone": "07954 819919",
  "Google rating": "4.7",
  "Google reviews": "12",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJzagrNrVldkgRzRg1QKmD3N0"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJzagrNrVldkgRzRg1QKmD3N0",
+ "details": {
+  "copy": {
+   "lede": "Taj Kitchen & Bedroom design, build and fit kitchens, fitted wardrobes, walk-in wardrobes and media walls around Slough. Customers mention the examples they're shown first, clear explanations and work tailored to exactly what they asked for.",
+   "about": [
+    "Made to measure,",
+    "fitted to the millimetre."
+   ],
+   "about_alt": "A sage green shaker kitchen with an island, fitted by Taj Kitchen & Bedroom",
+   "photos": {
+    "about": "sage-kitchen.jpg",
+    "tiles": [
+     "island-kitchen.jpg",
+     "fitted-wardrobes.jpg",
+     "walk-in-wardrobe.jpg",
+     "media-wall.jpg",
+     "sliding-wardrobe.jpg",
+     "alcove-units.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "white-kitchen.jpg",
+     "Handleless kitchen with an island"
+    ],
+    [
+     "media-wall.jpg",
+     "Media wall with slatted panels"
+    ],
+    [
+     "walk-in-wardrobe.jpg",
+     "Walk-in wardrobe"
+    ],
+    [
+     "bedroom-storage.jpg",
+     "Bedroom storage built around the bed"
+    ],
+    [
+     "alcove-units.jpg",
+     "Alcove units with lit shelves"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Slough.",
+   "keep_film": true
+  }
+ }
 }

@@ -6,5 +6,51 @@
  "Phone": "07545 389829",
  "Google rating": "4.7",
  "Google reviews": "12",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJOy0KAnyZdkgRbripHp6gg1g"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJOy0KAnyZdkgRbripHp6gg1g",
+ "details": {
+  "copy": {
+   "lede": "Dan runs MosaicMe, tiling and refurbishing kitchens, bathrooms and floors around Reading. Customers say he explains things clearly, keeps the place tidy and goes above and beyond, from a small repair to two months of floor tiling.",
+   "about": [
+    "Dan does the detail",
+    "others skip."
+   ],
+   "about_alt": "A walk-in shower with metro tiles and a patterned floor, tiled by MosaicMe",
+   "photos": {
+    "about": "walk-in-shower.jpg",
+    "tiles": [
+     "blue-kitchen.jpg",
+     "loft-ensuite.jpg",
+     "shower-tray.jpg",
+     "grey-shower-room.jpg",
+     "cloakroom.jpg",
+     "kitchen-splashback.jpg"
+    ]
+   },
+   "gallery": [
+    [
+     "walk-in-shower.jpg",
+     "Walk-in shower with metro tiles and a patterned floor"
+    ],
+    [
+     "blue-kitchen.jpg",
+     "Kitchen with brick-bond splashback"
+    ],
+    [
+     "loft-ensuite.jpg",
+     "Loft en suite with a quadrant shower"
+    ],
+    [
+     "cloakroom.jpg",
+     "Cloakroom in marble-effect tiles"
+    ],
+    [
+     "grey-shower-room.jpg",
+     "Shower room in grey stone-effect tiles"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Reading.",
+   "keep_film": true
+  }
+ }
 }
