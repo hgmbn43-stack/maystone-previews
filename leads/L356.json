@@ -6,5 +6,116 @@
  "Phone": "07906 484340",
  "Google rating": "5",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJt_aaQM_rdUgR26qAnjETNKk"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJt_aaQM_rdUgR26qAnjETNKk",
+ "details": {
+  "copy": {
+   "lede": "Bill and the team keep gardens around Horsham looking sharp: lawns cut clean, borders dug and edged, and patios and paths jet-washed back to their proper colour. Customers say Bill is reliable, cheerful and excellent value.",
+   "about": [
+    "Borders, lawns",
+    "and patios, done right."
+   ],
+   "about_alt": "A freshly dug and edged border, by Bill's Borders",
+   "photos": {
+    "about": "new-border.jpg",
+    "tiles": [
+     "new-border.jpg",
+     "new-border.jpg",
+     "patio-clean.jpg",
+     "new-border.jpg",
+     "path-after.jpg",
+     "slab-patio.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Lawn cutting",
+     "blurb": "Lawns cut and edged with a clean finish.",
+     "intro": "Neat stripes and sharp edges.",
+     "includes": [
+      "Mowing",
+      "Edging",
+      "Clippings taken away",
+      "Regular visits"
+     ]
+    },
+    {
+     "title": "Borders",
+     "blurb": "Borders weeded, dug over and edged.",
+     "intro": "Beds that look cared for.",
+     "includes": [
+      "Weeding",
+      "Digging over",
+      "Edging",
+      "Mulching"
+     ]
+    },
+    {
+     "title": "Patio and path cleaning",
+     "blurb": "Patios, paths and driveways jet-washed.",
+     "intro": "Back to their proper colour.",
+     "includes": [
+      "Jet washing",
+      "Patios",
+      "Paths",
+      "Driveways"
+     ]
+    },
+    {
+     "title": "Hedges and shrubs",
+     "blurb": "Hedges trimmed and shrubs cut back.",
+     "intro": "Tidy shapes, waste cleared.",
+     "includes": [
+      "Hedge trimming",
+      "Shrub pruning",
+      "Cut-backs",
+      "Waste removal"
+     ]
+    },
+    {
+     "title": "Garden tidy-ups",
+     "blurb": "One-off tidy-ups for overgrown gardens.",
+     "intro": "Back under control in a visit or two.",
+     "includes": [
+      "Clearances",
+      "Leaf clearing",
+      "Tidy-ups",
+      "Green waste"
+     ]
+    },
+    {
+     "title": "Regular maintenance",
+     "blurb": "Regular visits to keep it all in shape.",
+     "intro": "Set and forget.",
+     "includes": [
+      "Weekly",
+      "Fortnightly",
+      "Seasonal",
+      "Holiday cover"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "path-before.jpg",
+     "Path before jet washing"
+    ],
+    [
+     "path-after.jpg",
+     "Side path after jet washing"
+    ],
+    [
+     "patio-clean.jpg",
+     "Patterned patio cleaned"
+    ],
+    [
+     "new-border.jpg",
+     "Border dug and edged"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Horsham.",
+   "keep_film": true
+  },
+  "business": "Bill's Borders"
+ }
 }
