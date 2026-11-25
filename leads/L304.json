@@ -6,5 +6,137 @@
  "Phone": "07749 469403",
  "Google rating": "5",
  "Google reviews": "3",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJu4ZyG_jsMyoRzMPZ17uQBEc"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJu4ZyG_jsMyoRzMPZ17uQBEc",
+ "details": {
+  "copy": {
+   "lede": "Alfie and Charlie run Ace Nature Garden Maintenance around Chichester: lawns, hedges, borders, tree work and overgrown gardens brought back under control. Customers call them honest, reliable lads who won't let you down.",
+   "about": [
+    "Alfie and Charlie,",
+    "on it every visit."
+   ],
+   "about_alt": "A freshly striped lawn and tidy borders, by Ace Nature Garden Maintenance",
+   "photos": {
+    "about": "striped-lawn.jpg",
+    "tiles": [
+     "hedge-lawn.jpg",
+     "topiary-borders.jpg",
+     "striped-lawn.jpg",
+     "raised-beds.jpg",
+     "cleared-path.jpg",
+     "tree-work.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Lawn care",
+     "blurb": "Lawns cut, striped and edged.",
+     "intro": "Sharp stripes, crisp edges.",
+     "includes": [
+      "Mowing",
+      "Striping",
+      "Edging",
+      "Feeding"
+     ]
+    },
+    {
+     "title": "Hedge cutting",
+     "blurb": "Hedges cut straight and level.",
+     "intro": "Clean lines, waste cleared.",
+     "includes": [
+      "Hedge trimming",
+      "Reductions",
+      "Shaping",
+      "Waste removal"
+     ]
+    },
+    {
+     "title": "Borders and shrubs",
+     "blurb": "Borders weeded and shrubs shaped.",
+     "intro": "Beds that look looked after.",
+     "includes": [
+      "Weeding",
+      "Shrub shaping",
+      "Topiary",
+      "Mulching"
+     ]
+    },
+    {
+     "title": "Overgrown gardens",
+     "blurb": "Brambles and overgrowth cleared back.",
+     "intro": "From jungle to usable garden.",
+     "includes": [
+      "Bramble clearance",
+      "Cut-backs",
+      "Paths cleared",
+      "Green waste"
+     ]
+    },
+    {
+     "title": "Planting and raised beds",
+     "blurb": "Raised beds planted and refreshed.",
+     "intro": "Colour back in the garden.",
+     "includes": [
+      "Raised beds",
+      "Planting",
+      "Compost",
+      "Seasonal colour"
+     ]
+    },
+    {
+     "title": "Tree and palm work",
+     "blurb": "Trees, palms and tall shrubs trimmed safely.",
+     "intro": "Up the ladder so you don't have to.",
+     "includes": [
+      "Tree trimming",
+      "Palm tidying",
+      "Crown lifting",
+      "Deadwood"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "An overgrown garden",
+    "title": "Back under",
+    "em": "control.",
+    "steps": [
+     {
+      "photo": "cleared-path.jpg",
+      "title": "Cleared",
+      "text": "Overgrowth cut back and the path found again."
+     },
+     {
+      "photo": "topiary-borders.jpg",
+      "title": "Shaped",
+      "text": "Hedges and shrubs shaped, borders brought back."
+     },
+     {
+      "photo": "striped-lawn.jpg",
+      "title": "Finished",
+      "text": "Lawn striped and edged, ready to enjoy."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "topiary-borders.jpg",
+     "Topiary and borders"
+    ],
+    [
+     "raised-beds.jpg",
+     "Raised beds planted"
+    ],
+    [
+     "palm-trim.jpg",
+     "Palm being tidied"
+    ],
+    [
+     "hedge-lawn.jpg",
+     "Hedge cut level"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Chichester.",
+   "keep_film": true
+  }
+ }
 }
