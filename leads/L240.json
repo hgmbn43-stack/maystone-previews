@@ -6,5 +6,139 @@
  "Phone": "07399 815956",
  "Google rating": "",
  "Google reviews": "0",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN_5czqD3kE0RS2VKzKomu_0"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJN_5czqD3kE0RS2VKzKomu_0",
+ "details": {
+  "copy": {
+   "palette": {
+    "accent": "#c9a24a",
+    "accent_ink": "#dcb763",
+    "brand": "#c9a24a",
+    "brand_text": "#dcb763",
+    "accent_deep": "#7a5e1c"
+   },
+   "lede": "NJR Carpentry build decks, pergolas, slatted fencing, cedar roofs and timber interiors around Shoreham-by-Sea. Every photo here is one of their own builds, from the frame going down to the finished job.",
+   "about": [
+    "Built in timber,",
+    "built to last."
+   ],
+   "about_alt": "A two-level deck built by NJR Carpentry",
+   "photos": {
+    "about": "deck-steps.jpg",
+    "tiles": [
+     "timber-washroom.jpg",
+     "pergola-build.jpg",
+     "cedar-roof.jpg",
+     "slatted-fence.jpg",
+     "deck-steps.jpg",
+     "pergola.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Bespoke joinery",
+     "blurb": "Timber-clad rooms, vanities and fitted pieces.",
+     "intro": "Made for the space.",
+     "includes": [
+      "Timber cladding",
+      "Vanity units",
+      "Built-ins",
+      "Finishing"
+     ]
+    },
+    {
+     "title": "Pergolas",
+     "blurb": "Pergolas built over patios and seating areas.",
+     "intro": "Shade and structure for the garden.",
+     "includes": [
+      "Pergolas",
+      "Raised edging",
+      "Posts set in",
+      "Treated timber"
+     ]
+    },
+    {
+     "title": "Cedar roofing",
+     "blurb": "Cedar shingle roofs laid by hand.",
+     "intro": "A roof that looks the part.",
+     "includes": [
+      "Cedar shingles",
+      "Ridges",
+      "Battens",
+      "Repairs"
+     ]
+    },
+    {
+     "title": "Slatted fencing",
+     "blurb": "Contemporary slatted fencing and screening.",
+     "intro": "Clean, modern lines.",
+     "includes": [
+      "Slatted fences",
+      "Screens",
+      "Walls clad",
+      "Gates"
+     ]
+    },
+    {
+     "title": "Decking",
+     "blurb": "Raised and multi-level decks on proper frames.",
+     "intro": "Built on solid frames, set level.",
+     "includes": [
+      "Deck frames",
+      "Steps",
+      "Multi-level",
+      "Hardwood and softwood"
+     ]
+    },
+    {
+     "title": "Garden structures",
+     "blurb": "Outdoor structures and garden carpentry.",
+     "intro": "From frame to finish.",
+     "includes": [
+      "Garden rooms",
+      "Shelters",
+      "Planters",
+      "Repairs"
+     ]
+    }
+   ],
+   "job_story": {
+    "kicker": "From a recent deck",
+    "title": "Frame first,",
+    "em": "then boards.",
+    "steps": [
+     {
+      "photo": "deck-frame.jpg",
+      "title": "The frame",
+      "text": "Joists set level on adjustable feet along the house."
+     },
+     {
+      "photo": "deck-steps.jpg",
+      "title": "Boarded",
+      "text": "Boards down and steps built in. The same deck."
+     }
+    ]
+   },
+   "gallery": [
+    [
+     "pergola.jpg",
+     "Finished pergola over a new patio"
+    ],
+    [
+     "slatted-fence.jpg",
+     "Slatted fencing"
+    ],
+    [
+     "cedar-roof.jpg",
+     "Cedar shingle roof"
+    ],
+    [
+     "timber-washroom.jpg",
+     "Timber-clad washroom"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Shoreham-by-Sea.",
+   "keep_film": true
+  }
+ }
 }
