@@ -2,9 +2,126 @@
  "Lead ID": "L1018",
  "Business": "On Par Building and Maintenance",
  "Trade": "Handyman/Handywoman/Handyperson",
- "Town": "",
+ "Town": "Lewes",
  "Phone": "07368 512994",
  "Google rating": "5",
  "Google reviews": "3",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJdcnADuj5vQsRvDfZZTwY41c"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJdcnADuj5vQsRvDfZZTwY41c",
+ "details": {
+  "copy": {
+   "lede": "Paul runs On Par Building and Maintenance, taking on sash window repairs, doors, patios, painting and all the niggly jobs around the house. Customers say he's efficient, fairly priced and sorts everything on the list.",
+   "about": [
+    "The niggly jobs,",
+    "sorted properly."
+   ],
+   "about_alt": "Restored white sash windows in a red brick bay, by On Par Building and Maintenance",
+   "photos": {
+    "about": "sash-bay.jpg",
+    "tiles": [
+     "sash-window.jpg",
+     "door-painted.jpg",
+     "slate-patio.jpg",
+     "sash-bay-2.jpg",
+     "door-fitting.jpg",
+     "sash-bay.jpg"
+    ]
+   },
+   "services": [
+    {
+     "title": "Sash windows",
+     "blurb": "Sash windows repaired, eased and repainted.",
+     "intro": "Period windows kept working and looking right.",
+     "includes": [
+      "Sash repairs",
+      "Cords and weights",
+      "Draught-proofing",
+      "Painting"
+     ]
+    },
+    {
+     "title": "Doors",
+     "blurb": "Doors hung, adjusted and painted.",
+     "intro": "Doors that shut properly and look smart.",
+     "includes": [
+      "Door hanging",
+      "Front doors",
+      "Adjustments",
+      "Painting"
+     ]
+    },
+    {
+     "title": "Patios and paving",
+     "blurb": "Slate and stone patios laid with gravel borders.",
+     "intro": "Level, tidy and built to last.",
+     "includes": [
+      "Slate patios",
+      "Stone",
+      "Gravel borders",
+      "Pointing"
+     ]
+    },
+    {
+     "title": "Painting and decorating",
+     "blurb": "Rooms painted inside, windows and woodwork outside.",
+     "intro": "Efficient and fairly priced.",
+     "includes": [
+      "Living rooms",
+      "Woodwork",
+      "Exterior paint",
+      "Prep"
+     ]
+    },
+    {
+     "title": "Repairs and maintenance",
+     "blurb": "All the niggly jobs on the list, sorted in one go.",
+     "intro": "One call for the whole list.",
+     "includes": [
+      "Small repairs",
+      "Fixing and fitting",
+      "Landlord jobs",
+      "Odd jobs"
+     ]
+    },
+    {
+     "title": "General building",
+     "blurb": "Small building jobs around the house and garden.",
+     "intro": "Done properly, not just patched.",
+     "includes": [
+      "Brickwork repairs",
+      "Garden jobs",
+      "Making good",
+      "Carpentry"
+     ]
+    }
+   ],
+   "gallery": [
+    [
+     "sash-window.jpg",
+     "Sash window restored"
+    ],
+    [
+     "slate-patio.jpg",
+     "Slate patio with gravel border"
+    ],
+    [
+     "door-painted.jpg",
+     "Front door painted"
+    ],
+    [
+     "sash-bay-2.jpg",
+     "Bay windows finished"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Lewes.",
+   "keep_film": true,
+   "palette": {
+    "accent": "#8fa07a",
+    "accent_ink": "#a7b793",
+    "brand": "#8fa07a",
+    "brand_text": "#a7b793",
+    "accent_deep": "#2f4a32"
+   }
+  }
+ }
 }
