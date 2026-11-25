@@ -6,5 +6,10 @@
  "Phone": "07999 821930",
  "Google rating": "4.8",
  "Google reviews": "4",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJT8jkg06sdUgRVGVwvE_vFcM"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJT8jkg06sdUgRVGVwvE_vFcM",
+ "details": {
+  "copy": {
+   "lede": "Warm and Kozy look after boilers, gas fires and heating around Bognor Regis. One customer had a new fire surround and gas fire installed and the boiler moved and serviced in the same job."
+  }
+ }
 }
