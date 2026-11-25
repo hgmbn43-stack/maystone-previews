@@ -386,6 +386,20 @@ NEARBY = {
     "Haywards Heath": ["Lindfield", "Cuckfield", "Burgess Hill", "Hassocks", "Wivelsfield"],
     "Eastbourne": ["Hampden Park", "Polegate", "Pevensey", "Willingdon", "Hailsham"],
     "Lewes": ["Ringmer", "Newhaven", "Seaford", "Kingston", "Peacehaven"],
+    # Outside Sussex (25 Nov 2026): every town we have leads in gets at least 4 neighbours.
+    "Polegate": ["Eastbourne", "Willingdon", "Hailsham", "Alfriston", "Pevensey"],
+    "Alfriston": ["Seaford", "Polegate", "Eastbourne", "Lewes", "Newhaven"],
+    "Windsor": ["Eton", "Datchet", "Old Windsor", "Slough", "Maidenhead"],
+    "Slough": ["Langley", "Burnham", "Datchet", "Windsor", "Farnham Common"],
+    "Reading": ["Tilehurst", "Caversham", "Earley", "Woodley", "Wokingham"],
+    "Wokingham": ["Finchampstead", "Winnersh", "Crowthorne", "Bracknell", "Earley"],
+    "Tring": ["Berkhamsted", "Aylesbury", "Wendover", "Aston Clinton", "Kings Langley"],
+    "Letchworth Garden City": ["Baldock", "Hitchin", "Stevenage", "Arlesey", "Royston"],
+    "Borehamwood": ["Elstree", "Radlett", "Barnet", "Edgware", "Potters Bar"],
+    "Maidstone": ["Aylesford", "Larkfield", "Bearsted", "Barming", "Coxheath"],
+    "Wickford": ["Billericay", "Basildon", "Rayleigh", "Runwell", "Shotgate"],
+    "Bridport": ["West Bay", "Lyme Regis", "Charmouth", "Beaminster", "Dorchester"],
+    "Addlestone": ["Weybridge", "Chertsey", "New Haw", "Byfleet", "Woking"],
 }
 
 
@@ -445,6 +459,21 @@ POSTCODES = {
     "Hassocks": ["BN6"], "Hurstpierpoint": ["BN6"], "Wivelsfield": ["RH17"], "Haywards Heath": ["RH16"],
     "Lindfield": ["RH16"], "Cuckfield": ["RH17"], "Eastbourne": ["BN20", "BN21", "BN22", "BN23"],
     "Hampden Park": ["BN22"], "Polegate": ["BN26"], "Pevensey": ["BN24"], "Willingdon": ["BN20"], "Hailsham": ["BN27"],
+    "Alfriston": ["BN26"], "Windsor": ["SL4"], "Eton": ["SL4"], "Datchet": ["SL3"], "Old Windsor": ["SL4"],
+    "Slough": ["SL1", "SL2", "SL3"], "Maidenhead": ["SL6"], "Langley": ["SL3"], "Burnham": ["SL1"], "Farnham Common": ["SL2"],
+    "Reading": ["RG1", "RG2", "RG30", "RG31"], "Tilehurst": ["RG30", "RG31"], "Caversham": ["RG4"], "Earley": ["RG6"],
+    "Woodley": ["RG5"], "Wokingham": ["RG40", "RG41"], "Finchampstead": ["RG40"], "Winnersh": ["RG41"],
+    "Crowthorne": ["RG45"], "Bracknell": ["RG12", "RG42"], "Tring": ["HP23"], "Berkhamsted": ["HP4"],
+    "Aylesbury": ["HP19", "HP20", "HP21"], "Wendover": ["HP22"], "Aston Clinton": ["HP22"], "Kings Langley": ["WD4"],
+    "Letchworth Garden City": ["SG6"], "Baldock": ["SG7"], "Hitchin": ["SG4", "SG5"], "Stevenage": ["SG1", "SG2"],
+    "Arlesey": ["SG15"], "Royston": ["SG8"], "Borehamwood": ["WD6"], "Elstree": ["WD6"], "Radlett": ["WD7"],
+    "Barnet": ["EN4", "EN5"], "Edgware": ["HA8"], "Potters Bar": ["EN6"], "Maidstone": ["ME14", "ME15", "ME16"],
+    "Aylesford": ["ME20"], "Larkfield": ["ME20"], "Bearsted": ["ME14"], "Barming": ["ME16"], "Coxheath": ["ME17"],
+    "Wickford": ["SS11", "SS12"], "Billericay": ["CM11", "CM12"], "Basildon": ["SS13", "SS14", "SS15", "SS16"],
+    "Rayleigh": ["SS6"], "Runwell": ["SS11"], "Shotgate": ["SS11"], "Bridport": ["DT6"], "West Bay": ["DT6"],
+    "Lyme Regis": ["DT7"], "Charmouth": ["DT6"], "Beaminster": ["DT8"], "Dorchester": ["DT1", "DT2"],
+    "Addlestone": ["KT15"], "Weybridge": ["KT13"], "Chertsey": ["KT16"], "New Haw": ["KT15"], "Byfleet": ["KT14"],
+    "Woking": ["GU21", "GU22"],
 }
 
 

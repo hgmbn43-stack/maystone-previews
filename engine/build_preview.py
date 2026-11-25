@@ -68,12 +68,34 @@ DEMOS = [
 
 def tidy_name(name):
     """Fix ALL CAPS or all-lowercase names; leave mixed case alone."""
-    name = re.sub(r"\s+", " ", (name or "")).strip().rstrip(",")
+    name = re.sub(r"\s+([,.])", r"\1", re.sub(r"\s+", " ", (name or ""))).strip().rstrip(",")
     letters = re.sub(r"[^A-Za-z]", "", name)
     if letters and (letters.isupper() or letters.islower()) and len(letters) > 3:
         name = name.title()
         name = re.sub(r"\bLtd\b\.?", "Ltd", name)
+    else:   # mixed case: lift stray lowercase words, e.g. "Roofing & guttering" (25 Nov 2026)
+        small = {"and", "of", "the", "for", "in", "on", "at", "by", "to", "a", "an", "or"}
+        name = " ".join(w[:1].upper() + w[1:] if (w.isalpha() and w.islower() and w not in small and i) else w
+                        for i, w in enumerate(name.split(" ")))
     return name
+
+
+def short_name(name):
+    """The name as it fits a phone header: 'MosaicMe Tiling and Refurbishment' -> 'MosaicMe'."""
+    if len(name) <= 20:
+        return name
+    trade = r"(plumb|heat|gas|electr|build|roof|landscap|garden|carpent|join|plaster|til|decor|paint|refurb|renov|home|propert|construct|maint|servic|ltd|limited|contract|bespoke|kitchen|fenc|outdoor|clean|window|handy|general|&|and)"
+    words, out = name.split(" "), []
+    for w in words:
+        if out and re.match(trade, w, re.I):
+            break
+        out.append(w)
+    if len(out) == 1 and out[0].lower() in ("affordable", "premier", "quality", "local", "reliable", "total", "pro", "elite", "prime", "expert", "the", "a1", "first"):
+        out = words[:2]
+    if (len(out) == 1 and re.match(trade, out[0], re.I)) or (out[0].lower() == "the" and len(out) < 3):
+        return name
+    short = " ".join(out).rstrip(",")
+    return short if 3 <= len(short) <= 22 else name
 
 
 def initials(name):
@@ -334,7 +356,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     logo = next((p for p in own_files if p.stem.lower() == "logo"), None)
 
     biz = {
-        "name": name, "initials": initials(name), "town": town, "town_longest": max(len(w) for w in re.split(r"[-\s]", town)), "phone": phone, "tel": tel_link(phone),
+        "name": name, "short": ((details.get("copy") or {}).get("short_name") if isinstance(details.get("copy"), dict) else None) or short_name(name), "initials": initials(name), "town": town, "town_longest": max(len(w) for w in re.split(r"[-\s]", town)), "phone": phone, "tel": tel_link(phone),
         "whatsapp": whatsapp_link(phone), "reviews": reviews,
         "rating_str": f"{rating:.1f}" if rating is not None else "",
         "rating_pct": round(rating / 5 * 100) if rating is not None else 0,

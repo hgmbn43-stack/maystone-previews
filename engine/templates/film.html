@@ -317,7 +317,7 @@ textarea { min-height: 7rem; resize: vertical; }
 .chips { display: flex; gap: .45rem; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
 .chips::-webkit-scrollbar { display: none; }
 .chips label { flex: 0 0 auto; cursor: pointer; }
-.chips input { position: absolute; opacity: 0; pointer-events: none; }
+.chips input { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; clip: rect(0 0 0 0); overflow: hidden; }
 .chips span { display: grid; place-items: center; min-width: 3.6rem; min-height: 44px; padding: .45rem .8rem; border: 1px solid var(--line); border-radius: 999px; font-size: .85rem; line-height: 1.15; text-align: center; transition: background .2s, color .2s, border-color .2s; }
 .chips.days span { border-radius: 12px; }
 .chips.slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); overflow: visible; }
@@ -499,7 +499,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
 <header class="top" id="topbar">
   {% if preview %}<div class="ribbon"><span class="long">Website preview for {{ biz.name }}, made by Maystone. {{ 'The film, prices and dashed boxes are examples' if show_film else 'Photos marked "Example" and the dashed boxes are placeholders' }} for you to check.</span><span class="short">Preview by Maystone. Examples are marked.</span></div>{% endif %}
   <div class="bar">
-    <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong>{{ biz.name }}</strong></a>
+    <a class="mark" href="#top" aria-label="{{ biz.name }} home">{% if biz.logo %}<img src="{{ biz.logo }}" alt="">{% else %}<span class="mono">{{ biz.initials }}</span>{% endif %}<strong><span class="nm-full">{{ biz.name }}</span>{% if biz.short != biz.name %}<span class="nm-short">{{ biz.short }}</span>{% endif %}</strong></a>
     <nav class="links" aria-label="Main"><a href="#services">{{ 'Menu' if t.venue else 'Services' }}</a>{% if preview or biz.show_rating %}<a href="#reviews">Reviews</a>{% endif %}<a href="#areas">{{ 'Find us' if t.venue else 'Areas' }}</a><a href="#quote">{{ 'Book' if t.venue else 'Get a quote' }}</a>{% if svc_pages %}<a href="contact/">Contact</a>{% endif %}</nav>
     <a class="btn btn-accent" href="tel:{{ biz.tel }}" aria-label="Call {{ biz.phone }}">{{ phone_icon|safe }}{{ biz.phone }}</a>
     <details class="menu"><summary aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
@@ -928,7 +928,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
     <div class="wrap quote-grid">
       <div class="quote-side">
         <p class="kicker">{{ 'Planning a visit?' if t.venue else 'Ready when you are' }}</p>
-        <h2>{% if t.venue %}Book a table or ask about an event.{% else %}Need a {{ t.cta_noun }} in {{ biz.town }}?{% endif %}</h2>
+        <h2>{% if t.venue %}Book a table or ask about an event.{% else %}Need {{ 'an' if t.cta_noun[:1] in 'aeiouAEIOU' else 'a' }} {{ t.cta_noun }} in {{ biz.town }}?{% endif %}</h2>
         <p>{{ t.quote_intro }}</p>
         <div class="end-row">
           <a class="phone" href="tel:{{ biz.tel }}">{{ biz.phone }}</a>

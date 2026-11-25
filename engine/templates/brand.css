@@ -427,3 +427,16 @@ body.brand .fm-sec > summary { font-weight: 500; }
 
 /* A real logo already says the name: on phones show the logo alone (23 Nov 2026). */
 @media (max-width: 700px) { body.brand .mark:has(img) strong { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; } }
+
+/* Fresh-eyes review fixes (25 Nov 2026) */
+html, body { overflow-x: clip; }
+.bmarquee { contain: paint; }
+.nm-short { display: none; }
+@media (max-width: 700px) {
+  body.brand .top .mark strong { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 46vw; }
+  body.brand .top .mark strong:has(.nm-short) .nm-full { display: none; }
+  body.brand .top .mark strong .nm-short { display: inline; }
+}
+/* Film captions stay readable over the footage */
+body.brand .beat .in { text-shadow: 0 2px 18px rgba(0,0,0,.55); }
+body.brand .beat::before { content: ""; position: absolute; inset: -40% 0; background: radial-gradient(ellipse at 25% 50%, rgba(0,0,0,.5), transparent 65%); z-index: -1; pointer-events: none; }
