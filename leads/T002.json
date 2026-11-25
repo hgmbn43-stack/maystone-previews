@@ -17,7 +17,8 @@
    "look": "clean",
    "photos": {
     "wide": "https://images.unsplash.com/photo-1671966550483-bed07f4c93b4?w=1920&q=78&auto=format&fit=crop",
-    "tall": "https://images.unsplash.com/photo-1671966550483-bed07f4c93b4?w=900&h=1600&q=78&auto=format&fit=crop&crop=right"
+    "tall": "https://images.unsplash.com/photo-1671966550483-bed07f4c93b4?w=900&h=1600&q=78&auto=format&fit=crop&crop=right",
+    "about": "https://images.unsplash.com/photo-1628528132630-f50513dc2743?w=900&h=1125&q=78&auto=format&fit=crop&crop=right"
    }
   }
  },

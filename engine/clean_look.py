@@ -30,6 +30,7 @@ ICONS = {
     "brush": '<path d="M4 4h12v5H4zM16 6.5h3v5h-7v3"/><rect x="10.5" y="14.5" width="3" height="6.5" rx="1"/>',
     "roller": '<rect x="3" y="4" width="14" height="5" rx="1"/><path d="M17 6.5h3v5h-8v3"/><rect x="10.5" y="14.5" width="3" height="6.5" rx="1"/>',
     "leaf": '<path d="M5 19c0-8 5-14 15-14 0 10-6 15-14 15"/><path d="M5 19c3-4 6-7 10-9"/>',
+    "sprout": '<path d="M12 21v-9M12 12c0-4-3-6-7-6 0 4 3 6 7 6zM12 14c0-4 3-6.5 7-6.5 0 4-3 6.5-7 6.5zM8 21h8"/>',
     "tree": '<path d="M12 21v-6M12 3l6 8h-3l4 4H5l4-4H6z"/>',
     "fence": '<path d="M4 8l1.5-3L7 8v12H4zM10.5 8 12 5l1.5 3v12h-3zM17 8l1.5-3L20 8v12h-3zM7 11h3.5M13.5 11H17M7 16h3.5M13.5 16H17"/>',
     "paving": '<path d="M3 20 7 4h10l4 16z"/><path d="M5 12h14M12 4v16M8.5 12 7.5 20M15.5 12l1 8"/>',
@@ -49,32 +50,44 @@ ICONS = {
     "key": '<circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M21 12v2"/>',
     "sparkle": '<path d="M12 3v5M12 16v5M3 12h5M16 12h5M6 6l3 3M15 15l3 3M18 6l-3 3M9 15l-3 3"/>',
 }
-# First match wins, so the more specific words come first.
+# Every rule that matches a service is a candidate, in order; each row takes the first icon not already used,
+# so three boiler services get a flame, a spanner and a shield rather than three flames.
 RULES = [
-    (r"radiator|underfloor", "radiator"), (r"boiler|heating|gas|cylinder|heat pump", "flame"),
+    (r"radiator|underfloor", "radiator"), (r"tiling", "tiles"), (r"fuse|consumer|board", "bolt"), (r"chimney", "brick"), (r"flat roof", "house"), (r"\bev\b|charger", "car"), (r"loft", "stairs"), (r"knock", "door"),
+    (r"exterior", "house"), (r"wallpaper", "tiles"), (r"woodwork", "door"), (r"plant|bed|flower", "sprout"), (r"rewir|wiring", "plug"),
+    (r"repair|fault|breakdown", "wrench"), (r"servic|maint", "check"),
+    (r"install|replace", "box"), (r"boiler|heating|gas|cylinder|heat pump", "flame"),
     (r"shower", "shower"), (r"bath|tap|toilet|sink|basin|wet ?room", "bath"),
     (r"leak|burst|pipe|drain|water|softener|blockage", "drop"),
     (r"\bev\b|charger|car", "car"), (r"fuse|consumer|board|rewire|wiring", "bolt"), (r"socket|plug", "plug"),
-    (r"light", "bulb"), (r"eicr|safety|inspect|certif|test|survey|report", "shield"), (r"fault|electr", "bolt"),
-    (r"gutter|fascia|soffit", "gutter"), (r"chimney|roof|slate|tile repair|flat roof|lead", "roof"),
+    (r"light", "bulb"), (r"eicr|safety|inspect|certif|test|survey|report", "shield"), (r"electr", "bolt"),
+    (r"gutter|fascia|soffit", "gutter"), (r"chimney|roof|slate|flat roof|lead", "roof"),
     (r"brick|wall|point|block|knock", "brick"), (r"extension|loft|conversion|build|renovat|refurb", "house"),
-    (r"wallpaper|exterior paint|interior paint|paint|decor", "roller"), (r"woodwork|varnish|stain", "brush"),
+    (r"wallpaper|paint|decor", "roller"), (r"woodwork|varnish|stain", "brush"),
     (r"kitchen|cabinet", "kitchen"), (r"tiling|tile", "tiles"), (r"floor|skirting|laminate|carpet", "floor"),
     (r"door|frame|window", "door"), (r"stair", "stairs"), (r"wardrobe|cupboard|storage|shelv", "wardrobe"),
     (r"deck|joinery|bespoke|carpent", "saw"), (r"patio|paving|driveway|path", "paving"), (r"fenc|gate", "fence"),
-    (r"tree|hedge", "tree"), (r"turf|lawn|plant|bed|garden|landscap|maint", "leaf"),
+    (r"tree|hedge", "tree"), (r"turf|lawn|plant|bed|garden|landscap", "leaf"),
     (r"flat[- ]?pack|assembl", "box"), (r"hang|fix|mount|shelf|tv", "drill"), (r"clean", "sparkle"),
-    (r"landlord|letting|propert", "key"), (r"repair|servic|odd job|small job", "wrench"),
-    (r"design|plan|quote|survey", "search"), (r"emergency|24", "clock"),
+    (r"landlord|letting|propert", "key"), (r"odd job|small job|general", "hammer"),
+    (r"design|plan|quote", "search"), (r"emergency|24", "clock"),
 ]
+SPARE = ["hammer", "wrench", "check", "shield", "clock", "search", "sparkle", "key"]
 
 
-def icon_for(title, fallback="hammer"):
-    t = (title or "").lower()
-    for pat, name in RULES:
-        if re.search(pat, t):
-            return _S.format(ICONS[name])
-    return _S.format(ICONS[fallback])
+def icons_for(titles):
+    used, out = set(), []
+    for title in titles:
+        t = (title or "").lower()
+        cands = [name for pat, name in RULES if re.search(pat, t)] + SPARE
+        pick = next((c for c in cands if c not in used), cands[0])
+        used.add(pick)
+        out.append(_S.format(ICONS[pick]))
+    return out
+
+
+def icon_for(title):
+    return icons_for([title])[0]
 
 
 def apply(brand, services, copy, preview):
@@ -84,6 +97,6 @@ def apply(brand, services, copy, preview):
     brand["clean"] = True
     own_tiles = all(str(x).startswith("img/fb/") for x in (brand.get("tiles") or [])) and brand.get("tiles")
     if not own_tiles:
-        brand["icons"] = [icon_for(sv.get("title") if isinstance(sv, dict) else sv[0]) for sv in services]
+        brand["icons"] = icons_for([sv.get("title") if isinstance(sv, dict) else sv[0] for sv in services])
     brand["hero_stock"] = bool(brand.get("label"))
     brand["about_stock"] = not brand.get("about_own") and not str(brand.get("about_img") or "").startswith("img/fb/")
