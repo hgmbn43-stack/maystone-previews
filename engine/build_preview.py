@@ -313,6 +313,11 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
     if not phone:
         return None, "no phone"
     group = group_for(row.get("Trade"), name)
+    # Per-lead trade group (25 Nov 2026): details.copy.group picks a different group's look when the sheet's
+    # Google category is wrong or has no group of its own (e.g. an appliance repairer listed as "Carpenter").
+    _cg = ((details.get("copy") or {}).get("group") if isinstance(details.get("copy"), dict) else None)
+    if _cg in TRADES:
+        group = _cg
     t = dict(TRADES[group], steps=STEPS)
     cred_values = details.get("creds") or {}          # by label, or
     cred_list = details.get("creds_list") or []        # by position: [registration, insurance/guarantee]
@@ -487,7 +492,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             brand["palette"] = {**brand["palette"], **copy["palette"]}
             if copy["palette"].get("accent_deep") and brand.get("light"):
                 brand["light"] = {**brand["light"], "accent_deep": copy["palette"]["accent_deep"]}
-    for k in ("lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
+    for k in ("cta_noun", "short", "label", "no_film", "lede", "kicker", "promise", "services_title", "services_intro", "faqs", "quote_intro", "enquiry_options", "menu_note", "full_menu", "full_menu_title", "gallery_intro", "gallery_kicker"):
         if copy.get(k):
             t[k] = copy[k]
     # The business's own photos (17 Nov 2026), e.g. from their Facebook with their permission: leads/<ID>/photos/*.jpg,
@@ -509,6 +514,16 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             if ph.get("wide") or ph.get("tall"):   # stock hero kept = still marked "Example photo"
                 brand["label"] = ""
         fb_gallery = [{"src": "img/fb/" + g[0], "caption": g[1] if len(g) > 1 else ""} for g in (copy.get("gallery") or [])]
+    # Hotlinked example photos per lead (25 Nov 2026): copy.photos values that are full https links (e.g. Unsplash)
+    # replace the trade's stock photos for one business. They stay marked "Example photo".
+    ph_web = {k: v for k, v in (copy.get("photos") or {}).items() if isinstance(v, str) and v.startswith("https://")}
+    tiles_web = [x for x in ((copy.get("photos") or {}).get("tiles") or []) if isinstance(x, str) and x.startswith("https://")]
+    if brand and (ph_web or tiles_web):
+        brand.update({k: v for k, v in ph_web.items() if k in ("wide", "tall")})
+        if ph_web.get("about"):
+            brand["about_img"] = ph_web["about"]
+        if tiles_web:
+            brand["tiles"], brand["tile_base"] = tiles_web, ""
     if copy.get("book"):
         t["book"] = copy["book"]
     if copy.get("pipe_run"):   # a photo of pipework whose copper heats up as you scroll (20 Nov 2026)

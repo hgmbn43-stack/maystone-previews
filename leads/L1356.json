@@ -6,5 +6,187 @@
  "Phone": "07742 947282",
  "Google rating": "5",
  "Google reviews": "37",
- "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJqVrMFz09SYAR0JHpKU3jv4I"
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJqVrMFz09SYAR0JHpKU3jv4I",
+ "details": {
+  "copy": {
+   "group": "handyman",
+   "no_film": true,
+   "label": "Appliance repairs",
+   "cta_noun": "appliance engineer",
+   "short": "Local",
+   "palette": {
+    "ground": "#0e1830",
+    "paper": "#151f36",
+    "card": "#1c263c",
+    "ink": "#ece7df",
+    "ink_soft": "#a7a198",
+    "line": "#30384d",
+    "accent": "#e0453a",
+    "accent_ink": "#f26a5f",
+    "brand": "#e0453a",
+    "brand_text": "#f26a5f",
+    "accent_deep": "#a8271d"
+   },
+   "headline": [
+    "Fixed, not",
+    "replaced."
+   ],
+   "sub": "Washing machines, ovens, tumble dryers and cooker hoods repaired across Reading and nearby, and new washing machines fitted. You know the price before Dan starts.",
+   "kicker": "Appliance repairs",
+   "stats": [
+    [
+     "Upfront",
+     "price, no surprises"
+    ],
+    [
+     "Repair",
+     "before you replace"
+    ]
+   ],
+   "alt": "A washing machine and tumble dryer in a bright utility room",
+   "photos": {
+    "wide": "https://images.unsplash.com/photo-1778731660248-044f78e8c1fb?w=2000&q=72&auto=format&fit=crop",
+    "tall": "https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=900&h=1600&q=70&auto=format&fit=crop",
+    "about": "https://images.unsplash.com/photo-1691729086731-a8f0b124986c?w=900&h=1125&q=70&auto=format&fit=crop",
+    "tiles": [
+     "https://images.unsplash.com/photo-1764705637770-9fc400e090cb?w=500&h=500&q=65&auto=format&fit=crop",
+     "https://images.unsplash.com/photo-1622473590925-e3616c0a41bf?w=500&h=500&q=65&auto=format&fit=crop",
+     "https://images.unsplash.com/photo-1584269600519-112d071b35e6?w=500&h=500&q=65&auto=format&fit=crop",
+     "https://images.unsplash.com/photo-1632923565835-6582b54f2105?w=500&h=500&q=65&auto=format&fit=crop",
+     "https://images.unsplash.com/photo-1677727852911-74e9d5269003?w=500&h=500&q=65&auto=format&fit=crop",
+     "https://images.unsplash.com/photo-1662220984920-3bd1f88e846f?w=500&h=500&q=65&auto=format&fit=crop"
+    ]
+   },
+   "about": [
+    "A local engineer who",
+    "fixes it first."
+   ],
+   "about_alt": "Close-up of a washing machine's controls",
+   "lede": "Prime Appliance Repairs is Dan, a local appliance engineer just outside Reading. He finds out what's actually wrong, explains it in plain English and tells you the price up front, so there are no surprises. Plenty of customers have saved the cost of a new machine.",
+   "process": [
+    "Three steps to",
+    "a working machine."
+   ],
+   "areas": [
+    "Tilehurst",
+    "Purley on Thames",
+    "Pangbourne",
+    "Calcot",
+    "Theale",
+    "Caversham"
+   ],
+   "postcodes": {
+    "Reading": [
+     "RG1",
+     "RG2",
+     "RG4",
+     "RG30",
+     "RG31"
+    ],
+    "Tilehurst": [
+     "RG30",
+     "RG31"
+    ],
+    "Purley on Thames": [
+     "RG8"
+    ],
+    "Pangbourne": [
+     "RG8"
+    ],
+    "Calcot": [
+     "RG31"
+    ],
+    "Theale": [
+     "RG7"
+    ],
+    "Caversham": [
+     "RG4"
+    ]
+   },
+   "services_title": "What Dan fixes",
+   "services_intro": "Repairs and installs for the machines you use every day.",
+   "services": [
+    {
+     "title": "Washing machine repairs",
+     "blurb": "Not spinning, not draining, leaking or stuck mid-cycle. Found and fixed.",
+     "intro": "Most faults are found on the first visit, and Dan tells you what went wrong before he fixes it.",
+     "includes": [
+      "Won't spin or drain",
+      "Leaks and door seals",
+      "Stuck doors and error codes",
+      "Honest repair-or-replace advice"
+     ]
+    },
+    {
+     "title": "Washing machine installation",
+     "blurb": "New machines fitted, plumbed in and tested, with the old one checked first in case it's worth saving.",
+     "intro": "Fitted properly so it doesn't leak or walk across the floor.",
+     "includes": [
+      "Plumbed in and levelled",
+      "Tested before he leaves",
+      "Old machine checked first"
+     ]
+    },
+    {
+     "title": "Oven and cooker repairs",
+     "blurb": "Fan ovens not heating, elements, thermostats and doors.",
+     "intro": "Found fast and explained, with the price agreed before any work.",
+     "includes": [
+      "Fan ovens not heating",
+      "Elements and thermostats",
+      "Doors and seals"
+     ]
+    },
+    {
+     "title": "Tumble dryer repairs",
+     "blurb": "Not heating, not turning or stopping early. Back up and running.",
+     "intro": "Dryers fixed in your home where possible.",
+     "includes": [
+      "Not heating",
+      "Drum not turning",
+      "Stops mid-cycle"
+     ]
+    },
+    {
+     "title": "Cooker hood repairs",
+     "blurb": "Fans, lights and switches that have given up.",
+     "intro": "Often a simple fix that saves buying a new hood.",
+     "includes": [
+      "Fan not working",
+      "Lights and switches",
+      "Noisy motors"
+     ]
+    },
+    {
+     "title": "Fault finding and advice",
+     "blurb": "Not sure what's wrong? Dan will diagnose it and tell you straight if it's worth fixing.",
+     "intro": "An honest answer on whether to repair or replace.",
+     "includes": [
+      "Clear diagnosis",
+      "Price before any work",
+      "Straight answer on repair or replace"
+     ]
+    }
+   ],
+   "faqs": [
+    [
+     "Is it worth repairing, or should I buy new?",
+     "Dan will tell you straight. A repair often costs far less than a new machine, and if it isn't worth fixing he'll say so."
+    ],
+    [
+     "Will I know the price first?",
+     "Yes. You'll know what it costs before any work starts."
+    ],
+    [
+     "Do you fit new washing machines?",
+     "Yes. Dan installs washing machines, and can check the old one first in case it's worth saving."
+    ],
+    [
+     "What areas do you cover?",
+     "Reading and the villages around it, including Tilehurst, Purley on Thames and Pangbourne. Call to check if you're further out."
+    ]
+   ],
+   "quote_intro": "Tell Dan what's playing up and he'll get back to you with a price."
+  }
+ }
 }

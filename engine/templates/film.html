@@ -1,4 +1,4 @@
-{% set show_film = not (brand and (t.venue or (t.job_story and not t.keep_film))) %}<!doctype html>
+{% set show_film = not (brand and (t.venue or t.no_film or (t.job_story and not t.keep_film))) %}<!doctype html>
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
