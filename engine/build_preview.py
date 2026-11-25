@@ -28,6 +28,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+import clean_look  # noqa: E402
 from trades import BRAND, FILM_TIMING, FILMS, NEARBY, POSTCODES, PRICES, SCENES, STEPS, TRADES, group_for
 
 HERE = Path(__file__).resolve().parent
@@ -524,6 +525,7 @@ def build_one(env, row, out_root, preview=True, details=None, lead_dir=None, dom
             brand["about_img"] = ph_web["about"]
         if tiles_web:
             brand["tiles"], brand["tile_base"] = tiles_web, ""
+    clean_look.apply(brand, services, copy, preview)   # 25 Nov 2026: own photo up top, icons, one colour grade
     if copy.get("book"):
         t["book"] = copy["book"]
     if copy.get("pipe_run"):   # a photo of pipework whose copper heats up as you scroll (20 Nov 2026)

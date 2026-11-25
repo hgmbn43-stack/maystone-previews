@@ -29,13 +29,17 @@ def main():
     for f in sorted((ROOT / "leads").glob("*.json")):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
-            row = {k: str(v) for k, v in data.items() if k not in ("live", "details", "domain")}
+            row = {k: str(v) for k, v in data.items() if k not in ("live", "details", "domain", "test_of")}
         except (ValueError, OSError) as e:
             print(f"skip {f.name}: {e}")
             continue
         leads.append((f, data, row))
     # Every lead gets a scroll film nobody else in their area has (see build_preview.assign_films).
-    films = assign_films([row for _, _, row in leads])
+    # Test copies (IDs starting "T", with "test_of") borrow the real lead's film and never change anyone's films.
+    films = assign_films([row for _, d, row in leads if not d.get("test_of")])
+    for _, d, row in leads:
+        if d.get("test_of"):
+            films[row.get("Lead ID")] = films.get(d["test_of"])
     for f, data, row in leads:
         live = bool(data.get("live"))
         details = data.get("details") if isinstance(data.get("details"), dict) else {}

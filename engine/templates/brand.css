@@ -503,3 +503,13 @@ body.brand.lay-c .bhero { background: {{ brand.palette.ground }}; }
   body.brand.lay-c .bh-scroll { display: none; }
 }
 @media (max-width: 700px) { body.brand.lay-b .top .mark strong { font-size: .98rem; max-width: 50vw; } }
+
+/* Clean look (25 Nov 2026): service icons instead of stock tiles, and one colour grade over any stock photo left,
+   so the stock reads as one shoot in the site's own colours. */
+.jobs.rows .tile-ico { display: grid; place-items: center; background: color-mix(in srgb, var(--accent) 10%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); color: var(--accent-ink); transition: background .4s ease, color .4s ease; }
+.jobs.rows .tile-ico svg { width: 46%; height: 46%; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.jobs.rows li:hover .tile-ico { background: var(--accent); color: {{ brand.palette.ground }}; }
+.jobs.rows li:hover .tile-ico svg { transform: scale(1.12) rotate(-4deg); }
+.bhero.stock img, .about-img.stock img { filter: saturate(.62) contrast(1.06) sepia(.16) brightness(.97); }
+.bhero.stock picture::after, .about-img.stock::after { content: ""; position: absolute; inset: 0; background: var(--accent); mix-blend-mode: soft-light; opacity: .4; pointer-events: none; z-index: -1; }
+.about-img.stock::after { z-index: 1; }

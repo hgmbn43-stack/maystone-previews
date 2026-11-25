@@ -1,0 +1,25 @@
+{
+ "Lead ID": "T002",
+ "Business": "Hestia Heating",
+ "Trade": "Gas engineer",
+ "Town": "Worthing",
+ "Phone": "07586 710119",
+ "Google rating": "5",
+ "Google reviews": "7",
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJ3RipNi-jdUgRUF4spO8zVKA",
+ "details": {
+  "copy": {
+   "lede": "Hailey runs Hestia Heating around Worthing: new boilers, boilers moved to the loft, radiators and heating repairs. Customers call her honest, reliable and reasonably priced, and say she keeps them informed throughout.",
+   "about": [
+    "Hailey looks after",
+    "your heating."
+   ],
+   "look": "clean",
+   "photos": {
+    "wide": "https://images.unsplash.com/photo-1671966550483-bed07f4c93b4?w=1920&q=78&auto=format&fit=crop",
+    "tall": "https://images.unsplash.com/photo-1671966550483-bed07f4c93b4?w=900&h=1600&q=78&auto=format&fit=crop&crop=right"
+   }
+  }
+ },
+ "test_of": "L023"
+}

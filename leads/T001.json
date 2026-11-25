@@ -1,0 +1,60 @@
+{
+ "Lead ID": "T001",
+ "Business": "Flash Plumbing and Heating Services Ltd",
+ "Trade": "Plumber",
+ "Town": "Worthing",
+ "Phone": "07379 937165",
+ "Google rating": "4.9",
+ "Google reviews": "67",
+ "Google Maps": "https://www.google.com/maps/place/?q=place_id:ChIJfY__GVyZdUgRioxttClzoKA",
+ "details": {
+  "copy": {
+   "lede": "Flash Plumbing and Heating fit boilers, cylinders, bathrooms, showers and water softeners around Worthing, with neat copper and waste pipework you could frame.",
+   "about": [
+    "Pipework neat enough",
+    "to show off."
+   ],
+   "about_alt": "A boiler, cylinder and copper pipework fitted by Flash Plumbing and Heating",
+   "photos": {
+    "about": "plant-room-hd.jpg",
+    "tiles": [
+     "sink-waste.jpg",
+     "plant-room.jpg",
+     "water-softener.jpg",
+     "appliance-plumbing.jpg",
+     "plant-room.jpg",
+     "bathroom.jpg"
+    ],
+    "wide": "van-hd.jpg",
+    "tall": "van-hd.jpg"
+   },
+   "gallery": [
+    [
+     "shower-enclosure.jpg",
+     "Black-framed shower enclosure"
+    ],
+    [
+     "bathroom.jpg",
+     "Bathroom with a basin unit and towel rail"
+    ],
+    [
+     "walk-in-shower.jpg",
+     "Walk-in shower with a concealed valve"
+    ],
+    [
+     "water-softener.jpg",
+     "Water softener under the sink"
+    ],
+    [
+     "van.jpg",
+     "The Flash van"
+    ]
+   ],
+   "gallery_kicker": "Recent work",
+   "gallery_intro": "Recent jobs around Worthing.",
+   "keep_film": true,
+   "look": "clean"
+  }
+ },
+ "test_of": "L001"
+}
