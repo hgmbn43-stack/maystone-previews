@@ -525,7 +525,7 @@ footer { padding-block: 2.6rem 3rem; color: var(--ink-soft); font-size: .9rem; }
       <div class="beat b-hook" data-from="0" data-to="{{ film.hook_to }}"><div class="in">
         {% if brand %}
         <div class="eyebrow">{{ brand.story_kicker }}</div>
-        <p class="hook">{{ brand.story[0] }} <em>{{ brand.story[1] }}</em></p>
+        <p class="hook">{% if film.story %}{{ film.story[0] }} <em>{{ film.story[1] }}</em>{% else %}{{ brand.story[0] }} <em>{{ brand.story[1] }}</em>{% endif %}</p>
         <p class="hook-sub">Keep scrolling to watch it happen.</p>
         {% else %}
         <h1 class="who"><b>{{ biz.name }}</b><span>{{ t.kicker }} in {{ biz.town }}</span></h1>

@@ -594,6 +594,12 @@ SCENES.update({
                   ("Step 2 · Fit", "Wall charger fitted and tested.")],
         "quote_words": ["charger", "electric car", "ev charg", "charging point"], "prefer": [" ev ", "ev charg", "charging", "charge point", "solar"],
     },
+    "house-lights": {
+        "hook": "Home after dark?", "hook_sub": "Scroll to switch the lights on.",
+        "beats": [("Step 1 · Inside", "Hall and living room first. Wired and switched properly."),
+                  ("Step 2 · Upstairs and out", "Bedrooms, then the porch and path lights. All tested.")],
+        "quote_words": ["lighting", "lights", "outside light", "rewire", "electrics"], "prefer": [],
+    },
     "outdoor-lights": {
         "hook": "Garden goes dark at night?", "hook_sub": "Scroll to light it up.",
         "beats": [("Step 1 · Run", "Outdoor cable and fittings planned and run."),
@@ -939,6 +945,8 @@ FILMS = {
          "alt": "A garage: the bare bulb flickers off, bright LED batten lights switch on across the ceiling and new sockets appear above the workbench as the clutter clears."},
         {"id": "consumer-unit-10", "scene": "fuseboard", "accent": "#b68e6b", "accent_ink": "#7c5d41", "accent_dark": "#cdaa8d", "ground": "#efeeed",
          "alt": "A utility room: the old fuse box, the old meter and the tangled wiring are replaced by a neat new grey consumer unit and a smart meter with tidy cable runs."},
+        {"id": "house-lights-11", "scene": "house-lights", "story": ("Watch the house", "light up."), "accent": "#c9913f", "accent_ink": "#855a1c", "accent_dark": "#dcb06e", "ground": "#f4ede4",
+         "alt": "A British semi-detached house at dusk, completely dark: the hallway and living room lights come on, then the two bedrooms upstairs, then the porch lantern and the path lights, until the whole house glows."},
     ],
     "plastering": [
         {"id": "skim-01", "scene": "skim", "accent": "#b98c79", "accent_ink": "#7e5b4d", "accent_dark": "#cea899", "ground": "#f7ece7",
